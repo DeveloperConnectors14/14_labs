@@ -71,15 +71,15 @@ export default function TechStack() {
     >
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 right-0 w-80 h-80 bg-tertiary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-80 h-80 bg-tertiary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       {/* Grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.015]"
         style={{
-          backgroundImage: `linear-gradient(#77ffdd 1px, transparent 1px), linear-gradient(90deg, #77ffdd 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(#3ecfb2 1px, transparent 1px), linear-gradient(90deg, #3ecfb2 1px, transparent 1px)`,
           backgroundSize: "40px 40px",
         }}
       />

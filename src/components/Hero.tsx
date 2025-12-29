@@ -14,17 +14,17 @@ export default function Hero() {
       {/* Background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <div
-          className={`absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl transition-all duration-1000 ${
+          className={`absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl transition-all duration-1000 ${
             isLoaded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
           }`}
         />
         <div
-          className={`absolute bottom-1/4 -right-32 w-96 h-96 bg-tertiary/20 rounded-full blur-3xl transition-all duration-1000 delay-300 ${
+          className={`absolute bottom-1/4 -right-32 w-96 h-96 bg-tertiary/10 rounded-full blur-3xl transition-all duration-1000 delay-300 ${
             isLoaded ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"
           }`}
         />
         <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/50 rounded-full blur-3xl transition-all duration-1000 delay-500 ${
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/30 rounded-full blur-3xl transition-all duration-1000 delay-500 ${
             isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-50"
           }`}
         />
@@ -32,9 +32,9 @@ export default function Hero() {
 
       {/* Grid pattern overlay */}
       <div
-        className="absolute inset-0 opacity-[0.08]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: `linear-gradient(#77ffdd 1px, transparent 1px), linear-gradient(90deg, #77ffdd 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(#3ecfb2 1px, transparent 1px), linear-gradient(90deg, #3ecfb2 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
@@ -57,7 +57,7 @@ export default function Hero() {
             >
               <path
                 d="M2 10C50 4 150 4 198 10"
-                stroke="#77ffdd"
+                stroke="#3ecfb2"
                 strokeWidth="3"
                 strokeLinecap="round"
                 className={`transition-all duration-1000 delay-700 ${

@@ -63,9 +63,9 @@ export default function Contact() {
     >
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-secondary/50 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-tertiary/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-tertiary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -242,7 +242,7 @@ export default function Contact() {
                           name="name"
                           required
                           className="w-full px-4 py-3 rounded-xl bg-background border border-foreground/10 text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all duration-300"
-                          placeholder="John Doe"
+                          placeholder=""
                         />
                       </div>
                       <div>
@@ -258,7 +258,7 @@ export default function Contact() {
                           name="email"
                           required
                           className="w-full px-4 py-3 rounded-xl bg-background border border-foreground/10 text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all duration-300"
-                          placeholder="john@example.com"
+                          placeholder=""
                         />
                       </div>
                     </div>
@@ -276,7 +276,7 @@ export default function Contact() {
                         name="subject"
                         required
                         className="w-full px-4 py-3 rounded-xl bg-background border border-foreground/10 text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all duration-300"
-                        placeholder="Project Inquiry"
+                        placeholder=""
                       />
                     </div>
 
@@ -293,7 +293,7 @@ export default function Contact() {
                         rows={5}
                         required
                         className="w-full px-4 py-3 rounded-xl bg-background border border-foreground/10 text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all duration-300 resize-none"
-                        placeholder="Tell us about your project..."
+                        placeholder=""
                       />
                     </div>
 

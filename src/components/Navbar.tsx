@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const navLinks = [
-  { name: "Home", href: "#" },
-  { name: "Services", href: "#services" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", target: "top" },
+  { name: "Services", target: "services" },
+  { name: "About", target: "about" },
+  { name: "Contact", target: "contact" },
 ];
 
 export default function Navbar() {
@@ -23,19 +23,36 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (target: string) => {
+    if (target === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.getElementById(target);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const handleNavClick = (e: React.MouseEvent, target: string) => {
+    e.preventDefault();
+    scrollToSection(target);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         isScrolled || isMobileMenuOpen
-          ? "bg-secondary/95 backdrop-blur-xl shadow-sm shadow-black/10 py-3"
+          ? "bg-background/80 backdrop-blur-xl shadow-sm shadow-black/10 py-3"
           : "bg-transparent py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a
-            href="#"
+          <button
+            onClick={() => scrollToSection("top")}
             className="group relative flex items-center"
           >
             <Image
@@ -43,19 +60,35 @@ export default function Navbar() {
               alt="14 Labs"
               width={120}
               height={40}
-              className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:brightness-125"
+              className={`h-10 md:h-12 w-auto transition-all duration-300 absolute ${
+                isScrolled || isMobileMenuOpen
+                  ? "opacity-0"
+                  : "opacity-100 group-hover:opacity-0"
+              }`}
+              priority
+            />
+            <Image
+              src="/logo-primary.png"
+              alt="14 Labs"
+              width={120}
+              height={40}
+              className={`h-10 md:h-12 w-auto transition-all duration-300 ${
+                isScrolled || isMobileMenuOpen
+                  ? "opacity-100"
+                  : "opacity-0 group-hover:opacity-100"
+              }`}
               priority
             />
             {/* Glow effect */}
             <div className="absolute -inset-4 bg-primary/0 blur-xl transition-all duration-500 group-hover:bg-primary/10" />
-          </a>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
+                onClick={(e) => handleNavClick(e, link.target)}
                 onMouseEnter={() => setHoveredLink(link.name)}
                 onMouseLeave={() => setHoveredLink(null)}
                 className="relative px-5 py-2.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:text-foreground"
@@ -78,7 +111,7 @@ export default function Navbar() {
                       : "w-0 -translate-x-1/2 opacity-0"
                   }`}
                 />
-              </a>
+              </button>
             ))}
           </div>
 
@@ -120,18 +153,17 @@ export default function Navbar() {
         >
           <div className="flex flex-col gap-2 pb-6 pt-4 border-t border-primary/20">
             {navLinks.map((link, index) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="group relative px-4 py-3 text-foreground/80 transition-all duration-300 hover:text-foreground hover:pl-6"
+                onClick={(e) => handleNavClick(e, link.target)}
+                className="group relative px-4 py-3 text-left text-foreground/80 transition-all duration-300 hover:text-foreground hover:pl-6"
                 style={{
                   transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : "0ms",
                 }}
               >
                 <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-2" />
                 {link.name}
-              </a>
+              </button>
             ))}
           </div>
         </div>
@@ -139,4 +171,3 @@ export default function Navbar() {
     </nav>
   );
 }
-

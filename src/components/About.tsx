@@ -3,10 +3,10 @@
 import { useEffect, useState, useRef } from "react";
 
 const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "30+", label: "Happy Clients" },
-  { value: "5+", label: "Years Experience" },
-  { value: "100%", label: "Client Satisfaction" },
+  { value: "15+", label: "Projects Delivered" },
+  { value: "10+", label: "Happy Clients" },
+  { value: "4+", label: "Years Experience" },
+  { value: "95%", label: "Client Satisfaction" },
 ];
 
 export default function About() {
@@ -38,7 +38,7 @@ export default function About() {
     >
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-secondary/50 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute top-1/2 left-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -translate-y-1/2" />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
