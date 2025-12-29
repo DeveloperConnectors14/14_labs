@@ -32,7 +32,7 @@ export default function Hero() {
 
       {/* Grid pattern overlay */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: `linear-gradient(#77ffdd 1px, transparent 1px), linear-gradient(90deg, #77ffdd 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
@@ -89,7 +89,7 @@ export default function Hero() {
         >
           <a
             href="#services"
-            className="group relative overflow-hidden rounded-full bg-primary px-8 py-4 text-base font-semibold text-secondary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
+            className="group relative overflow-hidden rounded-full bg-primary px-8 py-4 text-base font-semibold text-secondary transition-all duration-300 hover:shadow-md hover:shadow-primary/10"
           >
             <span className="relative z-10">Explore Services</span>
             <div className="absolute inset-0 scale-0 rounded-full bg-tertiary transition-transform duration-500 group-hover:scale-100" />

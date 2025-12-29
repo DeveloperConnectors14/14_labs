@@ -27,7 +27,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         isScrolled || isMobileMenuOpen
-          ? "bg-secondary/95 backdrop-blur-xl shadow-lg shadow-primary/5 py-3"
+          ? "bg-secondary/95 backdrop-blur-xl shadow-sm shadow-black/10 py-3"
           : "bg-transparent py-6"
       }`}
     >
@@ -41,9 +41,9 @@ export default function Navbar() {
             <Image
               src="/logo-primary-white.png"
               alt="14 Labs"
-              width={240}
-              height={80}
-              className="h-20 md:h-24 w-auto transition-all duration-300 group-hover:brightness-125"
+              width={120}
+              height={40}
+              className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:brightness-125"
               priority
             />
             {/* Glow effect */}
@@ -80,23 +80,6 @@ export default function Navbar() {
                 />
               </a>
             ))}
-
-            {/* CTA Button */}
-            <a
-              href="#contact"
-              className="group relative ml-4 overflow-hidden rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-secondary transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
-            >
-              <span className="relative z-10 transition-all duration-300 group-hover:text-secondary">
-                Get Started
-              </span>
-              {/* Shine effect */}
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              {/* Scale effect */}
-              <div className="absolute inset-0 scale-0 rounded-full bg-tertiary transition-transform duration-300 group-hover:scale-100" />
-              <span className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                Get Started
-              </span>
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -150,13 +133,6 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-2 mx-4 rounded-full bg-primary px-6 py-3 text-center font-semibold text-secondary transition-all duration-300 hover:bg-tertiary"
-            >
-              Get Started
-            </a>
           </div>
         </div>
       </div>

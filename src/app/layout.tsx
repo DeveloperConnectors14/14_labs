@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "14 Labs",
   description: "14 Labs - IT Solutions & Technology Services",
+  icons: {
+    icon: "/logo-secondary.png",
+    apple: "/logo-secondary.png",
+  },
 };
 
 export default function RootLayout({
