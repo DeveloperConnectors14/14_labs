@@ -38,7 +38,7 @@ export default function Contact() {
     };
 
     try {
-      await fetch("https://formsubmit.co/ajax/contact@14labs.ai", {
+      await fetch("https://formsubmit.co/ajax/contact@14labs.co", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,10 +131,10 @@ export default function Contact() {
                 <div>
                   <div className="text-foreground font-medium mb-1">Email</div>
                   <a
-                    href="mailto:contact@14labs.ai"
+                    href="mailto:contact@14labs.co"
                     className="text-foreground/60 hover:text-primary transition-colors"
                   >
-                    contact@14labs.ai
+                    contact@14labs.co
                   </a>
                 </div>
               </div>
