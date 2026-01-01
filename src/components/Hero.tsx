@@ -41,6 +41,14 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <p
+          className={`text-sm md:text-base text-primary font-semibold tracking-wider uppercase mb-4 transition-all duration-700 ${
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          Engineered for enterprise. Inspired by what&apos;s next.
+        </p>
+
         <h1
           className={`text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 transition-all duration-700 ${
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -78,8 +86,8 @@ export default function Hero() {
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Building tomorrow&apos;s technology solutions today. We transform ideas into
-          powerful digital experiences.
+          Delivering AI-powered innovation. We turn complex technology challenges into
+          seamless, scalable solutions that are delivered on time and on target.
         </p>
 
         <div
@@ -91,10 +99,10 @@ export default function Hero() {
             href="#services"
             className="group relative overflow-hidden rounded-full bg-primary px-8 py-4 text-base font-semibold text-secondary transition-all duration-300 hover:shadow-md hover:shadow-primary/10"
           >
-            <span className="relative z-10">Explore Services</span>
+            <span className="relative z-10">Explore AI Services</span>
             <div className="absolute inset-0 scale-0 rounded-full bg-tertiary transition-transform duration-500 group-hover:scale-100" />
             <span className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              Explore Services
+              Explore AI Services
             </span>
           </a>
           <a

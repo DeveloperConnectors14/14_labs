@@ -4,10 +4,10 @@ import { useEffect, useState, useRef } from "react";
 
 const services = [
   {
-    id: "web",
-    title: "Web Development",
+    id: "multi-agent",
+    title: "Multi-Agent Systems",
     description:
-      "Modern, responsive websites and web applications built with cutting-edge technologies. From landing pages to complex platforms.",
+      "Development of multi-agent systems with built-in observability, enabling monitoring and optimizing specialized agents operating at enterprise scale.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -19,40 +19,20 @@ const services = [
         strokeLinejoin="round"
         className="w-8 h-8"
       >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="18" cy="6" r="3" />
+        <circle cx="12" cy="18" r="3" />
+        <path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9" />
+        <path d="M12 15v-3" />
       </svg>
     ),
-    features: ["React & Next.js", "E-commerce", "Custom CMS", "API Integration"],
+    features: ["Agent Orchestration", "Built-in Observability", "Enterprise Scale", "Real-time Monitoring"],
   },
   {
-    id: "app",
-    title: "App Development",
+    id: "ai-integration",
+    title: "AI Integration",
     description:
-      "Native and cross-platform mobile applications that deliver exceptional user experiences on iOS and Android.",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="w-8 h-8"
-      >
-        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-        <path d="M12 18h.01" />
-      </svg>
-    ),
-    features: ["iOS & Android", "React Native", "Flutter", "App Store Launch"],
-  },
-  {
-    id: "ai",
-    title: "AI Solutions",
-    description:
-      "Intelligent automation and machine learning solutions that transform your business processes and unlock new possibilities.",
+      "Seamlessly integrate AI capabilities into your existing systems. Enhance today's operations and drive tomorrow's breakthroughs with intelligent automation.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +54,53 @@ const services = [
         <circle cx="12" cy="8" r="1" />
       </svg>
     ),
-    features: ["ChatGPT Integration", "Custom AI Models", "Automation", "Data Analytics"],
+    features: ["LLM Integration", "Custom AI Models", "Process Automation", "Data Analytics"],
+  },
+  {
+    id: "custom-ai",
+    title: "Custom AI Solutions",
+    description:
+      "Designing intelligent solutions for the future. We build custom AI models and applications tailored to your unique business challenges.",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-8 h-8"
+      >
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+    features: ["RAG Systems", "Fine-tuned Models", "AI Chatbots", "Knowledge Bases"],
+  },
+  {
+    id: "web",
+    title: "Web & App Development",
+    description:
+      "Modern, AI-enhanced websites and applications built with cutting-edge technologies. From intelligent platforms to seamless mobile experiences.",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-8 h-8"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      </svg>
+    ),
+    features: ["React & Next.js", "Mobile Apps", "AI-Powered UX", "API Integration"],
   },
 ];
 
@@ -120,27 +146,27 @@ export default function Services() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            What We Do
+            AI Services
           </span>
           <h2
             className={`text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 transition-all duration-700 delay-100 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Our Services
+            Serious expertise. <span className="text-primary">Real results.</span>
           </h2>
           <p
             className={`text-foreground/60 text-lg max-w-2xl mx-auto transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            We specialize in creating digital solutions that drive growth and innovation
-            for businesses of all sizes.
+            We keep our word, align seamlessly with your teams, and deliver outcomes that matter.
+            Integrating the now. Inventing the next.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {services.map((service, index) => (
             <div
               key={service.id}
@@ -192,23 +218,6 @@ export default function Services() {
                   ))}
                 </ul>
 
-                {/* Arrow link */}
-                <div className="mt-8 flex items-center text-primary font-medium text-sm opacity-0 translate-x-[-10px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                  <span>Learn more</span>
-                  <svg
-                    className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </div>
               </div>
 
               {/* Corner accent */}

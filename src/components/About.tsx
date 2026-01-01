@@ -58,27 +58,27 @@ export default function About() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              We Build Digital
-              <span className="text-primary"> Excellence</span>
+              Designing Intelligent
+              <span className="text-primary"> Solutions</span>
             </h2>
             <p
               className={`text-foreground/60 text-lg mb-6 leading-relaxed transition-all duration-700 delay-200 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              14 Labs is a forward-thinking technology company dedicated to transforming
-              businesses through innovative digital solutions. We combine creativity with
-              technical expertise to deliver products that make a real impact.
+              14 Labs is an AI-first technology company dedicated to transforming
+              businesses through intelligent automation and cutting-edge AI solutions.
+              We combine deep AI expertise with practical engineering to deliver
+              systems that drive real business value.
             </p>
             <p
               className={`text-foreground/60 text-lg mb-8 leading-relaxed transition-all duration-700 delay-300 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Our team of experts specializes in web development, mobile applications,
-              and AI-powered solutions. We believe in building long-term partnerships
-              with our clients, understanding their unique challenges, and delivering
-              solutions that exceed expectations.
+              From multi-agent systems to custom LLM integrations, we specialize in
+              building AI infrastructure that scales. We believe in genuine support,
+              seamless team alignment, and delivering outcomes that matter.
             </p>
 
             {/* Values */}
@@ -87,7 +87,7 @@ export default function About() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              {["Innovation", "Quality", "Transparency", "Results"].map((value) => (
+              {["AI-First", "Enterprise Scale", "Transparency", "Real Results"].map((value) => (
                 <span
                   key={value}
                   className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium"

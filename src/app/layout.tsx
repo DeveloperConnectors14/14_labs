@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "14 Labs",
-  description: "14 Labs - IT Solutions & Technology Services",
+  title: "14 Labs | AI Solutions & Multi-Agent Systems",
+  description: "14 Labs - AI-powered innovation for enterprise. Multi-agent systems, LLM integration, and intelligent automation delivered on time and on target.",
   icons: {
     icon: "/favicon.png",
     apple: "/logo-secondary.png",
