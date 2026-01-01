@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "14 Labs",
   description: "14 Labs - IT Solutions & Technology Services",
   icons: {
-    icon: "/logo-secondary.png",
+    icon: "/favicon.ico",
     apple: "/logo-secondary.png",
   },
 };
