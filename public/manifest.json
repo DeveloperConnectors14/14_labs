@@ -1,0 +1,21 @@
+{
+  "name": "14 Labs",
+  "short_name": "14 Labs",
+  "description": "AI-powered innovation for enterprise. Multi-agent systems, LLM integration, and intelligent automation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111118",
+  "theme_color": "#3ecfb2",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-secondary.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

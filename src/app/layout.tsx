@@ -16,11 +16,13 @@ export const metadata: Metadata = {
   title: "14 Labs | AI Solutions & Multi-Agent Systems",
   description:
     "14 Labs - AI-powered innovation for enterprise. Multi-agent systems, LLM integration, and intelligent automation delivered on time and on target.",
+  manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.png", sizes: "any", type: "image/png" },
       { url: "/favicon.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.png", sizes: "192x192", type: "image/png" },
     ],
     apple: [
       { url: "/logo-secondary.png", sizes: "180x180", type: "image/png" },
@@ -52,6 +54,10 @@ export const metadata: Metadata = {
     images: ["/logo-primary.png"],
   },
   metadataBase: new URL("https://14labs.co"),
+  other: {
+    "msapplication-TileColor": "#3ecfb2",
+    "msapplication-TileImage": "/favicon.png",
+  },
 };
 
 export default function RootLayout({
