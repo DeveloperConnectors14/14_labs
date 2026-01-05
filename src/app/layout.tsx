@@ -14,11 +14,44 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "14 Labs | AI Solutions & Multi-Agent Systems",
-  description: "14 Labs - AI-powered innovation for enterprise. Multi-agent systems, LLM integration, and intelligent automation delivered on time and on target.",
+  description:
+    "14 Labs - AI-powered innovation for enterprise. Multi-agent systems, LLM integration, and intelligent automation delivered on time and on target.",
   icons: {
-    icon: "/favicon.png",
-    apple: "/logo-secondary.png",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/logo-secondary.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
   },
+  openGraph: {
+    title: "14 Labs | AI Solutions & Multi-Agent Systems",
+    description:
+      "AI-powered innovation for enterprise. Multi-agent systems, LLM integration, and intelligent automation delivered on time and on target.",
+    url: "https://14labs.co",
+    siteName: "14 Labs",
+    images: [
+      {
+        url: "/logo-primary.png",
+        width: 1200,
+        height: 630,
+        alt: "14 Labs - AI Solutions",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "14 Labs | AI Solutions & Multi-Agent Systems",
+    description:
+      "AI-powered innovation for enterprise. Multi-agent systems, LLM integration, and intelligent automation.",
+    images: ["/logo-primary.png"],
+  },
+  metadataBase: new URL("https://14labs.co"),
 };
 
 export default function RootLayout({
