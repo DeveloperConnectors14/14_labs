@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
       { url: "/favicon.png", sizes: "any", type: "image/png" },
       { url: "/favicon.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon.png", sizes: "16x16", type: "image/png" },
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     apple: [
       { url: "/logo-secondary.png", sizes: "180x180", type: "image/png" },
     ],
-    shortcut: "/favicon.png",
+    shortcut: "/favicon.ico",
   },
   openGraph: {
     title: "14 Labs | AI Solutions & Multi-Agent Systems",
