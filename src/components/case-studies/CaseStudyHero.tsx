@@ -96,20 +96,11 @@ export default function CaseStudyHero() {
           }}
         >
           <a
-            href="https://pgadmit.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:contact@14labs.co"
             className="group relative px-8 py-4 rounded-full bg-primary text-background font-medium overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-primary/30"
           >
-            <span className="relative z-10">View Live Platform</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          </a>
-
-          <a
-            href="#contact"
-            className="group relative px-8 py-4 rounded-full border border-primary/30 text-foreground font-medium transition-all duration-500 hover:border-primary hover:bg-primary/5"
-          >
             <span className="relative z-10">Contact Us</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </a>
         </div>
       </div>

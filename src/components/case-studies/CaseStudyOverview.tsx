@@ -6,7 +6,7 @@ const stats = [
   { label: "Industry", value: "EdTech" },
   { label: "Timeline", value: "3 months" },
   { label: "Team Size", value: "4 engineers" },
-  { label: "Status", value: "Production" },
+  { label: "Agents", value: "7 AI" },
 ];
 
 export default function CaseStudyOverview() {

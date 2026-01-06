@@ -62,7 +62,7 @@ const agents: Agent[] = [
       "Flag critical deadlines",
     ],
     position: { x: 750, y: 180 },
-    color: "#1a3a5c",
+    color: "#60a5fa",
   },
   {
     id: "scholarship-search",
@@ -280,26 +280,6 @@ export default function AgentFlowDiagram() {
                 }
               }}
             >
-              <defs>
-                <radialGradient id="orchestrator-gradient">
-                  <stop offset="0%" stopColor={agents[0].color} stopOpacity="0.3" />
-                  <stop offset="100%" stopColor={agents[0].color} stopOpacity="0.1" />
-                </radialGradient>
-              </defs>
-
-              {/* Pulsing background circle */}
-              <circle
-                cx={orchPos.x}
-                cy={orchPos.y}
-                r={85}
-                fill="url(#orchestrator-gradient)"
-                className={`transition-all duration-300 ${
-                  activeAgent?.id === "orchestrator"
-                    ? "opacity-100"
-                    : "opacity-60 hover:opacity-80"
-                }`}
-              />
-
               {/* Main circle */}
               <circle
                 cx={orchPos.x}
@@ -372,26 +352,6 @@ export default function AgentFlowDiagram() {
                   }
                 }}
               >
-                <defs>
-                  <radialGradient id={`agent-gradient-${agent.id}`}>
-                    <stop offset="0%" stopColor={agent.color} stopOpacity="0.2" />
-                    <stop offset="100%" stopColor={agent.color} stopOpacity="0.05" />
-                  </radialGradient>
-                </defs>
-
-                {/* Background circle with glow */}
-                <circle
-                  cx={agent.position.x}
-                  cy={agent.position.y}
-                  r={60}
-                  fill={`url(#agent-gradient-${agent.id})`}
-                  className={`transition-all duration-300 ${
-                    activeAgent?.id === agent.id
-                      ? "opacity-100"
-                      : "opacity-60 hover:opacity-80"
-                  }`}
-                />
-
                 {/* Main circle */}
                 <circle
                   cx={agent.position.x}
@@ -399,11 +359,13 @@ export default function AgentFlowDiagram() {
                   r={50}
                   fill={agent.color}
                   opacity={
-                    activeAgent?.id === agent.id
-                      ? 1
-                      : hoveredAgent === agent.id
-                        ? 0.8
-                        : 0.7
+                    agent.id === "university-search" || agent.id === "visa-agent"
+                      ? 0
+                      : activeAgent?.id === agent.id
+                        ? 1
+                        : hoveredAgent === agent.id
+                          ? 0.8
+                          : 0.7
                   }
                   className="transition-all duration-300"
                   style={{

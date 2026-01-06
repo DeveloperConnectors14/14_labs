@@ -10,7 +10,7 @@ interface Metric {
 
 const metrics: Metric[] = [
   {
-    value: "70-80%",
+    value: "70%",
     label: "Time Reduction",
     description: "Reduction in manual research time for students",
   },
@@ -46,6 +46,7 @@ function Counter({ value, isVisible, index }: CounterProps) {
 
     // Extract numeric value
     const numericValue = parseInt(value);
+    const suffix = value.replace(/\d+/g, ""); // Get non-numeric part (%, etc)
 
     if (isNaN(numericValue)) {
       // Non-numeric values like "∞" or "70-80%"
@@ -64,10 +65,10 @@ function Counter({ value, isVisible, index }: CounterProps) {
     const timer = setInterval(() => {
       current += increment;
       if (current >= numericValue) {
-        setDisplayValue(numericValue.toString());
+        setDisplayValue(numericValue.toString() + suffix);
         clearInterval(timer);
       } else {
-        setDisplayValue(Math.floor(current).toString());
+        setDisplayValue(Math.floor(current).toString() + suffix);
       }
     }, stepDuration);
 
@@ -173,45 +174,6 @@ export default function OutcomesMetrics() {
           ))}
         </div>
 
-        {/* Key outcomes */}
-        <div
-          className={`mt-16 grid md:grid-cols-2 gap-6 lg:gap-8 transition-all duration-700 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
-          }`}
-          style={{
-            transitionDelay: isVisible ? "600ms" : "0ms",
-          }}
-        >
-          <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/20">
-            <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-              <span className="text-2xl">✓</span> MVP Completion
-            </h3>
-            <p className="text-foreground/80">
-              Delivered a fully functional, production-ready MVP with multiple
-              collaborating AI agents working seamlessly in coordination.
-            </p>
-          </div>
-
-          <div className="p-8 rounded-2xl bg-gradient-to-br from-tertiary/5 to-transparent border border-tertiary/20">
-            <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-              <span className="text-2xl">✓</span> Live Platform
-            </h3>
-            <p className="text-foreground/80">
-              System is running in production at{" "}
-              <a
-                href="https://pgadmit.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline font-semibold"
-              >
-                pgadmit.com
-              </a>
-              , actively serving students worldwide.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AI-Powered Admission Counselor - 14 Labs Case Study",
     description:
-      "Multi-agent AI system reducing admissions research time by 70% - deployed at pgadmit.com",
+      "Multi-agent AI system reducing admissions research time by 70% with intelligent orchestration and specialized agents",
     url: "https://14labs.co/case-studies/ai-admission-counselor",
     type: "article",
     images: [
