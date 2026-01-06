@@ -155,10 +155,9 @@ export default function AgentFlowDiagram() {
   }, []);
 
   // Calculate agent positions for hexagonal layout
-  const orchPos = agents.find((a) => a.isOrchestrator)?.position || {
-    x: 500,
-    y: 400,
-  };
+  const orchestrator = agents.find((a) => a.isOrchestrator);
+  const orchPos = orchestrator?.position || { x: 500, y: 400 };
+  const orchColor = orchestrator?.color || "#3ecfb2";
   const specialistAgents = agents.filter((a) => !a.isOrchestrator);
 
   return (
@@ -216,7 +215,7 @@ export default function AgentFlowDiagram() {
                     x2="100%"
                     y2="100%"
                   >
-                    <stop offset="0%" stopColor={orchPos.color || "#3ecfb2"} />
+                    <stop offset="0%" stopColor={orchColor} />
                     <stop offset="100%" stopColor={agent.color} />
                   </linearGradient>
                 </defs>
