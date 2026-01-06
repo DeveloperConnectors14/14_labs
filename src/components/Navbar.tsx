@@ -2,15 +2,25 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 
-const navLinks = [
-  { name: "Home", target: "top" },
-  { name: "Services", target: "services" },
-  { name: "About", target: "about" },
-  { name: "Contact", target: "contact" },
+interface NavLink {
+  name: string;
+  target: string;
+  type?: "scroll" | "route";
+}
+
+const navLinks: NavLink[] = [
+  { name: "Home", target: "top", type: "scroll" },
+  { name: "Services", target: "services", type: "scroll" },
+  { name: "About", target: "about", type: "scroll" },
+  { name: "Case Studies", target: "/case-studies/ai-admission-counselor", type: "route" },
+  { name: "Contact", target: "contact", type: "scroll" },
 ];
 
 export default function Navbar() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,9 +44,15 @@ export default function Navbar() {
     }
   };
 
-  const handleNavClick = (e: React.MouseEvent, target: string) => {
+  const handleNavClick = (e: React.MouseEvent, link: NavLink) => {
     e.preventDefault();
-    scrollToSection(target);
+
+    if (link.type === "route") {
+      router.push(link.target);
+    } else {
+      scrollToSection(link.target);
+    }
+
     setIsMobileMenuOpen(false);
   };
 
@@ -88,7 +104,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={(e) => handleNavClick(e, link.target)}
+                onClick={(e) => handleNavClick(e, link)}
                 onMouseEnter={() => setHoveredLink(link.name)}
                 onMouseLeave={() => setHoveredLink(null)}
                 className="relative px-5 py-2.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:text-foreground"
@@ -155,7 +171,7 @@ export default function Navbar() {
             {navLinks.map((link, index) => (
               <button
                 key={link.name}
-                onClick={(e) => handleNavClick(e, link.target)}
+                onClick={(e) => handleNavClick(e, link)}
                 className="group relative px-4 py-3 text-left text-foreground/80 transition-all duration-300 hover:text-foreground hover:pl-6"
                 style={{
                   transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : "0ms",
