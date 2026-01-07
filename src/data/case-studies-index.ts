@@ -58,8 +58,8 @@ export const caseStudies: CaseStudyCard[] = [
     description:
       "A sophisticated multi-agent AI system that reduces university admissions research time by 70-80%. Equipped with specialized agents for program discovery, scholarship hunting, and personalized guidance.",
     industry: "EdTech",
-    timeline: "4 Months",
-    teamSize: "5",
+    timeline: "2 Months",
+    teamSize: "3",
     metrics: [
       { label: "Research Time Saved", value: "70-80%" },
       { label: "Agents", value: "4" },

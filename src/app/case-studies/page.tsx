@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Link from "next/link";
+import Navbar from "@/components/Navbar";
 import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
 
 export const metadata: Metadata = {
@@ -33,8 +33,11 @@ export const metadata: Metadata = {
 
 export default function CaseStudiesPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-hidden">
-      <CaseStudiesShowcase />
-    </main>
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-background text-foreground overflow-hidden">
+        <CaseStudiesShowcase />
+      </main>
+    </>
   );
 }

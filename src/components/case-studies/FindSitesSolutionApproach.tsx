@@ -178,29 +178,29 @@ export default function FindSitesSolutionApproach() {
               <div
                 key={solution.title}
                 className={`transition-all duration-500 overflow-hidden ${
-                  expandedStep === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  expandedStep === index ? "max-h-full md:max-h-96 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
                 <div
-                  className={`p-8 md:p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/50 to-tertiary/10 border-2 border-primary/30 ${
+                  className={`p-6 md:p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-secondary/50 to-tertiary/10 border-2 border-primary/30 ${
                     isVisible ? "translate-y-0" : "translate-y-4"
                   }`}
                 >
-                  <div className="flex items-start gap-6">
+                  <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
                     {/* Icon */}
-                    <div className="text-6xl flex-shrink-0">{solution.icon}</div>
+                    <div className="text-5xl md:text-6xl flex-shrink-0">{solution.icon}</div>
 
                     {/* Content */}
                     <div className="flex-1">
-                      <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+                      <h3 className="text-xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">
                         Step {expandedStep + 1}: {solution.title}
                       </h3>
-                      <p className="text-foreground/80 text-base md:text-lg leading-relaxed">
+                      <p className="text-foreground/80 text-sm md:text-lg leading-relaxed">
                         {solution.description}
                       </p>
 
                       {/* Decorative line */}
-                      <div className="mt-6 h-1 w-20 bg-gradient-to-r from-primary to-tertiary" />
+                      <div className="mt-4 md:mt-6 h-1 w-20 bg-gradient-to-r from-primary to-tertiary" />
                     </div>
                   </div>
                 </div>

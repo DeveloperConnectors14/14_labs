@@ -53,10 +53,17 @@ export default function Navbar() {
   const handleNavClick = (e: React.MouseEvent, link: NavLink) => {
     e.preventDefault();
 
+    const isOnCaseStudyPage = pathname.includes("/case-studies");
+
     if (link.type === "route") {
       router.push(link.target);
     } else {
-      scrollToSection(link.target);
+      // If on a case study page and clicking a scroll link, go home first then scroll
+      if (isOnCaseStudyPage) {
+        router.push(`/?section=${link.target}`);
+      } else {
+        scrollToSection(link.target);
+      }
     }
 
     setIsMobileMenuOpen(false);
@@ -113,7 +120,7 @@ export default function Navbar() {
                   onClick={(e) => {
                     if (link.name === "Case Studies") {
                       e.preventDefault();
-                      setShowCaseStudiesDropdown(!showCaseStudiesDropdown);
+                      handleNavClick(e, link);
                     } else {
                       handleNavClick(e, link);
                     }
