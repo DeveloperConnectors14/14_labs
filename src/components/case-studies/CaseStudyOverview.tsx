@@ -1,15 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { StatCard } from "@/types/case-study";
 
-const stats = [
+interface CaseStudyOverviewProps {
+  stats?: StatCard[];
+}
+
+const DEFAULT_STATS: StatCard[] = [
   { label: "Industry", value: "EdTech" },
   { label: "Timeline", value: "3 months" },
   { label: "Team Size", value: "4 engineers" },
   { label: "Agents", value: "7 AI" },
 ];
 
-export default function CaseStudyOverview() {
+export default function CaseStudyOverview({ stats: propStats }: CaseStudyOverviewProps) {
+  const stats = propStats || DEFAULT_STATS;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 

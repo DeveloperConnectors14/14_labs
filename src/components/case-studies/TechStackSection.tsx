@@ -1,17 +1,44 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Technology, TechHighlight } from "@/types/case-study";
 
-const technologies = [
-  { name: "Flask", category: "Backend", icon: "🐍" },
-  { name: "Python", category: "Backend", icon: "🔧" },
-  { name: "Supabase", category: "Database", icon: "🗄️" },
-  { name: "PostgreSQL", category: "Database", icon: "📊" },
-  { name: "CrewAI", category: "AI Framework", icon: "🤖" },
-  { name: "OpenAI GPT-4", category: "LLM", icon: "🧠" },
+interface TechStackSectionProps {
+  technologies?: Technology[];
+  highlights?: TechHighlight[];
+}
+
+const DEFAULT_TECHNOLOGIES: Technology[] = [
+  { name: "Flask", category: "Backend", logo: "🐍" },
+  { name: "Python", category: "Backend", logo: "🔧" },
+  { name: "Supabase", category: "Database", logo: "🗄️" },
+  { name: "PostgreSQL", category: "Database", logo: "📊" },
+  { name: "CrewAI", category: "AI Framework", logo: "🤖" },
+  { name: "OpenAI GPT-4", category: "LLM", logo: "🧠" },
 ];
 
-export default function TechStackSection() {
+const DEFAULT_HIGHLIGHTS: TechHighlight[] = [
+  {
+    title: "Event-Driven",
+    description: "Microservices architecture with asynchronous message processing",
+  },
+  {
+    title: "Scalable",
+    description: "Designed to handle thousands of concurrent student interactions",
+  },
+  {
+    title: "Reliable",
+    description:
+      "Enterprise-grade infrastructure with 99.9% uptime guarantee and robust monitoring",
+  },
+];
+
+export default function TechStackSection({
+  technologies: propTechs,
+  highlights: propHighlights,
+}: TechStackSectionProps) {
+  const technologies = propTechs || DEFAULT_TECHNOLOGIES;
+  const highlights = propHighlights || DEFAULT_HIGHLIGHTS;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -88,7 +115,7 @@ export default function TechStackSection() {
                     }}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl">{tech.icon}</span>
+                      <span className="text-2xl">{tech.logo}</span>
                       <div>
                         <p className="font-semibold text-foreground text-sm">
                           {tech.name}
@@ -115,24 +142,12 @@ export default function TechStackSection() {
           }}
         >
           <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <p className="text-primary font-bold text-2xl mb-2">Event-Driven</p>
-              <p className="text-foreground/80 text-sm">
-                Microservices architecture with asynchronous message processing
-              </p>
-            </div>
-            <div>
-              <p className="text-primary font-bold text-2xl mb-2">Scalable</p>
-              <p className="text-foreground/80 text-sm">
-                Designed to handle thousands of concurrent student interactions
-              </p>
-            </div>
-            <div>
-              <p className="text-primary font-bold text-2xl mb-2">Reliable</p>
-              <p className="text-foreground/80 text-sm">
-                Enterprise-grade infrastructure with 99.9% uptime guarantee and robust monitoring
-              </p>
-            </div>
+            {highlights.map((highlight) => (
+              <div key={highlight.title}>
+                <p className="text-primary font-bold text-2xl mb-2">{highlight.title}</p>
+                <p className="text-foreground/80 text-sm">{highlight.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

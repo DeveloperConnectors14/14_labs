@@ -81,7 +81,7 @@ export default function CaseStudyCTA() {
           </a>
 
           <a
-            href="#"
+            href="/case-studies"
             className="group relative px-8 py-4 rounded-full border border-primary/30 text-foreground font-medium transition-all duration-500 hover:border-primary hover:bg-primary/5"
           >
             <span className="relative z-10">View More Case Studies</span>

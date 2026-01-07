@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Metric } from "@/types/case-study";
 
-interface Metric {
-  value: string;
-  label: string;
-  description: string;
+interface OutcomesMetricsProps {
+  metrics?: Metric[];
 }
 
-const metrics: Metric[] = [
+const DEFAULT_METRICS: Metric[] = [
   {
     value: "70%",
     label: "Time Reduction",
@@ -93,7 +92,8 @@ function Counter({ value, isVisible, index }: CounterProps) {
   );
 }
 
-export default function OutcomesMetrics() {
+export default function OutcomesMetrics({ metrics: propMetrics }: OutcomesMetricsProps) {
+  const metrics = propMetrics || DEFAULT_METRICS;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 

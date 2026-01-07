@@ -1,8 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { HeroData } from "@/types/case-study";
 
-export default function CaseStudyHero() {
+interface CaseStudyHeroProps {
+  data?: HeroData;
+}
+
+const DEFAULT_DATA: HeroData = {
+  label: "Case Study",
+  title: "AI-Powered Admission Counselor",
+  subtitle: "Transforming University Admissions with Multi-Agent Intelligence",
+  ctaText: "Contact Us",
+  ctaLink: "mailto:contact@14labs.co",
+};
+
+export default function CaseStudyHero({ data }: CaseStudyHeroProps) {
+  const content = data || DEFAULT_DATA;
   const [isVisible, setIsVisible] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -52,7 +66,7 @@ export default function CaseStudyHero() {
           }`}
         >
           <span className="text-xs uppercase tracking-wider text-primary font-medium">
-            Case Study
+            {content.label}
           </span>
         </div>
 
@@ -67,7 +81,7 @@ export default function CaseStudyHero() {
             transitionDelay: isVisible ? "100ms" : "0ms",
           }}
         >
-          AI-Powered Admission Counselor
+          {content.title}
         </h1>
 
         {/* Subtitle */}
@@ -81,7 +95,7 @@ export default function CaseStudyHero() {
             transitionDelay: isVisible ? "200ms" : "0ms",
           }}
         >
-          Transforming University Admissions with Multi-Agent Intelligence
+          {content.subtitle}
         </p>
 
         {/* CTA Buttons */}
@@ -96,10 +110,10 @@ export default function CaseStudyHero() {
           }}
         >
           <a
-            href="mailto:contact@14labs.co"
+            href={content.ctaLink}
             className="group relative px-8 py-4 rounded-full bg-primary text-background font-medium overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-primary/30"
           >
-            <span className="relative z-10">Contact Us</span>
+            <span className="relative z-10">{content.ctaText}</span>
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </a>
         </div>
