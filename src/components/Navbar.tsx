@@ -14,7 +14,7 @@ const navLinks: NavLink[] = [
   { name: "Home", target: "top", type: "scroll" },
   { name: "Services", target: "services", type: "scroll" },
   { name: "About", target: "about", type: "scroll" },
-  { name: "Case Studies", target: "/case-studies/ai-admission-counselor", type: "route" },
+  { name: "Case Studies", target: "/case-studies", type: "route" },
   { name: "Contact", target: "contact", type: "scroll" },
 ];
 
@@ -181,11 +181,20 @@ export default function Navbar() {
                           router.push(caseStudy.path);
                           setShowCaseStudiesDropdown(false);
                         }}
-                        className="w-full px-4 py-3 text-left text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-all duration-300 border-b border-foreground/5 last:border-b-0"
+                        className="w-full px-4 py-3 text-left text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-all duration-300 border-b border-foreground/5"
                       >
                         {caseStudy.name}
                       </button>
                     ))}
+                    <button
+                      onClick={() => {
+                        router.push("/case-studies");
+                        setShowCaseStudiesDropdown(false);
+                      }}
+                      className="w-full px-4 py-3 text-left text-sm font-bold text-primary hover:bg-primary/10 transition-all duration-300 border-t border-foreground/5"
+                    >
+                      View All Case Studies →
+                    </button>
                   </div>
                 )}
               </div>

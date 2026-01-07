@@ -454,14 +454,14 @@ export const technologies: Technology[] = [
     logo: '📊',
   },
   {
-    name: 'Google Geocoding API',
-    category: 'API Integration',
-    logo: '🗺️',
+    name: 'CrewAI',
+    category: 'AI Framework',
+    logo: '👥',
   },
   {
-    name: 'Google Drive',
-    category: 'Storage',
-    logo: '💾',
+    name: 'LangChain',
+    category: 'AI Framework',
+    logo: '🔗',
   },
   {
     name: 'OpenAI GPT-4o',
@@ -475,7 +475,7 @@ export const technologies: Technology[] = [
   },
   {
     name: 'Gemini Vision API',
-    category: 'Computer Vision',
+    category: 'LLM',
     logo: '👁️',
   },
 ];

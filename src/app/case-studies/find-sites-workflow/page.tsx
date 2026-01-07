@@ -6,7 +6,6 @@ import FindSitesSolutionApproach from "@/components/case-studies/FindSitesSoluti
 import PipelineFlowDiagram from "@/components/case-studies/PipelineFlowDiagram";
 import FindSitesKeyFeatures from "@/components/case-studies/FindSitesKeyFeatures";
 import TechStackSection from "@/components/case-studies/TechStackSection";
-import OutcomesMetrics from "@/components/case-studies/OutcomesMetrics";
 import CaseStudyCTA from "@/components/case-studies/CaseStudyCTA";
 
 import {
@@ -15,7 +14,6 @@ import {
   pipelineNodes,
   technologies,
   techHighlights,
-  outcomes,
 } from "@/data/case-studies/find-sites-workflow";
 
 export const metadata: Metadata = {
@@ -76,9 +74,6 @@ export default function FindSitesWorkflowCaseStudy() {
 
       {/* Technology Stack */}
       <TechStackSection technologies={technologies} highlights={techHighlights} />
-
-      {/* Results & Impact */}
-      <OutcomesMetrics metrics={outcomes} />
 
       {/* Call to Action */}
       <CaseStudyCTA />
