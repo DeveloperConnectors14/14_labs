@@ -116,9 +116,10 @@ export default function CaseStudiesShowcase() {
                       </p>
                     </div>
 
-                    {/* Middle Section - Metrics */}
+                    {/* Middle Section - Metrics and Highlights */}
                     <div className="mb-8 flex-1">
-                      <div className="grid grid-cols-2 gap-4">
+                      {/* Metrics Grid */}
+                      <div className="grid grid-cols-2 gap-4 mb-6">
                         {caseStudy.metrics.slice(0, 4).map((metric, idx) => (
                           <div
                             key={idx}
@@ -145,6 +146,37 @@ export default function CaseStudiesShowcase() {
                             </p>
                           </div>
                         ))}
+                      </div>
+
+                      {/* Project Highlights */}
+                      <div className="space-y-3 pt-6 border-t border-foreground/10 group-hover:border-primary/30 transition-colors duration-500">
+                        <div className={`flex items-center gap-3 transition-all duration-500 ${
+                          hoveredId === caseStudy.id ? "translate-x-0 opacity-100" : "translate-x-2 opacity-60"
+                        }`}
+                          style={{ transitionDelay: hoveredId === caseStudy.id ? "200ms" : "0ms" }}>
+                          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: caseStudy.color.primary }} />
+                          <span className="text-xs text-foreground/70">
+                            <span className="font-semibold text-foreground">{caseStudy.timeline}</span> timeline
+                          </span>
+                        </div>
+                        <div className={`flex items-center gap-3 transition-all duration-500 ${
+                          hoveredId === caseStudy.id ? "translate-x-0 opacity-100" : "translate-x-2 opacity-60"
+                        }`}
+                          style={{ transitionDelay: hoveredId === caseStudy.id ? "250ms" : "0ms" }}>
+                          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: caseStudy.color.primary }} />
+                          <span className="text-xs text-foreground/70">
+                            <span className="font-semibold text-foreground">{caseStudy.teamSize}</span> engineers
+                          </span>
+                        </div>
+                        <div className={`flex items-center gap-3 transition-all duration-500 ${
+                          hoveredId === caseStudy.id ? "translate-x-0 opacity-100" : "translate-x-2 opacity-60"
+                        }`}
+                          style={{ transitionDelay: hoveredId === caseStudy.id ? "300ms" : "0ms" }}>
+                          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: caseStudy.color.primary }} />
+                          <span className="text-xs text-foreground/70">
+                            <span className="font-semibold text-foreground">{caseStudy.technologies.length}</span> technologies
+                          </span>
+                        </div>
                       </div>
                     </div>
 
