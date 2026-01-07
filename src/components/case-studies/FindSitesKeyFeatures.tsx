@@ -1,53 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Feature } from "@/types/case-study";
 
-interface KeyFeaturesProps {
-  features?: Feature[];
-}
-
-const DEFAULT_FEATURES: Feature[] = [
-  {
-    title: "Intelligent Conversation Routing",
-    description:
-      "Understands student queries and routes them to the right specialist agent with full context preservation.",
-    icon: "🎯",
-  },
-  {
-    title: "Real-Time University Matching",
-    description:
-      "Instant matching of universities based on academic profile, preferences, and goals with detailed rankings.",
-    icon: "🎓",
-  },
-  {
-    title: "Scholarship Discovery Engine",
-    description:
-      "Comprehensive search across thousands of scholarships to find the best opportunities for each student.",
-    icon: "💰",
-  },
-  {
-    title: "Application Timeline Management",
-    description:
-      "Automated deadline tracking, document checklists, and progress monitoring across all applications.",
-    icon: "📅",
-  },
-  {
-    title: "Essay Assistance & Review",
-    description:
-      "AI-powered feedback on personal essays and statements with suggestions for improvement and impact.",
-    icon: "✍️",
-  },
-  {
-    title: "Visa Guidance & Requirements",
-    description:
-      "Country-specific visa information, requirements, and procedural guidance for international students.",
-    icon: "🌍",
-  },
-];
-
-export default function KeyFeatures({ features: propFeatures }: KeyFeaturesProps) {
-  const features = propFeatures || DEFAULT_FEATURES;
+export default function FindSitesKeyFeatures() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -68,20 +23,56 @@ export default function KeyFeatures({ features: propFeatures }: KeyFeaturesProps
     return () => observer.disconnect();
   }, []);
 
+  const features = [
+    {
+      title: "Deep Research Automation",
+      description:
+        "Searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically, discovering properties missed by manual searching.",
+      icon: "🔍",
+    },
+    {
+      title: "Comprehensive Contact Data",
+      description:
+        "Extracts complete broker information including name, title, company, direct email, and phone numbers for immediate outreach.",
+      icon: "📞",
+    },
+    {
+      title: "Geolocation Verification",
+      description:
+        "Validates addresses and enriches with GPS coordinates, CBSA codes, and metropolitan area data for accurate location intelligence.",
+      icon: "🗺️",
+    },
+    {
+      title: "Computer Vision Analysis",
+      description:
+        "Analyzes aerial and street view imagery to verify property attributes, square footage, and premises classification.",
+      icon: "👁️",
+    },
+    {
+      title: "Multi-Stage Quality Assurance",
+      description:
+        "User-configurable qualification criteria with data legitimacy, recency, and criteria matching for transparent decision making.",
+      icon: "✅",
+    },
+    {
+      title: "Real-Time Monitoring",
+      description:
+        "Google Sheets integration logs all workflow executions for tracking, debugging, and maintaining an audit trail.",
+      icon: "📊",
+    },
+  ];
+
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
-    >
+    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
       {/* Background orbs */}
       <div className="absolute top-0 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 -right-40 w-96 h-96 bg-tertiary/5 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        {/* Header */}
         <div
           className={`mb-16 transition-all duration-700 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           <span className="inline-block text-xs uppercase tracking-wider text-primary font-medium mb-4">
@@ -91,11 +82,11 @@ export default function KeyFeatures({ features: propFeatures }: KeyFeaturesProps
             Key Features
           </h2>
           <p className="text-xl text-foreground/60 max-w-3xl">
-            A comprehensive suite of AI-powered tools to guide students through
-            every step of the admissions journey.
+            A comprehensive suite of AI-powered tools to automate commercial real estate site discovery and qualification.
           </p>
         </div>
 
+        {/* Features grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <div

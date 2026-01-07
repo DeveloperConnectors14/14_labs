@@ -18,12 +18,18 @@ const navLinks: NavLink[] = [
   { name: "Contact", target: "contact", type: "scroll" },
 ];
 
+const caseStudies = [
+  { name: "AI Admission Counselor", path: "/case-studies/ai-admission-counselor" },
+  { name: "AI Find Sites Real Estate Solution", path: "/case-studies/find-sites-workflow" },
+];
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showCaseStudiesDropdown, setShowCaseStudiesDropdown] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,32 +108,87 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={(e) => handleNavClick(e, link)}
-                onMouseEnter={() => setHoveredLink(link.name)}
-                onMouseLeave={() => setHoveredLink(null)}
-                className="relative px-5 py-2.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:text-foreground"
-              >
-                {/* Background pill */}
-                <span
-                  className={`absolute inset-0 rounded-full bg-primary/10 transition-all duration-300 ease-out ${
-                    hoveredLink === link.name
-                      ? "opacity-100 scale-100"
-                      : "opacity-0 scale-95"
-                  }`}
-                />
-                {/* Text */}
-                <span className="relative z-10">{link.name}</span>
-                {/* Bottom accent */}
-                <span
-                  className={`absolute bottom-1 left-1/2 h-[2px] bg-primary transition-all duration-300 ease-out ${
-                    hoveredLink === link.name
-                      ? "w-6 -translate-x-1/2 opacity-100"
-                      : "w-0 -translate-x-1/2 opacity-0"
-                  }`}
-                />
-              </button>
+              <div key={link.name} className="relative">
+                <button
+                  onClick={(e) => {
+                    if (link.name === "Case Studies") {
+                      e.preventDefault();
+                      setShowCaseStudiesDropdown(!showCaseStudiesDropdown);
+                    } else {
+                      handleNavClick(e, link);
+                    }
+                  }}
+                  onMouseEnter={() => {
+                    setHoveredLink(link.name);
+                    if (link.name === "Case Studies") {
+                      setShowCaseStudiesDropdown(true);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredLink(null);
+                    if (link.name === "Case Studies") {
+                      setShowCaseStudiesDropdown(false);
+                    }
+                  }}
+                  className="relative px-5 py-2.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:text-foreground"
+                >
+                  {/* Background pill */}
+                  <span
+                    className={`absolute inset-0 rounded-full bg-primary/10 transition-all duration-300 ease-out ${
+                      hoveredLink === link.name
+                        ? "opacity-100 scale-100"
+                        : "opacity-0 scale-95"
+                    }`}
+                  />
+                  {/* Text */}
+                  <span className="relative z-10 flex items-center gap-2">
+                    {link.name}
+                    {link.name === "Case Studies" && (
+                      <span
+                        className={`transition-transform duration-300 ${
+                          showCaseStudiesDropdown ? "rotate-180" : ""
+                        }`}
+                      >
+                        ▼
+                      </span>
+                    )}
+                  </span>
+                  {/* Bottom accent */}
+                  <span
+                    className={`absolute bottom-1 left-1/2 h-[2px] bg-primary transition-all duration-300 ease-out ${
+                      hoveredLink === link.name
+                        ? "w-6 -translate-x-1/2 opacity-100"
+                        : "w-0 -translate-x-1/2 opacity-0"
+                    }`}
+                  />
+                </button>
+
+                {/* Case Studies Dropdown */}
+                {link.name === "Case Studies" && (
+                  <div
+                    className={`absolute top-full left-0 mt-2 bg-secondary/95 backdrop-blur-xl rounded-lg border border-foreground/10 overflow-hidden shadow-lg transition-all duration-300 ease-out ${
+                      showCaseStudiesDropdown
+                        ? "opacity-100 visible"
+                        : "opacity-0 invisible"
+                    }`}
+                    onMouseEnter={() => setShowCaseStudiesDropdown(true)}
+                    onMouseLeave={() => setShowCaseStudiesDropdown(false)}
+                  >
+                    {caseStudies.map((caseStudy, index) => (
+                      <button
+                        key={caseStudy.path}
+                        onClick={() => {
+                          router.push(caseStudy.path);
+                          setShowCaseStudiesDropdown(false);
+                        }}
+                        className="w-full px-4 py-3 text-left text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-all duration-300 border-b border-foreground/5 last:border-b-0"
+                      >
+                        {caseStudy.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
