@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Contact from "@/components/Contact";
 import { caseStudies } from "@/data/case-studies-index";
 
 export default function CaseStudiesShowcase() {
@@ -243,29 +244,9 @@ export default function CaseStudiesShowcase() {
           ))}
         </div>
 
-        {/* Stats Section */}
-        <div
-          className={`mt-24 grid md:grid-cols-3 gap-8 p-12 rounded-2xl bg-gradient-to-r from-primary/5 via-secondary/50 to-tertiary/5 border border-primary/20 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{
-            transitionDelay: isVisible ? "400ms" : "0ms",
-          }}
-        >
-          {[
-            { label: "Total Case Studies", value: "2" },
-            { label: "Industries Served", value: "2+" },
-            { label: "Combined Efficiency Gain", value: "70%+" },
-          ].map((stat, idx) => (
-            <div key={idx} className="text-center">
-              <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-cyan-500 bg-clip-text text-transparent mb-2">
-                {stat.value}
-              </p>
-              <p className="text-foreground/60 uppercase text-sm font-semibold tracking-wider">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+        {/* Contact Section */}
+        <div className="mt-24">
+          <Contact />
         </div>
       </div>
     </section>
