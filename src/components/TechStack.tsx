@@ -69,17 +69,11 @@ export default function TechStack() {
       ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 right-0 w-80 h-80 bg-tertiary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-      </div>
-
       {/* Grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.015]"
         style={{
-          backgroundImage: `linear-gradient(#3ecfb2 1px, transparent 1px), linear-gradient(90deg, #3ecfb2 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(#888 1px, transparent 1px), linear-gradient(90deg, #888 1px, transparent 1px)`,
           backgroundSize: "40px 40px",
         }}
       />
@@ -130,7 +124,7 @@ export default function TechStack() {
                 {category.items.map((tech) => (
                   <div
                     key={tech.name}
-                    className="group flex items-center gap-3 p-3 rounded-xl bg-secondary/30 border border-foreground/5 transition-all duration-300 hover:bg-secondary/60 hover:border-primary/20 cursor-default"
+                    className="group flex items-center gap-3 p-3 rounded-xl bg-secondary/30 border border-foreground/5 hover:border-primary cursor-default"
                   >
                     <span className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
                       <Image

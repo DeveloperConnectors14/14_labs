@@ -100,7 +100,7 @@ export default function KeyFeatures({ features: propFeatures }: KeyFeaturesProps
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className={`group relative p-8 rounded-2xl bg-secondary/50 border border-foreground/5 transition-all duration-700 hover:border-primary/30 hover:bg-secondary/80 ${
+              className={`group relative p-8 rounded-2xl bg-secondary/50 border border-foreground/5 transition-opacity transition-transform duration-700 hover:border-primary ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -109,8 +109,6 @@ export default function KeyFeatures({ features: propFeatures }: KeyFeaturesProps
                 transitionDelay: isVisible ? `${100 + index * 50}ms` : "0ms",
               }}
             >
-              {/* Glow effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-tertiary/10 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
               <div className="relative z-10">
                 {/* Icon */}

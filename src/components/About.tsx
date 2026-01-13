@@ -39,7 +39,6 @@ export default function About() {
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -107,12 +106,11 @@ export default function About() {
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="group relative p-6 rounded-2xl bg-secondary/50 border border-foreground/5 transition-all duration-300 hover:border-primary/30 hover:bg-secondary/80"
+                className="group relative p-6 rounded-2xl bg-secondary/50 border border-foreground/5 hover:border-primary"
                 style={{
                   transitionDelay: isVisible ? `${400 + index * 100}ms` : "0ms",
                 }}
               >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative z-10">
                   <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                     {stat.value}

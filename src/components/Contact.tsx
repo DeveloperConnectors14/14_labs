@@ -64,8 +64,6 @@ export default function Contact() {
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-tertiary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -300,7 +298,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="group relative w-full overflow-hidden rounded-xl bg-primary px-8 py-4 text-base font-semibold text-secondary transition-all duration-300 hover:shadow-md hover:shadow-primary/10 disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="group relative w-full overflow-hidden rounded-xl bg-primary px-8 py-4 text-base font-semibold text-secondary transition-all duration-300 hover:ring-2 hover:ring-primary disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       <span className="relative z-10">
                         {isSubmitting ? "Sending..." : "Send Message"}

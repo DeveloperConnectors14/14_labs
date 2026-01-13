@@ -134,7 +134,7 @@ export default function AgentCard({ agent, onClose }: AgentCardProps) {
         <div className="mt-8 pt-6 border-t border-foreground/10">
           <button
             onClick={onClose}
-            className="w-full px-4 py-3 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-medium transition-colors duration-300"
+            className="w-full px-4 py-3 rounded-lg border border-primary/30 text-primary hover:border-primary font-medium transition-colors duration-300"
           >
             Close (Esc)
           </button>

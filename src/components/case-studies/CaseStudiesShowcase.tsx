@@ -80,14 +80,7 @@ export default function CaseStudiesShowcase() {
                 )}
 
                 {/* Card Container */}
-                <div className="relative h-full rounded-2xl overflow-hidden border border-foreground/10 group-hover:border-primary/40 transition-all duration-500 bg-gradient-to-br from-secondary/50 to-secondary/30 group-hover:from-secondary/70 group-hover:to-secondary/50">
-                  {/* Gradient background that animates on hover */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `linear-gradient(135deg, ${caseStudy.color.primary}08 0%, ${caseStudy.color.secondary}08 100%)`,
-                    }}
-                  />
+                <div className="relative h-full rounded-2xl overflow-hidden border border-foreground/10 group-hover:border-primary transition-border duration-0 bg-gradient-to-br from-secondary/50 to-secondary/30">
 
                   {/* Content */}
                   <div className="relative p-8 md:p-10 h-full flex flex-col">
@@ -124,7 +117,7 @@ export default function CaseStudiesShowcase() {
                         {caseStudy.metrics.slice(0, 4).map((metric, idx) => (
                           <div
                             key={idx}
-                            className={`p-3 rounded-lg bg-foreground/5 group-hover:bg-foreground/10 transition-all duration-500 ${
+                            className={`p-3 rounded-lg bg-foreground/5 transition-all duration-500 ${
                               hoveredId === caseStudy.id
                                 ? "translate-y-0 opacity-100"
                                 : "translate-y-2 opacity-80"

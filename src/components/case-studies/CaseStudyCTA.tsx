@@ -74,7 +74,7 @@ export default function CaseStudyCTA() {
         >
           <a
             href="mailto:contact@14labs.co"
-            className="group relative px-8 py-4 rounded-full bg-primary text-background font-medium overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-primary/30"
+            className="group relative px-8 py-4 rounded-full bg-primary text-background font-medium overflow-hidden transition-all duration-500 hover:ring-2 hover:ring-primary"
           >
             <span className="relative z-10">Discuss Your Project</span>
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

@@ -132,11 +132,6 @@ export default function Services() {
       ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-tertiary/5 rounded-full blur-3xl" />
-      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
@@ -172,7 +167,7 @@ export default function Services() {
               key={service.id}
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className={`group relative rounded-2xl bg-secondary/50 border border-foreground/5 p-8 transition-all duration-500 hover:border-primary/30 hover:bg-secondary/80 ${
+              className={`group relative rounded-2xl bg-secondary/50 border border-foreground/5 p-8 transition-opacity transition-transform duration-500 hover:border-primary ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -181,12 +176,6 @@ export default function Services() {
                 transitionDelay: isVisible ? `${300 + index * 100}ms` : "0ms",
               }}
             >
-              {/* Glow effect on hover */}
-              <div
-                className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-tertiary/10 opacity-0 blur-xl transition-opacity duration-500 ${
-                  hoveredCard === service.id ? "opacity-100" : ""
-                }`}
-              />
 
               {/* Content */}
               <div className="relative z-10">

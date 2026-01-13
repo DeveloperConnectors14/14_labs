@@ -14,16 +14,6 @@ export default function Hero() {
       {/* Background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <div
-          className={`absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl transition-all duration-1000 ${
-            isLoaded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
-          }`}
-        />
-        <div
-          className={`absolute bottom-1/4 -right-32 w-96 h-96 bg-tertiary/10 rounded-full blur-3xl transition-all duration-1000 delay-300 ${
-            isLoaded ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"
-          }`}
-        />
-        <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/30 rounded-full blur-3xl transition-all duration-1000 delay-500 ${
             isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-50"
           }`}
@@ -97,7 +87,7 @@ export default function Hero() {
         >
           <a
             href="#services"
-            className="group relative overflow-hidden rounded-full bg-primary px-8 py-4 text-base font-semibold text-secondary transition-all duration-300 hover:shadow-md hover:shadow-primary/10"
+            className="group relative overflow-hidden rounded-full bg-primary px-8 py-4 text-base font-semibold text-secondary transition-all duration-300 hover:ring-2 hover:ring-primary"
           >
             <span className="relative z-10">Explore AI Services</span>
             <div className="absolute inset-0 scale-0 rounded-full bg-tertiary transition-transform duration-500 group-hover:scale-100" />
