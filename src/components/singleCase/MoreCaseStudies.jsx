@@ -39,13 +39,14 @@ function MoreCaseStudies() {
                     <Grid size={12}>
                         <Grid container spacing={3}>
                             {moreStudies.map((item, i) => (
-                                < Grid size={{ xs: 12, md: 4 }} key={i}
+                                < Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}
                                     sx={{ display: "flex" }}
                                 >
                                     <Card
                                         component={Link}
                                         href={`/case-studies/${item.id}`}
                                         sx={{
+                                            width: "100%",
                                             borderRadius: 4,
                                             display: "flex",
                                             flexDirection: "column",

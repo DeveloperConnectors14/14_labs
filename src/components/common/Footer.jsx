@@ -54,7 +54,7 @@ const Footer = () => {
                             </Typography>
                         </Link>
 
-                        <Link href="/about" style={{ textDecoration: "none" }}>
+                        <Link href="/about-us" style={{ textDecoration: "none" }}>
                             <Typography variant="body2" sx={{ fontWeight: 600, color: "text.primary" }}>
                                 ABOUT US
                             </Typography>
@@ -67,11 +67,11 @@ const Footer = () => {
                         </Link>
                     </Box>
                 </Grid>
-                <Grid size={{ xs: 6, md: 3 }}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: { xs: "center", md: "flex-end" },
+                            justifyContent: "flex-end",
                         }}
                     >
                         <IconButton>
@@ -92,12 +92,27 @@ const Footer = () => {
 
             <Divider sx={{ my: 4 }} />
 
-            <Grid container alignItems="center">
+            <Grid container sx={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: { xs: "column-reverse", sm: "column-reverse", md: "row" },
+            }}>
+                <Grid size={{ xs: 12, md: 6 }}>
+                    <Box sx={{
+                        display: "flex",
+                        justifyContent: { xs: "center", md: "flex-start" },
+                        mt: { xs: 2, md: 0 },
+                    }}>
+                        <Typography variant="body2" color="text.secondary">
+                            © Copyright 2026, All Rights Reserved
+                        </Typography>
+                    </Box>
+                </Grid>
                 <Grid size={{ xs: 12, md: 6 }}>
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: { xs: "center", md: "flex-end" },
+                            justifyContent: { xs: "space-evenly", md: "flex-end" },
                             gap: 3,
                         }}
                     >
@@ -114,17 +129,7 @@ const Footer = () => {
                         </Link>
                     </Box>
                 </Grid>
-                <Grid size={{ xs: 12, md: 6 }}>
-                    <Box sx={{
-                        display: "flex",
-                        justifyContent: { xs: "center", md: "flex-start" },
-                        mt: { xs: 2, md: 0 },
-                    }}>
-                        <Typography variant="body2" color="text.secondary">
-                            © Copyright 2026, All Rights Reserved
-                        </Typography>
-                    </Box>
-                </Grid>
+
             </Grid>
         </Box>
     );

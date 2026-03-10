@@ -44,7 +44,13 @@ function SingleCaseHero() {
                         </Typography>
                     </Grid>
                     <Grid size={12}>
-                        <Grid container spacing={3}>
+                        <Grid container spacing={3} sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 2,
+                        }}>
                             {heroCards.map((item, i) => (
                                 < Grid size={{ md: 3 }} key={i}>
                                     <Card

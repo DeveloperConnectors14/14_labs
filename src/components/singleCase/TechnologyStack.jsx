@@ -32,7 +32,13 @@ function TechnologyStack() {
                         </Typography>
                     </Grid>
 
-                    <Grid size={12} sx={{ display: "flex", gap: 2, pb: 2 }}>
+                    <Grid size={12} sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                        gap: 2,
+                        pb: 2
+                    }}>
                         <Button
                             variant="contained"
                             onClick={() => handleFilter()}
@@ -122,7 +128,6 @@ function TechnologyStack() {
                         sx={{
                             display: "flex",
                             flexWrap: "wrap",
-                            justifyContent: "center",
                             alignItems: "center",
                             gap: 2,
                         }}
