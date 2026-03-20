@@ -35,10 +35,10 @@ function SingleKeyFeatures() {
             <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography variant="h4" fontWeight={600}>
+                        <Typography variant="h4" fontWeight={600} color="text.primary">
                             Key Features
                         </Typography>
-                        <Typography sx={{ py: 2 }} color="text.secondary">
+                        <Typography sx={{ py: 2 }} color="text.primary">
                             A comprehensive suit of AI-powered tools to automate commercial real estate site discovery and qualification.
                         </Typography>
                     </Grid>
@@ -61,10 +61,10 @@ function SingleKeyFeatures() {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="h6" fontWeight={700} sx={{ color: "black", pb: 1 }}>
+                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.black", pb: 1 }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.grey">
                                                 {item.desc}
                                             </Typography>
                                         </CardContent>

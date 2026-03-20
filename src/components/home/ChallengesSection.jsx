@@ -30,13 +30,13 @@ function ChallengesSection() {
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 5 }}>
           <Box>
-            <Typography variant="h4" fontWeight={600}>
-              Challenges we <Box component="span" sx={{ color: "primary.main" }}>
+            <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary" }}>
+              Challenges we <Box component="span" sx={{ color: "text.secondary" }}>
                 can overcome
               </Box>
             </Typography>
           </Box>
-          <Typography sx={{ py: 2 }} color="text.secondary">
+          <Typography sx={{ py: 2 }} color="text.primary">
             We turn these challenges into intelligent, practicle solutions.
           </Typography>
         </Grid>
@@ -71,7 +71,7 @@ function ChallengesSection() {
                       <Typography variant="h6" fontWeight={"bold"}>
                         {item.title}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" sx={{ py: 1 }}>
+                      <Typography variant="body2" color="text.grey" sx={{ py: 1 }}>
                         {item.desc}
                       </Typography>
                     </Box>

@@ -27,13 +27,13 @@ function ToolsSection() {
       <Grid container spacing={2}>
         <Grid size={12}>
           <Box>
-            <Typography variant="h4" fontWeight={600}>
-              Tools & <Box component="span" sx={{ color: "primary.main" }}>
+            <Typography variant="h4" sx={{ color: "text.primary", fontWeight: 600 }}>
+              Tools & <Box component="span" sx={{ color: "text.secondary" }}>
                 technologies
               </Box>
             </Typography>
           </Box>
-          <Typography sx={{ py: 2 }} color="text.secondary">
+          <Typography sx={{ py: 2 }} color="text.primary">
             We will be using the best tools and technologies to deliver results.
           </Typography>
         </Grid>
@@ -55,11 +55,11 @@ function ToolsSection() {
               border: 1,
               borderColor: "divider",
               fontWeight: 600,
-              backgroundColor: "primary.contrastText",
-              color: "black",
+              backgroundColor: "background.paper",
+              color: "text.black",
               boxShadow: "none",
               "&:hover": {
-                backgroundColor: "#f3f4f6",
+                backgroundColor: "primary.contrastText",
                 boxShadow: "none",
               },
             }}
@@ -76,11 +76,11 @@ function ToolsSection() {
               border: 1,
               borderColor: "divider",
               fontWeight: 600,
-              backgroundColor: "primary.contrastText",
-              color: "black",
+              backgroundColor: "background.paper",
+              color: "text.black",
               boxShadow: "none",
               "&:hover": {
-                backgroundColor: "#f3f4f6",
+                backgroundColor: "primary.contrastText",
                 boxShadow: "none",
               },
             }}
@@ -97,11 +97,11 @@ function ToolsSection() {
               border: 1,
               borderColor: "divider",
               fontWeight: 600,
-              backgroundColor: "primary.contrastText",
-              color: "black",
+              backgroundColor: "background.paper",
+              color: "text.black",
               boxShadow: "none",
               "&:hover": {
-                backgroundColor: "#f3f4f6",
+                backgroundColor: "primary.contrastText",
                 boxShadow: "none",
               },
             }}
@@ -115,14 +115,14 @@ function ToolsSection() {
               borderRadius: 2,
               px: 2,
               py: 1,
-              fontWeight: 600,
               border: 1,
               borderColor: "divider",
-              backgroundColor: "primary.contrastText",
-              color: "black",
+              fontWeight: 600,
+              backgroundColor: "background.paper",
+              color: "text.black",
               boxShadow: "none",
               "&:hover": {
-                backgroundColor: "#f3f4f6",
+                backgroundColor: "primary.contrastText",
                 boxShadow: "none",
               },
             }}
@@ -140,6 +140,7 @@ function ToolsSection() {
         >
           {tools.map((item, index) => (
             <Box key={index} sx={{
+              width: { xs: 80, sm: 80, md: 120 },
               backgroundColor: "background.paper",
               p: 1,
               border: 1,
@@ -152,6 +153,7 @@ function ToolsSection() {
                 width={120}
                 height={45}
                 style={{
+                  width: "100%",
                   objectFit: "contain",
                 }}
               />

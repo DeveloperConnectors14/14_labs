@@ -36,10 +36,10 @@ function SingleTopFeatures() {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="h6" fontWeight={700} sx={{ color: "black", pb: 1 }}>
+                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.black", pb: 1 }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 {item.desc}
                                             </Typography>
                                         </CardContent>

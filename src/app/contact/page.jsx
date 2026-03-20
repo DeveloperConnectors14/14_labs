@@ -65,13 +65,13 @@ function ContactPage() {
         >
             <Grid container spacing={3} alignItems="flex-start">
                 <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="h4" fontWeight={700} gutterBottom>
+                    <Typography variant="h4" fontWeight={700} sx={{ color: "text.primary" }} gutterBottom>
                         Contact Us
                     </Typography>
 
                     <Typography
                         sx={{ py: 2, maxWidth: 420 }}
-                        color="text.secondary"
+                        color="text.primary"
                     >
                         Explore our in-depth case studies showcasing real-world
                         examples of how our AI solutions have driven success for
@@ -80,19 +80,19 @@ function ContactPage() {
 
                     <Box sx={{ mt: 6 }}>
                         <Box sx={{ mb: 4 }}>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography variant="body2" color="text.grey">
                                 Email
                             </Typography>
-                            <Typography variant="h6" fontWeight={700}>
+                            <Typography variant="h6" fontWeight={700} color="text.primary">
                                 info@14labs.co
                             </Typography>
                         </Box>
 
                         <Box>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography variant="body2" color="text.grey">
                                 Phone
                             </Typography>
-                            <Typography variant="h6" fontWeight={700}>
+                            <Typography variant="h6" fontWeight={700} color="text.primary">
                                 +1(888)-855-5328
                             </Typography>
                         </Box>
@@ -117,8 +117,17 @@ function ContactPage() {
                             fullWidth
                             required
                             sx={{
-                                backgroundColor: "#fff",
+                                backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                "& .MuiInputLabel-root": {
+                                    color: "text.grey",
+                                },
+                                "& .MuiInputLabel-root.Mui-focused": {
+                                    color: "text.secondary",
+                                },
+                                "& .MuiInputBase-input": {
+                                    color: "text.black",
+                                },
                             }}
                         />
 
@@ -131,8 +140,17 @@ function ContactPage() {
                             fullWidth
                             required
                             sx={{
-                                backgroundColor: "#fff",
+                                backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                "& .MuiInputLabel-root": {
+                                    color: "text.grey",
+                                },
+                                "& .MuiInputLabel-root.Mui-focused": {
+                                    color: "text.secondary",
+                                },
+                                "& .MuiInputBase-input": {
+                                    color: "text.black",
+                                },
                             }}
                         />
 
@@ -144,8 +162,17 @@ function ContactPage() {
                             fullWidth
                             required
                             sx={{
-                                backgroundColor: "#fff",
+                                backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                "& .MuiInputLabel-root": {
+                                    color: "text.grey",
+                                },
+                                "& .MuiInputLabel-root.Mui-focused": {
+                                    color: "text.secondary",
+                                },
+                                "& .MuiInputBase-input": {
+                                    color: "text.black",
+                                },
                             }}
                         />
 
@@ -159,8 +186,17 @@ function ContactPage() {
                             fullWidth
                             required
                             sx={{
-                                backgroundColor: "#fff",
+                                backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                "& .MuiInputLabel-root": {
+                                    color: "text.grey",
+                                },
+                                "& .MuiInputLabel-root.Mui-focused": {
+                                    color: "text.secondary",
+                                },
+                                "& .MuiInputBase-input": {
+                                    color: "text.black",
+                                },
                             }}
                         />
 
@@ -171,13 +207,18 @@ function ContactPage() {
                                 disabled={isSubmitted}
                                 sx={{
                                     borderRadius: 7,
-                                    px: 2.5,
-                                    py: 1.5,
+                                    p: "9px 18px",
                                     fontWeight: 600,
-                                    letterSpacing: 1,
+                                    fontSize: { sx: 16, sm: 16.5, md: 17 },
                                     color: "text.primary",
-                                    backgroundColor: "primary.main",
-                                    boxShadow: "none"
+                                    backgroundColor: "secondary.main",
+                                    boxShadow: "none",
+                                    transition: 'all 0.3s ease',
+                                    "&:hover": {
+                                        boxShadow: "none",
+                                        backgroundColor: "primary.contrastText",
+                                        color: "text.primary",
+                                    },
                                 }}
                             >
                                 SEND MESSAGE

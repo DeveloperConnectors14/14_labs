@@ -29,10 +29,12 @@ function MoreCaseStudies() {
             <Box sx={{ px: 4, py: 6, }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography variant="h4" fontWeight={600}>
-                            View more case studies
+                        <Typography variant="h4" fontWeight={600} color="text.primary">
+                            View more <Box component="span" sx={{ color: "text.secondary" }}>
+                                case studies
+                            </Box>
                         </Typography>
-                        <Typography sx={{ py: 2 }} color="text.secondary">
+                        <Typography sx={{ py: 2 }} color="text.primary">
                             Explore our in-depth case studies showcasing real-world examples of how AI solutions have driven success for businesses like yours.
                         </Typography>
                     </Grid>
@@ -68,10 +70,10 @@ function MoreCaseStudies() {
                                             sx={{ borderRadius: 2 }}
                                         />
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography fontWeight={600} color="black">
+                                            <Typography fontWeight={600} color="text.black">
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary" sx={{ pt: 1 }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ pt: 1 }}>
                                                 {item.date}
                                             </Typography>
                                         </CardContent>

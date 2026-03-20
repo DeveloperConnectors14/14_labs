@@ -13,23 +13,25 @@ export const ThemeProvider = ({ children }) => {
       mode: "light",
 
       primary: {
+        main: "#0A3B60",
+        contrastText: "#d1d5db",
+      },
+
+      secondary: {
         main: "#00D3B1",
         contrastText: "#FFFFFF",
       },
 
-      secondary: {
-        main: "#0186b2",
-        contrastText: "#d1d5db",
-      },
-
       background: {
-        default: "#fafafa",
-        paper: "#ffffff",
+        default: "#FAFAFA",
+        paper: "#FFFFFF",
       },
 
       text: {
-        primary: "#2E368F",
-        secondary: "#666666",
+        primary: "#0A3B60",
+        secondary: "#00D3B1",
+        grey: "#808080",
+        black: "#0c0c0c",
       },
 
       divider: "#e4e5eb",
@@ -37,9 +39,6 @@ export const ThemeProvider = ({ children }) => {
       customColors: {
         hardGradient: "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)",
         softGradient: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
-        backgroundSecondary: "#e2f2f1",
-        backgroundLightBlue: "#e4e5eb",
-        textBlack: "#000000",
       },
     },
 
@@ -48,7 +47,7 @@ export const ThemeProvider = ({ children }) => {
       fontWeightRegular: 400,
       fontWeightMedium: 500,
     },
-    
+
     breakpoints: {
       values: {
         xs: 0,

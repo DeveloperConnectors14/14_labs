@@ -20,7 +20,7 @@ import Image from "next/image";
 
 const Footer = () => {
     return (
-        <Box sx={{ px: 4, py: 6, }}>
+        <Box sx={{ px: 4, py: 5, }}>
             <Grid container alignItems="center" spacing={3}>
                 <Grid size={{ xs: 6, md: 3 }}>
                     <Button
@@ -35,33 +35,49 @@ const Footer = () => {
                         <Image
                             src="/media/logo.svg"
                             alt="14Labs Logo"
-                            width={100}
-                            height={30}
+                            width={85.53}
+                            height={32}
                         />
                     </Button>
                 </Grid>
                 <Grid size={{ xs: 12, md: 6 }} sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", alignItems: "center", }}>
                     <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-evenly", alignItems: "center", width: "100%" }}>
                         <Link href="/services" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{ fontWeight: 600, color: "text.primary" }}>
+                            <Typography variant="body2" sx={{
+                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }}>
                                 SERVICES
                             </Typography>
                         </Link>
 
                         <Link href="/case-studies" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{ fontWeight: 600, color: "text.primary" }}>
+                            <Typography variant="body2" sx={{
+                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }}>
                                 CASE STUDIES
                             </Typography>
                         </Link>
 
                         <Link href="/about-us" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{ fontWeight: 600, color: "text.primary" }}>
+                            <Typography variant="body2" sx={{
+                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }}>
                                 ABOUT US
                             </Typography>
                         </Link>
 
                         <Link href="/contact" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{ fontWeight: 600, color: "text.primary" }}>
+                            <Typography variant="body2" sx={{
+                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }}>
                                 CONTACT
                             </Typography>
                         </Link>
@@ -71,31 +87,56 @@ const Footer = () => {
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: "flex-end",
+                            justifyContent: { xs: "flex-start", sm: "flex-end", md: "flex-end" },
                         }}
                     >
                         <IconButton>
-                            <TwitterIcon fontSize="small" sx={{ color: "black" }} />
+                            <TwitterIcon fontSize="small" sx={{
+                                color: "text.black",
+                                transition: 'all 0.3s ease',
+                                "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }} />
                         </IconButton>
                         <IconButton>
-                            <FacebookIcon fontSize="small" sx={{ color: "black" }} />
+                            <FacebookIcon fontSize="small" sx={{
+                                color: "text.black",
+                                transition: 'all 0.3s ease',
+                                "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }} />
                         </IconButton>
                         <IconButton>
-                            <InstagramIcon fontSize="small" sx={{ color: "black" }} />
+                            <InstagramIcon fontSize="small" sx={{
+                                color: "text.black",
+                                transition: 'all 0.3s ease',
+                                "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }} />
                         </IconButton>
                         <IconButton>
-                            <GitHubIcon fontSize="small" sx={{ color: "black" }} />
+                            <GitHubIcon fontSize="small" sx={{
+                                color: "text.black",
+                                transition: 'all 0.3s ease',
+                                "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }} />
                         </IconButton>
                     </Box>
                 </Grid>
             </Grid>
 
-            <Divider sx={{ my: 4 }} />
+            <Divider sx={{ my: 2 }} />
 
             <Grid container sx={{
                 display: "flex",
                 alignItems: "center",
                 flexDirection: { xs: "column-reverse", sm: "column-reverse", md: "row" },
+                pt: 2,
             }}>
                 <Grid size={{ xs: 12, md: 6 }}>
                     <Box sx={{
@@ -103,7 +144,7 @@ const Footer = () => {
                         justifyContent: { xs: "center", md: "flex-start" },
                         mt: { xs: 2, md: 0 },
                     }}>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" sx={{ color: "text.grey" }}>
                             © Copyright 2026, All Rights Reserved
                         </Typography>
                     </Box>
@@ -116,14 +157,22 @@ const Footer = () => {
                             gap: 3,
                         }}
                     >
-                        <Link href="/privacy" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" color="text.secondary">
+                        <Link href="/" style={{ textDecoration: "none" }}>
+                            <Typography variant="body2" sx={{
+                                color: "text.grey", "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }}>
                                 Privacy Policy
                             </Typography>
                         </Link>
 
-                        <Link href="/terms" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" color="text.secondary">
+                        <Link href="/" style={{ textDecoration: "none" }}>
+                            <Typography variant="body2" sx={{
+                                color: "text.grey", "&:hover": {
+                                    color: "text.secondary",
+                                },
+                            }}>
                                 Terms & Conditions
                             </Typography>
                         </Link>

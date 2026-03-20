@@ -26,16 +26,15 @@ function TrustedBrands() {
     return (
         <Box
             sx={{
-                py: 6,
+                py: 4,
                 textAlign: "center",
             }}
         >
             <Typography
                 sx={{
                     mb: 4,
-                    fontWeight: 500,
-                    letterSpacing: 1,
-                    color: "text.secondary",
+                    fontSize: { xs: 14, sm: 16, md: 16 },
+                    color: "text.grey",
                 }}
             >
                 TRUSTED BY LEADING BRANDS
@@ -47,13 +46,14 @@ function TrustedBrands() {
                     flexWrap: "wrap",
                     justifyContent: "center",
                     alignItems: "center",
-                    gap: { xs: 4, md: 7 },
+                    gap: { xs: 2, md: 7 },
                 }}
             >
                 {brandImages.map((item, index) => (
                     <Box key={index} sx={{
+                        width: { xs: 80, sm: 100, md: 140 },
                         backgroundColor: "background.paper",
-                        p: 3,
+                        p: { xs: 1, sm: 2, md: 3 },
                         border: 1,
                         borderColor: "divider",
                         borderRadius: 3
@@ -61,9 +61,10 @@ function TrustedBrands() {
                         <Image
                             src={`/media/${item.fileName}`}
                             alt={`Brand ${item.fileName}`}
-                            width={120}
-                            height={25}
+                            width={140}
+                            height={40}
                             style={{
+                                width: "100%",
                                 objectFit: "contain",
                             }}
                         />

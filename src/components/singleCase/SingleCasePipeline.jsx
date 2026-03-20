@@ -8,10 +8,10 @@ function SingleCasePipeline() {
             <Box sx={{ px: 4, py: 6, }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography sx={{ py: 2.5 }} color="text.secondary">
+                        <Typography sx={{ py: 2.5 }} color="text.primary">
                             Architecture
                         </Typography>
-                        <Typography variant="h4" fontWeight={600}>
+                        <Typography variant="h4" fontWeight={600} color="text.primary">
                             Intelligent Pipeline <br /> Architecture
                         </Typography>
                     </Grid>

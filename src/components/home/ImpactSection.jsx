@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 const stats = [
   { value: "14+", label: "Projects delivered" },
@@ -11,12 +11,12 @@ function ImpactSection() {
     <Box sx={{ px: 4, py: 6 }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h4" fontWeight={600}>
-            Our <Box component="span" sx={{ color: "primary.main" }}>
+          <Typography variant="h4" sx={{ fontWeight: 600, color: "text.primary" }}>
+            Our <Box component="span" sx={{ color: "text.secondary" }}>
               impact
             </Box>
           </Typography>
-          <Typography sx={{ py: 2 }} color="text.secondary">
+          <Typography sx={{ py: 2 }} color="text.primary">
             From multi-agent systems to custom LLM integration, we specialize in building AI infrastructures that scales.
           </Typography>
         </Grid>
@@ -24,30 +24,32 @@ function ImpactSection() {
           <Grid container spacing={3}>
             {stats.map((item, i) => (
               < Grid size={{ xs: 12, sm: (i === 0 ? 12 : 6), md: (i === 0 ? 6 : 3) }} key={i}>
-                <Card
+                <Box
                   sx={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 2.5,
+                    p: 2,
+                    borderRadius: 4,
                     border: 1,
                     borderColor: "divider",
-                    borderRadius: 4,
-                    px: 2,
-                    position: "relative",
-                    overflow: "hidden",
+                    backgroundColor: "background.paper",
                     transition: "0.3s",
                     "&:hover": {
-                      transform: "translateY(-6px)",
-                      boxShadow: 6,
+                      boxShadow: 4,
+                      transform: "translateY(-4px)",
                     },
                   }}
                 >
-                  <CardContent>
-                    <Typography variant="h1" fontWeight={700} sx={{ pb: 6 }}>
+                  <Box>
+                    <Typography variant="h1" sx={{ pb: 6, fontWeight: 700, color: "text.primary" }} gutterBottom>
                       {item.value}
                     </Typography>
-                    <Typography variant="h6" fontWeight={700} color="black" >
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: "text.black" }}>
                       {item.label}
                     </Typography>
-                  </CardContent>
-                </Card>
+                  </Box>
+                </Box>
               </Grid>
             ))}
           </Grid>

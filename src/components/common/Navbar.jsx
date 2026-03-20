@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 
-const APP_BAR_HEIGHT = "12vh";
+const APP_BAR_HEIGHT = "10vh";
 
 function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -43,8 +43,8 @@ function Navbar() {
                 position="fixed"
                 elevation={0}
                 sx={{
-                    height: { md: APP_BAR_HEIGHT, xs: "10vh" },
-                    backgroundColor: "primary.contrastText",
+                    height: APP_BAR_HEIGHT,
+                    backgroundColor: "background.paper",
                     backdropFilter: isScrolled ? "blur(10px)" : "none",
                     transition: "all 0.4s ease",
                     zIndex: 1200,
@@ -70,8 +70,8 @@ function Navbar() {
                         <Image
                             src="/media/logo.svg"
                             alt="14Labs Logo"
-                            width={120}
-                            height={40}
+                            width={85.53}
+                            height={32}
                         />
                     </Button>
 
@@ -80,26 +80,35 @@ function Navbar() {
                         <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-evenly", alignItems: "center", gap: 2, width: "60%" }}>
                             {navItems.map((item) => (
                                 <Link key={item.path} href={item.path} style={{ textDecoration: "none" }}>
-                                    <Typography variant="body2" sx={{ fontWeight: 600, color: "text.primary" }}>
+                                    <Typography variant="body2" sx={{
+                                        fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                            color: "text.secondary",
+                                        },
+                                    }}>
                                         {item.label}
                                     </Typography>
                                 </Link>
                             ))}
                         </Box>
-                        <Box>
+                        <Box >
                             <Button
                                 component={Link}
                                 href="/contact"
                                 variant="contained"
                                 sx={{
                                     borderRadius: 7,
-                                    px: 2.5,
-                                    py: 1.5,
+                                    p: "9px 18px",
                                     fontWeight: 600,
-                                    letterSpacing: 1,
+                                    fontSize: 17,
                                     color: "text.primary",
-                                    backgroundColor: "primary.main",
-                                    boxShadow: "none"
+                                    backgroundColor: "secondary.main",
+                                    boxShadow: "none",
+                                    transition: 'all 0.3s ease',
+                                    "&:hover": {
+                                        boxShadow: "none",
+                                        backgroundColor: "primary.contrastText",
+                                        color: "text.primary",
+                                    },
                                 }}
                             >
                                 GET STARTED
@@ -128,7 +137,7 @@ function Navbar() {
                 <Box
                     sx={{
                         position: "fixed",
-                        top: { md: APP_BAR_HEIGHT, xs: "10vh" },
+                        top: APP_BAR_HEIGHT,
                         left: 0,
                         right: 0,
                         backgroundColor: "background.paper",
@@ -148,10 +157,16 @@ function Navbar() {
                             onClick={() => setMobileOpen(false)}
                             sx={{
                                 justifyContent: "center",
-                                py: 1.5,
-                                letterSpacing: 1,
+                                py: 1,
+                                fontWeight: 500,
+                                fontSize: 14,
                                 color: "text.primary",
                                 textTransform: "none",
+                                backgroundColor: "transparent",
+                                transition: "all 0.4s ease",
+                                "&:hover": {
+                                    color: "text.secondary",
+                                },
                             }}
                         >
                             {item.label}
@@ -166,12 +181,18 @@ function Navbar() {
                         sx={{
                             borderRadius: 7,
                             px: 2.5,
-                            py: 1.5,
+                            py: 1,
                             fontWeight: 600,
-                            letterSpacing: 1,
+                            fontsize: 16,
                             color: "text.primary",
-                            backgroundColor: "primary.main",
-                            boxShadow: "none"
+                            backgroundColor: "secondary.main",
+                            boxShadow: "none",
+                            transition: 'all 0.3s ease',
+                            "&:hover": {
+                                boxShadow: "none",
+                                backgroundColor: "primary.contrastText",
+                                color: "text.primary",
+                            },
                         }}
                     >
                         GET STARTED
@@ -180,7 +201,7 @@ function Navbar() {
             </Collapse>
 
             {/* space for fixed navbar */}
-            <Toolbar sx={{ height: { md: APP_BAR_HEIGHT, xs: "10vh" } }} />
+            <Toolbar sx={{ height: APP_BAR_HEIGHT }} />
         </>
     );
 }

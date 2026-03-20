@@ -37,16 +37,16 @@ function Services() {
                 sx={{
                     background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
                     px: { xs: 3, md: 8 },
-                    py: { xs: 6, md: 10 },
+                    py: { xs: 5, md: 10 },
                 }}
             >
                 <Typography variant="h3" fontWeight={700} color="text.primary" gutterBottom>
-                    Serious expertise.{" "}
-                    <Box component="span" sx={{ color: "primary.main" }}>
-                        Real results.
+                    Serious expertise & {" "}
+                    <Box component="span" sx={{ color: "text.secondary" }}>
+                        Real results
                     </Box>
                 </Typography>
-                <Typography color="text.secondary" sx={{ maxWidth: 580, lineHeight: 1.8 }}>
+                <Typography color="text.primary" sx={{ maxWidth: 580, lineHeight: 1.8 }}>
                     We keep our word, align seamlessly with your teams, and deliver outcomes
                     that matter. Integrating the now. Inventing the next.
                 </Typography>
@@ -78,7 +78,7 @@ function Services() {
                                     <Typography
                                         variant="h6"
                                         fontWeight={700}
-                                        sx={{ color: "primary.main" }}
+                                        sx={{ color: "text.grey" }}
                                     >
                                         {s.number}
                                     </Typography>
@@ -88,7 +88,7 @@ function Services() {
                                     {s.title}
                                 </Typography>
 
-                                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7, flexGrow: 1 }}>
+                                <Typography variant="body2" color="text.grey" sx={{ lineHeight: 1.7, flexGrow: 1 }}>
                                     {s.desc}
                                 </Typography>
 

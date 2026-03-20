@@ -36,10 +36,10 @@ function SingleCaseApproach() {
             <Box sx={{ px: 4, py: 6 }}>
                 <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 5 }}>
-                        <Typography sx={{ py: 2.5 }} color="text.secondary">
+                        <Typography sx={{ py: 2.5 }} color="text.primary">
                             Our approach
                         </Typography>
-                        <Typography variant="h4" fontWeight={600}>
+                        <Typography variant="h4" fontWeight={600} color="text.primary">
                             AI Powered Workflow
                         </Typography>
                     </Grid>
@@ -74,16 +74,16 @@ function SingleCaseApproach() {
                                                 <Accordion sx={{ boxShadow: "none" }}>
                                                     <AccordionSummary expandIcon={<ExpandMore />}>
                                                         <Box>
-                                                            <Typography variant="body2" color="text.secondary" sx={{ py: 0.5 }}>
+                                                            <Typography variant="body2" color="text.grey" sx={{ py: 0.5 }}>
                                                                 {item.step}
                                                             </Typography>
-                                                            <Typography variant="h6" fontWeight={"bold"}>
+                                                            <Typography variant="h6" fontWeight={"bold"} color="text.primary">
                                                                 {item.title}
                                                             </Typography>
                                                         </Box>
                                                     </AccordionSummary>
                                                     <AccordionDetails>
-                                                        <Typography variant="body2" color="text.secondary">
+                                                        <Typography variant="body2" color="text.grey">
                                                             {item.desc}
                                                         </Typography>
                                                     </AccordionDetails>

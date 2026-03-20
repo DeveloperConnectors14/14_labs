@@ -1,4 +1,4 @@
-import {  Box, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 
 
 function SingleCaseChallanges() {
@@ -31,10 +31,10 @@ function SingleCaseChallanges() {
             <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 4 }}>
-                        <Typography sx={{ py: 2.5 }} color="text.secondary">
+                        <Typography sx={{ py: 2.5 }} color="text.primary">
                             Challange
                         </Typography>
-                        <Typography variant="h4" fontWeight={600}>
+                        <Typography variant="h4" fontWeight={600} color="text.primary">
                             Commercial Real Estate Site Discovery Pain Points
                         </Typography>
                     </Grid>
@@ -62,17 +62,17 @@ function SingleCaseChallanges() {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="body2" color="text.secondary" sx={{ py: 0.5 }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ py: 0.5 }}>
                                                 {challange.sNo}
                                             </Typography>
                                             <Divider />
                                             <Box sx={{ pt: 10 }}>
-                                                <Typography variant="h6" sx={{ color: "black" }}>
+                                                <Typography variant="h6" sx={{ color: "text.black" }}>
                                                     {challange.title}
                                                 </Typography>
                                                 <Typography
                                                     variant="body2"
-                                                    color="text.secondary"
+                                                    color="text.primary"
                                                     sx={{
                                                         pt: 1,
                                                         display: "-webkit-box",

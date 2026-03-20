@@ -37,12 +37,12 @@ function PricingSection() {
         <Box sx={{ px: 4, py: 6, }}>
             <Grid container spacing={3}>
                 <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="h4" fontWeight={600}>
-                        Our <Box component="span" sx={{ color: "primary.main" }}>
+                    <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary" }}>
+                        Our <Box component="span" sx={{ color: "text.secondary" }}>
                             Pricing
                         </Box>
                     </Typography>
-                    <Typography sx={{ py: 2 }} color="text.secondary">
+                    <Typography sx={{ py: 2 }} color="text.primary">
                         Customised pricing options best suitable for your needs
                     </Typography>
                 </Grid>
@@ -56,9 +56,6 @@ function PricingSection() {
                                         border: 1,
                                         borderColor: "divider",
                                         borderRadius: 4,
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "space-between",
                                         transition: "0.3s",
                                         "&:hover": {
                                             transform: "translateY(-6px)",
@@ -66,12 +63,18 @@ function PricingSection() {
                                         },
                                     }}
                                 >
-                                    <CardContent sx={{ flexGrow: 1, p: 1 }}>
+                                    <CardContent sx={{
+                                        width: "100%",
+                                        height: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between", p: 1,
+                                    }}>
                                         <Box sx={{ px: 2, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
-                                            <Typography variant="h6" fontWeight={700} color="black" sx={{ py: 1 }} >
+                                            <Typography variant="h6" fontWeight={700} color="text.black" sx={{ py: 1 }} >
                                                 {item.title}
                                             </Typography>
-                                            <Typography sx={{ py: 1 }} color="text.secondary">
+                                            <Typography sx={{ py: 1 }} color="text.primary">
                                                 {item.duration}
                                             </Typography>
                                         </Box>
@@ -91,18 +94,18 @@ function PricingSection() {
                                                             width: 18,
                                                             height: 18,
                                                             borderRadius: "50%",
-                                                            backgroundColor: "primary.main",
+                                                            backgroundColor: "text.secondary",
                                                             display: "flex",
                                                             alignItems: "center",
                                                             justifyContent: "center",
                                                         }}
                                                     >
                                                         <ArrowForwardIosIcon
-                                                            sx={{ fontSize: 10, color: "#fff" }}
+                                                            sx={{ fontSize: 10, color: "secondary.contrastText" }}
                                                         />
                                                     </Box>
 
-                                                    <Typography color="text.secondary">
+                                                    <Typography color="text.primary">
                                                         {point.trim()}
                                                     </Typography>
                                                 </Box>
@@ -111,7 +114,7 @@ function PricingSection() {
                                             <Typography
                                                 variant="h6"
                                                 fontWeight={700}
-                                                color="black"
+                                                color="text.black"
                                                 sx={{ mt: 1 }}
                                             >
                                                 {item.pricing}
@@ -123,18 +126,19 @@ function PricingSection() {
                                                 variant="contained"
                                                 sx={{
                                                     border: 1,
-                                                    borderColor: "primary.main",
+                                                    borderColor: "secondary.main",
                                                     borderRadius: 6,
                                                     mt: 2,
                                                     px: 3,
                                                     py: 1.4,
                                                     fontWeight: 600,
-                                                    backgroundColor: "primary.contrastText",
+                                                    backgroundColor: "background.paper",
                                                     color: "text.primary",
                                                     boxShadow: "none",
                                                     "&:hover": {
-                                                        backgroundColor: "#f3f4f6",
                                                         boxShadow: "none",
+                                                        backgroundColor: "primary.contrastText",
+                                                        color: "text.primary",
                                                     },
                                                 }}
                                             >

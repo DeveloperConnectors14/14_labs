@@ -12,7 +12,7 @@ function HeroSection() {
     return (
         <Box
             sx={{
-                height: "92vh",
+                height: "90vh",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -22,7 +22,7 @@ function HeroSection() {
             <Box
                 sx={{
                     width: "100%",
-                    height: "85vh",
+                    height: "87vh",
                     backgroundImage: 'url("/media/hero.png")',
                     backgroundPosition: "center",
                     backgroundSize: "cover",
@@ -49,9 +49,8 @@ function HeroSection() {
                             variant="h3"
                             sx={{
                                 fontWeight: 700,
-                                fontSize: { xs: "2rem", md: "3rem" },
-                                color: "primary.contrastText",
-                                lineHeight: 1.3,
+                                fontSize: { xs: "2.5rem", sm: "2.5rem", md: "3rem" },
+                                color: "secondary.contrastText",
                             }}
                         >
                             We build AI & software solutions that solve real
@@ -62,8 +61,7 @@ function HeroSection() {
                             sx={{
                                 mt: 3,
                                 mb: 4,
-                                color: "secondary.contrastText",
-                                fontSize: "1rem",
+                                color: "primary.contrastText",
                             }}
                         >
                             We design and develop intelligent systems,
@@ -84,14 +82,17 @@ function HeroSection() {
                                 href="/works"
                                 variant="contained"
                                 sx={{
-                                    borderRadius: 6,
-                                    px: 3,
-                                    py: 1.4,
+                                    borderRadius: 7,
+                                    p: "9px 18px",
                                     fontWeight: 600,
-                                    backgroundColor: "primary.contrastText",
+                                    fontSize: { sx: 16, sm: 16.5, md: 17 },
+                                    backgroundColor: "background.paper",
                                     color: "text.primary",
+                                    transition: 'all 0.3s ease',
                                     "&:hover": {
-                                        backgroundColor: "#f3f4f6",
+                                        boxShadow: "none",
+                                        backgroundColor: "primary.contrastText",
+                                        color: "text.primary",
                                     },
                                 }}
                             >
@@ -103,13 +104,19 @@ function HeroSection() {
                                 href="/contact"
                                 variant="contained"
                                 sx={{
-                                    borderRadius: 6,
-                                    px: 3,
-                                    py: 1.4,
+                                    borderRadius: 7,
+                                    p: "9px 18px",
                                     fontWeight: 600,
+                                    fontSize: { sx: 16, sm: 16.5, md: 17 },
                                     color: "text.primary",
-                                    background:
-                                        "primary.main",
+                                    backgroundColor: "secondary.main",
+                                    boxShadow: "none",
+                                    transition: 'all 0.3s ease',
+                                    "&:hover": {
+                                        boxShadow: "none",
+                                        backgroundColor: "primary.contrastText",
+                                        color: "text.primary",
+                                    },
                                 }}
                             >
                                 GET STARTED

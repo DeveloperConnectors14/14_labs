@@ -28,11 +28,11 @@ const services = [
 
 function ServicesSection() {
   return (
-    <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
+    <Box sx={{ px: 4, py: 5, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 4 }}>
-          <Typography variant="h4" fontWeight={600}>
-            Our <Box component="span" sx={{ color: "primary.main" }}>
+          <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary" }}>
+            Our <Box component="span" sx={{ color: "text.secondary" }}>
               Services
             </Box>
           </Typography>
@@ -61,8 +61,9 @@ function ServicesSection() {
                     overflow: "hidden",
                     transition: "0.3s",
                     "&:hover": {
-                      transform: "translateY(-6px)",
+                      border: "none",
                       boxShadow: 6,
+                      transform: "translateY(-6px)",
                     },
                   }}
                 >
@@ -79,7 +80,7 @@ function ServicesSection() {
                     <Box>
                       <Typography
                         variant="body2"
-                        color="secondary.contrastText"
+                        color="primary.contrastText"
                         sx={{ py: 0.5 }}
                       >
                         {service.sNo}
@@ -88,13 +89,13 @@ function ServicesSection() {
                       <Box sx={{ pt: 10 }}>
                         <Typography
                           variant="h6"
-                          sx={{ color: "primary.contrastText" }}
+                          sx={{ color: "secondary.contrastText" }}
                         >
                           {service.title}
                         </Typography>
                         <Typography
                           variant="body2"
-                          color="secondary.contrastText"
+                          color="primary.contrastText"
                           sx={{ py: 1 }}
                         >
                           {service.desc}
@@ -104,20 +105,21 @@ function ServicesSection() {
 
                     <Button
                       component={Link}
-                      href="/"
+                      href="/services"
                       variant="contained"
                       sx={{
-                        borderRadius: 6,
-                        px: 2,
-                        py: 1,
+                        borderRadius: 7,
+                        p: "9px 18px",
                         fontWeight: 600,
-                        backgroundColor: "primary.contrastText",
+                        mt: 1,
+                        backgroundColor: "background.paper",
                         color: "text.primary",
                         boxShadow: "none",
                         alignSelf: "flex-start",
                         "&:hover": {
-                          backgroundColor: "#f3f4f6",
                           boxShadow: "none",
+                          backgroundColor: "primary.contrastText",
+                          color: "text.primary",
                         },
                       }}
                     >

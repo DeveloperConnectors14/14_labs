@@ -36,14 +36,14 @@ function SuccessStories() {
     <Box sx={{ px: 4, py: 6 }}>
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 5 }}>
-          <Typography variant="h4" fontWeight={600}>
+          <Typography variant="h4" fontWeight={600} sx={{ color: "primary.main" }}>
             Success{" "}
-            <Box component="span" sx={{ color: "primary.main" }}>
+            <Box component="span" sx={{ color: "secondary.main" }}>
               Stories
             </Box>
           </Typography>
 
-          <Typography sx={{ py: 2 }} color="text.secondary">
+          <Typography sx={{ py: 2 }} color="primary.main">
             Discover how our customized AI solutions have made a significant
             impact on businesses through our case studies.
           </Typography>
@@ -59,11 +59,21 @@ function SuccessStories() {
         >
           <Box sx={{ display: "flex", gap: 1 }}>
             <IconButton className="prev-btn" sx={{ border: 1 }}>
-              <ArrowBack />
+              <ArrowBack sx={{
+                transition: 'all 0.3s ease',
+                "&:hover": {
+                  color: "secondary.main",
+                },
+              }} />
             </IconButton>
 
             <IconButton className="next-btn" sx={{ border: 1 }}>
-              <ArrowForward />
+              <ArrowForward sx={{
+                transition: 'all 0.3s ease',
+                "&:hover": {
+                  color: "secondary.main",
+                },
+              }} />
             </IconButton>
           </Box>
         </Grid>
@@ -112,11 +122,11 @@ function SuccessStories() {
               </Box>
 
               <Box>
-                <Typography sx={{ color: "black" }} mb={2}>
+                <Typography sx={{ color: "text.black" }} mb={2}>
                   "{story.text}"
                 </Typography>
 
-                <Typography sx={{ color: "black" }} fontWeight={600}>
+                <Typography sx={{ color: "text.black" }} fontWeight={600}>
                   {story.name}
                 </Typography>
               </Box>

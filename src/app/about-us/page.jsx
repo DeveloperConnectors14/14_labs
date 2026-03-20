@@ -39,23 +39,22 @@ function AboutUs() {
                 }}
             >
                 <Grid container spacing={4} alignItems="center">
-                    <Grid size={{ xs: 12, md: 7 }}>
+                    <Grid size={{ xs: 12, md: 12 }}>
                         <Typography variant="h3" fontWeight={700} color="text.primary" gutterBottom>
                             Designing{" "}
-                            <Box component="span" sx={{ color: "primary.main" }}>
-                                Intelligent
-                            </Box>{" "}
-                            Solutions
+                            <Box component="span" sx={{ color: "text.secondary" }}>
+                                Intelligent Solutions
+                            </Box>
                         </Typography>
 
-                        <Typography color="text.secondary" sx={{ maxWidth: 560, lineHeight: 1.8, mb: 2 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8, mb: 2 }}>
                             14 Labs is an AI-first technology company dedicated to transforming
                             businesses through intelligent automation and cutting-edge AI solutions.
                             We combine deep AI expertise with practical engineering to deliver
                             systems that drive real business value.
                         </Typography>
 
-                        <Typography color="text.secondary" sx={{ maxWidth: 560, lineHeight: 1.8 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8 }}>
                             From multi-agent systems to custom LLM integrations, we specialize in
                             building AI infrastructure that scales. We believe in genuine support,
                             seamless team alignment, and delivering outcomes that matter.
@@ -70,10 +69,9 @@ function AboutUs() {
                                         px: 2.5,
                                         py: 1,
                                         borderRadius: 7,
-                                        backgroundColor: "#e2f2f1",
-                                        color: "#0a3b60",
+                                        backgroundColor: "primary.contrastText",
+                                        color: "text.primary",
                                         fontSize: "0.85rem",
-                                        fontWeight: 600,
                                     }}
                                 >
                                     {p}
@@ -111,22 +109,22 @@ function AboutUs() {
                 </Grid>
             </Box>
 
-            <Box sx={{ px: { xs: 3, md: 8 }, py: { xs: 6, md: 8 }, backgroundColor: "background.paper" }}>
-                <Grid container spacing={6} alignItems="center">
+            <Box sx={{ px: { xs: 3, md: 8 }, py: { xs: 6, md: 8 } }}>
+                <Grid container spacing={6} alignItems="flex-start">
                     <Grid size={{ xs: 12, md: 5 }}>
                         <Typography variant="h4" fontWeight={700} color="text.primary" gutterBottom>
                             Who{" "}
-                            <Box component="span" sx={{ color: "primary.main" }}>
+                            <Box component="span" sx={{ color: "text.secondary" }}>
                                 We Are
                             </Box>
                         </Typography>
-                        <Typography color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8 }}>
                             We are a team of AI engineers, researchers, and product builders
                             passionate about solving hard problems. Our work spans industries —
                             from real estate and healthcare to finance and logistics — delivering
                             AI systems that create measurable business outcomes.
                         </Typography>
-                        <Typography color="text.secondary" sx={{ lineHeight: 1.8, mt: 2 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8, mt: 2 }}>
                             We partner closely with our clients, embedding ourselves in their
                             workflows to truly understand the challenge before building the solution.
                         </Typography>
@@ -145,7 +143,7 @@ function AboutUs() {
                                             borderRadius: 4,
                                             border: 1,
                                             borderColor: "divider",
-                                            backgroundColor: "background.default",
+                                            backgroundColor: "background.paper",
                                             transition: "0.3s",
                                             "&:hover": {
                                                 boxShadow: 4,
@@ -157,7 +155,7 @@ function AboutUs() {
                                             <Typography fontWeight={600} color="text.primary" gutterBottom>
                                                 {v.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ lineHeight: 1.7 }}>
                                                 {v.desc}
                                             </Typography>
                                         </Box>

@@ -30,12 +30,12 @@ function WhyChooseUs() {
     <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h4" fontWeight={600}>
-            What set us <Box component="span" sx={{ color: "primary.main" }}>
+          <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary" }}>
+            What set us <Box component="span" sx={{ color: "text.secondary" }}>
               apart
             </Box>
           </Typography>
-          <Typography sx={{ py: 2 }} color="text.secondary">
+          <Typography sx={{ py: 2 }} color="text.primary">
             We differentiate ourselves from other AI service providers by:
           </Typography>
         </Grid>
@@ -73,10 +73,10 @@ function WhyChooseUs() {
                         }}
                       />
                     </Box>
-                    <Typography variant="h6" fontWeight={700} sx={{ color: "black", pb: 1 }}>
+                    <Typography variant="h6" fontWeight={700} sx={{ color: "text.black", pb: 1 }}>
                       {item.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.grey">
                       {item.desc}
                     </Typography>
                   </CardContent>

@@ -1,4 +1,4 @@
-import {  Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 
 
 function SingleCaseArchitechture() {
@@ -26,7 +26,7 @@ function SingleCaseArchitechture() {
             <Box sx={{ px: 4, py: 6, }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography variant="h4" fontWeight={600}>
+                        <Typography variant="h4" fontWeight={600} color="text.primary">
                             Architecture <br /> Highlights
                         </Typography>
                     </Grid>
@@ -51,7 +51,7 @@ function SingleCaseArchitechture() {
                                             <Typography variant="h6" fontWeight={700} sx={{ color: "text.primary", pb: 1 }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.grey">
                                                 <Box component="span" fontWeight={600}>{item.boldText}</Box>
                                                 {item.desc}
                                             </Typography>
