@@ -26,7 +26,7 @@ function SingleCaseArchitechture() {
             <Box sx={{ px: 4, py: 6, }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography variant="h4" fontWeight={600} color="text.primary">
+                        <Typography variant="h4" fontWeight={600} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                             Architecture <br /> Highlights
                         </Typography>
                     </Grid>
@@ -41,18 +41,14 @@ function SingleCaseArchitechture() {
                                             position: "relative",
                                             overflow: "hidden",
                                             transition: "0.3s",
-                                            "&:hover": {
-                                                transform: "translateY(-6px)",
-                                                boxShadow: 6,
-                                            },
                                         }}
                                     >
                                         <CardContent>
-                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.primary", pb: 1 }}>
+                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.primary", pb: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.grey">
-                                                <Box component="span" fontWeight={600}>{item.boldText}</Box>
+                                            <Typography variant="body2" color="text.grey" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                                                <Box component="span" fontWeight={600} sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>{item.boldText}</Box>
                                                 {item.desc}
                                             </Typography>
                                         </CardContent>

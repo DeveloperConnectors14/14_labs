@@ -40,13 +40,19 @@ function Services() {
                     py: { xs: 5, md: 10 },
                 }}
             >
-                <Typography variant="h3" fontWeight={700} color="text.primary" gutterBottom>
+                <Typography variant="h3" fontWeight={700} color="text.primary" gutterBottom sx={{
+                    fontFamily: "'Instrument Sans', sans-serif",
+                }}>
                     Serious expertise & {" "}
-                    <Box component="span" sx={{ color: "text.secondary" }}>
+                    <Box component="span" sx={{
+                        color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif",
+                    }}>
                         Real results
                     </Box>
                 </Typography>
-                <Typography color="text.primary" sx={{ maxWidth: 580, lineHeight: 1.8 }}>
+                <Typography color="text.primary" sx={{
+                    maxWidth: 580, lineHeight: 1.8, fontFamily: "'Instrument Sans', sans-serif",
+                }}>
                     We keep our word, align seamlessly with your teams, and deliver outcomes
                     that matter. Integrating the now. Inventing the next.
                 </Typography>
@@ -68,27 +74,23 @@ function Services() {
                                     flexDirection: "column",
                                     gap: 2,
                                     transition: "0.3s",
-                                    "&:hover": {
-                                        boxShadow: 6,
-                                        transform: "translateY(-6px)",
-                                    },
                                 }}
                             >
                                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                                     <Typography
                                         variant="h6"
                                         fontWeight={700}
-                                        sx={{ color: "text.grey" }}
+                                        sx={{ color: "text.grey", fontFamily: "'IBM Plex Mono', monospace", }}
                                     >
                                         {s.number}
                                     </Typography>
                                 </Box>
 
-                                <Typography variant="h6" fontWeight={700} color="text.primary">
+                                <Typography variant="h6" fontWeight={700} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                     {s.title}
                                 </Typography>
 
-                                <Typography variant="body2" color="text.grey" sx={{ lineHeight: 1.7, flexGrow: 1 }}>
+                                <Typography variant="body2" color="text.grey" sx={{ lineHeight: 1.7, flexGrow: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
                                     {s.desc}
                                 </Typography>
 
@@ -98,7 +100,7 @@ function Services() {
                                             key={tag}
                                             label={tag}
                                             size="small"
-                                            sx={{ fontSize: "0.75rem" }}
+                                            sx={{ fontSize: "0.75rem", fontFamily: "'Instrument Sans', sans-serif", }}
                                         />
                                     ))}
                                 </Box>

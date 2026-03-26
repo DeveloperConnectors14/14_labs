@@ -81,7 +81,7 @@ function Navbar() {
                             {navItems.map((item) => (
                                 <Link key={item.path} href={item.path} style={{ textDecoration: "none" }}>
                                     <Typography variant="body2" sx={{
-                                        fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                        fontWeight: 500, fontsize: 16, color: "text.primary", transition: 'all 0.3s ease', fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
                                             color: "text.secondary",
                                         },
                                     }}>
@@ -99,7 +99,7 @@ function Navbar() {
                                     borderRadius: 7,
                                     p: "9px 18px",
                                     fontWeight: 600,
-                                    fontSize: 17,
+                                    fontFamily: "'IBM Plex Mono', monospace",
                                     color: "text.primary",
                                     backgroundColor: "secondary.main",
                                     boxShadow: "none",
@@ -160,6 +160,7 @@ function Navbar() {
                                 py: 1,
                                 fontWeight: 500,
                                 fontSize: 14,
+                                fontFamily: "'IBM Plex Mono', monospace",
                                 color: "text.primary",
                                 textTransform: "none",
                                 backgroundColor: "transparent",
@@ -184,6 +185,7 @@ function Navbar() {
                             py: 1,
                             fontWeight: 600,
                             fontsize: 16,
+                            fontFamily: "'IBM Plex Mono', monospace",
                             color: "text.primary",
                             backgroundColor: "secondary.main",
                             boxShadow: "none",

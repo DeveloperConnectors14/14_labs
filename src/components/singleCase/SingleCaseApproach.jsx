@@ -36,10 +36,10 @@ function SingleCaseApproach() {
             <Box sx={{ px: 4, py: 6 }}>
                 <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 5 }}>
-                        <Typography sx={{ py: 2.5 }} color="text.primary">
+                        <Typography sx={{ py: 2.5, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                             Our approach
                         </Typography>
-                        <Typography variant="h4" fontWeight={600} color="text.primary">
+                        <Typography variant="h4" fontWeight={600} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                             AI Powered Workflow
                         </Typography>
                     </Grid>
@@ -74,16 +74,16 @@ function SingleCaseApproach() {
                                                 <Accordion sx={{ boxShadow: "none" }}>
                                                     <AccordionSummary expandIcon={<ExpandMore />}>
                                                         <Box>
-                                                            <Typography variant="body2" color="text.grey" sx={{ py: 0.5 }}>
+                                                            <Typography variant="body2" color="text.grey" sx={{ py: 0.5, fontFamily: "'IBM Plex Mono', monospace", }}>
                                                                 {item.step}
                                                             </Typography>
-                                                            <Typography variant="h6" fontWeight={"bold"} color="text.primary">
+                                                            <Typography variant="h6" fontWeight={"bold"} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                                                 {item.title}
                                                             </Typography>
                                                         </Box>
                                                     </AccordionSummary>
                                                     <AccordionDetails>
-                                                        <Typography variant="body2" color="text.grey">
+                                                        <Typography variant="body2" color="text.grey" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                                             {item.desc}
                                                         </Typography>
                                                     </AccordionDetails>

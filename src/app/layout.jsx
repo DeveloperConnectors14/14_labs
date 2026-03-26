@@ -14,6 +14,12 @@ export const metadata = {
 function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Instrument+Sans&family=Inter&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider>

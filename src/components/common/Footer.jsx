@@ -44,7 +44,7 @@ const Footer = () => {
                     <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-evenly", alignItems: "center", width: "100%" }}>
                         <Link href="/services" style={{ textDecoration: "none" }}>
                             <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                fontWeight: 500, color: "text.primary", fontFamily: "'IBM Plex Mono', monospace", transition: 'all 0.3s ease', "&:hover": {
                                     color: "text.secondary",
                                 },
                             }}>
@@ -54,7 +54,7 @@ const Footer = () => {
 
                         <Link href="/case-studies" style={{ textDecoration: "none" }}>
                             <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                fontWeight: 500, color: "text.primary", fontFamily: "'IBM Plex Mono', monospace", transition: 'all 0.3s ease', "&:hover": {
                                     color: "text.secondary",
                                 },
                             }}>
@@ -64,7 +64,7 @@ const Footer = () => {
 
                         <Link href="/about-us" style={{ textDecoration: "none" }}>
                             <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
                                     color: "text.secondary",
                                 },
                             }}>
@@ -74,7 +74,7 @@ const Footer = () => {
 
                         <Link href="/contact" style={{ textDecoration: "none" }}>
                             <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', "&:hover": {
+                                fontWeight: 500, color: "text.primary", fontFamily: "'IBM Plex Mono', monospace", transition: 'all 0.3s ease', "&:hover": {
                                     color: "text.secondary",
                                 },
                             }}>
@@ -144,7 +144,7 @@ const Footer = () => {
                         justifyContent: { xs: "center", md: "flex-start" },
                         mt: { xs: 2, md: 0 },
                     }}>
-                        <Typography variant="body2" sx={{ color: "text.grey" }}>
+                        <Typography variant="body2" sx={{ color: "text.grey", fontFamily: "'Instrument Sans', sans-serif", }}>
                             © Copyright 2026, All Rights Reserved
                         </Typography>
                     </Box>
@@ -159,7 +159,10 @@ const Footer = () => {
                     >
                         <Link href="/" style={{ textDecoration: "none" }}>
                             <Typography variant="body2" sx={{
-                                color: "text.grey", "&:hover": {
+                                color: "text.grey",
+                                fontFamily: "'Instrument Sans', sans-serif",
+                                transition: "all 0.4s ease",
+                                "&:hover": {
                                     color: "text.secondary",
                                 },
                             }}>
@@ -169,7 +172,10 @@ const Footer = () => {
 
                         <Link href="/" style={{ textDecoration: "none" }}>
                             <Typography variant="body2" sx={{
-                                color: "text.grey", "&:hover": {
+                                color: "text.grey",
+                                fontFamily: "'Instrument Sans', sans-serif",
+                                transition: "all 0.4s ease",
+                                "&:hover": {
                                     color: "text.secondary",
                                 },
                             }}>

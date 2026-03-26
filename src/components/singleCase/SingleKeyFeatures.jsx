@@ -35,10 +35,10 @@ function SingleKeyFeatures() {
             <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography variant="h4" fontWeight={600} color="text.primary">
+                        <Typography variant="h4" fontWeight={600} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                             Key Features
                         </Typography>
-                        <Typography sx={{ py: 2 }} color="text.primary">
+                        <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                             A comprehensive suit of AI-powered tools to automate commercial real estate site discovery and qualification.
                         </Typography>
                     </Grid>
@@ -54,17 +54,13 @@ function SingleKeyFeatures() {
                                             flexDirection: "column",
                                             justifyContent: "space-between",
                                             transition: "0.3s",
-                                            "&:hover": {
-                                                transform: "translateY(-6px)",
-                                                boxShadow: 6,
-                                            },
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.black", pb: 1 }}>
+                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.black", pb: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.grey">
+                                            <Typography variant="body2" color="text.grey" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.desc}
                                             </Typography>
                                         </CardContent>

@@ -36,10 +36,10 @@ function SingleCaseHero() {
                     textAlign: "center",
                 }}>
                     <Grid size={{ xs: 12, md: 7 }} >
-                        <Typography variant="h3" fontWeight={700} color="text.primary" sx={{ fontSize: { xs: "2.5rem", sm: "2.5rem", md: "3rem" }, }}>
+                        <Typography variant="h3" fontWeight={700} color="text.primary" sx={{ fontSize: { xs: "2.5rem", sm: "2.5rem", md: "3rem" }, fontFamily: "'Instrument Sans', sans-serif", }}>
                             AI Find Sites Real Estate Solution
                         </Typography>
-                        <Typography sx={{ py: 2.5, }} color="text.primary">
+                        <Typography sx={{ py: 2.5, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                             AI-Driven Commercial Real Estate Site Discovery - Automating hours of manual research into minutes of intelligent analysis
                         </Typography>
                     </Grid>
@@ -63,17 +63,13 @@ function SingleCaseHero() {
                                             position: "relative",
                                             overflow: "hidden",
                                             transition: "0.3s",
-                                            "&:hover": {
-                                                transform: "translateY(-6px)",
-                                                boxShadow: 6,
-                                            },
                                         }}
                                     >
                                         <CardContent>
-                                            <Typography variant="h6" fontWeight={700} >
+                                            <Typography variant="h6" fontWeight={700} sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.value}
                                             </Typography>
-                                            <Typography variant="body2" color="text.grey" sx={{ pt: 1 }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ pt: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.label}
                                             </Typography>
                                         </CardContent>

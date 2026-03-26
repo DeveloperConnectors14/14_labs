@@ -34,6 +34,7 @@ function TrustedBrands() {
                 sx={{
                     mb: 4,
                     fontSize: { xs: 14, sm: 16, md: 16 },
+                    fontFamily: "'IBM Plex Mono', monospace",
                     color: "text.grey",
                 }}
             >
@@ -46,12 +47,12 @@ function TrustedBrands() {
                     flexWrap: "wrap",
                     justifyContent: "center",
                     alignItems: "center",
-                    gap: { xs: 2, md: 7 },
+                    gap: { xs: 2, md: 1 },
                 }}
             >
                 {brandImages.map((item, index) => (
                     <Box key={index} sx={{
-                        width: { xs: 80, sm: 100, md: 140 },
+                        width: { xs: 80, sm: 140, md: 200 },
                         backgroundColor: "background.paper",
                         p: { xs: 1, sm: 2, md: 3 },
                         border: 1,

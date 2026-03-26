@@ -23,11 +23,11 @@ function TechnologyStack() {
                 <Grid container spacing={2}>
                     <Grid size={12}>
                         <Box>
-                            <Typography variant="h4" fontWeight={600} color="text.primary">
+                            <Typography variant="h4" fontWeight={600} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                 Build with technology stack
                             </Typography>
                         </Box>
-                        <Typography sx={{ py: 2 }} color="text.primary">
+                        <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                             Enterprise-grade technologies powering scalable, intelligent multi-agent systems.
                         </Typography>
                     </Grid>
@@ -49,6 +49,7 @@ function TechnologyStack() {
                                 border: 1,
                                 borderColor: "divider",
                                 fontWeight: 600,
+                                fontFamily: "'IBM Plex Mono', monospace",
                                 backgroundColor: "background.paper",
                                 color: "text.black",
                                 boxShadow: "none",
@@ -70,6 +71,7 @@ function TechnologyStack() {
                                 border: 1,
                                 borderColor: "divider",
                                 fontWeight: 600,
+                                fontFamily: "'IBM Plex Mono', monospace",
                                 backgroundColor: "background.paper",
                                 color: "text.black",
                                 boxShadow: "none",
@@ -91,6 +93,7 @@ function TechnologyStack() {
                                 border: 1,
                                 borderColor: "divider",
                                 fontWeight: 600,
+                                fontFamily: "'IBM Plex Mono', monospace",
                                 backgroundColor: "background.paper",
                                 color: "text.black",
                                 boxShadow: "none",
@@ -112,6 +115,7 @@ function TechnologyStack() {
                                 border: 1,
                                 borderColor: "divider",
                                 fontWeight: 600,
+                                fontFamily: "'IBM Plex Mono', monospace",
                                 backgroundColor: "background.paper",
                                 color: "text.black",
                                 boxShadow: "none",

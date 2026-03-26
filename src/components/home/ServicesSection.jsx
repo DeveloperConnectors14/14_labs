@@ -31,8 +31,8 @@ function ServicesSection() {
     <Box sx={{ px: 4, py: 5, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 4 }}>
-          <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary" }}>
-            Our <Box component="span" sx={{ color: "text.secondary" }}>
+          <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+            Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               Services
             </Box>
           </Typography>
@@ -53,78 +53,125 @@ function ServicesSection() {
                     borderRadius: 4,
                     display: "flex",
                     flexDirection: "column",
-                    backgroundImage: 'url("/media/service1.png")',
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
                     position: "relative",
-                    overflow: "hidden",
-                    transition: "0.3s",
+                    minHeight: 270,
+                    transition: "all 0.4s ease",
                     "&:hover": {
-                      border: "none",
-                      boxShadow: 6,
-                      transform: "translateY(-6px)",
+                      backgroundImage: 'url("/media/service1.png")',
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      "& .cardContent::before": {
+                        opacity: 1,
+                      },
+                      "& .sNo": {
+                        color: "primary.contrastText",
+                      },
+                      "& .hidden": {
+                        display: "block",
+                        transform: "translateY(0)",
+                        opacity: 1,
+                      }, "&:hover .hidden": {
+                        position: "relative",
+                        opacity: 1,
+                        transform: "translateY(0)",
+                        visibility: "visible",
+                      },
+                      "& .heading": {
+                        color: "secondary.contrastText",
+                      }
                     },
+
                   }}
                 >
                   <CardContent
+                    className="cardContent"
                     sx={{
+                      position: "relative",
                       flexGrow: 1,
+                      zIndex: 0,
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
-                      background:
-                        "linear-gradient(90deg, #016b64bb, #054c64c5, #063864cb, #02185abb)",
+                      transition: "background 0.4s ease",
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        inset: 0,
+                        background:
+                          "linear-gradient(90deg, #016b64bb, #054c64c5, #063864cb, #02185abb)",
+                        opacity: 0,
+                        transition: "opacity 0.4s ease",
+                      }
                     }}
                   >
-                    <Box>
-                      <Typography
-                        variant="body2"
-                        color="primary.contrastText"
-                        sx={{ py: 0.5 }}
-                      >
-                        {service.sNo}
-                      </Typography>
-                      <Divider />
-                      <Box sx={{ pt: 10 }}>
+                    <Box sx={{
+                      flexGrow: 1,
+                      zIndex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      transition: "background 0.4s ease",
+                    }}>
+                      <Box>
                         <Typography
+                          className="sNo"
+                          variant="body2"
+                          color="text.grey"
+                          sx={{ py: 0.5, fontFamily: "'IBM Plex Mono', monospace", }}
+                        >
+                          {service.sNo}
+                        </Typography>
+                        <Divider />
+                      </Box>
+                      <Box className="detailBox" >
+                        <Typography
+                          className="heading"
                           variant="h6"
-                          sx={{ color: "secondary.contrastText" }}
+                          sx={{ color: "text.black", fontFamily: "'Instrument Sans', sans-serif", }}
                         >
                           {service.title}
                         </Typography>
-                        <Typography
-                          variant="body2"
-                          color="primary.contrastText"
-                          sx={{ py: 1 }}
-                        >
-                          {service.desc}
-                        </Typography>
+                        <Box className="hidden" sx={{
+                          position: "absolute",
+                          opacity: 0,
+                          transform: "translateY(50px)",
+                          visibility: "hidden",
+                          transition: "all 0.4s ease",
+                        }} >
+                          <Typography
+                            variant="body2"
+                            color="primary.contrastText"
+                            sx={{ py: 1, fontFamily: "'Instrument Sans', sans-serif", }}
+                          >
+                            {service.desc}
+                          </Typography>
+                          <Button
+                            component={Link}
+                            href="/services"
+                            variant="contained"
+                            sx={{
+                              borderRadius: 7,
+                              p: "9px 18px",
+                              fontWeight: 600,
+                              mt: 2,
+                              fontFamily: "'IBM Plex Mono', monospace",
+                              backgroundColor: "background.paper",
+                              color: "text.primary",
+                              boxShadow: "none",
+                              alignSelf: "flex-start",
+                              "&:hover": {
+                                boxShadow: "none",
+                                backgroundColor: "primary.contrastText",
+                                color: "text.primary",
+                              },
+                            }}
+                          >
+                            EXPLORE
+                          </Button>
+                        </Box>
                       </Box>
                     </Box>
-
-                    <Button
-                      component={Link}
-                      href="/services"
-                      variant="contained"
-                      sx={{
-                        borderRadius: 7,
-                        p: "9px 18px",
-                        fontWeight: 600,
-                        mt: 1,
-                        backgroundColor: "background.paper",
-                        color: "text.primary",
-                        boxShadow: "none",
-                        alignSelf: "flex-start",
-                        "&:hover": {
-                          boxShadow: "none",
-                          backgroundColor: "primary.contrastText",
-                          color: "text.primary",
-                        },
-                      }}
-                    >
-                      EXPLORE
-                    </Button>
                   </CardContent>
                 </Card>
               </Grid>
@@ -135,6 +182,5 @@ function ServicesSection() {
     </Box>
   );
 }
-
 
 export default ServicesSection;

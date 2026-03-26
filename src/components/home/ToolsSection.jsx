@@ -27,13 +27,13 @@ function ToolsSection() {
       <Grid container spacing={2}>
         <Grid size={12}>
           <Box>
-            <Typography variant="h4" sx={{ color: "text.primary", fontWeight: 600 }}>
-              Tools & <Box component="span" sx={{ color: "text.secondary" }}>
+            <Typography variant="h4" sx={{ color: "text.primary", fontWeight: 600, fontFamily: "'Instrument Sans', sans-serif", }}>
+              Tools & <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
                 technologies
               </Box>
             </Typography>
           </Box>
-          <Typography sx={{ py: 2 }} color="text.primary">
+          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             We will be using the best tools and technologies to deliver results.
           </Typography>
         </Grid>
@@ -55,6 +55,7 @@ function ToolsSection() {
               border: 1,
               borderColor: "divider",
               fontWeight: 600,
+              fontFamily: "'IBM Plex Mono', monospace",
               backgroundColor: "background.paper",
               color: "text.black",
               boxShadow: "none",
@@ -76,6 +77,7 @@ function ToolsSection() {
               border: 1,
               borderColor: "divider",
               fontWeight: 600,
+              fontFamily: "'IBM Plex Mono', monospace",
               backgroundColor: "background.paper",
               color: "text.black",
               boxShadow: "none",
@@ -99,6 +101,7 @@ function ToolsSection() {
               fontWeight: 600,
               backgroundColor: "background.paper",
               color: "text.black",
+              fontFamily: "'IBM Plex Mono', monospace",
               boxShadow: "none",
               "&:hover": {
                 backgroundColor: "primary.contrastText",
@@ -118,6 +121,7 @@ function ToolsSection() {
               border: 1,
               borderColor: "divider",
               fontWeight: 600,
+              fontFamily: "'IBM Plex Mono', monospace",
               backgroundColor: "background.paper",
               color: "text.black",
               boxShadow: "none",

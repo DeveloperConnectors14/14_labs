@@ -43,7 +43,7 @@ export const ThemeProvider = ({ children }) => {
     },
 
     typography: {
-      fontFamily: "sans-serif",
+      fontFamily: "Inter, sans-serif",
       fontWeightRegular: 400,
       fontWeightMedium: 500,
     },

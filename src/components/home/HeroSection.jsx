@@ -34,6 +34,7 @@ function HeroSection() {
             >
                 <Box
                     sx={{
+                        width: "100%",
                         position: "absolute",
                         inset: 0,
                         background:
@@ -44,31 +45,37 @@ function HeroSection() {
                         textAlign: "center",
                     }}
                 >
-                    <Container maxWidth="md">
-                        <Typography
-                            variant="h3"
-                            sx={{
-                                fontWeight: 700,
-                                fontSize: { xs: "2.5rem", sm: "2.5rem", md: "3rem" },
-                                color: "secondary.contrastText",
-                            }}
-                        >
-                            We build AI & software solutions that solve real
-                            business problems
-                        </Typography>
+                    <Container sx={{ width: "803px", display: "flex", flexDirection: "column", gap: "24px" }}>
+                        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "16px", }}>
+                            <Typography
+                                sx={{
+                                    fontWeight: 600,
+                                    fontStyle: "semiBold",
+                                    fontSize: { xs: "28px", sm: "38px", md: "48px" },
+                                    lineHeight: "120%",
+                                    color: "secondary.contrastText",
+                                    fontFamily: "'Instrument Sans', sans-serif",
+                                }}
+                            >
+                                We build AI & software solutions that solve real
+                                business problems
+                            </Typography>
 
-                        <Typography
-                            sx={{
-                                mt: 3,
-                                mb: 4,
-                                color: "primary.contrastText",
-                            }}
-                        >
-                            We design and develop intelligent systems,
-                            automation tools, and scalable web platforms
-                            that help teams work smarter and grow faster.
-                        </Typography>
-
+                            <Typography
+                                sx={{
+                                    fontWeight: 400,
+                                    fontstyle: "Regular",
+                                    fontSize: { xs: "16px", sm: "17px", md: "18px" },
+                                    lineHeight: "150%",
+                                    color: "primary.contrastText",
+                                    fontFamily: "'Instrument Sans', sans-serif",
+                                }}
+                            >
+                                We design and develop intelligent systems,
+                                automation tools, and scalable web platforms
+                                that help teams work smarter and grow faster.
+                            </Typography>
+                        </Box>
                         <Box
                             sx={{
                                 display: "flex",
@@ -82,12 +89,15 @@ function HeroSection() {
                                 href="/works"
                                 variant="contained"
                                 sx={{
-                                    borderRadius: 7,
-                                    p: "9px 18px",
+                                    borderRadius: "60px",
+                                    p: "16px 24px",
                                     fontWeight: 600,
-                                    fontSize: { sx: 16, sm: 16.5, md: 17 },
+                                    fontStyle: "semiBold",
+                                    fontSize: { xs: "16px", sm: "18px", md: "20px" },
+                                    lineHeight: "24px",
                                     backgroundColor: "background.paper",
                                     color: "text.primary",
+                                    fontFamily: "'IBM Plex Mono', monospace",
                                     transition: 'all 0.3s ease',
                                     "&:hover": {
                                         boxShadow: "none",
@@ -104,11 +114,14 @@ function HeroSection() {
                                 href="/contact"
                                 variant="contained"
                                 sx={{
-                                    borderRadius: 7,
-                                    p: "9px 18px",
+                                    borderRadius: "60px",
+                                    p: "16px 24px",
                                     fontWeight: 600,
-                                    fontSize: { sx: 16, sm: 16.5, md: 17 },
+                                    fontStyle: "semiBold",
+                                    fontSize: { xs: "16px", sm: "18px", md: "20px" },
+                                    lineHeight: "24px",
                                     color: "text.primary",
+                                    fontFamily: "'IBM Plex Mono', monospace",
                                     backgroundColor: "secondary.main",
                                     boxShadow: "none",
                                     transition: 'all 0.3s ease',

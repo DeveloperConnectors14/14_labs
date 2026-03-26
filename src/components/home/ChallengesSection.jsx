@@ -30,13 +30,13 @@ function ChallengesSection() {
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 5 }}>
           <Box>
-            <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary" }}>
-              Challenges we <Box component="span" sx={{ color: "text.secondary" }}>
+            <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+              Challenges we <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
                 can overcome
               </Box>
             </Typography>
           </Box>
-          <Typography sx={{ py: 2 }} color="text.primary">
+          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             We turn these challenges into intelligent, practicle solutions.
           </Typography>
         </Grid>
@@ -68,10 +68,10 @@ function ChallengesSection() {
                       />
                     </Box>
                     <Box>
-                      <Typography variant="h6" fontWeight={"bold"}>
+                      <Typography variant="h6" fontWeight={"bold"} sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                         {item.title}
                       </Typography>
-                      <Typography variant="body2" color="text.grey" sx={{ py: 1 }}>
+                      <Typography variant="body2" color="text.grey" sx={{ py: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
                         {item.desc}
                       </Typography>
                     </Box>

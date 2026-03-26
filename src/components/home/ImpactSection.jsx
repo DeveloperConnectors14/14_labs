@@ -11,12 +11,12 @@ function ImpactSection() {
     <Box sx={{ px: 4, py: 6 }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h4" sx={{ fontWeight: 600, color: "text.primary" }}>
-            Our <Box component="span" sx={{ color: "text.secondary" }}>
+          <Typography variant="h4" sx={{ fontWeight: 600, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+            Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               impact
             </Box>
           </Typography>
-          <Typography sx={{ py: 2 }} color="text.primary">
+          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             From multi-agent systems to custom LLM integration, we specialize in building AI infrastructures that scales.
           </Typography>
         </Grid>
@@ -35,17 +35,13 @@ function ImpactSection() {
                     borderColor: "divider",
                     backgroundColor: "background.paper",
                     transition: "0.3s",
-                    "&:hover": {
-                      boxShadow: 4,
-                      transform: "translateY(-4px)",
-                    },
                   }}
                 >
                   <Box>
-                    <Typography variant="h1" sx={{ pb: 6, fontWeight: 700, color: "text.primary" }} gutterBottom>
+                    <Typography variant="h1" sx={{ pb: 6, fontWeight: 700, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }} gutterBottom>
                       {item.value}
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: "text.black" }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: "text.black", fontFamily: "Inter, sans-serif" }}>
                       {item.label}
                     </Typography>
                   </Box>

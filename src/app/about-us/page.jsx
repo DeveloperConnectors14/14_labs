@@ -40,21 +40,21 @@ function AboutUs() {
             >
                 <Grid container spacing={4} alignItems="center">
                     <Grid size={{ xs: 12, md: 12 }}>
-                        <Typography variant="h3" fontWeight={700} color="text.primary" gutterBottom>
+                        <Typography variant="h3" fontWeight={700} color="text.primary" gutterBottom sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                             Designing{" "}
-                            <Box component="span" sx={{ color: "text.secondary" }}>
+                            <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
                                 Intelligent Solutions
                             </Box>
                         </Typography>
 
-                        <Typography color="text.primary" sx={{ lineHeight: 1.8, mb: 2 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8, mb: 2, fontFamily: "'Instrument Sans', sans-serif", }}>
                             14 Labs is an AI-first technology company dedicated to transforming
                             businesses through intelligent automation and cutting-edge AI solutions.
                             We combine deep AI expertise with practical engineering to deliver
                             systems that drive real business value.
                         </Typography>
 
-                        <Typography color="text.primary" sx={{ lineHeight: 1.8 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8, fontFamily: "'Instrument Sans', sans-serif", }}>
                             From multi-agent systems to custom LLM integrations, we specialize in
                             building AI infrastructure that scales. We believe in genuine support,
                             seamless team alignment, and delivering outcomes that matter.
@@ -72,6 +72,7 @@ function AboutUs() {
                                         backgroundColor: "primary.contrastText",
                                         color: "text.primary",
                                         fontSize: "0.85rem",
+                                        fontFamily: "'Instrument Sans', sans-serif",
                                     }}
                                 >
                                     {p}
@@ -97,10 +98,10 @@ function AboutUs() {
                                     boxShadow: "0px 4px 20px rgba(0,0,0,0.05)",
                                 }}
                             >
-                                <Typography variant="h3" fontWeight={700} sx={{ color: "primary.main" }}>
+                                <Typography variant="h3" fontWeight={700} sx={{ color: "primary.main", fontFamily: "'Instrument Sans', sans-serif", }}>
                                     {s.value}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                                <Typography variant="body2" color="text.secondary" sx={{ mt: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
                                     {s.label}
                                 </Typography>
                             </Box>
@@ -112,19 +113,19 @@ function AboutUs() {
             <Box sx={{ px: { xs: 3, md: 8 }, py: { xs: 6, md: 8 } }}>
                 <Grid container spacing={6} alignItems="flex-start">
                     <Grid size={{ xs: 12, md: 5 }}>
-                        <Typography variant="h4" fontWeight={700} color="text.primary" gutterBottom>
+                        <Typography variant="h4" fontWeight={700} color="text.primary" gutterBottom sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                             Who{" "}
-                            <Box component="span" sx={{ color: "text.secondary" }}>
+                            <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
                                 We Are
                             </Box>
                         </Typography>
-                        <Typography color="text.primary" sx={{ lineHeight: 1.8 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8, fontFamily: "'Instrument Sans', sans-serif", }}>
                             We are a team of AI engineers, researchers, and product builders
                             passionate about solving hard problems. Our work spans industries —
                             from real estate and healthcare to finance and logistics — delivering
                             AI systems that create measurable business outcomes.
                         </Typography>
-                        <Typography color="text.primary" sx={{ lineHeight: 1.8, mt: 2 }}>
+                        <Typography color="text.primary" sx={{ lineHeight: 1.8, mt: 2, fontFamily: "'Instrument Sans', sans-serif", }}>
                             We partner closely with our clients, embedding ourselves in their
                             workflows to truly understand the challenge before building the solution.
                         </Typography>
@@ -145,17 +146,13 @@ function AboutUs() {
                                             borderColor: "divider",
                                             backgroundColor: "background.paper",
                                             transition: "0.3s",
-                                            "&:hover": {
-                                                boxShadow: 4,
-                                                transform: "translateY(-4px)",
-                                            },
                                         }}
                                     >
                                         <Box>
-                                            <Typography fontWeight={600} color="text.primary" gutterBottom>
+                                            <Typography fontWeight={600} color="text.primary" gutterBottom sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {v.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.grey" sx={{ lineHeight: 1.7 }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ lineHeight: 1.7, fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {v.desc}
                                             </Typography>
                                         </Box>

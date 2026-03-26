@@ -65,12 +65,12 @@ function ContactPage() {
         >
             <Grid container spacing={3} alignItems="flex-start">
                 <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="h4" fontWeight={700} sx={{ color: "text.primary" }} gutterBottom>
+                    <Typography variant="h4" fontWeight={700} sx={{ color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }} gutterBottom>
                         Contact Us
                     </Typography>
 
                     <Typography
-                        sx={{ py: 2, maxWidth: 420 }}
+                        sx={{ py: 2, maxWidth: 420, fontFamily: "'Instrument Sans', sans-serif", }}
                         color="text.primary"
                     >
                         Explore our in-depth case studies showcasing real-world
@@ -80,19 +80,19 @@ function ContactPage() {
 
                     <Box sx={{ mt: 6 }}>
                         <Box sx={{ mb: 4 }}>
-                            <Typography variant="body2" color="text.grey">
+                            <Typography variant="body2" color="text.grey" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                 Email
                             </Typography>
-                            <Typography variant="h6" fontWeight={700} color="text.primary">
+                            <Typography variant="h6" fontWeight={700} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                 info@14labs.co
                             </Typography>
                         </Box>
 
                         <Box>
-                            <Typography variant="body2" color="text.grey">
+                            <Typography variant="body2" color="text.grey" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                 Phone
                             </Typography>
-                            <Typography variant="h6" fontWeight={700} color="text.primary">
+                            <Typography variant="h6" fontWeight={700} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
                                 +1(888)-855-5328
                             </Typography>
                         </Box>
@@ -119,6 +119,7 @@ function ContactPage() {
                             sx={{
                                 backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                fontFamily: "'Instrument Sans', sans-serif",
                                 "& .MuiInputLabel-root": {
                                     color: "text.grey",
                                 },
@@ -142,6 +143,7 @@ function ContactPage() {
                             sx={{
                                 backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                fontFamily: "'Instrument Sans', sans-serif",
                                 "& .MuiInputLabel-root": {
                                     color: "text.grey",
                                 },
@@ -164,6 +166,7 @@ function ContactPage() {
                             sx={{
                                 backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                fontFamily: "'Instrument Sans', sans-serif",
                                 "& .MuiInputLabel-root": {
                                     color: "text.grey",
                                 },
@@ -188,6 +191,7 @@ function ContactPage() {
                             sx={{
                                 backgroundColor: "background.paper",
                                 borderRadius: 2,
+                                fontFamily: "'Instrument Sans', sans-serif",
                                 "& .MuiInputLabel-root": {
                                     color: "text.grey",
                                 },
@@ -210,6 +214,7 @@ function ContactPage() {
                                     p: "9px 18px",
                                     fontWeight: 600,
                                     fontSize: { sx: 16, sm: 16.5, md: 17 },
+                                    fontFamily: "'IBM Plex Mono', monospace",
                                     color: "text.primary",
                                     backgroundColor: "secondary.main",
                                     boxShadow: "none",

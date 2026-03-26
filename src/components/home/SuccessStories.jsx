@@ -36,14 +36,14 @@ function SuccessStories() {
     <Box sx={{ px: 4, py: 6 }}>
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 5 }}>
-          <Typography variant="h4" fontWeight={600} sx={{ color: "primary.main" }}>
+          <Typography variant="h4" fontWeight={600} sx={{ color: "primary.main", fontFamily: "'Instrument Sans', sans-serif", }}>
             Success{" "}
-            <Box component="span" sx={{ color: "secondary.main" }}>
+            <Box component="span" sx={{ color: "secondary.main", fontFamily: "'Instrument Sans', sans-serif", }}>
               Stories
             </Box>
           </Typography>
 
-          <Typography sx={{ py: 2 }} color="primary.main">
+          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="primary.main">
             Discover how our customized AI solutions have made a significant
             impact on businesses through our case studies.
           </Typography>
@@ -122,11 +122,11 @@ function SuccessStories() {
               </Box>
 
               <Box>
-                <Typography sx={{ color: "text.black" }} mb={2}>
+                <Typography sx={{ color: "text.black", fontFamily: "'Instrument Sans', sans-serif", textAlign: { xs: "center", sm: "center", md: "start" } }} mb={2}>
                   "{story.text}"
                 </Typography>
 
-                <Typography sx={{ color: "text.black" }} fontWeight={600}>
+                <Typography sx={{ color: "text.black", fontFamily: "'IBM Plex Mono', monospace", textAlign: { xs: "center", sm: "center", md: "start" } }} fontWeight={600}>
                   {story.name}
                 </Typography>
               </Box>
