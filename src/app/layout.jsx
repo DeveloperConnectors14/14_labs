@@ -7,7 +7,7 @@ export const metadata = {
   title: "14 LABS",
   description: "14 Labs official website",
   icons: {
-    icon: '/favicon.png',
+    icon: '/Favicon.svg',
   },
 };
 
