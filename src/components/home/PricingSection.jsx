@@ -37,12 +37,12 @@ function PricingSection() {
         <Box sx={{ px: 4, py: 6, }}>
             <Grid container spacing={3}>
                 <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
                         Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
                             Pricing
                         </Box>
                     </Typography>
-                    <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+                    <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                         Customised pricing options best suitable for your needs
                     </Typography>
                 </Grid>
@@ -70,10 +70,10 @@ function PricingSection() {
                                         justifyContent: "space-between", p: 1,
                                     }}>
                                         <Box sx={{ px: 2, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
-                                            <Typography variant="h6" fontWeight={700} color="text.black" sx={{ py: 1, fontFamily: "Inter, sans-serif" }} >
+                                            <Typography fontWeight={500} color="text.black" sx={{ py: 1, fontSize: { xs: "24px", sm: "26px", md: "28px" }, fontStyle: "Medium", fontFamily: "Inter, sans-serif" }} >
                                                 {item.title}
                                             </Typography>
-                                            <Typography sx={{ py: 1, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+                                            <Typography sx={{ py: 1, fontWeight: 400, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                                                 {item.duration}
                                             </Typography>
                                         </Box>
@@ -104,17 +104,16 @@ function PricingSection() {
                                                         />
                                                     </Box>
 
-                                                    <Typography color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                                                    <Typography sx={{ py: 1, fontWeight: 400, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                                                         {point.trim()}
                                                     </Typography>
                                                 </Box>
                                             ))}
 
                                             <Typography
-                                                variant="h6"
                                                 fontWeight={700}
                                                 color="text.black"
-                                                sx={{ mt: 1, fontFamily: "Inter, sans-serif" }}
+                                                sx={{ mt: 1, fontSize: { xs: "24px", sm: "26px", md: "28px" }, fontStyle: "Bold", fontWeight: 700, fontFamily: "Inter, sans-serif" }}
                                             >
                                                 {item.pricing}
                                             </Typography>

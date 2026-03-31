@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 
-const APP_BAR_HEIGHT = "10vh";
+const APP_BAR_HEIGHT = "104px";
 
 function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -43,7 +43,7 @@ function Navbar() {
                 position="fixed"
                 elevation={0}
                 sx={{
-                    height: APP_BAR_HEIGHT,
+                    height: { xs: "80px", sm: "90px", md: APP_BAR_HEIGHT },
                     backgroundColor: "background.paper",
                     backdropFilter: isScrolled ? "blur(10px)" : "none",
                     transition: "all 0.4s ease",
@@ -54,6 +54,7 @@ function Navbar() {
                     sx={{
                         height: "100%",
                         display: "flex",
+                        alignItems: "center",
                         justifyContent: "space-between",
                     }}
                 >
@@ -76,45 +77,67 @@ function Navbar() {
                     </Button>
 
                     {/* Desktop Menu */}
-                    <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-between", alignItems: "center", gap: 2, width: "70%" }}>
-                        <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-evenly", alignItems: "center", gap: 2, width: "60%" }}>
-                            {navItems.map((item) => (
-                                <Link key={item.path} href={item.path} style={{ textDecoration: "none" }}>
-                                    <Typography variant="body2" sx={{
-                                        fontWeight: 500, fontsize: 16, color: "text.primary", transition: 'all 0.3s ease', fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
-                                            color: "text.secondary",
-                                        },
-                                    }}>
-                                        {item.label}
-                                    </Typography>
-                                </Link>
-                            ))}
-                        </Box>
-                        <Box >
-                            <Button
-                                component={Link}
-                                href="/contact"
-                                variant="contained"
-                                sx={{
-                                    borderRadius: 7,
-                                    p: "9px 18px",
-                                    fontWeight: 600,
-                                    fontFamily: "'IBM Plex Mono', monospace",
+                    <Box sx={{
+                        display: { xs: "none", md: "flex" },
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: 2,
+                        width: "538px",
+                        p: "4px"
+                    }}>
+                        {navItems.map((item) => (
+                            <Link key={item.path} href={item.path} style={{
+                                textDecoration: "none",
+                            }}>
+                                <Typography sx={{
+                                    fontStyle: "medium",
+                                    height: "24px",
+                                    fontWeight: 500,
+                                    fontsize: "16px",
+                                    lineHeight: "150%",
                                     color: "text.primary",
-                                    backgroundColor: "secondary.main",
-                                    boxShadow: "none",
                                     transition: 'all 0.3s ease',
-                                    "&:hover": {
-                                        boxShadow: "none",
-                                        backgroundColor: "primary.contrastText",
-                                        color: "text.primary",
+                                    fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
+                                        color: "text.secondary",
                                     },
-                                }}
-                            >
-                                GET STARTED
-                            </Button>
-                        </Box>
+                                }}>
+                                    {item.label}
+                                </Typography>
+                            </Link>
+                        ))}
+
                     </Box>
+                    <Button
+                        component={Link}
+                        href="/contact"
+                        variant="contained"
+                        sx={{
+                            display: { xs: "none", md: "flex" },
+                            width: "178px",
+                            height: "56px",
+                            borderRadius: "60px",
+                            p: "16px 24px",
+                            backgroundColor: "secondary.main",
+                            boxShadow: "none",
+                            transition: 'all 0.3s ease',
+                            "&:hover": {
+                                boxShadow: "none",
+                                backgroundColor: "primary.contrastText",
+                                color: "text.primary",
+                            },
+                        }}
+                    >
+                        <Typography sx={{
+                            height: "24px",
+                            fontFamily: "'IBM Plex Mono', monospace",
+                            color: "text.primary",
+                            fontWeight: 600,
+                            fontStyle: "semiBold",
+                            fontsize: "20px",
+                        }}>
+                            GET STARTED
+                        </Typography>
+                    </Button>
 
                     {/* Mobile Menu Icon */}
                     <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -137,7 +160,7 @@ function Navbar() {
                 <Box
                     sx={{
                         position: "fixed",
-                        top: APP_BAR_HEIGHT,
+                        top: { xs: "80px", sm: "90px", md: APP_BAR_HEIGHT },
                         left: 0,
                         right: 0,
                         backgroundColor: "background.paper",
@@ -203,7 +226,7 @@ function Navbar() {
             </Collapse>
 
             {/* space for fixed navbar */}
-            <Toolbar sx={{ height: APP_BAR_HEIGHT }} />
+            <Toolbar sx={{ height: { xs: "80px", sm: "90px", md: APP_BAR_HEIGHT }, }} />
         </>
     );
 }

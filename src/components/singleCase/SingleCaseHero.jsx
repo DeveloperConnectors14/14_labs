@@ -35,11 +35,11 @@ function SingleCaseHero() {
                     justifyContent: "center",
                     textAlign: "center",
                 }}>
-                    <Grid size={{ xs: 12, md: 7 }} >
-                        <Typography variant="h3" fontWeight={700} color="text.primary" sx={{ fontSize: { xs: "2.5rem", sm: "2.5rem", md: "3rem" }, fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Grid size={{ xs: 12, md: 6 }} >
+                        <Typography fontWeight={600} color="text.primary" sx={{ fontSize: { xs: "26px", sm: "30px", md: "48px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
                             AI Find Sites Real Estate Solution
                         </Typography>
-                        <Typography sx={{ py: 2.5, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+                        <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
                             AI-Driven Commercial Real Estate Site Discovery - Automating hours of manual research into minutes of intelligent analysis
                         </Typography>
                     </Grid>
@@ -66,10 +66,10 @@ function SingleCaseHero() {
                                         }}
                                     >
                                         <CardContent>
-                                            <Typography variant="h6" fontWeight={700} sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography fontWeight={"700"} sx={{ fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "Bold", fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.value}
                                             </Typography>
-                                            <Typography variant="body2" color="text.grey" sx={{ pt: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography fontWeight={"400"} color="text.grey" sx={{ pt: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.label}
                                             </Typography>
                                         </CardContent>

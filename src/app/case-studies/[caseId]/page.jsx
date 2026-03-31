@@ -16,21 +16,21 @@ import TechnologyStack from "@/components/singleCase/TechnologyStack";
 function SingleCasePage() {
 
 
-    return (
-        <>
-            <SingleCaseHero />
-            <SingleCaseChallanges />
-            <RealCostDetails />
-            <SingleCaseApproach />
-            <SingleCaseArchitechture />
-            <SingleCasePipeline />
-            <SingleKeyFeatures />
-            <TechnologyStack />
-            <SingleTopFeatures />
-            <CallSection contact={true} />
-            <MoreCaseStudies />
-        </>
-    )
+  return (
+    <>
+      <SingleCaseHero />
+      <SingleCaseChallanges />
+      <RealCostDetails />
+      <SingleCaseApproach />
+      <SingleCaseArchitechture />
+      <SingleCasePipeline />
+      <SingleKeyFeatures />
+      <TechnologyStack />
+      <SingleTopFeatures />
+      <CallSection contact={true} />
+      <MoreCaseStudies />
+    </>
+  )
 }
 
 export default SingleCasePage;

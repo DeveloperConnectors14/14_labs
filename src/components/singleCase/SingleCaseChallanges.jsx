@@ -31,10 +31,10 @@ function SingleCaseChallanges() {
             <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 4 }}>
-                        <Typography sx={{ py: 2.5, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+                        <Typography fontWeight={"400"} color="text.primary" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
                             Challange
                         </Typography>
-                        <Typography variant="h4" fontWeight={600} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                        <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
                             Commercial Real Estate Site Discovery Pain Points
                         </Typography>
                     </Grid>
@@ -117,9 +117,8 @@ function SingleCaseChallanges() {
                                                 <Box>
                                                     <Typography
                                                         className="sNo"
-                                                        variant="body2"
                                                         color="text.grey"
-                                                        sx={{ py: 0.5, fontFamily: "'IBM Plex Mono', monospace", }}
+                                                        sx={{ py: 0.5, fontSize: { xs: "14px", sm: "15px", md: "16px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'IBM Plex Mono', monospace", }}
                                                     >
                                                         {challange.sNo}
                                                     </Typography>
@@ -128,8 +127,7 @@ function SingleCaseChallanges() {
                                                 <Box className="detailBox" >
                                                     <Typography
                                                         className="heading"
-                                                        variant="h6"
-                                                        sx={{ color: "text.black", fontFamily: "Inter, sans-serif" }}
+                                                        sx={{ color: "text.black", fontSize: { xs: "18px", sm: "22", md: "24px" }, fontWeight: 500, fontStyle: "Medium", fontFamily: "Inter, sans-serif" }}
                                                     >
                                                         {challange.title}
                                                     </Typography>
@@ -141,9 +139,8 @@ function SingleCaseChallanges() {
                                                         transition: "all 0.4s ease",
                                                     }} >
                                                         <Typography
-                                                            variant="body2"
                                                             color="primary.contrastText"
-                                                            sx={{ py: 1, fontFamily: "'Instrument Sans', sans-serif", }}
+                                                            sx={{ py: 1, fontWeight: 400, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}
                                                         >
                                                             {challange.desc}
                                                         </Typography>

@@ -30,12 +30,12 @@ function WhyChooseUs() {
     <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
             What set us <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               apart
             </Box>
           </Typography>
-          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             We differentiate ourselves from other AI service providers by:
           </Typography>
         </Grid>
@@ -69,10 +69,10 @@ function WhyChooseUs() {
                         }}
                       />
                     </Box>
-                    <Typography variant="h6" fontWeight={700} sx={{ color: "text.black", pb: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography fontWeight={"700"} sx={{ fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "Bold", fontFamily: "'Instrument Sans', sans-serif", }}>
                       {item.title}
                     </Typography>
-                    <Typography variant="body2" color="text.grey" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography fontWeight={"400"} color="text.grey" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
                       {item.desc}
                     </Typography>
                   </CardContent>

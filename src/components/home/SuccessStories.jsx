@@ -36,14 +36,14 @@ function SuccessStories() {
     <Box sx={{ px: 4, py: 6 }}>
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 5 }}>
-          <Typography variant="h4" fontWeight={600} sx={{ color: "primary.main", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
             Success{" "}
             <Box component="span" sx={{ color: "secondary.main", fontFamily: "'Instrument Sans', sans-serif", }}>
               Stories
             </Box>
           </Typography>
 
-          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="primary.main">
+          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             Discover how our customized AI solutions have made a significant
             impact on businesses through our case studies.
           </Typography>
@@ -122,11 +122,11 @@ function SuccessStories() {
               </Box>
 
               <Box>
-                <Typography sx={{ color: "text.black", fontFamily: "'Instrument Sans', sans-serif", textAlign: { xs: "center", sm: "center", md: "start" } }} mb={2}>
+                <Typography sx={{ color: "text.black", fontSize: { xs: "22px", sm: "26px", md: "32px" }, fontStyle: "Regular", fontWeight: 400, fontFamily: "'Instrument Sans', sans-serif", textAlign: { xs: "center", sm: "center", md: "start" } }} mb={2}>
                   "{story.text}"
                 </Typography>
 
-                <Typography sx={{ color: "text.black", fontFamily: "'IBM Plex Mono', monospace", textAlign: { xs: "center", sm: "center", md: "start" } }} fontWeight={600}>
+                <Typography sx={{ color: "text.black", fontSize: { xs: "16px", sm: "18px", md: "20px" }, fontStyle: "semiBold", fontWeight: 600, fontFamily: "'IBM Plex Mono', monospace", textAlign: { xs: "center", sm: "center", md: "start" } }} fontWeight={600}>
                   {story.name}
                 </Typography>
               </Box>

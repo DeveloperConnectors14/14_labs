@@ -36,12 +36,12 @@ function CaseStudies() {
     <Box sx={{ px: 4, py: 6, }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography  fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
             Case <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               studies
             </Box>
           </Typography>
-          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             Explore our in-depth case studies showcasing real-world examples of how AI solutions have driven success for businesses like yours.
           </Typography>
         </Grid>

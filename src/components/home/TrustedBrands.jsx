@@ -33,6 +33,8 @@ function TrustedBrands() {
             <Typography
                 sx={{
                     mb: 4,
+                    fontWeight:400,
+                    fontStyle:"Regular",
                     fontSize: { xs: 14, sm: 16, md: 16 },
                     fontFamily: "'IBM Plex Mono', monospace",
                     color: "text.grey",

@@ -27,7 +27,7 @@ function SingleTopFeatures() {
                                 < Grid size={{ xs: 12, md: 4 }} key={i} sx={{ display: { xs: "block", sm: "block", md: "flex" } }}>
                                     <Card
                                         sx={{
-                                            px: 2,
+                                            px: 1,
                                             display: "flex",
                                             flexDirection: "column",
                                             justifyContent: "space-between",
@@ -36,20 +36,20 @@ function SingleTopFeatures() {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.black", pb: 1, fontFamily: "Inter, sans-serif" }}>
-                                                {item.title}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
-                                                {item.desc}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
+                                            <Typography fontWeight={"600"} sx={{ color: "text.black", fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "SemiBold", pb: 1, fontFamily: "Inter, sans-serif" }}>
+                                            {item.title}
+                                        </Typography>
+                                        <Typography fontWeight={"400"} color="text.primary" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            {item.desc}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
                                 </Grid>
                             ))}
-                        </Grid>
                     </Grid>
                 </Grid>
-            </Box>
+            </Grid>
+        </Box >
         </>
     )
 }

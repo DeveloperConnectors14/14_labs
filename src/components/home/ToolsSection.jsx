@@ -27,13 +27,13 @@ function ToolsSection() {
       <Grid container spacing={2}>
         <Grid size={12}>
           <Box>
-            <Typography variant="h4" sx={{ color: "text.primary", fontWeight: 600, fontFamily: "'Instrument Sans', sans-serif", }}>
+            <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
               Tools & <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
                 technologies
               </Box>
             </Typography>
           </Box>
-          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             We will be using the best tools and technologies to deliver results.
           </Typography>
         </Grid>

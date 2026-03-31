@@ -11,12 +11,12 @@ function ImpactSection() {
     <Box sx={{ px: 4, py: 6 }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h4" sx={{ fontWeight: 600, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
             Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               impact
             </Box>
           </Typography>
-          <Typography sx={{ py: 2, fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
             From multi-agent systems to custom LLM integration, we specialize in building AI infrastructures that scales.
           </Typography>
         </Grid>
@@ -38,10 +38,10 @@ function ImpactSection() {
                   }}
                 >
                   <Box>
-                    <Typography variant="h1" sx={{ pb: 6, fontWeight: 700, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }} gutterBottom>
+                    <Typography  sx={{ pb: 6, fontWeight: 700, fontSize: { xs: "60px", sm: "80px", md: "120px" }, fontStyle: "Bold", fontWeight: 700, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }} gutterBottom>
                       {item.value}
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: "text.black", fontFamily: "Inter, sans-serif" }}>
+                    <Typography sx={{ fontWeight: 500, fontSize:{xs:"24px",sm:"26px",md:"28px"},fontStyle:"Medium", color: "text.black", fontFamily: "Inter, sans-serif" }}>
                       {item.label}
                     </Typography>
                   </Box>

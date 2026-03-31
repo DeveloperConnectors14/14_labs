@@ -7,25 +7,25 @@ const services = [
     {
         number: "01",
         title: "Multi-Agent Systems",
-        desc: "Development of multi-agent systems with built-in observability, enabling monitoring and optimizing specialized agents operating at enterprise scale.",
+        desc: "Development of multi-agent systems with built-in observability...",
         tags: ["Agent Orchestration", "Built-in Observability", "Enterprise Scale", "Real-time Monitoring"],
     },
     {
         number: "02",
         title: "AI Integration",
-        desc: "Seamlessly integrate AI capabilities into your existing systems. Enhance today's operations and drive tomorrow's breakthroughs with intelligent automation.",
+        desc: "Seamlessly integrate AI capabilities into your existing systems...",
         tags: ["LLM Integration", "Custom AI Models", "Process Automation", "Data Analytics"],
     },
     {
         number: "03",
         title: "Custom AI Solutions",
-        desc: "Designing intelligent solutions for the future. We build custom AI models and applications tailored to your unique business challenges.",
+        desc: "Designing intelligent solutions for the future...",
         tags: ["RAG Systems", "Fine-tuned Models", "AI Chatbots", "Knowledge Bases"],
     },
     {
         number: "04",
         title: "Web & App Development",
-        desc: "Modern, AI-enhanced websites and applications built with cutting-edge technologies. From intelligent platforms to seamless mobile experiences.",
+        desc: "Modern, AI-enhanced websites and applications...",
         tags: ["React & Next.js", "Mobile Apps", "AI-Powered UX", "API Integration"],
     },
 ];
@@ -33,77 +33,89 @@ const services = [
 function Services() {
     return (
         <Box>
-            <Box
-                sx={{
-                    background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
-                    px: { xs: 3, md: 8 },
-                    py: { xs: 5, md: 10 },
-                }}
-            >
-                <Typography variant="h3" fontWeight={700} color="text.primary" gutterBottom sx={{
-                    fontFamily: "'Instrument Sans', sans-serif",
-                }}>
-                    Serious expertise & {" "}
-                    <Box component="span" sx={{
-                        color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif",
-                    }}>
+
+            <Box sx={{
+                background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+                px: { xs: 4, md: 8 },
+                py: { xs: 6, md: 10 },
+            }}>
+                <Typography
+                    fontWeight={600}
+                    sx={{
+                        fontSize: { xs: "26px", sm: "32px", md: "40px" },
+                        fontStyle: "SemiBold",
+                        fontFamily: "'Instrument Sans', sans-serif",
+                    }}
+                >
+                    Serious expertise &{" "}
+                    <Box component="span" sx={{ color: "text.secondary" }}>
                         Real results
                     </Box>
                 </Typography>
-                <Typography color="text.primary" sx={{
-                    maxWidth: 580, lineHeight: 1.8, fontFamily: "'Instrument Sans', sans-serif",
+
+                <Typography sx={{
+                    py: 2,
+                    maxWidth: 580,
+                    fontSize: { xs: "16px", sm: "17px", md: "18px" },
+                    fontFamily: "'Instrument Sans', sans-serif",
                 }}>
-                    We keep our word, align seamlessly with your teams, and deliver outcomes
-                    that matter. Integrating the now. Inventing the next.
+                    We keep our word, align seamlessly with your teams...
                 </Typography>
             </Box>
 
-            <Box sx={{ px: { xs: 3, md: 8 }, py: { xs: 6, md: 8 }, backgroundColor: "background.default" }}>
+            <Box sx={{ px: { xs: 4, md: 8 }, py: { xs: 6, md: 8 } }}>
                 <Grid container spacing={3}>
-                    {services.map((s, i) => (
+                    {services.map((s) => (
                         <Grid size={{ xs: 12, md: 6 }} key={s.number}>
-                            <Box
-                                sx={{
-                                    p: 4,
-                                    borderRadius: 4,
-                                    backgroundColor: "background.paper",
-                                    border: 1,
-                                    borderColor: "divider",
-                                    height: "100%",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: 2,
-                                    transition: "0.3s",
-                                }}
-                            >
-                                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                                    <Typography
-                                        variant="h6"
-                                        fontWeight={700}
-                                        sx={{ color: "text.grey", fontFamily: "'IBM Plex Mono', monospace", }}
-                                    >
-                                        {s.number}
-                                    </Typography>
-                                </Box>
+                            <Box sx={{
+                                p: 4,
+                                borderRadius: 4,
+                                backgroundColor: "background.paper",
+                                border: 1,
+                                borderColor: "divider",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 2,
+                            }}>
 
-                                <Typography variant="h6" fontWeight={700} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                                <Typography sx={{
+                                    fontSize: { xs: "14px", sm: "15px", md: "16px" },
+                                    fontFamily: "'IBM Plex Mono', monospace",
+                                    color: "text.grey",
+                                }}>
+                                    {s.number}
+                                </Typography>
+
+                                <Typography sx={{
+                                    fontSize: { xs: "20px", sm: "22px", md: "24px" },
+                                    fontWeight: 600,
+                                    fontFamily: "'Instrument Sans', sans-serif",
+                                }}>
                                     {s.title}
                                 </Typography>
 
-                                <Typography variant="body2" color="text.grey" sx={{ lineHeight: 1.7, flexGrow: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
+                                <Typography sx={{
+                                    fontSize: { xs: "14px", sm: "15px", md: "16px" },
+                                    fontFamily: "'Instrument Sans', sans-serif",
+                                    color: "text.grey",
+                                }}>
                                     {s.desc}
                                 </Typography>
 
-                                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 1 }}>
+                                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
                                     {s.tags.map((tag) => (
                                         <Chip
                                             key={tag}
                                             label={tag}
                                             size="small"
-                                            sx={{ fontSize: "0.75rem", fontFamily: "'Instrument Sans', sans-serif", }}
+                                            sx={{
+                                                fontSize: { xs: "12px", sm: "13px", md: "14px" },
+                                                fontFamily: "'Instrument Sans', sans-serif",
+                                            }}
                                         />
                                     ))}
                                 </Box>
+
                             </Box>
                         </Grid>
                     ))}
@@ -111,8 +123,6 @@ function Services() {
             </Box>
 
             <CallSection contact={true} />
-
-
         </Box>
     );
 }

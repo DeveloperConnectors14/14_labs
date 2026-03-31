@@ -26,7 +26,7 @@ function SingleCaseArchitechture() {
             <Box sx={{ px: 4, py: 6, }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography variant="h4" fontWeight={600} color="text.primary" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                        <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
                             Architecture <br /> Highlights
                         </Typography>
                     </Grid>
@@ -44,11 +44,11 @@ function SingleCaseArchitechture() {
                                         }}
                                     >
                                         <CardContent>
-                                            <Typography variant="h6" fontWeight={700} sx={{ color: "text.primary", pb: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography fontWeight={"700"} sx={{ fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "Bold", fontFamily: "'Instrument Sans', sans-serif", }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.grey" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
-                                                <Box component="span" fontWeight={600} sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>{item.boldText}</Box>
+                                            <Typography color="text.grey" fontWeight={"400"} sx={{ fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                                <Box component={"span"} color="text.grey" fontWeight={"600"} sx={{ fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Bold", fontFamily: "'Instrument Sans', sans-serif", }}>{item.boldText}</Box>
                                                 {item.desc}
                                             </Typography>
                                         </CardContent>

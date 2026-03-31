@@ -31,7 +31,7 @@ function ServicesSection() {
     <Box sx={{ px: 4, py: 5, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 4 }}>
-          <Typography variant="h4" fontWeight={600} sx={{ color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
             Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               Services
             </Box>
@@ -54,7 +54,7 @@ function ServicesSection() {
                     display: "flex",
                     flexDirection: "column",
                     position: "relative",
-                    minHeight: 270,
+                    minHeight: { xs: 270, sm: 300, md: 340 },
                     transition: "all 0.4s ease",
                     "&:hover": {
                       backgroundImage: 'url("/media/service1.png")',
@@ -118,7 +118,7 @@ function ServicesSection() {
                           className="sNo"
                           variant="body2"
                           color="text.grey"
-                          sx={{ py: 0.5, fontFamily: "'IBM Plex Mono', monospace", }}
+                          sx={{ py: 0.5, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'IBM Plex Mono', monospace", }}
                         >
                           {service.sNo}
                         </Typography>
@@ -127,8 +127,7 @@ function ServicesSection() {
                       <Box className="detailBox" >
                         <Typography
                           className="heading"
-                          variant="h6"
-                          sx={{ color: "text.black", fontFamily: "'Instrument Sans', sans-serif", }}
+                          sx={{ color: "text.black", fontFamily: "'Instrument Sans', sans-serif", fontSize: { xs: "24px", sm: "26px", md: "28px" }, fontStyle: "medium", fontWeight: 500 }}
                         >
                           {service.title}
                         </Typography>
@@ -140,9 +139,8 @@ function ServicesSection() {
                           transition: "all 0.4s ease",
                         }} >
                           <Typography
-                            variant="body2"
                             color="primary.contrastText"
-                            sx={{ py: 1, fontFamily: "'Instrument Sans', sans-serif", }}
+                            sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}
                           >
                             {service.desc}
                           </Typography>
