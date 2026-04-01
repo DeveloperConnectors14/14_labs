@@ -113,10 +113,14 @@ function Navbar() {
                         variant="contained"
                         sx={{
                             display: { xs: "none", md: "flex" },
-                            width: "178px",
-                            height: "56px",
                             borderRadius: "60px",
                             p: "16px 24px",
+                            fontWeight: 600,
+                            fontStyle: "semiBold",
+                            fontSize: { xs: "16px", sm: "18px", md: "20px" },
+                            lineHeight: "24px",
+                            color: "text.primary",
+                            fontFamily: "'IBM Plex Mono', monospace",
                             backgroundColor: "secondary.main",
                             boxShadow: "none",
                             transition: 'all 0.3s ease',
@@ -127,16 +131,7 @@ function Navbar() {
                             },
                         }}
                     >
-                        <Typography sx={{
-                            height: "24px",
-                            fontFamily: "'IBM Plex Mono', monospace",
-                            color: "text.primary",
-                            fontWeight: 600,
-                            fontStyle: "semiBold",
-                            fontsize: "20px",
-                        }}>
-                            GET STARTED
-                        </Typography>
+                        GET STARTED
                     </Button>
 
                     {/* Mobile Menu Icon */}
