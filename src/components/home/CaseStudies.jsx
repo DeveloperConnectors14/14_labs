@@ -12,22 +12,16 @@ import {
 
 const studies = [
   {
-    id: "case-1",
-    title: "How we increase revenuew for Acme using AI.",
+    id: "find-sites-workflow",
+    title: "AI Find Sites Real Estate Solution",
     img: "case1.png",
-    date: "31st January 2008",
+    date: "1st January 2024",
   },
   {
-    id: "case-2",
-    title: "How we reduce wait time to 45% using data.",
+    id: "ai-admission-counselor",
+    title: "AI Admission Counselor",
     img: "case2.png",
-    date: "31st January 2008",
-  },
-  {
-    id: "case-3",
-    title: "How we increase revenuew for Acme using AI.",
-    img: "case3.png",
-    date: "31st January 2008",
+    date: "1st January 2024",
   },
 ];
 
@@ -42,7 +36,7 @@ function CaseStudies() {
             </Box>
           </Typography>
           <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
-            Explore our in-depth case studies showcasing real-world examples of how AI solutions have driven success for businesses like yours.
+            Explore how we've transformed businesses across industries with intelligent automation, multi-agent systems, and cutting-edge AI technology.
           </Typography>
         </Grid>
         <Grid size={12}>

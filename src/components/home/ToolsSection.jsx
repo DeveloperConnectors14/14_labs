@@ -6,35 +6,75 @@ import {
   Button,
 } from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
 
 const tools = [
-  "tool1.png",
-  "tool2.png",
-  "tool3.png",
-  "tool4.png",
-  "tool5.png",
-  "tool5.png",
+  {
+    techType: "AI & LLMs",
+    values: [
+      "openai-2",
+      "ffffff (1)",
+      "ffffff",
+      "huggingface",
+    ]
+  },
+  {
+    techType: "AI Infrastructure",
+    values: [
+      "python-original",
+      "fastapi-original",
+      "postgresql-original",
+      "redis-original",
+    ]
+  },
+  {
+    techType: "Web & Mobile",
+    values: [
+      "react-original",
+      "nextjs-original",
+      "typescript-original",
+      "react-original",
+    ]
+  },
+  {
+    techType: "Cloud & DevOps",
+    values: [
+      "amazonwebservices-original-wordmark",
+      "docker-original",
+      "kubernetes-original",
+      "vercel-original",
+    ]
+  },
 ];
 
-function handleFilter() {
-
-  console.log("handleFilter function is called!")
-}
-
 function ToolsSection() {
+
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredTools =
+    activeFilter === "All"
+      ? tools.flatMap((item) => item.values)
+      : tools
+        .filter((item) => item.techType === activeFilter)
+        .flatMap((item) => item.values);
+
+  function handleFilter(type) {
+    setActiveFilter(type);
+  }
+
   return (
     <Box sx={{ px: 4, py: 6 }}>
       <Grid container spacing={2}>
         <Grid size={12}>
           <Box>
             <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-              Tools & <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
-                technologies
+              Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
+                Tech Stack
               </Box>
             </Typography>
           </Box>
           <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
-            We will be using the best tools and technologies to deliver results.
+            We leverage cutting-edge AI frameworks and cloud infrastructure to build intelligent, scalable solutions for enterprise.
           </Typography>
         </Grid>
 
@@ -47,7 +87,7 @@ function ToolsSection() {
         }}>
           <Button
             variant="contained"
-            onClick={() => handleFilter()}
+            onClick={() => handleFilter("All")}
             sx={{
               borderRadius: 2,
               px: 2,
@@ -65,75 +105,37 @@ function ToolsSection() {
               },
             }}
           >
-            AI & LLMs
+            All
           </Button>
-          <Button
-            variant="contained"
-            onClick={() => handleFilter()}
-            sx={{
-              borderRadius: 2,
-              px: 2,
-              py: 1,
-              border: 1,
-              borderColor: "divider",
-              fontWeight: 600,
-              fontFamily: "'IBM Plex Mono', monospace",
-              backgroundColor: "background.paper",
-              color: "text.black",
-              boxShadow: "none",
-              "&:hover": {
-                backgroundColor: "primary.contrastText",
+
+          {tools.map((item, index) => (
+            <Button
+              key={index}
+              variant="contained"
+              onClick={() => handleFilter(`${item.techType}`)}
+              sx={{
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                border: 1,
+                borderColor: "divider",
+                fontWeight: 600,
+                fontFamily: "'IBM Plex Mono', monospace",
+                backgroundColor: "background.paper",
+                color: "text.black",
                 boxShadow: "none",
-              },
-            }}
-          >
-            BACKEND
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => handleFilter()}
-            sx={{
-              borderRadius: 2,
-              px: 2,
-              py: 1,
-              border: 1,
-              borderColor: "divider",
-              fontWeight: 600,
-              backgroundColor: "background.paper",
-              color: "text.black",
-              fontFamily: "'IBM Plex Mono', monospace",
-              boxShadow: "none",
-              "&:hover": {
-                backgroundColor: "primary.contrastText",
-                boxShadow: "none",
-              },
-            }}
-          >
-            FRONTEND
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => handleFilter()}
-            sx={{
-              borderRadius: 2,
-              px: 2,
-              py: 1,
-              border: 1,
-              borderColor: "divider",
-              fontWeight: 600,
-              fontFamily: "'IBM Plex Mono', monospace",
-              backgroundColor: "background.paper",
-              color: "text.black",
-              boxShadow: "none",
-              "&:hover": {
-                backgroundColor: "primary.contrastText",
-                boxShadow: "none",
-              },
-            }}
-          >
-            CLOUD
-          </Button>
+                "&:hover": {
+                  backgroundColor: "primary.contrastText",
+                  boxShadow: "none",
+                },
+              }}
+            >
+              {item.techType}
+            </Button>
+          ))}
+
         </Grid>
+
         <Box
           sx={{
             display: "flex",
@@ -142,7 +144,7 @@ function ToolsSection() {
             gap: 2,
           }}
         >
-          {tools.map((item, index) => (
+          {filteredTools.map((item, index) => (
             <Box key={index} sx={{
               width: { xs: 80, sm: 80, md: 120 },
               backgroundColor: "background.paper",
@@ -152,7 +154,7 @@ function ToolsSection() {
               borderRadius: 3
             }}>
               <Image
-                src={`/media/${item}`}
+                src={`/media/tech_stacks/${item}.svg`}
                 alt={item}
                 width={120}
                 height={45}
@@ -168,6 +170,5 @@ function ToolsSection() {
     </Box>
   );
 }
-
 
 export default ToolsSection;

@@ -1,30 +1,7 @@
 import { Box, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 
 
-function SingleCaseChallanges() {
-
-    const challanges = [
-        {
-            sNo: "01",
-            title: "Time-intensive research",
-            desc: "Web plateforms, internal tools, dashboards, and scalable systems tailored to your workflow."
-        },
-        {
-            sNo: "02",
-            title: "Fragmented & incomplete data",
-            desc: "Property information scaterred across 5+ sources with missing contact details, broker information, and geographic data that requires manual consolidation"
-        },
-        {
-            sNo: "03",
-            title: "No verification standards",
-            desc: "Addresses, square footage, property attributes and contact details lack systematic verification, leading to 30%+ data inaccuracy rates"
-        },
-        {
-            sNo: "04",
-            title: "Missed opportunities",
-            desc: "Manual processes create response delays, duplicate efforts, and significant property discovery gaps that competitors fint through automation."
-        },
-    ];
+function SingleCaseChallanges({ challanges }) {
 
     return (
         <>
@@ -35,12 +12,12 @@ function SingleCaseChallanges() {
                             Challange
                         </Typography>
                         <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-                            Commercial Real Estate Site Discovery Pain Points
+                            {challanges.title}
                         </Typography>
                     </Grid>
                     <Grid size={{ xs: 12, md: 8 }}>
                         <Grid container spacing={3}>
-                            {challanges.map((challange, i) => (
+                            {challanges.items.map((challange, i) => (
                                 <Grid
                                     size={{ xs: 12, sm: 6, md: 6 }}
                                     key={i}

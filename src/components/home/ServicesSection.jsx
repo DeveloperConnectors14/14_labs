@@ -6,23 +6,23 @@ import Link from "next/link";
 const services = [
   {
     sNo: "01",
-    title: "AI & Intelligent Systems",
-    desc: "Web plateforms, internal tools, dashboards, and scalable systems tailored to your workflow."
+    title: "Multi-Agent Systems",
+    desc: "Development of multi-agent systems with built-in observability, enabling monitoring and optimizing specialized agents operating at enterprise scale."
   },
   {
     sNo: "02",
-    title: "Custom Software",
-    desc: "Web plateforms, internal tools, dashboards, and scalable systems tailored to your workflow."
+    title: "AI Integration",
+    desc: "Seamlessly integrate AI capabilities into your existing systems. Enhance today's operations and drive tomorrow's breakthroughs with intelligent automation."
   },
   {
     sNo: "03",
-    title: "AI Integration & Automation",
-    desc: "Web plateforms, internal tools, dashboards, and scalable systems tailored to your workflow."
+    title: "Custom AI Solutions",
+    desc: "Designing intelligent solutions for the future. We build custom AI models and applications tailored to your unique business challenges."
   },
   {
     sNo: "04",
-    title: "AI & Intelligent Systems",
-    desc: "Web plateforms, internal tools, dashboards, and scalable systems tailored to your workflow."
+    title: "Web & App Development",
+    desc: "Modern, AI-enhanced websites and applications built with cutting-edge technologies. From intelligent platforms to seamless mobile experiences."
   },
 ];
 
@@ -35,6 +35,9 @@ function ServicesSection() {
             Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               Services
             </Box>
+          </Typography>
+          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+            We keep our word, align seamlessly with your teams, and deliver outcomes that matter. Integrating the now. Inventing the next.
           </Typography>
         </Grid>
         <Grid size={{ xs: 12, md: 8 }}>

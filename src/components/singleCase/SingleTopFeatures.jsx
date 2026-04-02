@@ -1,21 +1,6 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 
-function SingleTopFeatures() {
-
-    const topFeatures = [
-        {
-            title: "Sequential Pipeline Architecture",
-            desc: "11-node data enrichment pipeline processing sites through multiple AI-powered stages for comprehensive analysis.",
-        },
-        {
-            title: "Multi-Source Integration",
-            desc: "Integrates Google APIs, AI research, computer vision and geocoding services into unified workflow.",
-        },
-        {
-            title: "Real time monitoring & logging",
-            desc: "Google sheets integration for workflow monitoring, execution tracking and audit trails.",
-        },
-    ];
+function SingleTopFeatures({ topFeatures }) {
 
     return (
         <>
@@ -37,19 +22,19 @@ function SingleTopFeatures() {
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
                                             <Typography fontWeight={"600"} sx={{ color: "text.black", fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "SemiBold", pb: 1, fontFamily: "Inter, sans-serif" }}>
-                                            {item.title}
-                                        </Typography>
-                                        <Typography fontWeight={"400"} color="text.primary" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
-                                            {item.desc}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
+                                                {item.title}
+                                            </Typography>
+                                            <Typography fontWeight={"400"} color="text.primary" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                                {item.desc}
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
                                 </Grid>
                             ))}
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        </Box >
+            </Box >
         </>
     )
 }

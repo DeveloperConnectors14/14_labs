@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 
 const stats = [
-  { value: "14+", label: "Projects delivered" },
+  { value: "15+", label: "Projects delivered" },
   { value: "10+", label: "Happy clients" },
   { value: "4+", label: "Years experience" },
 ];
@@ -17,7 +17,7 @@ function ImpactSection() {
             </Box>
           </Typography>
           <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
-            From multi-agent systems to custom LLM integration, we specialize in building AI infrastructures that scales.
+            From multi-agent systems to custom LLM integrations, we specialize in building AI infrastructure that scales. We believe in genuine support, seamless team alignment, and delivering outcomes that matter.
           </Typography>
         </Grid>
         <Grid size={12}>

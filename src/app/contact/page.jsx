@@ -70,9 +70,7 @@ function ContactPage() {
           </Typography>
 
           <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
-            Explore our in-depth case studies showcasing real-world
-            examples of how our AI solutions have driven success for
-            businesses like yours.
+            Ready to start your next project? Contact us through any of these channels or fill out the form.
           </Typography>
 
           <Box sx={{ mt: 6 }}>
@@ -81,15 +79,15 @@ function ContactPage() {
                 Email
               </Typography>
               <Typography color="text.primary" sx={{ fontWeight: "700", fontStyle: "Bold", fontSize: { xs: "18px", sm: "22px", md: "24px" }, fontFamily: "'Instrument Sans', sans-serif", }}>
-                info@14labs.com
+                contact@14labs.co
               </Typography>
             </Box>
             <Box>
               <Typography color="text.grey" sx={{ fontSize: { xs: "14px", sm: "15px", md: "16px" }, fontStyle: "Regular", fontWeight: 400, fontFamily: "'Instrument Sans', sans-serif", }}>
-                Phone
+                Location
               </Typography>
               <Typography color="text.primary" sx={{ fontWeight: "700", fontStyle: "Bold", fontSize: { xs: "18px", sm: "22px", md: "24px" }, fontFamily: "'Instrument Sans', sans-serif", }}>
-                {"+1(888)-855-5328"}
+                Lahore, Pakistan
               </Typography>
             </Box>
           </Box>

@@ -1,25 +1,6 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 
-function SingleCaseHero() {
-
-    const heroCards = [
-        {
-            value: "Real Estate",
-            label: "industry",
-        },
-        {
-            value: "1 Month",
-            label: "Timeline",
-        },
-        {
-            value: "3",
-            label: "Engineers",
-        },
-        {
-            value: "11",
-            label: "Pipeline nodes",
-        },
-    ];
+function SingleCaseHero({ heroData }) {
 
     return (
         <>
@@ -37,10 +18,10 @@ function SingleCaseHero() {
                 }}>
                     <Grid size={{ xs: 12, md: 6 }} >
                         <Typography fontWeight={600} color="text.primary" sx={{ fontSize: { xs: "26px", sm: "30px", md: "48px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-                            AI Find Sites Real Estate Solution
+                            {heroData.title}
                         </Typography>
                         <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
-                            AI-Driven Commercial Real Estate Site Discovery - Automating hours of manual research into minutes of intelligent analysis
+                            {heroData.subtitle}
                         </Typography>
                     </Grid>
                     <Grid size={12}>
@@ -51,7 +32,7 @@ function SingleCaseHero() {
                             justifyContent: "center",
                             gap: 2,
                         }}>
-                            {heroCards.map((item, i) => (
+                            {heroData.stats.map((item, i) => (
                                 < Grid size={{ md: 3 }} key={i}>
                                     <Card
                                         sx={{

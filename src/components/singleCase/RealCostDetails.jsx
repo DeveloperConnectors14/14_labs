@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 
-function RealCostDetails() {
+function RealCostDetails({ costData }) {
 
     return (
         <>
@@ -15,7 +15,7 @@ function RealCostDetails() {
                     <Grid size={{ xs: 12, md: 7 }}>
                         <Grid container spacing={3}>
                             <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-                                These challanges compound daily: analysts spend 6-8 hours per property discovery, data accuracy drops to 70%, and critical oppurtunities are missed entirely. The result is slower deal cycles, higher optional costs, and competitive disadventage. Automation is no longer optional-it's essential.
+                                {costData.text}
                             </Typography>
                         </Grid>
                     </Grid>

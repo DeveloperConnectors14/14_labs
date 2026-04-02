@@ -1,25 +1,7 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 
 
-function SingleCaseArchitechture() {
-
-    const archHighlights = [
-        {
-            title: "11",
-            boldText: "Pipeline nodes : ",
-            desc: "Sequential workflow with specialized processing at each stage",
-        },
-        {
-            title: "Infinite",
-            boldText: "Scalability : ",
-            desc: "Extensible architecture supporting new data resources",
-        },
-        {
-            title: "100%",
-            boldText: "Data Quality : ",
-            desc: "Multi-stage QA with verification and validation",
-        },
-    ];
+function SingleCaseArchitechture({ architectureData }) {
 
     return (
         <>
@@ -32,7 +14,7 @@ function SingleCaseArchitechture() {
                     </Grid>
                     <Grid size={12}>
                         <Grid container spacing={3}>
-                            {archHighlights.map((item, i) => (
+                            {architectureData.map((item, i) => (
                                 < Grid size={{ xs: 12, md: 4 }} key={i}>
                                     <Card
                                         sx={{

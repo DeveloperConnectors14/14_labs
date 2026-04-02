@@ -65,10 +65,7 @@ function AboutUs() {
                                 color: "text.primary",
                             }}
                         >
-                            14 Labs is an AI-first technology company dedicated to transforming
-                            businesses through intelligent automation and cutting-edge AI solutions.
-                            We combine deep AI expertise with practical engineering to deliver
-                            systems that drive real business value.
+                            14 Labs is an AI-first technology company dedicated to transforming businesses through intelligent automation and cutting-edge AI solutions. We combine deep AI expertise with practical engineering to deliver systems that drive real business value.
                         </Typography>
 
                         <Typography
@@ -80,9 +77,7 @@ function AboutUs() {
                                 color: "text.primary",
                             }}
                         >
-                            From multi-agent systems to custom LLM integrations, we specialize in
-                            building AI infrastructure that scales. We believe in genuine support,
-                            seamless team alignment, and delivering outcomes that matter.
+                            From multi-agent systems to custom LLM integrations, we specialize in building AI infrastructure that scales. We believe in genuine support, seamless team alignment, and delivering outcomes that matter.
                         </Typography>
 
                         {/* Pillars */}

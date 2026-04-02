@@ -2,34 +2,7 @@ import { ExpandMore } from "@mui/icons-material";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
-function SingleCaseApproach() {
-
-    const workflowSteps = [
-        {
-            step: "STEP 1",
-            icon: "workflowstep1.png",
-            title: "Automated Deep Research",
-            desc: "AI searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically discovering properties that match your criteria.",
-        },
-        {
-            step: "STEP 2",
-            icon: "workflowstep2.png",
-            title: "Structured Data Extraction",
-            desc: "AI searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically discovering properties that match your criteria.",
-        },
-        {
-            step: "STEP 3",
-            icon: "workflowstep3.png",
-            title: "Geolocation Verification",
-            desc: "AI searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically discovering properties that match your criteria.",
-        },
-        {
-            step: "STEP 4",
-            icon: "workflowstep4.png",
-            title: "Computer Vision Analysis",
-            desc: "AI searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically discovering properties that match your criteria.",
-        },
-    ];
+function SingleCaseApproach({ approaches }) {
 
     return (
         <>
@@ -40,13 +13,13 @@ function SingleCaseApproach() {
                             Our approach
                         </Typography>
                         <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-                            AI Powered Workflow
+                            {approaches.title}
                         </Typography>
                     </Grid>
 
                     <Grid size={{ xs: 12, md: 7 }}>
                         <Grid container spacing={3}>
-                            {workflowSteps.map((item, i) => (
+                            {approaches.steps.map((item, i) => (
                                 <Grid size={12} key={i} >
                                     <Card sx={{ border: "divider" }}>
                                         <CardContent sx={{

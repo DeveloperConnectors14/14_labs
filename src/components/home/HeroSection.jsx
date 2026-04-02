@@ -57,8 +57,7 @@ function HeroSection() {
                                     fontFamily: "'Instrument Sans', sans-serif",
                                 }}
                             >
-                                We build AI & software solutions that solve real
-                                business problems
+                                We are 14 Labs <br /> Engineered for enterprise. Inspired by what's next.
                             </Typography>
 
                             <Typography
@@ -71,9 +70,7 @@ function HeroSection() {
                                     fontFamily: "'Instrument Sans', sans-serif",
                                 }}
                             >
-                                We design and develop intelligent systems,
-                                automation tools, and scalable web platforms
-                                that help teams work smarter and grow faster.
+                                Delivering AI-powered innovation. We turn complex technology challenges into seamless, scalable solutions that are delivered on time and on target.
                             </Typography>
                         </Box>
                         <Box
@@ -86,7 +83,7 @@ function HeroSection() {
                         >
                             <Button
                                 component={Link}
-                                href="/works"
+                                href="/services"
                                 variant="contained"
                                 sx={{
                                     borderRadius: "60px",
@@ -106,7 +103,7 @@ function HeroSection() {
                                     },
                                 }}
                             >
-                                VIEW WORK
+                                Explore AI Services
                             </Button>
 
                             <Button
@@ -132,7 +129,7 @@ function HeroSection() {
                                     },
                                 }}
                             >
-                                GET STARTED
+                                Contact Us →
                             </Button>
                         </Box>
                     </Container>

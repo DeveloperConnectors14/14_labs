@@ -1,28 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 
-function MoreCaseStudies() {
-
-    const moreStudies = [
-        {
-            id: "case-1",
-            title: "How we increase revenuew for Acme using AI.",
-            img: "case1.png",
-            date: "31st January 2008",
-        },
-        {
-            id: "case-2",
-            title: "How we reduce wait time to 45% using data.",
-            img: "case2.png",
-            date: "31st January 2008",
-        },
-        {
-            id: "case-3",
-            title: "How we increase revenuew for Acme using AI.",
-            img: "case3.png",
-            date: "31st January 2008",
-        },
-    ];
+function MoreCaseStudies({ moreCases }) {
 
     return (
         <>
@@ -40,7 +19,7 @@ function MoreCaseStudies() {
                     </Grid>
                     <Grid size={12}>
                         <Grid container spacing={3}>
-                            {moreStudies.map((item, i) => (
+                            {moreCases.map((item, i) => (
                                 < Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}
                                     sx={{ display: "flex" }}
                                 >

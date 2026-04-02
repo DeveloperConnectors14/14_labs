@@ -1,21 +1,21 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
 
-function handleFilter() {
 
-    console.log("handleFilter function is called!")
-}
+function TechnologyStack({ technologies }) {
+    const [activeFilter, setActiveFilter] = useState("All");
 
-function TechnologyStack() {
+    const filteredTools =
+        activeFilter === "All"
+            ? technologies.stacks.flatMap((item) => item.values)
+            : technologies.stacks
+                .filter((item) => item.techType === activeFilter)
+                .flatMap((item) => item.values);
 
-    const tools = [
-        "tool1.png",
-        "tool2.png",
-        "tool3.png",
-        "tool4.png",
-        "tool5.png",
-        "tool5.png",
-    ];
+    function handleFilter(type) {
+        setActiveFilter(type);
+    }
 
     return (
         <>
@@ -28,7 +28,7 @@ function TechnologyStack() {
                             </Typography>
                         </Box>
                         <Typography sx={{ py: 1, fontWeight: 400, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
-                            Enterprise-grade technologies powering scalable, intelligent multi-agent systems.
+                            {technologies.text}
                         </Typography>
                     </Grid>
 
@@ -41,7 +41,7 @@ function TechnologyStack() {
                     }}>
                         <Button
                             variant="contained"
-                            onClick={() => handleFilter()}
+                            onClick={() => handleFilter("All")}
                             sx={{
                                 borderRadius: 2,
                                 px: 2,
@@ -59,74 +59,33 @@ function TechnologyStack() {
                                 },
                             }}
                         >
-                            BACKEND
+                            All
                         </Button>
-                        <Button
-                            variant="contained"
-                            onClick={() => handleFilter()}
-                            sx={{
-                                borderRadius: 2,
-                                px: 2,
-                                py: 1,
-                                border: 1,
-                                borderColor: "divider",
-                                fontWeight: 600,
-                                fontFamily: "'IBM Plex Mono', monospace",
-                                backgroundColor: "background.paper",
-                                color: "text.black",
-                                boxShadow: "none",
-                                "&:hover": {
-                                    backgroundColor: "primary.contrastText",
+                        {technologies.stacks.map((item, index) => (
+                            <Button
+                                key={index}
+                                variant="contained"
+                                onClick={() => handleFilter(`${item.techType}`)}
+                                sx={{
+                                    borderRadius: 2,
+                                    px: 2,
+                                    py: 1,
+                                    border: 1,
+                                    borderColor: "divider",
+                                    fontWeight: 600,
+                                    fontFamily: "'IBM Plex Mono', monospace",
+                                    backgroundColor: "background.paper",
+                                    color: "text.black",
                                     boxShadow: "none",
-                                },
-                            }}
-                        >
-                            DATABASE
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={() => handleFilter()}
-                            sx={{
-                                borderRadius: 2,
-                                px: 2,
-                                py: 1,
-                                border: 1,
-                                borderColor: "divider",
-                                fontWeight: 600,
-                                fontFamily: "'IBM Plex Mono', monospace",
-                                backgroundColor: "background.paper",
-                                color: "text.black",
-                                boxShadow: "none",
-                                "&:hover": {
-                                    backgroundColor: "primary.contrastText",
-                                    boxShadow: "none",
-                                },
-                            }}
-                        >
-                            AI FRAMEWORKS
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={() => handleFilter()}
-                            sx={{
-                                borderRadius: 2,
-                                px: 2,
-                                py: 1,
-                                border: 1,
-                                borderColor: "divider",
-                                fontWeight: 600,
-                                fontFamily: "'IBM Plex Mono', monospace",
-                                backgroundColor: "background.paper",
-                                color: "text.black",
-                                boxShadow: "none",
-                                "&:hover": {
-                                    backgroundColor: "primary.contrastText",
-                                    boxShadow: "none",
-                                },
-                            }}
-                        >
-                            LLM
-                        </Button>
+                                    "&:hover": {
+                                        backgroundColor: "primary.contrastText",
+                                        boxShadow: "none",
+                                    },
+                                }}
+                            >
+                                {item.techType}
+                            </Button>
+                        ))}
                     </Grid>
                     <Box
                         sx={{
@@ -136,7 +95,7 @@ function TechnologyStack() {
                             gap: 2,
                         }}
                     >
-                        {tools.map((item, index) => (
+                        {filteredTools.map((item, index) => (
                             <Box key={index} sx={{
                                 width: { xs: 80, sm: 80, md: 120 },
                                 backgroundColor: "background.paper",
@@ -146,7 +105,7 @@ function TechnologyStack() {
                                 borderRadius: 3
                             }}>
                                 <Image
-                                    src={`/media/${item}`}
+                                    src={`/media/tech_stacks/${item}.svg`}
                                     alt={item}
                                     width={120}
                                     height={45}
@@ -159,7 +118,7 @@ function TechnologyStack() {
                         ))}
                     </Box>
                 </Grid>
-            </Box>
+            </Box >
         </>
     )
 }
