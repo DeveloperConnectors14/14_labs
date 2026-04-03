@@ -102,6 +102,47 @@ const caseStudies = [
         desc: "Multi-stage QA with verification and validation",
       },
     ],
+    pipeline: {
+      nodes: [
+        { id: "global", label: "Global Config", color: "#377BBB" },
+        { id: "geo", label: "Geography Input", color: "#377BBB" },
+        { id: "research", label: "Deep Research", color: "#00895E" },
+        { id: "extract", label: "Site Extraction", color: "#BB7000" },
+        { id: "geocode", label: "Geocode", color: "#BB7000" },
+        { id: "analysis", label: "Site Attribute Analysis", color: "#BB7000" },
+        { id: "join", label: "Join", color: "#BB7000" },
+        { id: "filter", label: "Filter", color: "#BB7000" },
+        { id: "qa", label: "QA Node", color: "#BC2831" },
+        { id: "excel", label: "Excel Output", color: "#4B4DB6" },
+        { id: "log", label: "Workflow Log", color: "#4B4DB6" },
+      ],
+
+      edges: [
+        ["global", "geo"],
+        ["geo", "research"],
+        ["research", "extract"],
+        ["extract", "geocode"],
+        ["extract", "analysis"],
+        ["join", "geocode"],
+        ["join", "analysis"],
+        ["join", "filter"],
+        ["filter", "qa"],
+        ["qa", "excel"],
+        ["qa", "log"],
+      ],
+
+      layout: [
+        ["global"],
+        ["geo"],
+        ["research"],
+        ["extract"],
+        ["geocode", "analysis"],
+        ["join"],
+        ["filter"],
+        ["qa"],
+        ["excel", "log"],
+      ],
+    },
     key_features: {
       text: "A comprehensive suite of AI-powered tools to automate commercial real estate site discovery and qualification.",
       list: [
@@ -286,6 +327,31 @@ const caseStudies = [
         desc: "Scalable to add new agents and domains as needed",
       },
     ],
+    pipeline: {
+      nodes: [
+        { id: "university", label: "University", color: "#377BBB" },
+        { id: "visa", label: "Visa", color: "#377BBB" },
+        { id: "application", label: "Application", color: "#00895E" },
+        { id: "counselor", label: "Admission Counselor", color: "#BC2831" },
+        { id: "scholarship", label: "Scholarship", color: "#BB7000" },
+        { id: "essay", label: "Essay", color: "#BB7000" },
+      ],
+
+      edges: [
+        ["university", "counselor"],
+        ["visa", "counselor"],
+        ["application", "counselor"],
+        ["scholarship", "counselor"],
+        ["essay", "counselor"],
+      ],
+
+      layout: [
+        ["university"],
+        ["visa", "application"],
+        ["counselor"], // center
+        ["scholarship", "essay"],
+      ],
+    },
     key_features: {
       text: "A comprehensive suite of AI-powered tools to guide students through every step of the admissions journey.",
       list: [
@@ -394,7 +460,7 @@ function SingleCasePage({ params }) {
       <RealCostDetails costData={data.cost} />
       <SingleCaseApproach approaches={data.approach} />
       <SingleCaseArchitechture architectureData={data.architecture_highlights} />
-      <SingleCasePipeline />
+      <SingleCasePipeline casePipeline={data.pipeline} />
       <SingleKeyFeatures keyFeatures={data.key_features} />
       <TechnologyStack technologies={data.techStack} />
       <SingleTopFeatures topFeatures={data.top_features} />
