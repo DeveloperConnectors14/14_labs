@@ -1,28 +1,8 @@
+import { getChallanges } from "@/services/dataService";
 import { Box, Typography, Grid, Card, CardContent } from "@mui/material";
 import Image from "next/image";
 
-const challenges = [
-  {
-    icon: "challangeIcon1.png",
-    title: "Too much manual work",
-    desc: "Repetitive tasks aeting up your team's time",
-  },
-  {
-    icon: "challangeIcon2.png",
-    title: "Disconnected tools & messy data",
-    desc: "Systems that don’t talk to each other",
-  },
-  {
-    icon: "challangeIcon3.png",
-    title: "AI feels complex and hard to apply",
-    desc: "Unsure how to leverage AI for your business",
-  },
-  {
-    icon: "challangeIcon4.png",
-    title: "You need custom software, not generic tools",
-    desc: "Off-the-shelf solutions don’t fit your workflow",
-  },
-];
+const challenges = getChallanges();
 
 function ChallengesSection() {
   return (

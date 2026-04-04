@@ -1,30 +1,10 @@
 "use client";
+import { getServices } from "@/services/dataService";
 import { Box, Grid, Card, CardContent, Typography, Divider, Button } from "@mui/material";
 import Link from "next/link";
 
 
-const services = [
-  {
-    sNo: "01",
-    title: "Multi-Agent Systems",
-    desc: "Development of multi-agent systems with built-in observability, enabling monitoring and optimizing specialized agents operating at enterprise scale."
-  },
-  {
-    sNo: "02",
-    title: "AI Integration",
-    desc: "Seamlessly integrate AI capabilities into your existing systems. Enhance today's operations and drive tomorrow's breakthroughs with intelligent automation."
-  },
-  {
-    sNo: "03",
-    title: "Custom AI Solutions",
-    desc: "Designing intelligent solutions for the future. We build custom AI models and applications tailored to your unique business challenges."
-  },
-  {
-    sNo: "04",
-    title: "Web & App Development",
-    desc: "Modern, AI-enhanced websites and applications built with cutting-edge technologies. From intelligent platforms to seamless mobile experiences."
-  },
-];
+const services = getServices();
 
 function ServicesSection() {
   return (

@@ -1,10 +1,7 @@
+import { getStats } from "@/services/dataService";
 import { Box, Grid, Typography } from "@mui/material";
 
-const stats = [
-  { value: "15+", label: "Projects delivered" },
-  { value: "10+", label: "Happy clients" },
-  { value: "4+", label: "Years experience" },
-];
+const stats = getStats();
 
 function ImpactSection() {
   return (
@@ -22,7 +19,7 @@ function ImpactSection() {
         </Grid>
         <Grid size={12}>
           <Grid container spacing={3}>
-            {stats.map((item, i) => (
+            {stats.slice(0, 3).map((item, i) => (
               < Grid size={{ xs: 12, sm: (i === 0 ? 12 : 6), md: (i === 0 ? 6 : 3) }} key={i}>
                 <Box
                   sx={{
@@ -38,10 +35,10 @@ function ImpactSection() {
                   }}
                 >
                   <Box>
-                    <Typography  sx={{ pb: 6, fontWeight: 700, fontSize: { xs: "60px", sm: "80px", md: "120px" }, fontStyle: "Bold", fontWeight: 700, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }} gutterBottom>
+                    <Typography sx={{ pb: 6, fontWeight: 700, fontSize: { xs: "60px", sm: "80px", md: "120px" }, fontStyle: "Bold", fontWeight: 700, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif", }} gutterBottom>
                       {item.value}
                     </Typography>
-                    <Typography sx={{ fontWeight: 500, fontSize:{xs:"24px",sm:"26px",md:"28px"},fontStyle:"Medium", color: "text.black", fontFamily: "Inter, sans-serif" }}>
+                    <Typography sx={{ fontWeight: 500, fontSize: { xs: "24px", sm: "26px", md: "28px" }, fontStyle: "Medium", color: "text.black", fontFamily: "Inter, sans-serif" }}>
                       {item.label}
                     </Typography>
                   </Box>

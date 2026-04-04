@@ -19,6 +19,7 @@ import {
     Close as CloseIcon,
 } from "@mui/icons-material";
 import Image from "next/image";
+import { getNavItems } from "@/services/dataService";
 
 const APP_BAR_HEIGHT = "104px";
 
@@ -30,12 +31,7 @@ function Navbar() {
         threshold: 10,
     });
 
-    const navItems = [
-        { label: "SERVICES", path: "/services" },
-        { label: "CASE STUDIES", path: "/case-studies" },
-        { label: "ABOUT US", path: "/about-us" },
-        { label: "CONTACT", path: "/contact" },
-    ];
+    const navItems = getNavItems();
 
     return (
         <>

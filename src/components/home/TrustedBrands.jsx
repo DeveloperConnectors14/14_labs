@@ -1,28 +1,11 @@
+import { getTrustedBrands } from "@/services/dataService";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
+const brandImages = getTrustedBrands();
+
 function TrustedBrands() {
 
-    const brandImages = [
-        {
-            fileName: "trustedBrand1.png",
-        },
-        {
-            fileName: "trustedBrand2.png",
-        },
-        {
-            fileName: "trustedBrand3.png",
-        },
-        {
-            fileName: "trustedBrand4.png",
-        },
-        {
-            fileName: "trustedBrand5.png",
-        },
-        {
-            fileName: "trustedBrand6.png",
-        },
-    ]
     return (
         <Box
             sx={{
@@ -33,8 +16,8 @@ function TrustedBrands() {
             <Typography
                 sx={{
                     mb: 4,
-                    fontWeight:400,
-                    fontStyle:"Regular",
+                    fontWeight: 400,
+                    fontStyle: "Regular",
                     fontSize: { xs: 14, sm: 16, md: 16 },
                     fontFamily: "'IBM Plex Mono', monospace",
                     color: "text.grey",

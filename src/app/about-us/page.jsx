@@ -1,31 +1,14 @@
 "use client";
 
 import CallSection from "@/components/general/CallSection";
+import { getPillars, getStats, getValues } from "@/services/dataService";
 import { Box, Typography, Grid } from "@mui/material";
 
-const stats = [
-    { value: "15+", label: "Projects Delivered" },
-    { value: "10+", label: "Happy Clients" },
-    { value: "4+", label: "Years Experience" },
-    { value: "95%", label: "Client Satisfaction" },
-];
+const stats = getStats();
 
-const pillars = ["AI-First", "Enterprise Scale", "Transparency", "Real Results"];
+const pillars = getPillars();
 
-const values = [
-    {
-        title: "Deep AI Expertise",
-        desc: "From multi-agent architectures to fine-tuned LLMs, our team brings cutting-edge knowledge to every engagement.",
-    },
-    {
-        title: "Practical Engineering",
-        desc: "We don't just design systems — we build and ship them. Every solution is engineered for reliability and real-world performance.",
-    },
-    {
-        title: "Genuine Partnership",
-        desc: "We align seamlessly with your teams, keep our word, and stay invested in your outcomes long after delivery.",
-    },
-];
+const values = getValues();
 
 function AboutUs() {
     return (

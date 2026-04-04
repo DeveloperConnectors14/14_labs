@@ -1,3 +1,4 @@
+import { getFeatures } from "@/services/dataService";
 import {
   Box,
   Typography,
@@ -7,23 +8,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 
-const features = [
-  {
-    icon: "feature1.png",
-    title: "Fast",
-    desc: "Offering faster training times without compromising accuracy.",
-  },
-  {
-    icon: "feature2.png",
-    title: "Competitive Pricing",
-    desc: "Providing competitive pricing options tailored to your budget & requirements.",
-  },
-  {
-    icon: "feature3.png",
-    title: "Support",
-    desc: "Ensuring ongoing support to maximize the value of our services.",
-  },
-];
+const features = getFeatures();
 
 function WhyChooseUs() {
   return (

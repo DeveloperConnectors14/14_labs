@@ -10,14 +10,14 @@ const Node = ({ id, label, color = "#377BBB" }) => {
             id={id}
             elevation={0}
             sx={{
-                px: 3,
-                py: 1.5,
+                px: { xs: 0.5, sm: 0.5, md: 2 },
+                py: { xs: 0.5, sm: 1, md: 1.5 },
                 borderRadius: "10px",
                 border: "1px dashed #D9D9D9",
                 display: "flex",
                 alignItems: "center",
                 gap: 1,
-                minWidth: 240,
+                minWidth: { xs: 150, sm: 200, md: 240 },
                 justifyContent: "center",
                 background: "#fff",
                 fontFamily: "IBM Plex Mono",
@@ -31,7 +31,16 @@ const Node = ({ id, label, color = "#377BBB" }) => {
                     backgroundColor: color,
                 }}
             />
-            {label}
+            <Typography
+                sx={{
+                    py: 1,
+                    fontWeight: 400,
+                    fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                    fontFamily: "'Instrument Sans', sans-serif",
+                }}
+            >
+                {label}
+            </Typography>
         </Paper>
     );
 };

@@ -17,6 +17,9 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Image from "next/image";
+import { getNavItems } from "@/services/dataService";
+
+const navItems = getNavItems();
 
 const Footer = () => {
     return (
@@ -42,45 +45,27 @@ const Footer = () => {
                 </Grid>
                 <Grid size={{ xs: 12, md: 6 }} sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", alignItems: "center", }}>
                     <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-evenly", alignItems: "center", width: "100%" }}>
-                        <Link href="/services" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", fontFamily: "'IBM Plex Mono', monospace", transition: 'all 0.3s ease', "&:hover": {
-                                    color: "text.secondary",
-                                },
-                            }}>
-                                SERVICES
-                            </Typography>
-                        </Link>
 
-                        <Link href="/case-studies" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", fontFamily: "'IBM Plex Mono', monospace", transition: 'all 0.3s ease', "&:hover": {
-                                    color: "text.secondary",
-                                },
+                        {navItems.map((item) => (
+                            <Link key={item.path} href={item.path} style={{
+                                textDecoration: "none",
                             }}>
-                                CASE STUDIES
-                            </Typography>
-                        </Link>
-
-                        <Link href="/about-us" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", transition: 'all 0.3s ease', fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
-                                    color: "text.secondary",
-                                },
-                            }}>
-                                ABOUT US
-                            </Typography>
-                        </Link>
-
-                        <Link href="/contact" style={{ textDecoration: "none" }}>
-                            <Typography variant="body2" sx={{
-                                fontWeight: 500, color: "text.primary", fontFamily: "'IBM Plex Mono', monospace", transition: 'all 0.3s ease', "&:hover": {
-                                    color: "text.secondary",
-                                },
-                            }}>
-                                CONTACT
-                            </Typography>
-                        </Link>
+                                <Typography sx={{
+                                    fontStyle: "medium",
+                                    height: "24px",
+                                    fontWeight: 500,
+                                    fontsize: "16px",
+                                    lineHeight: "150%",
+                                    color: "text.primary",
+                                    transition: 'all 0.3s ease',
+                                    fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
+                                        color: "text.secondary",
+                                    },
+                                }}>
+                                    {item.label}
+                                </Typography>
+                            </Link>
+                        ))}
                     </Box>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 3 }}>

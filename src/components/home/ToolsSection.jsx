@@ -1,4 +1,5 @@
 "use client";
+import { getTools } from "@/services/dataService";
 import {
   Box,
   Typography,
@@ -8,44 +9,7 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 
-const tools = [
-  {
-    techType: "AI & LLMs",
-    values: [
-      "openai-2",
-      "ffffff (1)",
-      "ffffff",
-      "huggingface",
-    ]
-  },
-  {
-    techType: "AI Infrastructure",
-    values: [
-      "python-original",
-      "fastapi-original",
-      "postgresql-original",
-      "redis-original",
-    ]
-  },
-  {
-    techType: "Web & Mobile",
-    values: [
-      "react-original",
-      "nextjs-original",
-      "typescript-original",
-      "react-original",
-    ]
-  },
-  {
-    techType: "Cloud & DevOps",
-    values: [
-      "amazonwebservices-original-wordmark",
-      "docker-original",
-      "kubernetes-original",
-      "vercel-original",
-    ]
-  },
-];
+const tools = getTools();
 
 function ToolsSection() {
 

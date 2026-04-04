@@ -9,28 +9,16 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
+import { getcaseStudies } from "@/services/dataService";
 
-const studies = [
-  {
-    id: "find-sites-workflow",
-    title: "AI Find Sites Real Estate Solution",
-    img: "case1.png",
-    date: "1st January 2024",
-  },
-  {
-    id: "ai-admission-counselor",
-    title: "AI Admission Counselor",
-    img: "case2.png",
-    date: "1st January 2024",
-  },
-];
+const studies = getcaseStudies();
 
 function CaseStudies() {
   return (
     <Box sx={{ px: 4, py: 6, }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography  fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
             Case <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
               studies
             </Box>

@@ -10,27 +10,9 @@ import {
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Link from "next/link";
+import { getPricing } from "@/services/dataService";
 
-const pricing = [
-    {
-        title: "Pilot Project",
-        duration: "2-3 Weeks",
-        details: "One use case, Measurable KPI's, Limited integrations",
-        pricing: "$1000-$3000",
-    },
-    {
-        title: "MVP",
-        duration: "4-6 Weeks",
-        details: "Production ready version, Monitoring, Basic admin panel",
-        pricing: "$3000-$8000",
-    },
-    {
-        title: "Scalable",
-        duration: "Ongoing",
-        details: "Retaining, Evals, New Workflows, Cost Optimizations",
-        pricing: "$8000+",
-    },
-];
+const pricing = getPricing();
 
 function PricingSection() {
     return (
