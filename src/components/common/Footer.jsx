@@ -13,9 +13,6 @@ import {
 
 import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import RocketLaunchOutlinedIcon from "@mui/icons-material/RocketLaunchOutlined";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
 import Image from "next/image";
 import { getNavItems } from "@/services/dataService";
 import { SECTION_PX } from "@/theme/tokens";
@@ -112,29 +109,6 @@ const Footer = () => {
 
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, pt: 1 }}>
                 <Typography variant="body2" sx={{ color: "text.grey" }}>
-                    Featured in production for EdTech solutions
-                </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: { xs: 2, sm: 4 } }}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: "text.grey" }}>
-                        <RocketLaunchOutlinedIcon fontSize="small" sx={{ color: "text.secondary" }} />
-                        <Typography variant="body2" sx={{ color: "text.primary", fontWeight: 500 }}>
-                            Production Ready
-                        </Typography>
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: "text.grey" }}>
-                        <LockOutlinedIcon fontSize="small" sx={{ color: "text.secondary" }} />
-                        <Typography variant="body2" sx={{ color: "text.primary", fontWeight: 500 }}>
-                            Enterprise Secure
-                        </Typography>
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, color: "text.grey" }}>
-                        <TrendingUpOutlinedIcon fontSize="small" sx={{ color: "text.secondary" }} />
-                        <Typography variant="body2" sx={{ color: "text.primary", fontWeight: 500 }}>
-                            Highly Scalable
-                        </Typography>
-                    </Box>
-                </Box>
-                <Typography variant="body2" sx={{ color: "text.grey", pt: 1 }}>
                     © Copyright 2026, All Rights Reserved
                 </Typography>
             </Box>
