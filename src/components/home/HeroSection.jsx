@@ -7,22 +7,20 @@ import {
     Button,
 } from "@mui/material";
 import Link from "next/link";
+import { BUTTON_RADIUS } from "@/theme/tokens";
 
 function HeroSection() {
     return (
         <Box
             sx={{
-                height: "90vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 px: 2,
+                pt: { xs: 1, md: 2 },
             }}
         >
             <Box
                 sx={{
                     width: "100%",
-                    height: "87vh",
+                    minHeight: { xs: "70vh", sm: "75vh", md: "87vh" },
                     backgroundImage: 'url("/media/hero.png")',
                     backgroundPosition: "center",
                     backgroundSize: "cover",
@@ -45,29 +43,17 @@ function HeroSection() {
                         textAlign: "center",
                     }}
                 >
-                    <Container sx={{ width: "803px", display: "flex", flexDirection: "column", gap: "24px" }}>
+                    <Container sx={{ maxWidth: "803px", width: "100%", display: "flex", flexDirection: "column", gap: "24px" }}>
                         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "16px", }}>
-                            <Typography
-                                sx={{
-                                    fontWeight: 600,
-                                    fontStyle: "semiBold",
-                                    fontSize: { xs: "28px", sm: "38px", md: "48px" },
-                                    lineHeight: "120%",
-                                    color: "secondary.contrastText",
-                                    fontFamily: "'Instrument Sans', sans-serif",
-                                }}
-                            >
+                            <Typography variant="h1" sx={{ color: "secondary.contrastText" }}>
                                 We are 14 Labs <br /> Engineered for enterprise. Inspired by what's next.
                             </Typography>
 
                             <Typography
+                                variant="body1"
                                 sx={{
-                                    fontWeight: 400,
-                                    fontstyle: "Regular",
-                                    fontSize: { xs: "16px", sm: "17px", md: "18px" },
-                                    lineHeight: "150%",
+                                    display: { xs: "none", sm: "block" },
                                     color: "primary.contrastText",
-                                    fontFamily: "'Instrument Sans', sans-serif",
                                 }}
                             >
                                 Delivering AI-powered innovation. We turn complex technology challenges into seamless, scalable solutions that are delivered on time and on target.
@@ -76,6 +62,8 @@ function HeroSection() {
                         <Box
                             sx={{
                                 display: "flex",
+                                flexDirection: { xs: "column", sm: "row" },
+                                alignItems: "center",
                                 justifyContent: "center",
                                 gap: 2,
                                 flexWrap: "wrap",
@@ -86,15 +74,10 @@ function HeroSection() {
                                 href="/services"
                                 variant="contained"
                                 sx={{
-                                    borderRadius: "60px",
+                                    borderRadius: BUTTON_RADIUS,
                                     p: "16px 24px",
-                                    fontWeight: 600,
-                                    fontStyle: "semiBold",
-                                    fontSize: { xs: "16px", sm: "18px", md: "20px" },
-                                    lineHeight: "24px",
                                     backgroundColor: "background.paper",
                                     color: "text.primary",
-                                    fontFamily: "'IBM Plex Mono', monospace",
                                     transition: 'all 0.3s ease',
                                     "&:hover": {
                                         boxShadow: "none",
@@ -111,14 +94,9 @@ function HeroSection() {
                                 href="/contact"
                                 variant="contained"
                                 sx={{
-                                    borderRadius: "60px",
+                                    borderRadius: BUTTON_RADIUS,
                                     p: "16px 24px",
-                                    fontWeight: 600,
-                                    fontStyle: "semiBold",
-                                    fontSize: { xs: "16px", sm: "18px", md: "20px" },
-                                    lineHeight: "24px",
                                     color: "text.primary",
-                                    fontFamily: "'IBM Plex Mono', monospace",
                                     backgroundColor: "secondary.main",
                                     boxShadow: "none",
                                     transition: 'all 0.3s ease',
@@ -129,7 +107,7 @@ function HeroSection() {
                                     },
                                 }}
                             >
-                                Contact Us →
+                                Contact Us
                             </Button>
                         </Box>
                     </Container>

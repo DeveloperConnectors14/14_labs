@@ -10,20 +10,21 @@ import {
   CardMedia,
 } from "@mui/material";
 import { getcaseStudies } from "@/services/dataService";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, TILE_RADIUS } from "@/theme/tokens";
 
 const studies = getcaseStudies();
 
 function CaseStudies() {
   return (
-    <Box sx={{ px: 4, py: 6, }}>
+    <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-            Case <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography variant="h2" sx={{ color: "text.primary" }}>
+            Case <Box component="span" sx={{ color: "text.secondary" }}>
               studies
             </Box>
           </Typography>
-          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
             Explore how we've transformed businesses across industries with intelligent automation, multi-agent systems, and cutting-edge AI technology.
           </Typography>
         </Grid>
@@ -40,7 +41,7 @@ function CaseStudies() {
                     width: "100%",
                     border: 1,
                     borderColor: "divider",
-                    borderRadius: 4,
+                    borderRadius: CARD_RADIUS,
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
@@ -48,7 +49,10 @@ function CaseStudies() {
                     textDecoration: "none",
                     p: 1,
                     "&:hover": {
-                      borderColor: "text.grey"
+                      borderColor: "transparent",
+                      background: "linear-gradient(90deg, #016b64bb, #054c64c5, #063864cb, #02185abb)",
+                      "& .caseTitle": { color: "secondary.contrastText" },
+                      "& .caseDate": { color: "primary.contrastText" },
                     },
                   }}
                 >
@@ -57,13 +61,13 @@ function CaseStudies() {
                     height="200"
                     image={`/media/${item.img}`}
                     alt={item.img}
-                    sx={{ borderRadius: 2 }}
+                    sx={{ borderRadius: TILE_RADIUS }}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography fontWeight={600} color="text.black" sx={{ fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography className="caseTitle" variant="h3" color="text.black" sx={{ transition: "color 0.3s" }}>
                       {item.title}
                     </Typography>
-                    <Typography variant="body2" color="text.grey" sx={{ pt: 1, fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography className="caseDate" variant="body2" color="text.grey" sx={{ pt: 1, transition: "color 0.3s" }}>
                       {item.date}
                     </Typography>
                   </CardContent>

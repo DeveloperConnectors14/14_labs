@@ -22,24 +22,24 @@ export const caseStudies = [
 
 export const challanges = [
   {
-    icon: "challangeIcon1.png",
-    title: "Too much manual work",
-    desc: "Repetitive tasks aeting up your team's time",
+    icon: "PrecisionManufacturing",
+    title: "Manual work slowing your team",
+    desc: "Repetitive workflows AI agents can automate",
   },
   {
-    icon: "challangeIcon2.png",
-    title: "Disconnected tools & messy data",
-    desc: "Systems that don’t talk to each other",
+    icon: "Hub",
+    title: "Siloed data across tools",
+    desc: "Knowledge locked in tools your models can't reach",
   },
   {
-    icon: "challangeIcon3.png",
-    title: "AI feels complex and hard to apply",
-    desc: "Unsure how to leverage AI for your business",
+    icon: "ScienceOutlined",
+    title: "AI pilots that never ship",
+    desc: "Prototypes stuck in notebooks, not production",
   },
   {
-    icon: "challangeIcon4.png",
-    title: "You need custom software, not generic tools",
-    desc: "Off-the-shelf solutions don’t fit your workflow",
+    icon: "TuneOutlined",
+    title: "Generic tools don't fit your workflow",
+    desc: "You need custom LLM pipelines, not generic tools",
   },
 ];
 
@@ -52,22 +52,22 @@ export const stats = [
 
 export const pricing = [
   {
-    title: "Pilot Project",
+    title: "Pilot",
     duration: "2-3 Weeks",
-    details: "One use case, Measurable KPI's, Limited integrations",
-    pricing: "$1000-$3000",
+    details: "One use-case, Measurable KPI, Limited integrations",
+    pricing: "$1000 - $3000",
   },
   {
     title: "MVP",
     duration: "4-6 Weeks",
-    details: "Production ready version, Monitoring, Basic admin panel",
-    pricing: "$3000-$8000",
+    details: "Production-ready version, Monitoring, Basic admin",
+    pricing: "$3000 - $8000",
   },
   {
-    title: "Scalable",
+    title: "Scale",
     duration: "Ongoing",
-    details: "Retaining, Evals, New Workflows, Cost Optimizations",
-    pricing: "$8000+",
+    details: "Retraining, Evals, New workflows, Cost optimization",
+    pricing: "$8000 +",
   },
 ];
 
@@ -143,33 +143,38 @@ export const stories = [
 export const tools = [
   {
     techType: "AI & LLMs",
-    values: ["openai-2", "ffffff (1)", "ffffff", "huggingface"],
+    values: [
+      { file: "openai-2", name: "OpenAI" },
+      { file: "anthropic", name: "Anthropic" },
+      { file: "langchain", name: "LangChain" },
+      { file: "huggingface", name: "Hugging Face" },
+    ],
   },
   {
     techType: "AI Infrastructure",
     values: [
-      "python-original",
-      "fastapi-original",
-      "postgresql-original",
-      "redis-original",
+      { file: "python-original", name: "Python" },
+      { file: "fastapi-original", name: "FastAPI" },
+      { file: "postgresql-original", name: "PostgreSQL" },
+      { file: "redis-original", name: "Redis" },
     ],
   },
   {
     techType: "Web & Mobile",
     values: [
-      "react-original",
-      "nextjs-original",
-      "typescript-original",
-      "react-original",
+      { file: "react-original", name: "React" },
+      { file: "nextjs-original", name: "Next.js" },
+      { file: "typescript-original", name: "TypeScript" },
+      { file: "reactnative-original", name: "React Native" },
     ],
   },
   {
     techType: "Cloud & DevOps",
     values: [
-      "amazonwebservices-original-wordmark",
-      "docker-original",
-      "kubernetes-original",
-      "vercel-original",
+      { file: "amazonwebservices-original-wordmark", name: "AWS" },
+      { file: "docker-original", name: "Docker" },
+      { file: "kubernetes-original", name: "Kubernetes" },
+      { file: "vercel-original", name: "Vercel" },
     ],
   },
 ];
@@ -224,11 +229,13 @@ export const caseDetails = [
         { label: "Industry", value: "Real Estate" },
         { label: "Timeline", value: "1 Month" },
         { label: "Engineers", value: "3" },
-        { label: "Pipeline nodes", value: "11" },
+        { label: "Pipeline Nodes", value: "11" },
       ],
     },
     challenges: {
+      label: "The Challenge",
       title: "Commercial Real Estate Site Discovery Pain Points",
+      text: "Traditional site research methods are inefficient, error-prone, and lack the automation that modern commercial real estate professionals need.",
       items: [
         {
           sNo: "01",
@@ -256,29 +263,31 @@ export const caseDetails = [
       text: "These challenges compound daily: analysts spend 6-8 hours per property discovery, data accuracy drops to 70%, and critical opportunities are missed entirely. The result is slower deal cycles, higher operational costs, and competitive disadvantage. Automation is no longer optional—it's essential.",
     },
     approach: {
-      title: "AI Powered Workflow",
+      label: "Our Approach",
+      title: "AI-Powered Workflow",
+      text: "An intelligent sequential pipeline that automates commercial real estate research from initial discovery through final qualification.",
       steps: [
         {
           step: "STEP 1",
-          icon: "workflowstep1.png",
+          icon: "SearchOutlined",
           title: "Automated Deep Research",
           desc: "AI searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically, discovering properties that match your criteria.",
         },
         {
           step: "STEP 2",
-          icon: "workflowstep2.png",
+          icon: "StorageOutlined",
           title: "Structured Data Extraction",
           desc: "Intelligently extracts property details, broker contacts (name, title, email, phone), and rental information from research findings.",
         },
         {
           step: "STEP 3",
-          icon: "workflowstep3.png",
+          icon: "LocationOnOutlined",
           title: "Geolocation Verification",
           desc: "Verifies address accuracy using Google Geocoding API and enriches data with GPS coordinates and CBSA information.",
         },
         {
           step: "STEP 4",
-          icon: "workflowstep4.png",
+          icon: "VisibilityOutlined",
           title: "Computer Vision Analysis",
           desc: "Analyzes aerial and street-view imagery to verify property attributes like square footage, asset type, and premises classification.",
         },
@@ -286,22 +295,25 @@ export const caseDetails = [
     },
     architecture_highlights: [
       {
-        title: "11",
-        boldText: "Pipeline nodes : ",
+        value: "11",
+        label: "Pipeline Nodes",
         desc: "Sequential workflow with specialized processing at each stage",
       },
       {
-        title: "Infinite",
-        boldText: "Scalability : ",
-        desc: "Extensible architecture supporting new data resources",
+        value: "∞",
+        label: "Scalability",
+        desc: "Extensible architecture supporting new data sources",
       },
       {
-        title: "100%",
-        boldText: "Data Quality : ",
+        value: "100%",
+        label: "Data Quality",
         desc: "Multi-stage QA with verification and validation",
       },
     ],
     pipeline: {
+      label: "Architecture",
+      title: "Intelligent Pipeline Architecture",
+      text: "Click on any node to explore its role and data flow",
       nodes: [
         { id: "global", label: "Global Config", color: "#377BBB" },
         { id: "geo", label: "Geography Input", color: "#377BBB" },
@@ -343,66 +355,67 @@ export const caseDetails = [
       ],
     },
     key_features: {
+      label: "Capabilities",
+      title: "Key Features",
       text: "A comprehensive suite of AI-powered tools to automate commercial real estate site discovery and qualification.",
       list: [
         {
-          title: "Deep research automation",
-          desc: "Searches across loopNet, CBRE, JLL, Brixmor and local broker websites automatically, discovering properties missed by manual searching.",
+          title: "Deep Research Automation",
+          desc: "Searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically, discovering properties missed by manual searching.",
         },
         {
           title: "Comprehensive Contact Data",
-          desc: "Extracts complete broker information including name, title, company direct email, and phone numbers for immediate outreach.",
+          desc: "Extracts complete broker information including name, title, company, direct email, and phone numbers for immediate outreach.",
         },
         {
-          title: "Geolocation verification",
+          title: "Geolocation Verification",
           desc: "Validates addresses and enriches with GPS coordinates, CBSA codes, and metropolitan area data for accurate location intelligence.",
         },
         {
-          title: "Computer vision analysis",
-          desc: "Analyzes aerial and street view imagery to verify property attributes square footage, and premises classification.",
+          title: "Computer Vision Analysis",
+          desc: "Analyzes aerial and street view imagery to verify property attributes, square footage, and premises classification.",
         },
         {
-          title: "Multistage quality assurance",
-          desc: "User-configurable qualification criteria with data legitimacy, recency and criteria matching for transparent desicion making.",
+          title: "Multi-Stage Quality Assurance",
+          desc: "User-configurable qualification criteria with data legitimacy, recency, and criteria matching for transparent decision making.",
         },
         {
-          title: "Real time monitoring",
-          desc: "Google sheets integration logs all workflow execution for tracking, debugging and maintaining an audit trail.",
+          title: "Real-Time Monitoring",
+          desc: "Google Sheets integration logs all workflow executions for tracking, debugging, and maintaining an audit trail.",
         },
       ],
     },
     techStack: {
+      label: "Built With",
+      title: "Technology Stack",
       text: "Enterprise-grade technologies powering scalable, intelligent multi-agent systems.",
       stacks: [
         {
-          techType: "BACKEND",
-          values: ["openai-2", "ffffff (1)", "ffffff", "huggingface"],
-        },
-        {
-          techType: "DATABASE",
+          techType: "Backend",
           values: [
-            "python-original",
-            "fastapi-original",
-            "postgresql-original",
-            "redis-original",
+            { name: "FastAPI", file: "fastapi-original" },
+            { name: "Python", file: "python-original" },
           ],
         },
         {
-          techType: "AI FRAMEWORK",
+          techType: "Database",
           values: [
-            "react-original",
-            "nextjs-original",
-            "typescript-original",
-            "react-original",
+            { name: "Google Sheets", file: "googlesheets" },
+          ],
+        },
+        {
+          techType: "AI Framework",
+          values: [
+            { name: "CrewAI", file: "crewai" },
+            { name: "LangChain", file: "langchain" },
           ],
         },
         {
           techType: "LLM",
           values: [
-            "amazonwebservices-original-wordmark",
-            "docker-original",
-            "kubernetes-original",
-            "vercel-original",
+            { name: "OpenAI GPT-4o", file: "openai-2" },
+            { name: "OpenAI GPT-5.2", file: "openai-2" },
+            { name: "Gemini Vision API", file: "gemini" },
           ],
         },
       ],
@@ -414,11 +427,11 @@ export const caseDetails = [
       },
       {
         title: "Multi-Source Integration",
-        desc: "Integrates Google APIs, AI research, computer vision and geocoding services into unified workflow.",
+        desc: "Integrates Google APIs, AI research, computer vision, and geocoding services into unified workflow.",
       },
       {
-        title: "Real time monitoring & logging",
-        desc: "Google sheets integration for workflow monitoring, execution tracking and audit trails.",
+        title: "Real-Time Monitoring & Logging",
+        desc: "Google Sheets integration for workflow monitoring, execution tracking, and audit trails.",
       },
     ],
     more_cases: [
@@ -438,69 +451,64 @@ export const caseDetails = [
         "Transforming University Admissions with Multi-Agent Intelligence",
       stats: [
         { label: "Industry", value: "EdTech" },
-        { label: "Timeline", value: "3 Month" },
-        { label: "Team Size", value: "4 Engineers" },
+        { label: "Timeline", value: "3 months" },
+        { label: "Team Size", value: "4 engineers" },
         { label: "Agents", value: "7 AI" },
       ],
     },
     challenges: {
-      title:
-        "Applying to universities especially internationally is a fragmented and overwhelming process.",
+      label: "The Challenge",
+      title: "The Problem",
+      text: "Applying to universities—especially internationally—is a fragmented and overwhelming process.",
       items: [
         {
           sNo: "01",
-          title: "Extensive Research Time",
           desc: "Students spend 40+ hours on manual university research",
         },
         {
           sNo: "02",
-          title: "Complex Eligibility Criteria",
           desc: "Application requirements vary widely across institutions",
         },
         {
           sNo: "03",
-          title: "Scattered Scholarship Data",
           desc: "Scholarship discovery is scattered and often outdated",
         },
         {
           sNo: "04",
-          title: "Complicated Visa Processes",
           desc: "Visa requirements are complex and frequently changing",
         },
         {
           sNo: "05",
-          title: "Lack of Structured Guidance",
           desc: "Students miss deadlines due to poor planning or lack of guidance",
         },
       ],
     },
-    cost: {
-      text: "These challenges quickly add up: students spend 40+ hours navigating fragmented information, miss critical deadlines, and often apply to poorly matched universities or miss scholarship opportunities. The result is increased stress, lower success rates, and inefficient decision-making. An intelligent, automated guidance system is no longer a luxury—it's a necessity.",
-    },
     approach: {
-      title: "AI-driven, agentic admissions consulting platform",
+      label: "Our Approach",
+      title: "The Solution",
+      text: "We built an AI-driven, agentic admissions consulting platform that breaks the process into specialized domains with intelligent orchestration at the core.",
       steps: [
         {
           step: "STEP 1",
-          icon: "workflowstep1.png",
+          icon: "AccountTreeOutlined",
           title: "Master-Worker Architecture",
           desc: "Centralized orchestrator agent coordinates with 6 specialist agents, each handling specific domains",
         },
         {
           step: "STEP 2",
-          icon: "workflowstep2.png",
+          icon: "GroupsOutlined",
           title: "1 Orchestrator + 6 Specialists",
           desc: "Admission Counselor routes requests to University Search, Application Requirements, Scholarship Search, Scholarship Requirements, Essay, and Visa agents",
         },
         {
           step: "STEP 3",
-          icon: "workflowstep3.png",
+          icon: "InsightsOutlined",
           title: "Data-Driven Recommendations",
           desc: "Personalized recommendations based on student profiles and real data, not generic advice",
         },
         {
           step: "STEP 4",
-          icon: "workflowstep4.png",
+          icon: "BoltOutlined",
           title: "Automated Discovery",
           desc: "Automates research across universities, scholarships, and visa requirements while keeping humans in control",
         },
@@ -508,22 +516,22 @@ export const caseDetails = [
     },
     architecture_highlights: [
       {
-        title: "1",
-        boldText: "Orchestrator : ",
+        value: "1",
         desc: "Central Orchestrator for unified student experience",
       },
       {
-        title: "6",
-        boldText: "Specialist Agents : ",
+        value: "6",
         desc: "Specialized agents handling different admission domains",
       },
       {
-        title: "Infinite",
-        boldText: "Scalability : ",
+        value: "∞",
         desc: "Scalable to add new agents and domains as needed",
       },
     ],
     pipeline: {
+      label: "Architecture",
+      title: "Multi-Agent System",
+      text: "Click on any agent to explore its role and responsibilities",
       nodes: [
         { id: "university", label: "University", color: "#377BBB" },
         { id: "visa", label: "Visa", color: "#377BBB" },
@@ -549,6 +557,8 @@ export const caseDetails = [
       ],
     },
     key_features: {
+      label: "Capabilities",
+      title: "Key Features",
       text: "A comprehensive suite of AI-powered tools to guide students through every step of the admissions journey.",
       list: [
         {
@@ -573,44 +583,52 @@ export const caseDetails = [
         },
         {
           title: "Visa Guidance & Requirements",
-          desc: "Country-specific visa information, requirements, and procedural guidance for international students",
+          desc: "Country-specific visa information, requirements, and procedural guidance for international students.",
         },
       ],
     },
     techStack: {
+      label: "Built With",
+      title: "Technology Stack",
       text: "Enterprise-grade technologies powering scalable, intelligent multi-agent systems.",
       stacks: [
         {
-          techType: "BACKEND",
-          values: ["openai-2", "ffffff (1)", "ffffff", "huggingface"],
-        },
-        {
-          techType: "DATABASE",
+          techType: "Backend",
           values: [
-            "python-original",
-            "fastapi-original",
-            "postgresql-original",
-            "redis-original",
+            { name: "Flask", file: "flask" },
+            { name: "Python", file: "python-original" },
           ],
         },
         {
-          techType: "AI FRAMEWORK",
+          techType: "Database",
           values: [
-            "react-original",
-            "nextjs-original",
-            "typescript-original",
-            "react-original",
+            { name: "Supabase", file: "supabase" },
+            { name: "PostgreSQL", file: "postgresql-original" },
+          ],
+        },
+        {
+          techType: "AI Framework",
+          values: [
+            { name: "CrewAI", file: "crewai" },
           ],
         },
         {
           techType: "LLM",
           values: [
-            "amazonwebservices-original-wordmark",
-            "docker-original",
-            "kubernetes-original",
-            "vercel-original",
+            { name: "OpenAI GPT-4", file: "openai-2" },
           ],
         },
+      ],
+    },
+    results: {
+      label: "Results",
+      title: "Measurable Impact",
+      text: "The agentic system delivered tangible value through intelligent automation and comprehensive guidance.",
+      items: [
+        { value: "75%", label: "Time Reduction", desc: "Reduction in manual research time for students" },
+        { value: "6", label: "Specialist Agents", desc: "AI agents working in coordination to provide end-to-end guidance" },
+        { value: "1", label: "Master Orchestrator", desc: "Central coordinator ensuring cohesive student experience" },
+        { value: "∞", label: "Scalability", desc: "Easily extensible architecture for future agents and domains" },
       ],
     },
     top_features: [

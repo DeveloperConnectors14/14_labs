@@ -12,13 +12,13 @@ import {
     Fade,
     useScrollTrigger,
     Typography,
-    Divider,
 } from "@mui/material";
 import {
     Menu as MenuIcon,
     Close as CloseIcon,
 } from "@mui/icons-material";
 import Image from "next/image";
+import { BUTTON_RADIUS } from "@/theme/tokens";
 import { getNavItems } from "@/services/dataService";
 
 const APP_BAR_HEIGHT = "104px";
@@ -39,7 +39,7 @@ function Navbar() {
                 position="fixed"
                 elevation={0}
                 sx={{
-                    height: { xs: "80px", sm: "90px", md: APP_BAR_HEIGHT },
+                    height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
                     backgroundColor: "background.paper",
                     backdropFilter: isScrolled ? "blur(10px)" : "none",
                     transition: "all 0.4s ease",
@@ -109,7 +109,7 @@ function Navbar() {
                         variant="contained"
                         sx={{
                             display: { xs: "none", md: "flex" },
-                            borderRadius: "60px",
+                            borderRadius: BUTTON_RADIUS,
                             p: "16px 24px",
                             fontWeight: 600,
                             fontStyle: "semiBold",
@@ -151,7 +151,7 @@ function Navbar() {
                 <Box
                     sx={{
                         position: "fixed",
-                        top: { xs: "80px", sm: "90px", md: APP_BAR_HEIGHT },
+                        top: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
                         left: 0,
                         right: 0,
                         backgroundColor: "background.paper",
@@ -176,7 +176,6 @@ function Navbar() {
                                 fontSize: 14,
                                 fontFamily: "'IBM Plex Mono', monospace",
                                 color: "text.primary",
-                                textTransform: "none",
                                 backgroundColor: "transparent",
                                 transition: "all 0.4s ease",
                                 "&:hover": {
@@ -187,37 +186,37 @@ function Navbar() {
                             {item.label}
                         </Button>
                     ))}
-                    <Divider sx={{ my: 2 }} />
-                    <Button
-                        component={Link}
-                        fullWidth
-                        href="/contact"
-                        variant="contained"
-                        sx={{
-                            borderRadius: 7,
-                            px: 2.5,
-                            py: 1,
-                            fontWeight: 600,
-                            fontsize: 16,
-                            fontFamily: "'IBM Plex Mono', monospace",
-                            color: "text.primary",
-                            backgroundColor: "secondary.main",
-                            boxShadow: "none",
-                            transition: 'all 0.3s ease',
-                            "&:hover": {
-                                boxShadow: "none",
-                                backgroundColor: "primary.contrastText",
+                    <Box sx={{ display: "flex", justifyContent: "center", mt: 1 }}>
+                        <Button
+                            component={Link}
+                            href="/contact"
+                            variant="contained"
+                            sx={{
+                                borderRadius: BUTTON_RADIUS,
+                                px: 2.5,
+                                py: 1,
+                                fontWeight: 600,
+                                fontsize: 16,
+                                fontFamily: "'IBM Plex Mono', monospace",
                                 color: "text.primary",
-                            },
-                        }}
-                    >
-                        GET STARTED
-                    </Button>
+                                backgroundColor: "secondary.main",
+                                boxShadow: "none",
+                                transition: 'all 0.3s ease',
+                                "&:hover": {
+                                    boxShadow: "none",
+                                    backgroundColor: "primary.contrastText",
+                                    color: "text.primary",
+                                },
+                            }}
+                        >
+                            GET STARTED
+                        </Button>
+                    </Box>
                 </Box>
             </Collapse>
 
             {/* space for fixed navbar */}
-            <Toolbar sx={{ height: { xs: "80px", sm: "90px", md: APP_BAR_HEIGHT }, }} />
+            <Toolbar sx={{ height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT }, }} />
         </>
     );
 }

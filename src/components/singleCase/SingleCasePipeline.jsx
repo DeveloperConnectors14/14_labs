@@ -2,6 +2,7 @@
 
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import Xarrow, { Xwrapper } from "react-xarrows";
+import { SECTION_PX, SECTION_PY, TILE_RADIUS } from "@/theme/tokens";
 
 
 const Node = ({ id, label, color = "#377BBB" }) => {
@@ -12,7 +13,7 @@ const Node = ({ id, label, color = "#377BBB" }) => {
             sx={{
                 px: { xs: 0.5, sm: 0.5, md: 2 },
                 py: { xs: 0.5, sm: 1, md: 1.5 },
-                borderRadius: "10px",
+                borderRadius: TILE_RADIUS,
                 border: "1px dashed #D9D9D9",
                 display: "flex",
                 alignItems: "center",
@@ -31,14 +32,7 @@ const Node = ({ id, label, color = "#377BBB" }) => {
                     backgroundColor: color,
                 }}
             />
-            <Typography
-                sx={{
-                    py: 1,
-                    fontWeight: 400,
-                    fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                    fontFamily: "'Instrument Sans', sans-serif",
-                }}
-            >
+            <Typography variant="body2" sx={{ py: 1 }}>
                 {label}
             </Typography>
         </Paper>
@@ -64,32 +58,37 @@ function SingleCasePipeline({ casePipeline }) {
     );
 
     return (
-        <Box sx={{ px: 4, py: 6 }}>
+        <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
             <Grid container spacing={2}>
                 <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography
-                        sx={{
-                            py: 1,
-                            fontWeight: 400,
-                            fontSize: { xs: "16px", sm: "17px", md: "18px" },
-                            fontFamily: "'Instrument Sans', sans-serif",
-                        }}
-                    >
-                        Architecture
+                    <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
+                        {casePipeline.label || "Architecture"}
                     </Typography>
 
-                    <Typography
-                        fontWeight={600}
-                        sx={{
-                            fontSize: { xs: "26px", sm: "32px", md: "40px" },
-                            fontFamily: "'Instrument Sans', sans-serif",
-                        }}
-                    >
-                        Intelligent Pipeline <br /> Architecture
+                    <Typography variant="h2" sx={{ color: "text.primary" }}>
+                        {(() => {
+                            const raw = casePipeline.title || "Intelligent Pipeline Architecture";
+                            const words = raw.split(" ");
+                            const last = words.pop();
+                            const rest = words.join(" ");
+                            return (
+                                <>
+                                    {rest ? `${rest} ` : ""}
+                                    <Box component="span" sx={{ color: "text.secondary" }}>
+                                        {last}
+                                    </Box>
+                                </>
+                            );
+                        })()}
                     </Typography>
+                    {casePipeline.text && (
+                        <Typography variant="body1" sx={{ pt: 2 }} color="text.grey">
+                            {casePipeline.text}
+                        </Typography>
+                    )}
                 </Grid>
 
-                <Grid size={12}>
+                <Grid size={12} sx={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
                     <Xwrapper>
                         <Box
                             sx={{
@@ -98,6 +97,8 @@ function SingleCasePipeline({ casePipeline }) {
                                 alignItems: "center",
                                 gap: 3,
                                 position: "relative",
+                                minWidth: "fit-content",
+                                px: 1,
                             }}
                         >
                             {casePipeline.layout.map((row, i) => (

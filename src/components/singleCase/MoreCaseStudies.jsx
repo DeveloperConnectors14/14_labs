@@ -1,19 +1,21 @@
 import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import Link from "next/link";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, TILE_RADIUS } from "@/theme/tokens";
 
 function MoreCaseStudies({ moreCases }) {
 
     return (
         <>
-            <Box sx={{ px: 4, py: 6, }}>
+            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-                            View more <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
-                                case studies
+                        <Typography variant="h2" sx={{ color: "text.primary" }}>
+                            View More{" "}
+                            <Box component="span" sx={{ color: "text.secondary" }}>
+                                Case Studies
                             </Box>
                         </Typography>
-                        <Typography sx={{ py: 1, fontWeight: 400, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+                        <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
                             Explore our in-depth case studies showcasing real-world examples of how AI solutions have driven success for businesses like yours.
                         </Typography>
                     </Grid>
@@ -30,7 +32,7 @@ function MoreCaseStudies({ moreCases }) {
                                             width: "100%",
                                             border: 1,
                                             borderColor: "divider",
-                                            borderRadius: 4,
+                                            borderRadius: CARD_RADIUS,
                                             display: "flex",
                                             flexDirection: "column",
                                             justifyContent: "space-between",
@@ -47,14 +49,13 @@ function MoreCaseStudies({ moreCases }) {
                                             height="200"
                                             image={`/media/${item.img}`}
                                             alt={item.img}
-                                            sx={{ borderRadius: 2 }}
+                                            sx={{ borderRadius: TILE_RADIUS }}
                                         />
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography color="text.black" fontWeight={"700"} sx={{ fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "Bold", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography variant="h3" color="text.black">
                                                 {item.title}
                                             </Typography>
-                                            <Typography color="text.grey"
-                                                sx={{ py: 0.5, fontSize: { xs: "14px", sm: "15px", md: "16px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ pt: 0.5 }}>
                                                 {item.date}
                                             </Typography>
                                         </CardContent>

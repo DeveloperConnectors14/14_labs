@@ -9,6 +9,7 @@ import SingleCaseArchitechture from "@/components/singleCase/SingleCaseArchitech
 import SingleCaseChallanges from "@/components/singleCase/SingleCaseChallanges";
 import SingleCaseHero from "@/components/singleCase/SingleCaseHero";
 import SingleCasePipeline from "@/components/singleCase/SingleCasePipeline";
+import SingleCaseResults from "@/components/singleCase/SingleCaseResults";
 import SingleKeyFeatures from "@/components/singleCase/SingleKeyFeatures";
 import SingleTopFeatures from "@/components/singleCase/SingleTopFeatures";
 import TechnologyStack from "@/components/singleCase/TechnologyStack";
@@ -27,13 +28,14 @@ function SingleCasePage({ params }) {
     <>
       <SingleCaseHero heroData={data.hero} />
       <SingleCaseChallanges challanges={data.challenges} />
-      <RealCostDetails costData={data.cost} />
+      {data.cost && <RealCostDetails costData={data.cost} />}
       <SingleCaseApproach approaches={data.approach} />
       <SingleCaseArchitechture architectureData={data.architecture_highlights} />
       <SingleCasePipeline casePipeline={data.pipeline} />
       <SingleKeyFeatures keyFeatures={data.key_features} />
       <TechnologyStack technologies={data.techStack} />
       <SingleTopFeatures topFeatures={data.top_features} />
+      {data.results && <SingleCaseResults results={data.results} />}
       <CallSection contact={true} />
       <MoreCaseStudies moreCases={data.more_cases} />
     </>

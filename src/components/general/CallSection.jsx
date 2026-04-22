@@ -1,65 +1,67 @@
 "use client";
 import { Box, Container, Typography, Button, Grid } from "@mui/material";
 import Link from "next/link";
+import { SECTION_PX, SECTION_PY, BUTTON_RADIUS } from "@/theme/tokens";
 
 function CallSection({ contact }) {
   return (
     <Box
       sx={{
         color: "white",
-        px: { xs: 3, md: ((contact) ? (3) : (14)) },
-        py: 3
+        px: SECTION_PX,
+        py: SECTION_PY,
       }}
     >
-      <Box sx={{ background: "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)", borderRadius: 4, py: 5, px: { xs: 2, md: 5 } }}>
+      <Box sx={{ background: "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)", borderRadius: 4, py: { xs: 6, md: 8 }, px: { xs: 2, md: 5 } }}>
         <Container sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
           {(contact ? (
             <Grid container spacing={3}>
               <Grid size={{ xs: 12, md: 8 }}>
-                <Box>
-                  <Typography sx={{ color: "secondary.contrastText", fontSize: { xs: "28px", sm: "36px", md: "40px" }, fontStyle: "semiBold", fontWeight: 600, fontFamily: "'Instrument Sans', sans-serif", }} >
-                    Are you ready to unlock potential with customised AI solution?
+                <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+                  <Typography variant="h2" sx={{ color: "secondary.contrastText" }} >
+                    Ready to Build Your AI Solution?
                   </Typography>
-                  <Button
-                    component={Link}
-                    href="/contact"
-                    variant="contained"
-                    sx={{
-                      borderRadius: 6,
-                      mt: 2,
-                      px: 3,
-                      py: 1.4,
-                      fontWeight: 600,
-                      fontFamily: "'IBM Plex Mono', monospace",
-                      backgroundColor: "background.paper",
-                      color: "text.primary",
-                      "&:hover": {
-                        boxShadow: "none",
-                        backgroundColor: "primary.contrastText",
-                        color: "text.primary"
-                      },
-                    }}
-                  >
-                    Schedule Call
-                  </Button>
+                  <Typography variant="body1" sx={{ pt: 2 }} color="primary.contrastText">
+                    We design and build multi-agent AI systems tailored to your unique business needs. From architecture to deployment, we handle it all.
+                  </Typography>
+                  <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" }, mt: 2 }}>
+                    <Button
+                      component={Link}
+                      href="/contact"
+                      variant="contained"
+                      sx={{
+                        borderRadius: BUTTON_RADIUS,
+                        px: 3,
+                        py: 1.4,
+                        backgroundColor: "background.paper",
+                        color: "text.primary",
+                        "&:hover": {
+                          backgroundColor: "primary.contrastText",
+                          color: "text.primary"
+                        },
+                      }}
+                    >
+                      Discuss Your Project
+                    </Button>
+                  </Box>
                 </Box>
               </Grid>
               <Grid size={{ xs: 12, md: 4 }}>
-                <Box sx={{ height: "100%", display: "flex", flexDirection: { xs: "row", md: "column" }, justifyContent: "space-between" }}>
+                <Box sx={{ height: "100%", display: "flex", flexDirection: "column", gap: 2, justifyContent: { xs: "flex-start", md: "space-between" }, alignItems: { xs: "center", md: "flex-start" }, textAlign: { xs: "center", md: "left" } }}>
                   <Box>
-                    <Typography color="primary.contrastText" sx={{ fontSize: { xs: "14px", sm: "15px", md: "16px" }, fontStyle: "Regular", fontWeight: 400, fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography variant="body2" color="primary.contrastText">
                       Email
                     </Typography>
-                    <Typography color="secondary.contrastText" sx={{ fontWeight: "700", fontStyle: "Bold", fontSize: { xs: "18px", sm: "22px", md: "24px" }, fontFamily: "'Instrument Sans', sans-serif", }}>
-                      info@14labs.com
+                    <Typography variant="h3" color="secondary.contrastText">
+                      contact@14labs.co
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography color="primary.contrastText" sx={{ fontSize: { xs: "14px", sm: "15px", md: "16px" }, fontStyle: "Regular", fontWeight: 400, fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography variant="body2" color="primary.contrastText">
                       Phone
                     </Typography>
-                    <Typography color="secondary.contrastText" sx={{ fontWeight: "700", fontStyle: "Bold", fontSize: { xs: "18px", sm: "22px", md: "24px" }, fontFamily: "'Instrument Sans', sans-serif", }}>
-                      {"+1(888)-855-5328"}
+                    <Typography variant="h3" color="secondary.contrastText">
+                      +92 318 7806914
                     </Typography>
                   </Box>
                 </Box>
@@ -67,22 +69,19 @@ function CallSection({ contact }) {
             </Grid>
           ) : (
             <Box sx={{ textAlign: "center" }}>
-              <Typography sx={{ color: "secondary.contrastText", fontSize: { xs: "28px", sm: "36px", md: "40px" }, fontStyle: "semiBold", fontWeight: 600, fontFamily: "'Instrument Sans', sans-serif", }} >
+              <Typography variant="h2" sx={{ color: "secondary.contrastText" }} >
                 Have an idea or challenge in mind?
               </Typography>
-              <Typography color="primary.contrastText" fontWeight={"400"} sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
-                Lets talk about how AI and custom software can help your business move faster and smarter
+              <Typography variant="body1" color="primary.contrastText" sx={{ py: 1 }}>
+                Let's talk about how AI and custom software can help your business move faster and smarter.
               </Typography>
               <Button
                 component={Link}
                 href="contact"
                 variant="contained"
                 sx={{
-                  borderRadius: 7,
+                  borderRadius: BUTTON_RADIUS,
                   p: "9px 18px",
-                  fontWeight: 600,
-                  fontSize: { sx: 16, sm: 16.5, md: 17 },
-                  fontFamily: "'IBM Plex Mono', monospace",
                   backgroundColor: "background.paper",
                   color: "text.primary",
                   transition: 'all 0.3s ease',
@@ -93,7 +92,7 @@ function CallSection({ contact }) {
                   },
                 }}
               >
-                Schedule Call
+                Contact Us
               </Button>
             </Box>
           )

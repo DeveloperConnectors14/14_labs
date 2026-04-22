@@ -1,16 +1,31 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
 
 function SingleKeyFeatures({ keyFeatures }) {
 
     return (
         <>
-            <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
+            <Box sx={{ px: SECTION_PX, py: SECTION_PY, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
                 <Grid container spacing={3}>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-                            Key Features
+                    <Grid size={12}>
+                        {keyFeatures.label && (
+                            <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
+                                {keyFeatures.label}
+                            </Typography>
+                        )}
+                        <Typography variant="h2" sx={{ color: "text.primary" }}>
+                            {keyFeatures.title ? (
+                                keyFeatures.title
+                            ) : (
+                                <>
+                                    Key{" "}
+                                    <Box component="span" sx={{ color: "text.secondary" }}>
+                                        Features
+                                    </Box>
+                                </>
+                            )}
                         </Typography>
-                        <Typography sx={{ py: 1, fontWeight: 400, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+                        <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
                             {keyFeatures.text}
                         </Typography>
                     </Grid>
@@ -20,7 +35,9 @@ function SingleKeyFeatures({ keyFeatures }) {
                                 < Grid size={{ xs: 12, md: 4 }} key={i} sx={{ display: { xs: "block", sm: "block", md: "flex" } }}>
                                     <Card
                                         sx={{
-                                            borderRadius: 4,
+                                            borderRadius: CARD_RADIUS,
+                                            border: 1,
+                                            borderColor: "divider",
                                             px: 2,
                                             display: "flex",
                                             flexDirection: "column",
@@ -29,10 +46,10 @@ function SingleKeyFeatures({ keyFeatures }) {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography fontWeight={"600"} sx={{ color: "text.black", fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography variant="h3" sx={{ color: "text.black" }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography fontWeight={"400"} color="text.grey" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ py: 1 }}>
                                                 {item.desc}
                                             </Typography>
                                         </CardContent>

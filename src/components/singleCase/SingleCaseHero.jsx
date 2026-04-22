@@ -1,26 +1,25 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { SECTION_PX, CARD_RADIUS } from "@/theme/tokens";
 
 function SingleCaseHero({ heroData }) {
 
     return (
         <>
             <Box sx={{
-                minHeight: { md: "88vh", xs: "90vh" },
-                px: 4,
-                py: { xs: 6, md: 0 }
+                px: SECTION_PX,
+                py: { xs: 6, md: 8 }
             }}>
-                <Grid container spacing={3} sx={{
-                    minHeight: { md: "88vh", xs: "90vh" },
+                <Grid container spacing={4} sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     textAlign: "center",
                 }}>
                     <Grid size={{ xs: 12, md: 6 }} >
-                        <Typography fontWeight={600} color="text.primary" sx={{ fontSize: { xs: "26px", sm: "30px", md: "48px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
+                        <Typography variant="h2" sx={{ color: "text.primary" }}>
                             {heroData.title}
                         </Typography>
-                        <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+                        <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
                             {heroData.subtitle}
                         </Typography>
                     </Grid>
@@ -33,24 +32,24 @@ function SingleCaseHero({ heroData }) {
                             gap: 2,
                         }}>
                             {heroData.stats.map((item, i) => (
-                                < Grid size={{ md: 3 }} key={i}>
+                                < Grid size={{ xs: 6, sm: 6, md: 3 }} key={i}>
                                     <Card
                                         sx={{
-                                            borderRadius: 4,
+                                            borderRadius: CARD_RADIUS,
                                             border: 1,
-                                            borderColor: "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)",
-                                            px: 2,
+                                            borderColor: "divider",
+                                            px: { xs: 0.5, sm: 1, md: 2 },
                                             textAlign: "start",
                                             position: "relative",
                                             overflow: "hidden",
                                             transition: "0.3s",
                                         }}
                                     >
-                                        <CardContent>
-                                            <Typography fontWeight={"700"} sx={{ fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "Bold", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                        <CardContent sx={{ p: { xs: 1.5, sm: 2, md: 3 }, "&:last-child": { pb: { xs: 1.5, sm: 2, md: 3 } } }}>
+                                            <Typography variant="h3">
                                                 {item.value}
                                             </Typography>
-                                            <Typography fontWeight={"400"} color="text.grey" sx={{ pt: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography variant="body2" color="text.grey" sx={{ pt: 1 }}>
                                                 {item.label}
                                             </Typography>
                                         </CardContent>

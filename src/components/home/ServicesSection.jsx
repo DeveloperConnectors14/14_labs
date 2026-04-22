@@ -2,21 +2,22 @@
 import { getServices } from "@/services/dataService";
 import { Box, Grid, Card, CardContent, Typography, Divider, Button } from "@mui/material";
 import Link from "next/link";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, BUTTON_RADIUS } from "@/theme/tokens";
 
 
 const services = getServices();
 
 function ServicesSection() {
   return (
-    <Box sx={{ px: 4, py: 5, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
+    <Box sx={{ px: SECTION_PX, py: SECTION_PY, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 4 }}>
-          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-            Our <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography variant="h2" sx={{ color: "text.primary" }}>
+            Our <Box component="span" sx={{ color: "text.secondary" }}>
               Services
             </Box>
           </Typography>
-          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
             We keep our word, align seamlessly with your teams, and deliver outcomes that matter. Integrating the now. Inventing the next.
           </Typography>
         </Grid>
@@ -33,7 +34,7 @@ function ServicesSection() {
                     flex: 1,
                     border: 1,
                     borderColor: "divider",
-                    borderRadius: 4,
+                    borderRadius: CARD_RADIUS,
                     display: "flex",
                     flexDirection: "column",
                     position: "relative",
@@ -63,6 +64,28 @@ function ServicesSection() {
                       "& .heading": {
                         color: "secondary.contrastText",
                       }
+                    },
+                    "@media (max-width: 1023.95px)": {
+                      backgroundImage: 'url("/media/service1.png")',
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      "& .cardContent::before": {
+                        opacity: 1,
+                      },
+                      "& .sNo": {
+                        color: "primary.contrastText",
+                      },
+                      "& .hidden": {
+                        position: "relative",
+                        display: "block",
+                        transform: "translateY(0)",
+                        opacity: 1,
+                        visibility: "visible",
+                      },
+                      "& .heading": {
+                        color: "secondary.contrastText",
+                      },
                     },
 
                   }}
@@ -99,9 +122,9 @@ function ServicesSection() {
                       <Box>
                         <Typography
                           className="sNo"
-                          variant="body2"
+                          variant="caption"
                           color="text.grey"
-                          sx={{ py: 0.5, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'IBM Plex Mono', monospace", }}
+                          sx={{ py: 0.5, display: "block" }}
                         >
                           {service.sNo}
                         </Typography>
@@ -110,7 +133,8 @@ function ServicesSection() {
                       <Box className="detailBox" >
                         <Typography
                           className="heading"
-                          sx={{ color: "text.black", fontFamily: "'Instrument Sans', sans-serif", fontSize: { xs: "24px", sm: "26px", md: "28px" }, fontStyle: "medium", fontWeight: 500 }}
+                          variant="h3"
+                          sx={{ color: "text.black" }}
                         >
                           {service.title}
                         </Typography>
@@ -122,8 +146,9 @@ function ServicesSection() {
                           transition: "all 0.4s ease",
                         }} >
                           <Typography
+                            variant="body2"
                             color="primary.contrastText"
-                            sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}
+                            sx={{ py: 1 }}
                           >
                             {service.desc}
                           </Typography>
@@ -132,11 +157,9 @@ function ServicesSection() {
                             href="/services"
                             variant="contained"
                             sx={{
-                              borderRadius: 7,
+                              borderRadius: BUTTON_RADIUS,
                               p: "9px 18px",
-                              fontWeight: 600,
                               mt: 2,
-                              fontFamily: "'IBM Plex Mono', monospace",
                               backgroundColor: "background.paper",
                               color: "text.primary",
                               boxShadow: "none",

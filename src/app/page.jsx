@@ -14,11 +14,11 @@ function Home() {
   return (
     <>
       <HeroSection />
-      <TrustedBrands />
+      {/* <TrustedBrands /> */}
       <ChallengesSection />
       <ServicesSection />
       <CallSection contact={false} />
-      <SuccessStories />
+      {/* <SuccessStories /> */}
       <ToolsSection />
       <ImpactSection />
       <PricingSection />

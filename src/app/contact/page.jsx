@@ -10,9 +10,42 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
+import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+
+const textFieldSx = {
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "background.paper",
+    borderRadius: TILE_RADIUS,
+    transition: "border-color 0.2s ease",
+    "& fieldset": {
+      borderColor: "divider",
+      transition: "border-color 0.2s ease",
+    },
+    "&:hover fieldset": {
+      borderColor: "text.grey",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "text.secondary",
+      borderWidth: "1.5px",
+    },
+  },
+  "& .MuiInputBase-input": {
+    color: "text.black",
+    padding: "14px 16px",
+    "&::placeholder": {
+      color: "text.grey",
+      opacity: 1,
+    },
+  },
+  "& .MuiInputBase-multiline": {
+    padding: 0,
+  },
+  "& .MuiInputBase-inputMultiline": {
+    padding: "14px 16px",
+  },
+};
 
 function ContactPage() {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,6 +55,7 @@ function ContactPage() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbar, setSnackbar] = useState({ severity: "success", message: "" });
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -30,23 +64,30 @@ function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    console.log(formData);
 
-    // show popup
-    setOpenSnackbar(true);
-
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      if (!res.ok) throw new Error("Request failed");
+
+      setSnackbar({ severity: "success", message: "Message sent successfully!" });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      setSnackbar({
+        severity: "error",
+        message: "Something went wrong. Please try again or email us directly.",
+      });
+    } finally {
+      setIsSubmitted(false);
+      setOpenSnackbar(true);
+    }
   };
 
   const handleClose = (_, reason) => {
@@ -57,36 +98,46 @@ function ContactPage() {
   return (
     <Box
       sx={{
-        px: { xs: 3, md: 8 },
-        py: 6,
-        background:
-          "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+        px: SECTION_PX,
+        py: SECTION_PY,
+        background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
       }}
     >
       <Grid container spacing={3} alignItems="flex-start">
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "semiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-            Contact Us
+          <Typography variant="h2" sx={{ color: "text.primary" }}>
+            Contact{" "}
+            <Box component="span" sx={{ color: "text.secondary" }}>
+              Us
+            </Box>
           </Typography>
 
-          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
             Ready to start your next project? Contact us through any of these channels or fill out the form.
           </Typography>
 
-          <Box sx={{ mt: 6 }}>
+          <Box sx={{ mt: 6, display: "flex", flexDirection: "column", gap: 2 }}>
             <Box>
-              <Typography color="text.grey" sx={{ fontSize: { xs: "14px", sm: "15px", md: "16px" }, fontStyle: "Regular", fontWeight: 400, fontFamily: "'Instrument Sans', sans-serif", }}>
+              <Typography variant="body2" color="text.grey">
                 Email
               </Typography>
-              <Typography color="text.primary" sx={{ fontWeight: "700", fontStyle: "Bold", fontSize: { xs: "18px", sm: "22px", md: "24px" }, fontFamily: "'Instrument Sans', sans-serif", }}>
+              <Typography variant="h3" color="text.primary">
                 contact@14labs.co
               </Typography>
             </Box>
             <Box>
-              <Typography color="text.grey" sx={{ fontSize: { xs: "14px", sm: "15px", md: "16px" }, fontStyle: "Regular", fontWeight: 400, fontFamily: "'Instrument Sans', sans-serif", }}>
+              <Typography variant="body2" color="text.grey">
+                Phone
+              </Typography>
+              <Typography variant="h3" color="text.primary">
+                +92 318 7806914
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant="body2" color="text.grey">
                 Location
               </Typography>
-              <Typography color="text.primary" sx={{ fontWeight: "700", fontStyle: "Bold", fontSize: { xs: "18px", sm: "22px", md: "24px" }, fontFamily: "'Instrument Sans', sans-serif", }}>
+              <Typography variant="h3" color="text.primary">
                 Lahore, Pakistan
               </Typography>
             </Box>
@@ -104,77 +155,38 @@ function ContactPage() {
             }}
           >
             <TextField
-              label="Full Name"
+              placeholder="Full Name"
               name="name"
               value={formData.name}
               onChange={handleChange}
               fullWidth
               required
-              sx={{
-                backgroundColor: "background.paper",
-                borderRadius: 2,
-                fontFamily: "'Instrument Sans', sans-serif",
-                "& .MuiInputLabel-root": {
-                  color: "text.grey",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "text.secondary",
-                },
-                "& .MuiInputBase-input": {
-                  color: "text.black",
-                },
-              }}
+              sx={textFieldSx}
             />
 
             <TextField
-              label="Email Address"
+              placeholder="Email Address"
               name="email"
               type="email"
               value={formData.email}
               onChange={handleChange}
               fullWidth
               required
-              sx={{
-                backgroundColor: "background.paper",
-                borderRadius: 2,
-                fontFamily: "'Instrument Sans', sans-serif",
-                "& .MuiInputLabel-root": {
-                  color: "text.grey",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "text.secondary",
-                },
-                "& .MuiInputBase-input": {
-                  color: "text.black",
-                },
-              }}
+              sx={textFieldSx}
             />
 
             <TextField
-              label="Subject"
+              placeholder="Subject"
               name="subject"
               value={formData.subject}
               onChange={handleChange}
               fullWidth
               required
-              sx={{
-                backgroundColor: "background.paper",
-                borderRadius: 2,
-                fontFamily: "'Instrument Sans', sans-serif",
-                "& .MuiInputLabel-root": {
-                  color: "text.grey",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "text.secondary",
-                },
-                "& .MuiInputBase-input": {
-                  color: "text.black",
-                },
-              }}
+              sx={textFieldSx}
             />
 
             <TextField
-              label="Message"
+              placeholder="Message"
               name="message"
               value={formData.message}
               onChange={handleChange}
@@ -182,65 +194,47 @@ function ContactPage() {
               rows={5}
               fullWidth
               required
-              sx={{
-                backgroundColor: "background.paper",
-                borderRadius: 2,
-                fontFamily: "'Instrument Sans', sans-serif",
-                "& .MuiInputLabel-root": {
-                  color: "text.grey",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "text.secondary",
-                },
-                "& .MuiInputBase-input": {
-                  color: "text.black",
-                },
-              }}
+              sx={textFieldSx}
             />
 
             <Box sx={{ mt: 2 }}>
               <Button
                 type="submit"
                 variant="contained"
+                disableElevation
                 disabled={isSubmitted}
                 sx={{
-                  borderRadius: 7,
+                  borderRadius: BUTTON_RADIUS,
                   p: "9px 18px",
-                  fontWeight: 600,
-                  fontSize: { sx: 16, sm: 16.5, md: 17 },
-                  fontFamily: "'IBM Plex Mono', monospace",
                   color: "text.primary",
                   backgroundColor: "secondary.main",
-                  boxShadow: "none",
-                  transition: 'all 0.3s ease',
+                  transition: "all 0.3s ease",
                   "&:hover": {
-                    boxShadow: "none",
                     backgroundColor: "primary.contrastText",
                     color: "text.primary",
                   },
                 }}
               >
-                SEND MESSAGE
+                Send Message
               </Button>
             </Box>
           </Box>
         </Grid>
       </Grid>
 
-      {/* Success Popup */}
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
           onClose={handleClose}
-          severity="success"
+          severity={snackbar.severity}
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Message Sent Successfully!
+          {snackbar.message}
         </Alert>
       </Snackbar>
     </Box>

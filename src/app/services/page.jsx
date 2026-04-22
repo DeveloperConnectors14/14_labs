@@ -2,50 +2,38 @@
 
 import CallSection from "@/components/general/CallSection";
 import { getServices } from "@/services/dataService";
-import { Box, Typography, Grid, Chip } from "@mui/material";
+import { Box, Typography, Grid, Chip, Divider } from "@mui/material";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
 
 const services = getServices();
 
 function Services() {
     return (
         <Box>
-
             <Box sx={{
                 background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
-                px: { xs: 4, md: 8 },
-                py: { xs: 6, md: 10 },
+                px: SECTION_PX,
+                py: SECTION_PY,
             }}>
-                <Typography
-                    fontWeight={600}
-                    sx={{
-                        fontSize: { xs: "26px", sm: "32px", md: "40px" },
-                        fontStyle: "SemiBold",
-                        fontFamily: "'Instrument Sans', sans-serif",
-                    }}
-                >
+                <Typography variant="h2" sx={{ color: "text.primary" }}>
                     Serious expertise &{" "}
                     <Box component="span" sx={{ color: "text.secondary" }}>
                         Real results
                     </Box>
                 </Typography>
 
-                <Typography sx={{
-                    py: 2,
-                    maxWidth: 580,
-                    fontSize: { xs: "16px", sm: "17px", md: "18px" },
-                    fontFamily: "'Instrument Sans', sans-serif",
-                }}>
+                <Typography variant="body1" sx={{ py: 2, maxWidth: 580 }} color="text.primary">
                     We keep our word, align seamlessly with your teams, and deliver outcomes that matter. Integrating the now. Inventing the next.
                 </Typography>
             </Box>
 
-            <Box sx={{ px: { xs: 4, md: 8 }, py: { xs: 6, md: 8 } }} >
+            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
                 <Grid container spacing={3}>
                     {services.map((s) => (
-                        <Grid size={{ xs: 12, md: 6 }} key={s.number} sx={{ display: "flex" }}>
+                        <Grid size={{ xs: 12, md: 6 }} key={s.sNo} sx={{ display: "flex" }}>
                             <Box sx={{
-                                p: 4,
-                                borderRadius: 4,
+                                p: { xs: 3, md: 4 },
+                                borderRadius: CARD_RADIUS,
                                 backgroundColor: "background.paper",
                                 border: 1,
                                 borderColor: "divider",
@@ -53,27 +41,18 @@ function Services() {
                                 flexDirection: "column",
                                 gap: 2,
                             }}>
-                                <Typography sx={{
-                                    fontSize: { xs: "14px", sm: "15px", md: "16px" },
-                                    fontFamily: "'IBM Plex Mono', monospace",
-                                    color: "text.grey",
-                                }}>
-                                    {s.sNo}
-                                </Typography>
+                                <Box>
+                                    <Typography variant="caption" color="text.grey" sx={{ display: "block", pb: 0.5 }}>
+                                        {s.sNo}
+                                    </Typography>
+                                    <Divider />
+                                </Box>
 
-                                <Typography sx={{
-                                    fontSize: { xs: "20px", sm: "22px", md: "24px" },
-                                    fontWeight: 600,
-                                    fontFamily: "'Instrument Sans', sans-serif",
-                                }}>
+                                <Typography variant="h3">
                                     {s.title}
                                 </Typography>
 
-                                <Typography sx={{
-                                    fontSize: { xs: "14px", sm: "15px", md: "16px" },
-                                    fontFamily: "'Instrument Sans', sans-serif",
-                                    color: "text.grey",
-                                }}>
+                                <Typography variant="body2" color="text.grey">
                                     {s.desc}
                                 </Typography>
 
@@ -83,14 +62,10 @@ function Services() {
                                             key={tag}
                                             label={tag}
                                             size="small"
-                                            sx={{
-                                                fontSize: { xs: "12px", sm: "13px", md: "14px" },
-                                                fontFamily: "'Instrument Sans', sans-serif",
-                                            }}
+                                            sx={{ px: 1.5 }}
                                         />
                                     ))}
                                 </Box>
-
                             </Box>
                         </Grid>
                     ))}

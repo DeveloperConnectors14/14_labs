@@ -7,20 +7,21 @@ import {
   CardContent,
 } from "@mui/material";
 import Image from "next/image";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
 
 const features = getFeatures();
 
 function WhyChooseUs() {
   return (
-    <Box sx={{ px: 4, py: 6, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
+    <Box sx={{ px: SECTION_PX, py: SECTION_PY, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Typography fontWeight={600} sx={{ color: "text.primary", fontSize: { xs: "26px", sm: "32px", md: "40px" }, fontStyle: "SemiBold", fontFamily: "'Instrument Sans', sans-serif", }}>
-            What set us <Box component="span" sx={{ color: "text.secondary", fontFamily: "'Instrument Sans', sans-serif", }}>
+          <Typography variant="h2" sx={{ color: "text.primary" }}>
+            What set us <Box component="span" sx={{ color: "text.secondary" }}>
               apart
             </Box>
           </Typography>
-          <Typography sx={{ py: 2, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontWeight: 400, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }} color="text.primary">
+          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
             We differentiate ourselves from other AI service providers by:
           </Typography>
         </Grid>
@@ -33,7 +34,7 @@ function WhyChooseUs() {
                     width: "100%",
                     border: 1,
                     borderColor: "divider",
-                    borderRadius: 4,
+                    borderRadius: CARD_RADIUS,
                     px: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -54,10 +55,10 @@ function WhyChooseUs() {
                         }}
                       />
                     </Box>
-                    <Typography fontWeight={"700"} sx={{ fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "Bold", fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography variant="h3">
                       {item.title}
                     </Typography>
-                    <Typography fontWeight={"400"} color="text.grey" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                    <Typography variant="body2" color="text.grey" sx={{ py: 1 }}>
                       {item.desc}
                     </Typography>
                   </CardContent>

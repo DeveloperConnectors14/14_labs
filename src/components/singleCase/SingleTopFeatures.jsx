@@ -1,10 +1,11 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { SECTION_PX, SECTION_PY } from "@/theme/tokens";
 
 function SingleTopFeatures({ topFeatures }) {
 
     return (
         <>
-            <Box sx={{ px: 4, py: 6 }}>
+            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
                 <Grid container spacing={2}>
                     <Grid size={12}>
                         <Grid container spacing={3}>
@@ -21,10 +22,10 @@ function SingleTopFeatures({ topFeatures }) {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography fontWeight={"600"} sx={{ color: "text.black", fontSize: { xs: "20px", sm: "22px", md: "24px" }, fontStyle: "SemiBold", pb: 1, fontFamily: "Inter, sans-serif" }}>
+                                            <Typography variant="h3" sx={{ color: "text.black", pb: 1 }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography fontWeight={"400"} color="text.primary" sx={{ py: 1, fontSize: { xs: "16px", sm: "17px", md: "18px" }, fontStyle: "Regular", fontFamily: "'Instrument Sans', sans-serif", }}>
+                                            <Typography variant="body1" color="text.primary" sx={{ py: 1 }}>
                                                 {item.desc}
                                             </Typography>
                                         </CardContent>

@@ -3,67 +3,39 @@
 import CallSection from "@/components/general/CallSection";
 import { getPillars, getStats, getValues } from "@/services/dataService";
 import { Box, Typography, Grid } from "@mui/material";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, BUTTON_RADIUS } from "@/theme/tokens";
 
 const stats = getStats();
-
 const pillars = getPillars();
-
 const values = getValues();
 
 function AboutUs() {
     return (
         <Box>
-
             <Box
                 sx={{
                     background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
-                    px: { xs: 4, md: 8 },
-                    py: { xs: 6, md: 10 },
+                    px: SECTION_PX,
+                    py: SECTION_PY,
                 }}
             >
                 <Grid container spacing={4}>
                     <Grid size={{ xs: 12 }}>
-                        <Typography
-                            fontWeight={600}
-                            sx={{
-                                fontSize: { xs: "26px", sm: "32px", md: "40px" },
-                                fontStyle: "SemiBold",
-                                fontFamily: "'Instrument Sans', sans-serif",
-                                color: "text.primary",
-                            }}
-                        >
+                        <Typography variant="h2" sx={{ color: "text.primary" }}>
                             Designing{" "}
                             <Box component="span" sx={{ color: "text.secondary" }}>
                                 Intelligent Solutions
                             </Box>
                         </Typography>
 
-                        <Typography
-                            sx={{
-                                py: 2,
-                                fontSize: { xs: "16px", sm: "17px", md: "18px" },
-                                fontWeight: 400,
-                                fontStyle: "Regular",
-                                fontFamily: "'Instrument Sans', sans-serif",
-                                color: "text.primary",
-                            }}
-                        >
+                        <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
                             14 Labs is an AI-first technology company dedicated to transforming businesses through intelligent automation and cutting-edge AI solutions. We combine deep AI expertise with practical engineering to deliver systems that drive real business value.
                         </Typography>
 
-                        <Typography
-                            sx={{
-                                fontSize: { xs: "16px", sm: "17px", md: "18px" },
-                                fontWeight: 400,
-                                fontStyle: "Regular",
-                                fontFamily: "'Instrument Sans', sans-serif",
-                                color: "text.primary",
-                            }}
-                        >
+                        <Typography variant="body1" color="text.primary">
                             From multi-agent systems to custom LLM integrations, we specialize in building AI infrastructure that scales. We believe in genuine support, seamless team alignment, and delivering outcomes that matter.
                         </Typography>
 
-                        {/* Pillars */}
                         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mt: 4 }}>
                             {pillars.map((p) => (
                                 <Box
@@ -71,7 +43,7 @@ function AboutUs() {
                                     sx={{
                                         px: 2.5,
                                         py: 1,
-                                        borderRadius: 7,
+                                        borderRadius: BUTTON_RADIUS,
                                         backgroundColor: "primary.contrastText",
                                         color: "text.primary",
                                         fontSize: { xs: "12px", sm: "13px", md: "14px" },
@@ -86,71 +58,57 @@ function AboutUs() {
                 </Grid>
             </Box>
 
-            <Box sx={{ px: { xs: 4, md: 8 }, py: { xs: 6, md: 8 } }}>
+            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
                 <Grid container spacing={3}>
                     {stats.map((s) => (
-                        <Grid size={{ xs: 6, md: 3 }} key={s.label}>
+                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={s.label}>
                             <Box
                                 sx={{
-                                    textAlign: "center",
-                                    p: 3,
-                                    borderRadius: 4,
-                                    backgroundColor: "background.paper",
+                                    display: "flex",
+                                    alignItems: "flex-start",
+                                    gap: 2.5,
+                                    p: 2,
+                                    borderRadius: CARD_RADIUS,
                                     border: 1,
                                     borderColor: "divider",
+                                    backgroundColor: "background.paper",
+                                    transition: "0.3s",
                                 }}
                             >
-                                <Typography
-                                    sx={{
-                                        fontSize: { xs: "26px", sm: "32px", md: "36px" },
-                                        fontWeight: 700,
-                                        fontFamily: "'Instrument Sans', sans-serif",
-                                        color: "primary.main",
-                                    }}
-                                >
-                                    {s.value}
-                                </Typography>
-
-                                <Typography
-                                    sx={{
-                                        mt: 1,
-                                        fontSize: { xs: "14px", sm: "15px", md: "16px" },
-                                        fontWeight: 400,
-                                        fontStyle: "Regular",
-                                        fontFamily: "'Instrument Sans', sans-serif",
-                                        color: "text.secondary",
-                                    }}
-                                >
-                                    {s.label}
-                                </Typography>
+                                <Box>
+                                    <Typography
+                                        sx={{
+                                            lineHeight: 1,
+                                            mb: 3,
+                                            fontWeight: 700,
+                                            fontSize: { xs: "48px", sm: "64px", md: "88px" },
+                                            color: "text.primary",
+                                            fontFamily: "'Instrument Sans', sans-serif",
+                                        }}
+                                    >
+                                        {s.value}
+                                    </Typography>
+                                    <Typography variant="h3" sx={{ color: "text.black" }}>
+                                        {s.label}
+                                    </Typography>
+                                </Box>
                             </Box>
                         </Grid>
                     ))}
                 </Grid>
             </Box>
 
-            <Box sx={{ px: { xs: 4, md: 8 }, py: { xs: 6, md: 8 } }}>
+            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
                 <Grid container spacing={6}>
                     <Grid size={{ xs: 12, md: 5 }}>
-                        <Typography
-                            fontWeight={600}
-                            sx={{
-                                fontSize: { xs: "26px", sm: "32px", md: "40px" },
-                                fontStyle: "SemiBold",
-                                fontFamily: "'Instrument Sans', sans-serif",
-                            }}
-                        >
+                        <Typography variant="h2" sx={{ color: "text.primary" }}>
                             Who{" "}
                             <Box component="span" sx={{ color: "text.secondary" }}>
                                 We Are
                             </Box>
                         </Typography>
 
-                        <Typography sx={{
-                            py: 2,
-                            fontSize: { xs: "16px", sm: "17px", md: "18px" },
-                            fontFamily: "'Instrument Sans', sans-serif",
-                        }}>
+                        <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
                             We are a team of AI engineers, researchers, and product builders...
                         </Typography>
                     </Grid>
@@ -160,26 +118,17 @@ function AboutUs() {
                             {values.map((v) => (
                                 <Grid size={{ xs: 12 }} key={v.title}>
                                     <Box sx={{
-                                        p: 3,
-                                        borderRadius: 4,
+                                        p: { xs: 2, sm: 2.5, md: 3 },
+                                        borderRadius: CARD_RADIUS,
                                         border: 1,
                                         borderColor: "divider",
                                         backgroundColor: "background.paper",
                                     }}>
-                                        <Typography sx={{
-                                            fontSize: { xs: "18px", sm: "20px", md: "22px" },
-                                            fontWeight: 600,
-                                            fontFamily: "'Instrument Sans', sans-serif",
-                                        }}>
+                                        <Typography variant="h3">
                                             {v.title}
                                         </Typography>
 
-                                        <Typography sx={{
-                                            py: 1,
-                                            fontSize: { xs: "14px", sm: "15px", md: "16px" },
-                                            fontFamily: "'Instrument Sans', sans-serif",
-                                            color: "text.grey",
-                                        }}>
+                                        <Typography variant="body2" color="text.grey" sx={{ py: 1 }}>
                                             {v.desc}
                                         </Typography>
                                     </Box>
