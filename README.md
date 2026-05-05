@@ -40,3 +40,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Project Structure
 
 The main application code lives in the `src/app` directory, with reusable components in `src/components` and shared utilities in `src/lib`.
+
+## Tech Stack
+
+- Next.js with the App Router
+- TypeScript
+- Tailwind CSS
