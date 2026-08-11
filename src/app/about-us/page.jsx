@@ -29,7 +29,7 @@ function AboutUs() {
                         </Typography>
 
                         <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-                            14 Labs is an AI-first technology company dedicated to transforming businesses through intelligent automation and cutting-edge AI solutions. We combine deep AI expertise with practical engineering to deliver systems that drive real business value.
+                            14Labs is an AI-first technology company dedicated to transforming businesses through intelligent automation and cutting-edge AI solutions. We combine deep AI expertise with practical engineering to deliver systems that drive real business value.
                         </Typography>
 
                         <Typography variant="body1" color="text.primary">

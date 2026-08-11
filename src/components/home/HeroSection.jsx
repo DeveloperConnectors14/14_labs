@@ -46,7 +46,7 @@ function HeroSection() {
                     <Container sx={{ maxWidth: "803px", width: "100%", display: "flex", flexDirection: "column", gap: "24px" }}>
                         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "16px", }}>
                             <Typography variant="h1" sx={{ color: "secondary.contrastText" }}>
-                                We are 14 Labs <br /> Engineered for enterprise. Inspired by what's next.
+                                We are 14Labs <br /> Engineered for enterprise. Inspired by what's next.
                             </Typography>
 
                             <Typography

@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 export const metadata = {
-  title: "14 LABS",
-  description: "14 Labs official website",
+  title: "14Labs",
+  description: "14Labs official website",
   icons: {
     icon: '/Favicon.svg',
   },

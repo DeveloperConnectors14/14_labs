@@ -121,7 +121,7 @@ export const services = [
 export const stories = [
   {
     name: "John Doe – CEO IBM",
-    text: `Working with 14labs has been a game-changer for our business.
+    text: `Working with 14Labs has been a game-changer for our business.
     Their customized AI solutions have not only streamlined our operations
     but have also helped us gain valuable insights from our data.`,
     image: "/media/person.png",
