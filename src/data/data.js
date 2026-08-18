@@ -118,28 +118,6 @@ export const services = [
   },
 ];
 
-export const stories = [
-  {
-    name: "John Doe – CEO IBM",
-    text: `Working with 14Labs has been a game-changer for our business.
-    Their customized AI solutions have not only streamlined our operations
-    but have also helped us gain valuable insights from our data.`,
-    image: "/media/person.png",
-  },
-  {
-    name: "Sarah Khan – CTO TechCorp",
-    text: `The AI automation provided by the team improved our productivity
-    drastically. Their support and innovation are exceptional.`,
-    image: "/media/person.png",
-  },
-  {
-    name: "Ali Ahmed – Founder StartupX",
-    text: `Their AI-driven analytics helped us understand our customers
-    better and scale our product faster.`,
-    image: "/media/person.png",
-  },
-];
-
 export const tools = [
   {
     techType: "AI & LLMs",
@@ -176,27 +154,6 @@ export const tools = [
       { file: "kubernetes-original", name: "Kubernetes" },
       { file: "vercel-original", name: "Vercel" },
     ],
-  },
-];
-
-export const brandImages = [
-  {
-    fileName: "trustedBrand1.png",
-  },
-  {
-    fileName: "trustedBrand2.png",
-  },
-  {
-    fileName: "trustedBrand3.png",
-  },
-  {
-    fileName: "trustedBrand4.png",
-  },
-  {
-    fileName: "trustedBrand5.png",
-  },
-  {
-    fileName: "trustedBrand6.png",
   },
 ];
 

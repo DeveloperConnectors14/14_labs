@@ -16,10 +16,8 @@ export const metadata = {
   description:
     "14Labs builds AI and machine learning systems — multi-agent architectures, LLM pipelines, and applied research delivered to production.",
   icons: {
-    // Google's favicon crawler looks for /favicon.ico by that exact name, and
-    // only a capitalised .svg existed before. The old Favicon.svg is a different
-    // rendition of the mark, so it is deliberately not declared here — browsers
-    // prefer SVG and would render the wrong glyph in tabs.
+    // Google's favicon crawler looks for /favicon.ico by that exact name.
+    // Both files are generated from public/logo-14.png — see scripts/generate-icons.mjs.
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
   },
