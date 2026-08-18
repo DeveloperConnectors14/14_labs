@@ -3,13 +3,14 @@
 import sharp from "sharp";
 import { readFileSync, writeFileSync } from "fs";
 
-const MARK = readFileSync("public/Favicon.svg");     // the "14" glyph
+const MARK = readFileSync("public/logo-14.png");       // canonical square "14" mark
 const WORDMARK = readFileSync("public/media/logo.svg"); // "14Labs" lockup
 const WHITE = { r: 255, g: 255, b: 255, alpha: 1 };
 const CLEAR = { r: 0, g: 0, b: 0, alpha: 0 };
 
-// Trim the glyph free of its viewBox padding so we control the margins ourselves.
-const glyph = await sharp(MARK, { density: 2400 }).trim().png().toBuffer();
+// Trim to the glyph's own bounds so the margins below are ours, not whatever
+// padding the source file happened to ship with.
+const glyph = await sharp(MARK).trim().png().toBuffer();
 
 async function square(size, background, padRatio) {
   const inner = Math.round(size * (1 - padRatio * 2));
@@ -44,7 +45,7 @@ function buildIco(buffers, sizes) {
 }
 
 const icoSizes = [16, 32, 48];
-const icoPngs = await Promise.all(icoSizes.map((s) => square(s, CLEAR, 0.06)));
+const icoPngs = await Promise.all(icoSizes.map((s) => square(s, CLEAR, 0.08)));
 writeFileSync("public/favicon.ico", buildIco(icoPngs, icoSizes));
 
 // Apple wants an opaque icon — a transparent one renders on black in iOS.
