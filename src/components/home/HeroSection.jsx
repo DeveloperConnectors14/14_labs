@@ -91,11 +91,13 @@ const headlineSx = {
   fontFamily: "var(--font-display)",
   fontWeight: 400,
   lineHeight: 0.88,
-  // Tight, but not so tight the letters touch. At -0.05em pairs like the "y t"
-  // in "systems that" collided at hero size; the word gap goes back separately
-  // because negative tracking eats the space character along with the letters.
-  letterSpacing: "-0.025em",
-  wordSpacing: "0.06em",
+  // Near-normal tracking, and the word gap opened past it. This used to run at
+  // -0.05em, where pairs like the "y t" in "systems that" touched at hero size.
+  // Loosening it is not free: FitLines re-fits the line to the same width, so a
+  // wider setting comes back as a smaller font-size, and a small nudge cancels
+  // itself out. Only a change this size actually reads as air between letters.
+  letterSpacing: "-0.008em",
+  wordSpacing: "0.09em",
   color: color.ink,
   "@keyframes heroLineIn": {
     from: { clipPath: "inset(0 0 104% 0)", translate: "0 0.12em" },
