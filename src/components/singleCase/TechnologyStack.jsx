@@ -1,120 +1,110 @@
-"use client";
-
-import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
-import { SECTION_PX, SECTION_PY, TILE_RADIUS } from "@/theme/tokens";
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
+import { color, motion, radius } from "@/theme/tokens";
 
+/**
+ * The stack, grouped the way an engineer would ask about it: what runs it, what
+ * stores it, what orchestrates it, what does the thinking.
+ *
+ * On the deep band, because vendor marks are the one place on the site where
+ * foreign colour is unavoidable — against dark green they read as logos rather
+ * than as a rash of colour on grey.
+ */
 function TechnologyStack({ technologies }) {
-    const [activeFilter, setActiveFilter] = useState("All");
+  if (!technologies?.stacks?.length) return null;
 
-    const filteredTools =
-        activeFilter === "All"
-            ? technologies.stacks.flatMap((item) => item.values)
-            : technologies.stacks
-                .filter((item) => item.techType === activeFilter)
-                .flatMap((item) => item.values);
+  return (
+    <Section band="deep">
+      <SectionHead
+        split
+        onDeep
+        eyebrow={technologies.label}
+        title={technologies.title}
+        lede={technologies.text}
+      />
 
-    return (
-        <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-            <Grid container spacing={2}>
-                <Grid size={12}>
-                    {technologies.label && (
-                        <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
-                            {technologies.label}
-                        </Typography>
-                    )}
-                    <Typography variant="h2" sx={{ color: "text.primary" }}>
-                        {technologies.title ? (
-                            technologies.title
-                        ) : (
-                            <>
-                                Build with{" "}
-                                <Box component="span" sx={{ color: "text.secondary" }}>
-                                    technology stack
-                                </Box>
-                            </>
-                        )}
-                    </Typography>
-                    <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
-                        {technologies.text}
-                    </Typography>
-                </Grid>
+      <Box
+        sx={{
+          mt: { xs: 5, md: 8 },
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" },
+          gap: { xs: 1.5, md: 2 },
+        }}
+      >
+        {technologies.stacks.map((group) => (
+          <Box
+            key={group.techType}
+            sx={{
+              backgroundColor: color.deepAlt,
+              border: "1px solid",
+              borderColor: color.ruleOnDeep,
+              borderRadius: radius.lg,
+              p: { xs: 2.5, md: 3 },
+            }}
+          >
+            <Typography variant="eyebrow" sx={{ color: color.lime }}>
+              {group.techType}
+            </Typography>
 
-                <Grid size={12} sx={{
+            <Box
+              sx={{
+                mt: 3,
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              {group.values.map((tech) => (
+                <Box
+                  key={`${group.techType}-${tech.name}`}
+                  sx={{
                     display: "flex",
-                    flexWrap: "wrap",
                     alignItems: "center",
-                    gap: 2,
-                    pb: 2,
-                }}>
-                    {["All", ...technologies.stacks.map((s) => s.techType)].map((label) => {
-                        const isActive = activeFilter === label;
-                        return (
-                            <Button
-                                key={label}
-                                variant="contained"
-                                onClick={() => setActiveFilter(label)}
-                                sx={{
-                                    borderRadius: TILE_RADIUS,
-                                    px: 2,
-                                    py: 1,
-                                    border: 1,
-                                    borderColor: isActive ? "text.secondary" : "divider",
-                                    backgroundColor: isActive ? "text.secondary" : "background.paper",
-                                    color: isActive ? "secondary.contrastText" : "text.black",
-                                    boxShadow: "none",
-                                    "&:hover": {
-                                        backgroundColor: isActive ? "text.secondary" : "primary.contrastText",
-                                        boxShadow: "none",
-                                    },
-                                }}
-                            >
-                                {label}
-                            </Button>
-                        );
-                    })}
-                </Grid>
+                    gap: 1.75,
+                    py: 1.25,
+                    px: 1.5,
+                    borderRadius: radius.md,
+                    transition: `background-color ${motion.fast}`,
+                    "&:hover": { backgroundColor: color.deep },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      flexShrink: 0,
+                      borderRadius: radius.sm,
+                      backgroundColor: color.onDeep,
+                      display: "grid",
+                      placeItems: "center",
+                      // The marks are supplied as their own brand colours on
+                      // transparent, so each one gets a light chip to sit on
+                      // rather than being recoloured.
+                      p: "5px",
+                    }}
+                  >
+                    <Image
+                      src={`/media/tech_stacks/${tech.file}.svg`}
+                      alt=""
+                      width={20}
+                      height={20}
+                      style={{ width: "100%", height: "auto" }}
+                    />
+                  </Box>
 
-                <Grid container spacing={2} sx={{ width: "100%" }}>
-                    {filteredTools.map((item, index) => (
-                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={`${item.name}-${index}`}>
-                            <Box sx={{
-                                width: "100%",
-                                height: { xs: 120, sm: 130, md: 140 },
-                                backgroundColor: "background.paper",
-                                p: 2,
-                                border: 1,
-                                borderColor: "divider",
-                                borderRadius: TILE_RADIUS,
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                gap: 1.5,
-                            }}>
-                                <Image
-                                    src={`/media/tech_stacks/${item.file}.svg`}
-                                    alt={item.name}
-                                    width={48}
-                                    height={48}
-                                    style={{
-                                        height: 44,
-                                        width: "auto",
-                                        maxWidth: "100%",
-                                        objectFit: "contain",
-                                    }}
-                                />
-                                <Typography variant="body2" sx={{ color: "text.black", textAlign: "center", fontWeight: 600, lineHeight: 1.2 }}>
-                                    {item.name}
-                                </Typography>
-                            </Box>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Grid>
-        </Box>
-    );
+                  <Typography sx={{ fontSize: "0.9375rem", color: color.onDeep }}>
+                    {tech.name}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    </Section>
+  );
 }
 
 export default TechnologyStack;

@@ -26,7 +26,7 @@ function SingleCasePage({ params }) {
 
   return (
     <>
-      <SingleCaseHero heroData={data.hero} />
+      <SingleCaseHero heroData={data.hero} caseId={data.caseId} />
       <SingleCaseChallanges challanges={data.challenges} />
       {data.cost && <RealCostDetails costData={data.cost} />}
       <SingleCaseApproach approaches={data.approach} />
@@ -36,8 +36,8 @@ function SingleCasePage({ params }) {
       <TechnologyStack technologies={data.techStack} />
       <SingleTopFeatures topFeatures={data.top_features} />
       {data.results && <SingleCaseResults results={data.results} />}
-      <CallSection contact={true} />
       <MoreCaseStudies moreCases={data.more_cases} />
+      <CallSection contact={true} />
     </>
   )
 }

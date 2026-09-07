@@ -1,122 +1,100 @@
-"use client";
-import { getTools } from "@/services/dataService";
-import {
-  Box,
-  Typography,
-  Grid,
-  Button,
-} from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
-import { SECTION_PX, SECTION_PY, TILE_RADIUS } from "@/theme/tokens";
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
+import { getTools } from "@/services/dataService";
+import { color, motion, radius } from "@/theme/tokens";
 
 const tools = getTools();
 
+/**
+ * Grouped rows rather than a filterable wall of tiles. A logo grid with its own
+ * tab bar was more interface than the content justified — there are fourteen
+ * items and no reason to hide any of them.
+ */
 function ToolsSection() {
-
-  const [activeFilter, setActiveFilter] = useState("All");
-
-  const filteredTools =
-    activeFilter === "All"
-      ? tools.flatMap((item) => item.values)
-      : tools
-        .filter((item) => item.techType === activeFilter)
-        .flatMap((item) => item.values);
-
-  function handleFilter(type) {
-    setActiveFilter(type);
-  }
-
   return (
-    <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-      <Grid container spacing={2}>
-        <Grid size={12}>
-          <Box>
-            <Typography variant="h2" sx={{ color: "text.primary" }}>
-              Our <Box component="span" sx={{ color: "text.secondary" }}>
-                Tech Stack
-              </Box>
+    <Section band="surface" inset tight>
+      <SectionHead
+        split
+        eyebrow="Stack"
+        title="What we build on"
+        lede="Chosen per problem, not per preference. We are model-agnostic by default and will say so when the cheaper option is the right one."
+      />
+
+      <Box sx={{ mt: { xs: 5, md: 8 } }}>
+        {tools.map((group) => (
+          <Box
+            key={group.techType}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "200px 1fr" },
+              gap: { xs: 2, md: 5 },
+              alignItems: "center",
+              paddingBlock: { xs: 3, md: 3.5 },
+              borderTop: "1px solid",
+              borderColor: color.rule,
+            }}
+          >
+            <Typography variant="eyebrow" sx={{ color: color.inkFaint }}>
+              {group.techType}
             </Typography>
-          </Box>
-          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            We leverage cutting-edge AI frameworks and cloud infrastructure to build intelligent, scalable solutions for enterprise.
-          </Typography>
-        </Grid>
 
-        <Grid size={12} sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          gap: 2,
-          pb: 2
-        }}>
-          {["All", ...tools.map((t) => t.techType)].map((label) => {
-            const isActive = activeFilter === label;
-            return (
-              <Button
-                key={label}
-                variant="contained"
-                onClick={() => handleFilter(label)}
-                sx={{
-                  borderRadius: TILE_RADIUS,
-                  px: 2,
-                  py: 1,
-                  border: 1,
-                  borderColor: isActive ? "text.secondary" : "divider",
-                  backgroundColor: isActive ? "text.secondary" : "background.paper",
-                  color: isActive ? "secondary.contrastText" : "text.black",
-                  boxShadow: "none",
-                  "&:hover": {
-                    backgroundColor: isActive ? "text.secondary" : "primary.contrastText",
-                    boxShadow: "none",
-                  },
-                }}
-              >
-                {label}
-              </Button>
-            );
-          })}
-
-        </Grid>
-
-        <Grid container spacing={2} sx={{ width: "100%" }}>
-          {filteredTools.map((item, index) => (
-            <Grid size={{ xs: 6, sm: 3, md: 1.5 }} key={index}>
-              <Box sx={{
-                width: "100%",
-                height: { xs: 110, sm: 115, md: 120 },
-                backgroundColor: "background.paper",
-                p: 2,
-                border: 1,
-                borderColor: "divider",
-                borderRadius: TILE_RADIUS,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 1,
-              }}>
-                <Image
-                  src={`/media/tech_stacks/${item.file}.svg`}
-                  alt={item.name}
-                  width={48}
-                  height={48}
-                  style={{
-                    height: 40,
-                    width: "auto",
-                    maxWidth: "100%",
-                    objectFit: "contain",
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+              {group.values.map((tool) => (
+                <Box
+                  key={tool.name}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.25,
+                    backgroundColor: color.green05,
+                    border: "1px solid",
+                    borderColor: color.green20,
+                    borderRadius: radius.pill,
+                    pl: 1.5,
+                    pr: 2.25,
+                    py: 1,
+                    transition: `background-color ${motion.base}, border-color ${motion.base}`,
+                    "&:hover": {
+                      backgroundColor: color.accentSoft,
+                      borderColor: color.green45,
+                    },
+                    "&:hover .tool-mark": { opacity: 1, filter: "grayscale(0)" },
+                    "&:hover .tool-name": { color: color.ink },
                   }}
-                />
-                <Typography variant="body2" sx={{ color: "text.grey", textAlign: "center", lineHeight: 1.2 }}>
-                  {item.name}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-    </Box>
+                >
+                  <Image
+                    className="tool-mark"
+                    src={`/media/tech_stacks/${tool.file}.svg`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      height: 20,
+                      width: "auto",
+                      objectFit: "contain",
+                      // Desaturated at rest so fourteen brand palettes do not
+                      // fight the two-colour page.
+                      filter: "grayscale(1)",
+                      opacity: 0.65,
+                      transition: `opacity ${motion.fast}, filter ${motion.fast}`,
+                    }}
+                  />
+                  <Typography
+                    className="tool-name"
+                    variant="body2"
+                    sx={{ color: color.inkMuted, transition: `color ${motion.fast}` }}
+                  >
+                    {tool.name}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    </Section>
   );
 }
 

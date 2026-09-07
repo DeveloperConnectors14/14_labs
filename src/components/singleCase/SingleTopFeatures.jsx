@@ -1,43 +1,57 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import { SECTION_PX, SECTION_PY } from "@/theme/tokens";
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import { color, measure } from "@/theme/tokens";
 
+/**
+ * The three properties of the build worth stating flatly, as a ruled row.
+ *
+ * No cards here on purpose: this sits between two card grids, and a third one
+ * would turn the page into a wall of boxes.
+ */
 function SingleTopFeatures({ topFeatures }) {
+  if (!topFeatures?.length) return null;
 
-    return (
-        <>
-            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-                <Grid container spacing={2}>
-                    <Grid size={12}>
-                        <Grid container spacing={3}>
-                            {topFeatures.map((item, i) => (
-                                < Grid size={{ xs: 12, md: 4 }} key={i} sx={{ display: { xs: "block", sm: "block", md: "flex" } }}>
-                                    <Card
-                                        sx={{
-                                            px: 1,
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            justifyContent: "space-between",
-                                            backgroundColor: "transparent",
-                                            boxShadow: "none"
-                                        }}
-                                    >
-                                        <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="h3" sx={{ color: "text.black", pb: 1 }}>
-                                                {item.title}
-                                            </Typography>
-                                            <Typography variant="body1" color="text.primary" sx={{ py: 1 }}>
-                                                {item.desc}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Box >
-        </>
-    )
+  return (
+    <Section tight>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: `repeat(${Math.min(topFeatures.length, 3)}, 1fr)` },
+          gap: { xs: 0, md: 5 },
+          borderTop: "1px solid",
+          borderColor: color.ruleStrong,
+        }}
+      >
+        {topFeatures.map((item) => (
+          <Box
+            key={item.title}
+            sx={{
+              paddingBlock: { xs: 3.5, md: 4 },
+              borderBottom: { xs: "1px solid", md: 0 },
+              borderColor: color.rule,
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "1.0625rem",
+                fontWeight: 500,
+                letterSpacing: "-0.015em",
+                color: color.ink,
+              }}
+            >
+              {item.title}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ mt: 1.25, color: color.inkMuted, maxWidth: measure.body }}
+            >
+              {item.desc}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+    </Section>
+  );
 }
 
 export default SingleTopFeatures;

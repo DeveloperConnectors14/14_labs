@@ -1,222 +1,241 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
     AppBar,
-    Toolbar,
-    IconButton,
-    Button,
     Box,
-    Collapse,
-    Fade,
-    useScrollTrigger,
+    Container,
+    IconButton,
+    Toolbar,
     Typography,
+    useScrollTrigger,
 } from "@mui/material";
-import {
-    Menu as MenuIcon,
-    Close as CloseIcon,
-} from "@mui/icons-material";
-import Image from "next/image";
-import { BUTTON_RADIUS } from "@/theme/tokens";
 import { getNavItems } from "@/services/dataService";
+import { color, layout, motion, radius } from "@/theme/tokens";
 
-const APP_BAR_HEIGHT = "104px";
+const navItems = getNavItems();
+
+/** Two bars that become an X. Cheaper and calmer than swapping icon glyphs. */
+function MenuToggle({ open }) {
+    const barSx = {
+        position: "absolute",
+        left: 0,
+        width: 20,
+        height: "1.5px",
+        backgroundColor: color.ink,
+        transition: `transform ${motion.base}, top ${motion.base}`,
+    };
+
+    return (
+        <Box aria-hidden sx={{ position: "relative", width: 20, height: 14 }}>
+            <Box
+                sx={{
+                    ...barSx,
+                    top: open ? 6 : 1,
+                    transform: open ? "rotate(45deg)" : "none",
+                }}
+            />
+            <Box
+                sx={{
+                    ...barSx,
+                    top: open ? 6 : 11,
+                    transform: open ? "rotate(-45deg)" : "none",
+                }}
+            />
+        </Box>
+    );
+}
 
 function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const pathname = usePathname();
 
-    const isScrolled = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 10,
-    });
+    const isScrolled = useScrollTrigger({ disableHysteresis: true, threshold: 8 });
 
-    const navItems = getNavItems();
+    // Route changes should never leave the overlay hanging open.
+    useEffect(() => {
+        setMobileOpen(false);
+    }, [pathname]);
+
+    // The overlay covers the page; letting the page scroll behind it is the
+    // classic mobile-menu bug.
+    useEffect(() => {
+        document.body.style.overflow = mobileOpen ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [mobileOpen]);
+
+    const isActive = (path) =>
+        path === "/" ? pathname === "/" : pathname.startsWith(path);
 
     return (
         <>
             <AppBar
                 position="fixed"
-                elevation={0}
                 sx={{
-                    height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
-                    backgroundColor: "background.paper",
-                    backdropFilter: isScrolled ? "blur(10px)" : "none",
-                    transition: "all 0.4s ease",
-                    zIndex: 1200,
+                    height: layout.navHeight,
+                    justifyContent: "center",
+                    backgroundColor: isScrolled ? "rgba(235,235,235,0.88)" : color.ground,
+                    backdropFilter: isScrolled ? "saturate(180%) blur(12px)" : "none",
+                    borderBottom: "1px solid",
+                    borderColor: isScrolled ? color.rule : "transparent",
+                    transition: `border-color ${motion.base}, background-color ${motion.base}`,
+                    zIndex: 1300,
                 }}
             >
-                <Toolbar
-                    sx={{
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    {/* Logo */}
-                    <Button
-                        component={Link}
-                        href="/"
-                        sx={{
-                            "&:hover": {
-                                backgroundColor: "transparent",
-                            },
-                        }}
-                    >
-                        <Image
-                            src="/media/logo.svg"
-                            alt="14Labs Logo"
-                            width={85.53}
-                            height={32}
-                        />
-                    </Button>
+                <Container>
+                    <Toolbar disableGutters sx={{ minHeight: "0 !important", gap: 2 }}>
+                        <Box
+                            component={Link}
+                            href="/"
+                            aria-label="14Labs home"
+                            sx={{ display: "flex", mr: "auto" }}
+                        >
+                            <Image
+                                src="/media/logo-ink.svg"
+                                alt="14Labs"
+                                width={80}
+                                height={30}
+                                priority
+                            />
+                        </Box>
 
-                    {/* Desktop Menu */}
-                    <Box sx={{
-                        display: { xs: "none", md: "flex" },
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        gap: 2,
-                        width: "538px",
-                        p: "4px"
-                    }}>
-                        {navItems.map((item) => (
-                            <Link key={item.path} href={item.path} style={{
+                        <Box
+                            component="nav"
+                            sx={{
+                                display: { xs: "none", md: "flex" },
+                                alignItems: "center",
+                                gap: 4,
+                            }}
+                        >
+                            {navItems.map((item) => {
+                                const active = isActive(item.path);
+                                return (
+                                    <Box
+                                        key={item.path}
+                                        component={Link}
+                                        href={item.path}
+                                        sx={{
+                                            textDecoration: "none",
+                                            position: "relative",
+                                            paddingBlock: "6px",
+                                            color: active ? color.ink : color.inkMuted,
+                                            transition: `color ${motion.fast}`,
+                                            "&:hover": { color: color.ink },
+                                            "&::after": {
+                                                content: '""',
+                                                position: "absolute",
+                                                insetInline: 0,
+                                                bottom: 0,
+                                                height: "1px",
+                                                backgroundColor: color.accent,
+                                                transform: active ? "scaleX(1)" : "scaleX(0)",
+                                                transformOrigin: "left",
+                                                transition: `transform ${motion.base}`,
+                                            },
+                                            "&:hover::after": { transform: "scaleX(1)" },
+                                        }}
+                                    >
+                                        <Typography
+                                            component="span"
+                                            sx={{ fontSize: "0.9375rem", fontWeight: 450, letterSpacing: "-0.005em" }}
+                                        >
+                                            {item.label}
+                                        </Typography>
+                                    </Box>
+                                );
+                            })}
+                        </Box>
+
+                        <Box
+                            component={Link}
+                            href="/contact"
+                            sx={{
+                                display: { xs: "none", md: "inline-flex" },
+                                alignItems: "center",
+                                ml: 3,
+                                px: 2.75,
+                                py: 1.35,
+                                borderRadius: radius.pill,
+                                backgroundColor: color.deep,
+                                color: color.onDeep,
                                 textDecoration: "none",
-                            }}>
-                                <Typography sx={{
-                                    fontStyle: "medium",
-                                    height: "24px",
-                                    fontWeight: 500,
-                                    fontsize: "16px",
-                                    lineHeight: "150%",
-                                    color: "text.primary",
-                                    transition: 'all 0.3s ease',
-                                    fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
-                                        color: "text.secondary",
-                                    },
-                                }}>
-                                    {item.label}
-                                </Typography>
-                            </Link>
-                        ))}
+                                transition: `background-color ${motion.fast}, color ${motion.fast}`,
+                                "&:hover": { backgroundColor: color.ink, color: color.ground },
+                            }}
+                        >
+                            <Typography
+                                component="span"
+                                sx={{ fontSize: "0.875rem", fontWeight: 500, letterSpacing: "-0.005em" }}
+                            >
+                                Start a project
+                            </Typography>
+                        </Box>
 
-                    </Box>
-                    <Button
-                        component={Link}
-                        href="/contact"
-                        variant="contained"
-                        sx={{
-                            display: { xs: "none", md: "flex" },
-                            borderRadius: BUTTON_RADIUS,
-                            p: "16px 24px",
-                            fontWeight: 600,
-                            fontStyle: "semiBold",
-                            fontSize: { xs: "16px", sm: "18px", md: "20px" },
-                            lineHeight: "24px",
-                            color: "text.primary",
-                            fontFamily: "'IBM Plex Mono', monospace",
-                            backgroundColor: "secondary.main",
-                            boxShadow: "none",
-                            transition: 'all 0.3s ease',
-                            "&:hover": {
-                                boxShadow: "none",
-                                backgroundColor: "primary.contrastText",
-                                color: "text.primary",
-                            },
-                        }}
-                    >
-                        GET STARTED
-                    </Button>
-
-                    {/* Mobile Menu Icon */}
-                    <Box sx={{ display: { xs: "flex", md: "none" } }}>
                         <IconButton
                             onClick={() => setMobileOpen((prev) => !prev)}
+                            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                            aria-expanded={mobileOpen}
+                            disableRipple
+                            sx={{ display: { xs: "flex", md: "none" }, mr: -1 }}
                         >
-                            <Fade in={!mobileOpen}>
-                                <MenuIcon />
-                            </Fade>
-                            <Fade in={mobileOpen}>
-                                <CloseIcon sx={{ position: "absolute" }} />
-                            </Fade>
+                            <MenuToggle open={mobileOpen} />
                         </IconButton>
-                    </Box>
-                </Toolbar>
+                    </Toolbar>
+                </Container>
             </AppBar>
 
-            {/* Mobile Menu */}
-            <Collapse in={mobileOpen} timeout="auto" unmountOnExit>
-                <Box
-                    sx={{
-                        position: "fixed",
-                        top: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
-                        left: 0,
-                        right: 0,
-                        backgroundColor: "background.paper",
-                        borderTop: 1,
-                        borderColor: "divider",
-                        zIndex: 1100,
-                        px: 2,
-                        py: 2,
-                    }}
-                >
-                    {navItems.map((item) => (
-                        <Button
+            {/* Mobile overlay. Full-bleed and large-type rather than a cramped
+                dropdown — a menu with five items deserves the whole screen. */}
+            <Box
+                sx={{
+                    display: { xs: "flex", md: "none" },
+                    position: "fixed",
+                    inset: 0,
+                    zIndex: 1200,
+                    flexDirection: "column",
+                    backgroundColor: color.ground,
+                    paddingTop: `${layout.navHeight.xs + 24}px`,
+                    opacity: mobileOpen ? 1 : 0,
+                    pointerEvents: mobileOpen ? "auto" : "none",
+                    transition: `opacity ${motion.base}`,
+                }}
+                aria-hidden={!mobileOpen}
+            >
+                <Container>
+                    {navItems.map((item, i) => (
+                        <Box
                             key={item.path}
                             component={Link}
                             href={item.path}
-                            fullWidth
-                            onClick={() => setMobileOpen(false)}
                             sx={{
-                                justifyContent: "center",
-                                py: 1,
-                                fontWeight: 500,
-                                fontSize: 14,
-                                fontFamily: "'IBM Plex Mono', monospace",
-                                color: "text.primary",
-                                backgroundColor: "transparent",
-                                transition: "all 0.4s ease",
-                                "&:hover": {
-                                    color: "text.secondary",
-                                },
+                                display: "flex",
+                                alignItems: "baseline",
+                                gap: 2,
+                                paddingBlock: 2.25,
+                                borderBottom: "1px solid",
+                                borderColor: color.rule,
+                                textDecoration: "none",
+                                color: isActive(item.path) ? color.accent : color.ink,
                             }}
                         >
-                            {item.label}
-                        </Button>
+                            <Typography variant="caption" sx={{ color: color.inkFaint, width: 24 }}>
+                                {String(i + 1).padStart(2, "0")}
+                            </Typography>
+                            <Typography variant="h3" component="span">
+                                {item.label}
+                            </Typography>
+                        </Box>
                     ))}
-                    <Box sx={{ display: "flex", justifyContent: "center", mt: 1 }}>
-                        <Button
-                            component={Link}
-                            href="/contact"
-                            variant="contained"
-                            sx={{
-                                borderRadius: BUTTON_RADIUS,
-                                px: 2.5,
-                                py: 1,
-                                fontWeight: 600,
-                                fontsize: 16,
-                                fontFamily: "'IBM Plex Mono', monospace",
-                                color: "text.primary",
-                                backgroundColor: "secondary.main",
-                                boxShadow: "none",
-                                transition: 'all 0.3s ease',
-                                "&:hover": {
-                                    boxShadow: "none",
-                                    backgroundColor: "primary.contrastText",
-                                    color: "text.primary",
-                                },
-                            }}
-                        >
-                            GET STARTED
-                        </Button>
-                    </Box>
-                </Box>
-            </Collapse>
+                </Container>
+            </Box>
 
-            {/* space for fixed navbar */}
-            <Toolbar sx={{ height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT }, }} />
+            {/* Spacer for the fixed bar. */}
+            <Box sx={{ height: layout.navHeight }} />
         </>
     );
 }

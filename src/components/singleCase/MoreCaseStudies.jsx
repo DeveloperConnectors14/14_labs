@@ -1,73 +1,100 @@
-import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import Link from "next/link";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import Image from "next/image";
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import LinkBox from "@/components/ui/LinkBox";
+import ActionLink from "@/components/ui/ActionLink";
+import { color, motion, radius } from "@/theme/tokens";
 
+/**
+ * The next case, as a wide plate rather than a grid of one.
+ *
+ * It sits after the closing band deliberately: somebody who has read to the end
+ * of a case study and is not ready to write to us should be handed the other
+ * one, not the footer.
+ */
 function MoreCaseStudies({ moreCases }) {
+  if (!moreCases?.length) return null;
 
-    return (
-        <>
-            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-                <Grid container spacing={3}>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <Typography variant="h2" sx={{ color: "text.primary" }}>
-                            View More{" "}
-                            <Box component="span" sx={{ color: "text.secondary" }}>
-                                Case Studies
-                            </Box>
-                        </Typography>
-                        <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
-                            Explore our in-depth case studies showcasing real-world examples of how AI solutions have driven success for businesses like yours.
-                        </Typography>
-                    </Grid>
-                    <Grid size={12}>
-                        <Grid container spacing={3}>
-                            {moreCases.map((item, i) => (
-                                < Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}
-                                    sx={{ display: "flex" }}
-                                >
-                                    <Card
-                                        component={Link}
-                                        href={`/case-studies/${item.id}`}
-                                        sx={{
-                                            width: "100%",
-                                            border: 1,
-                                            borderColor: "divider",
-                                            borderRadius: CARD_RADIUS,
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            justifyContent: "space-between",
-                                            transition: "0.3s",
-                                            textDecoration: "none",
-                                            p: 1,
-                                            "&:hover": {
-                                                borderColor: "text.grey"
-                                            },
-                                        }}
-                                    >
-                                        <CardMedia
-                                            component="img"
-                                            height="200"
-                                            image={`/media/${item.img}`}
-                                            alt={item.img}
-                                            sx={{ borderRadius: TILE_RADIUS }}
-                                        />
-                                        <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="h3" color="text.black">
-                                                {item.title}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.grey" sx={{ pt: 0.5 }}>
-                                                {item.date}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Box >
-        </>
-    )
+  return (
+    <Section tight>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          gap: 3,
+          flexWrap: "wrap",
+          pb: { xs: 3, md: 4 },
+          borderBottom: "1px solid",
+          borderColor: color.ruleStrong,
+        }}
+      >
+        <Typography variant="eyebrow" sx={{ color: color.accent }}>
+          Read next
+        </Typography>
+        <ActionLink href="/case-studies">All work</ActionLink>
+      </Box>
+
+      <Box
+        sx={{
+          mt: { xs: 3, md: 4 },
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
+          gap: { xs: 4, md: 6 },
+        }}
+      >
+        {moreCases.map((item) => (
+          <LinkBox
+            key={item.id}
+            href={`/case-studies/${item.id}`}
+            sx={{
+              textDecoration: "none",
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", sm: "160px 1fr" },
+              gap: { xs: 2.5, sm: 3 },
+              alignItems: "center",
+              "&:hover .next-image": { transform: "scale(1.05)" },
+              "&:hover .next-title": { color: color.accent },
+            }}
+          >
+            <Box
+              sx={{
+                position: "relative",
+                aspectRatio: "16 / 11",
+                overflow: "hidden",
+                borderRadius: radius.md,
+                backgroundColor: color.green20,
+              }}
+            >
+              <Image
+                className="next-image"
+                src={`/media/${item.img}`}
+                alt=""
+                fill
+                sizes="200px"
+                style={{ objectFit: "cover", transition: `transform ${motion.slow}` }}
+              />
+            </Box>
+
+            <Box>
+              {/* This slot used to print `item.date`, which was the same
+                  placeholder on every record. */}
+              <Typography variant="caption" sx={{ color: color.inkFaint }}>
+                Case study
+              </Typography>
+              <Typography
+                className="next-title"
+                variant="h3"
+                sx={{ mt: 1, color: color.ink, transition: `color ${motion.fast}` }}
+              >
+                {item.title}
+              </Typography>
+            </Box>
+          </LinkBox>
+        ))}
+      </Box>
+    </Section>
+  );
 }
 
 export default MoreCaseStudies;

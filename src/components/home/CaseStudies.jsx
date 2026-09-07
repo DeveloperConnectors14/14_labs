@@ -1,85 +1,130 @@
-"use client";
-
-import Link from "next/link";
-import {
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-} from "@mui/material";
-import { getcaseStudies } from "@/services/dataService";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import Image from "next/image";
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
+import LinkBox from "@/components/ui/LinkBox";
+import { getCaseDetails, getcaseStudies } from "@/services/dataService";
+import { color, motion, radius } from "@/theme/tokens";
 
 const studies = getcaseStudies();
+const details = getCaseDetails();
 
-function CaseStudies() {
-  return (
-    <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-      <Grid container spacing={3}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h2" sx={{ color: "text.primary" }}>
-            Case <Box component="span" sx={{ color: "text.secondary" }}>
-              studies
-            </Box>
-          </Typography>
-          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            Explore how we've transformed businesses across industries with intelligent automation, multi-agent systems, and cutting-edge AI technology.
-          </Typography>
-        </Grid>
-        <Grid size={12}>
-          <Grid container spacing={3}>
-            {studies.map((item, i) => (
-              < Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}
-                sx={{ display: "flex" }}
-              >
-                <Card
-                  component={Link}
-                  href={`/case-studies/${item.id}`}
-                  sx={{
-                    width: "100%",
-                    border: 1,
-                    borderColor: "divider",
-                    borderRadius: CARD_RADIUS,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    transition: "0.3s",
-                    textDecoration: "none",
-                    p: 1,
-                    "&:hover": {
-                      borderColor: "transparent",
-                      background: "linear-gradient(90deg, #016b64bb, #054c64c5, #063864cb, #02185abb)",
-                      "& .caseTitle": { color: "secondary.contrastText" },
-                      "& .caseDate": { color: "primary.contrastText" },
-                    },
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={`/media/${item.img}`}
-                    alt={item.img}
-                    sx={{ borderRadius: TILE_RADIUS }}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography className="caseTitle" variant="h3" color="text.black" sx={{ transition: "color 0.3s" }}>
-                      {item.title}
-                    </Typography>
-                    <Typography className="caseDate" variant="body2" color="text.grey" sx={{ pt: 1, transition: "color 0.3s" }}>
-                      {item.date}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
-    </Box >
-  );
+/** Pulls the standfirst, the industry and the node count out of the full case
+ *  record, so the card carries real information rather than just a title. */
+function summarise(id) {
+  const record = details.find((entry) => entry.caseId === id);
+  if (!record) return {};
+  const stats = record.hero?.stats ?? [];
+  const industry = stats.find((s) => s.label === "Industry")?.value;
+  const nodes = stats.find((s) => s.label === "Pipeline Nodes")?.value;
+  return { subtitle: record.hero?.subtitle, industry, nodes };
 }
 
+function CaseStudies({ heading = true }) {
+  return (
+    <Section id="work">
+      {heading ? (
+        <SectionHead
+          split
+          eyebrow="Selected work"
+          title="Systems running in production"
+          lede="Each of these started as a workflow somebody was doing by hand. The write-ups cover the architecture, what we measured and where the design had to change."
+          sx={{ mb: { xs: 6, md: 10 } }}
+        />
+      ) : null}
+
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
+          gap: { xs: 6, md: 6 },
+        }}
+      >
+        {studies.map((item) => {
+          const { subtitle, industry, nodes } = summarise(item.id);
+
+          return (
+            <LinkBox
+              key={item.id}
+              href={`/case-studies/${item.id}`}
+              sx={{
+                textDecoration: "none",
+                display: "block",
+                "&:hover .case-image": { transform: "scale(1.04)" },
+                "&:hover .case-title": { color: color.accent },
+              }}
+            >
+              <Box
+                sx={{
+                  position: "relative",
+                  aspectRatio: "16 / 10",
+                  overflow: "hidden",
+                  borderRadius: radius.lg,
+                  // Green rather than grey, so the plate reads as part of the
+                  // palette while the screenshot is still decoding.
+                  backgroundColor: color.green20,
+                }}
+              >
+                <Image
+                  className="case-image"
+                  src={`/media/${item.img}`}
+                  alt=""
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  style={{
+                    objectFit: "cover",
+                    transition: `transform ${motion.slow}`,
+                  }}
+                />
+              </Box>
+
+              <Box
+                sx={{
+                  mt: 3,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                {industry ? (
+                  <Typography variant="caption" sx={{ color: color.accent }}>
+                    {industry}
+                  </Typography>
+                ) : null}
+                {/* The date these cards used to show was the same placeholder
+                    on every record — `1st January 2024`. On a page selling
+                    measurement, a fabricated date is the one thing you cannot
+                    leave lying around, so the slot carries something the data
+                    actually knows instead. */}
+                {nodes ? (
+                  <Typography variant="caption" sx={{ color: color.inkFaint }}>
+                    {nodes} pipeline nodes
+                  </Typography>
+                ) : null}
+              </Box>
+
+              <Typography
+                className="case-title"
+                variant="h3"
+                sx={{ mt: 1.5, color: color.ink, transition: `color ${motion.fast}` }}
+              >
+                {item.title}
+              </Typography>
+
+              {subtitle ? (
+                <Typography
+                  variant="body1"
+                  sx={{ mt: 1.5, color: color.inkMuted, maxWidth: "52ch" }}
+                >
+                  {subtitle}
+                </Typography>
+              ) : null}
+            </LinkBox>
+          );
+        })}
+      </Box>
+    </Section>
+  );
+}
 
 export default CaseStudies;

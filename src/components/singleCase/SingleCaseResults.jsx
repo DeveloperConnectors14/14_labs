@@ -1,69 +1,28 @@
-import { Box, Grid, Typography } from "@mui/material";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+import { Box } from "@mui/material";
+import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
+import StatSlabs from "@/components/ui/StatSlabs";
 
+/** What the system was worth once it ran, on the same stat treatment the
+ *  architecture figures use — so the two rows read as the same kind of claim
+ *  measured at two points in the project. */
 function SingleCaseResults({ results }) {
-    if (!results) return null;
+  if (!results?.items?.length) return null;
 
-    return (
-        <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-            <Grid container spacing={3}>
-                <Grid size={12}>
-                    {results.label && (
-                        <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
-                            {results.label}
-                        </Typography>
-                    )}
-                    <Typography variant="h2" sx={{ color: "text.primary" }}>
-                        {results.title}
-                    </Typography>
-                    {results.text && (
-                        <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
-                            {results.text}
-                        </Typography>
-                    )}
-                </Grid>
+  return (
+    <Section>
+      <SectionHead
+        split
+        eyebrow={results.label}
+        title={results.title}
+        lede={results.text}
+      />
 
-                <Grid size={12}>
-                    <Grid container spacing={3}>
-                        {results.items.map((item, i) => (
-                            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={i} sx={{ display: "flex" }}>
-                                <Box
-                                    sx={{
-                                        width: "100%",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        p: { xs: 2.5, md: 3 },
-                                        borderRadius: CARD_RADIUS,
-                                        border: 1,
-                                        borderColor: "divider",
-                                        backgroundColor: "background.paper",
-                                    }}
-                                >
-                                    <Typography
-                                        sx={{
-                                            color: "text.secondary",
-                                            fontFamily: "'Instrument Sans', sans-serif",
-                                            fontWeight: 700,
-                                            fontSize: { xs: "40px", sm: "48px", md: "56px" },
-                                            lineHeight: 1,
-                                        }}
-                                    >
-                                        {item.value}
-                                    </Typography>
-                                    <Typography variant="h3" sx={{ color: "text.black", pt: 1.5 }}>
-                                        {item.label}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.grey" sx={{ pt: 1 }}>
-                                        {item.desc}
-                                    </Typography>
-                                </Box>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Box>
-    );
+      <Box sx={{ mt: { xs: 5, md: 8 } }}>
+        <StatSlabs items={results.items} />
+      </Box>
+    </Section>
+  );
 }
 
 export default SingleCaseResults;

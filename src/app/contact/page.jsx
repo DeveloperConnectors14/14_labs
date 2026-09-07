@@ -2,48 +2,65 @@
 
 import { useState } from "react";
 import {
-  Box,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-  Snackbar,
   Alert,
+  Box,
+  Container,
+  Snackbar,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import { getSite } from "@/services/dataService";
+import { color, font, measure, motion, radius } from "@/theme/tokens";
 
-const textFieldSx = {
+const site = getSite();
+
+/**
+ * One input style for the whole form, written against the site's own tokens
+ * rather than MUI's theme palette — the rest of the page is built from these
+ * and a form that quietly uses a different grey is the tell that it was bolted
+ * on afterwards.
+ */
+const fieldSx = {
   "& .MuiOutlinedInput-root": {
-    backgroundColor: "background.paper",
-    borderRadius: TILE_RADIUS,
-    transition: "border-color 0.2s ease",
+    backgroundColor: color.surface,
+    borderRadius: radius.md,
+    fontSize: "1rem",
     "& fieldset": {
-      borderColor: "divider",
-      transition: "border-color 0.2s ease",
+      borderColor: color.rule,
+      transition: `border-color ${motion.fast}`,
     },
-    "&:hover fieldset": {
-      borderColor: "text.grey",
-    },
+    "&:hover fieldset": { borderColor: color.green30 },
     "&.Mui-focused fieldset": {
-      borderColor: "text.secondary",
+      borderColor: color.accent,
       borderWidth: "1.5px",
     },
   },
   "& .MuiInputBase-input": {
-    color: "text.black",
-    padding: "14px 16px",
-    "&::placeholder": {
-      color: "text.grey",
-      opacity: 1,
-    },
+    color: color.ink,
+    padding: "15px 16px",
+    "&::placeholder": { color: color.inkFaint, opacity: 1 },
   },
-  "& .MuiInputBase-multiline": {
-    padding: 0,
-  },
-  "& .MuiInputBase-inputMultiline": {
-    padding: "14px 16px",
-  },
+  "& .MuiInputBase-inputMultiline": { padding: 0 },
 };
+
+const DETAILS = [
+  { label: "Email", value: site.email, href: `mailto:${site.email}` },
+  {
+    label: "Phone",
+    value: site.phone,
+    href: `tel:${site.phone.replace(/\s/g, "")}`,
+  },
+  { label: "LinkedIn", value: "/company/14labs", href: site.linkedin, external: true },
+  { label: "Based in", value: "Lahore, Pakistan" },
+];
+
+// What actually happens after the button is pressed. Saying so is the cheapest
+// way to make a contact form feel like it reaches a person.
+const NEXT = [
+  "One of the engineers reads it — not a form queue.",
+  "You get a reply within two working days, including if the answer is no.",
+  "If it looks like a fit, the next step is a 30-minute call about the problem, not a pitch.",
+];
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -53,20 +70,17 @@ function ContactPage() {
     message: "",
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbar, setSnackbar] = useState({ severity: "success", message: "" });
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
 
     try {
       const res = await fetch("/api/contact", {
@@ -77,7 +91,7 @@ function ContactPage() {
 
       if (!res.ok) throw new Error("Request failed");
 
-      setSnackbar({ severity: "success", message: "Message sent successfully!" });
+      setSnackbar({ severity: "success", message: "Message sent. We will reply within two working days." });
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
       setSnackbar({
@@ -85,7 +99,7 @@ function ContactPage() {
         message: "Something went wrong. Please try again or email us directly.",
       });
     } finally {
-      setIsSubmitted(false);
+      setIsSubmitting(false);
       setOpenSnackbar(true);
     }
   };
@@ -97,134 +111,215 @@ function ContactPage() {
 
   return (
     <Box
+      component="section"
       sx={{
-        px: SECTION_PX,
-        py: SECTION_PY,
-        background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+        backgroundColor: color.ground,
+        paddingTop: { xs: "48px", md: "88px" },
+        paddingBottom: { xs: "56px", md: "112px" },
       }}
     >
-      <Grid container spacing={3} alignItems="flex-start">
-        <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h2" sx={{ color: "text.primary" }}>
-            Contact{" "}
-            <Box component="span" sx={{ color: "text.secondary" }}>
-              Us
-            </Box>
-          </Typography>
+      <Container>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            columnGap: { md: 8 },
+            rowGap: { xs: 6, md: 0 },
+            alignItems: "start",
+          }}
+        >
+          <Box>
+            <Typography variant="eyebrow" sx={{ color: color.accent, mb: 4 }}>
+              Contact
+            </Typography>
 
-          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            Ready to start your next project? Contact us through any of these channels or fill out the form.
-          </Typography>
+            <Typography variant="h1" sx={{ color: color.ink, maxWidth: "13ch" }}>
+              Tell us what is not working yet
+            </Typography>
 
-          <Box sx={{ mt: 6, display: "flex", flexDirection: "column", gap: 2 }}>
-            <Box>
-              <Typography variant="body2" color="text.grey">
-                Email
-              </Typography>
-              <Typography variant="h3" color="text.primary">
-                contact@14labs.co
-              </Typography>
+            <Typography
+              variant="lede"
+              sx={{ mt: 4, color: color.inkMuted, maxWidth: measure.lede }}
+            >
+              Send the shape of the problem, the data you have and what a good
+              outcome would look like. We will reply with an honest read on
+              whether it is worth building — including when it is not.
+            </Typography>
+
+            <Box
+              sx={{
+                mt: { xs: 5, md: 7 },
+                borderTop: "1px solid",
+                borderColor: color.ruleStrong,
+              }}
+            >
+              {DETAILS.map((row) => {
+                const content = (
+                  <>
+                    <Typography variant="eyebrow" sx={{ color: color.inkFaint }}>
+                      {row.label}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        mt: 0.75,
+                        fontSize: "1.0625rem",
+                        fontWeight: 500,
+                        letterSpacing: "-0.015em",
+                        color: "inherit",
+                      }}
+                    >
+                      {row.value}
+                    </Typography>
+                  </>
+                );
+
+                const rowSx = {
+                  display: "block",
+                  paddingBlock: 2.25,
+                  borderBottom: "1px solid",
+                  borderColor: color.rule,
+                  textDecoration: "none",
+                  color: color.ink,
+                  transition: `color ${motion.fast}`,
+                };
+
+                return row.href ? (
+                  <Box
+                    key={row.label}
+                    component="a"
+                    href={row.href}
+                    target={row.external ? "_blank" : undefined}
+                    rel={row.external ? "noopener noreferrer" : undefined}
+                    sx={{ ...rowSx, "&:hover": { color: color.accent } }}
+                  >
+                    {content}
+                  </Box>
+                ) : (
+                  <Box key={row.label} sx={rowSx}>
+                    {content}
+                  </Box>
+                );
+              })}
             </Box>
-            <Box>
-              <Typography variant="body2" color="text.grey">
-                Phone
+
+            <Box sx={{ mt: { xs: 5, md: 6 } }}>
+              <Typography variant="eyebrow" sx={{ color: color.accent }}>
+                What happens next
               </Typography>
-              <Typography variant="h3" color="text.primary">
-                +92 318 7806914
-              </Typography>
-            </Box>
-            <Box>
-              <Typography variant="body2" color="text.grey">
-                Location
-              </Typography>
-              <Typography variant="h3" color="text.primary">
-                Lahore, Pakistan
-              </Typography>
+
+              <Box component="ol" sx={{ listStyle: "none", m: 0, mt: 2.5, p: 0 }}>
+                {NEXT.map((item, i) => (
+                  <Box
+                    key={item}
+                    component="li"
+                    sx={{ display: "flex", gap: 2, mt: i ? 1.75 : 0 }}
+                  >
+                    <Typography
+                      aria-hidden
+                      sx={{
+                        fontFamily: font.mono,
+                        fontSize: "0.75rem",
+                        letterSpacing: "0.11em",
+                        color: color.green45,
+                        pt: "3px",
+                      }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: color.inkMuted }}>
+                      {item}
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
             </Box>
           </Box>
-        </Grid>
 
-        <Grid size={{ xs: 12, md: 6 }}>
           <Box
             component="form"
             onSubmit={handleSubmit}
             sx={{
+              backgroundColor: color.green05,
+              border: "1px solid",
+              borderColor: color.green20,
+              borderRadius: { xs: radius.lg, md: radius.xl },
+              p: { xs: 3, md: 4.5 },
               display: "flex",
               flexDirection: "column",
-              gap: 3,
+              gap: 2.5,
             }}
           >
-            <TextField
-              placeholder="Full Name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              fullWidth
-              required
-              sx={textFieldSx}
-            />
+            <Typography variant="h3" sx={{ color: color.ink }}>
+              Send a note
+            </Typography>
+
+            {[
+              { name: "name", placeholder: "Full name", type: "text" },
+              { name: "email", placeholder: "Email address", type: "email" },
+              { name: "subject", placeholder: "Subject", type: "text" },
+            ].map((field) => (
+              <TextField
+                key={field.name}
+                name={field.name}
+                type={field.type}
+                placeholder={field.placeholder}
+                value={formData[field.name]}
+                onChange={handleChange}
+                fullWidth
+                required
+                sx={fieldSx}
+              />
+            ))}
 
             <TextField
-              placeholder="Email Address"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              fullWidth
-              required
-              sx={textFieldSx}
-            />
-
-            <TextField
-              placeholder="Subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              fullWidth
-              required
-              sx={textFieldSx}
-            />
-
-            <TextField
-              placeholder="Message"
               name="message"
+              placeholder="What is the problem, and what have you tried?"
               value={formData.message}
               onChange={handleChange}
               multiline
-              rows={5}
+              rows={6}
               fullWidth
               required
-              sx={textFieldSx}
+              sx={fieldSx}
             />
 
-            <Box sx={{ mt: 2 }}>
-              <Button
-                type="submit"
-                variant="contained"
-                disableElevation
-                disabled={isSubmitted}
-                sx={{
-                  borderRadius: BUTTON_RADIUS,
-                  p: "9px 18px",
-                  color: "text.primary",
-                  backgroundColor: "secondary.main",
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    backgroundColor: "primary.contrastText",
-                    color: "text.primary",
-                  },
-                }}
-              >
-                Send Message
-              </Button>
+            <Box
+              component="button"
+              type="submit"
+              disabled={isSubmitting}
+              sx={{
+                mt: 1,
+                alignSelf: "flex-start",
+                appearance: "none",
+                border: 0,
+                cursor: isSubmitting ? "progress" : "pointer",
+                px: 3.5,
+                py: 1.8,
+                borderRadius: radius.pill,
+                backgroundColor: color.deep,
+                color: color.onDeep,
+                fontFamily: font.body,
+                fontSize: "0.9375rem",
+                fontWeight: 500,
+                transition: `background-color ${motion.fast}, opacity ${motion.fast}`,
+                opacity: isSubmitting ? 0.65 : 1,
+                "&:hover": { backgroundColor: color.ink },
+              }}
+            >
+              {isSubmitting ? "Sending…" : "Send message"}
             </Box>
+
+            <Typography variant="caption" sx={{ color: color.inkFaint }}>
+              We reply to everything. No newsletter, no sequence, no CRM
+              follow-up.
+            </Typography>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </Container>
 
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={4000}
+        autoHideDuration={5000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >

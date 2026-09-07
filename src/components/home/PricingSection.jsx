@@ -1,138 +1,140 @@
-"use client";
-
-import {
-    Box,
-    Typography,
-    Grid,
-    Card,
-    CardContent,
-    Button,
-} from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Link from "next/link";
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
+import ActionLink from "@/components/ui/ActionLink";
 import { getPricing } from "@/services/dataService";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS, BUTTON_RADIUS } from "@/theme/tokens";
+import { color, font, radius } from "@/theme/tokens";
 
 const pricing = getPricing();
 
+// The middle column is the one most engagements actually take, so it carries
+// the green. That is the emphasis doing a job, not decoration.
+const FEATURED = 1;
+
 function PricingSection() {
-    return (
-        <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-            <Grid container spacing={3}>
-                <Grid size={{ xs: 12, md: 6 }}>
-                    <Typography variant="h2" sx={{ color: "text.primary" }}>
-                        Our <Box component="span" sx={{ color: "text.secondary" }}>
-                            Pricing
-                        </Box>
-                    </Typography>
-                    <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-                        Customized pricing options best suitable for your needs
-                    </Typography>
-                </Grid>
-                <Grid size={12}>
-                    <Grid container spacing={3}>
-                        {pricing.map((item, i) => (
-                            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={i} sx={{ display: "flex" }}>
-                                <Card
-                                    sx={{
-                                        width: "100%",
-                                        border: 1,
-                                        borderColor: "divider",
-                                        borderRadius: CARD_RADIUS,
-                                        transition: "0.3s",
-                                        "&:hover": {
-                                            borderColor: "text.grey"
-                                        },
-                                    }}
-                                >
-                                    <CardContent sx={{
-                                        width: "100%",
-                                        height: "100%",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "space-between", p: 1,
-                                    }}>
-                                        <Box sx={{ px: 2, borderRadius: "12px", background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
-                                            <Typography variant="h3" color="text.black" sx={{ py: 1 }} >
-                                                {item.title}
-                                            </Typography>
-                                            <Typography variant="body2" sx={{ py: 1 }} color="text.primary">
-                                                {item.duration}
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ px: 2 }}>
-                                            {item.details.split(",").map((point, idx) => (
-                                                <Box
-                                                    key={idx}
-                                                    sx={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        gap: 1,
-                                                        py: 0.6,
-                                                    }}
-                                                >
-                                                    <Box
-                                                        sx={{
-                                                            width: 18,
-                                                            height: 18,
-                                                            borderRadius: "50%",
-                                                            backgroundColor: "text.secondary",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center",
-                                                        }}
-                                                    >
-                                                        <ArrowForwardIosIcon
-                                                            sx={{ fontSize: 10, color: "secondary.contrastText" }}
-                                                        />
-                                                    </Box>
+  return (
+    <Section id="engagements">
+      <SectionHead
+        split
+        eyebrow="Engagements"
+        title="Three ways to start"
+        lede="Most work begins with a pilot. It is deliberately small, ends in a written recommendation, and you keep the evaluation set whichever way it goes."
+      />
 
-                                                    <Typography variant="body2" sx={{ py: 1 }} color="text.primary">
-                                                        {point.trim()}
-                                                    </Typography>
-                                                </Box>
-                                            ))}
+      <Box
+        sx={{
+          mt: { xs: 5, md: 8 },
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+          gap: { xs: 1.5, md: 2 },
+          alignItems: "stretch",
+        }}
+      >
+        {pricing.map((tier, i) => {
+          const featured = i === FEATURED;
+          const fg = featured ? color.onDeep : color.ink;
+          const muted = featured ? color.onDeepMuted : color.inkMuted;
+          const rule = featured ? color.ruleOnDeep : color.rule;
 
-                                            <Typography
-                                                color="text.black"
-                                                sx={{ mt: 1, fontWeight: 700, fontSize: { xs: "24px", sm: "26px", md: "28px" }, fontFamily: "'Instrument Sans', sans-serif" }}
-                                            >
-                                                {item.pricing}
-                                            </Typography>
+          return (
+            <Box
+              key={tier.title}
+              sx={{
+                backgroundColor: featured ? color.deep : color.green05,
+                border: featured ? "1px solid transparent" : "1px solid",
+                borderColor: featured ? "transparent" : color.green20,
+                borderRadius: radius.lg,
+                p: { xs: 3, md: 4 },
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                  gap: 2,
+                }}
+              >
+                <Typography variant="h3" sx={{ color: fg }}>
+                  {tier.title}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: featured ? color.deepAlt : color.inkMuted,
+                    backgroundColor: featured ? color.lime : color.surface,
+                    borderRadius: radius.pill,
+                    px: 1.5,
+                    py: 0.75,
+                  }}
+                >
+                  {tier.duration}
+                </Typography>
+              </Box>
 
-                                            <Button
-                                                component={Link}
-                                                href="/contact"
-                                                variant="contained"
-                                                sx={{
-                                                    border: 1,
-                                                    borderColor: "secondary.main",
-                                                    borderRadius: BUTTON_RADIUS,
-                                                    mt: 2,
-                                                    px: 3,
-                                                    py: 1.4,
-                                                    backgroundColor: "background.paper",
-                                                    color: "text.primary",
-                                                    boxShadow: "none",
-                                                    "&:hover": {
-                                                        boxShadow: "none",
-                                                        backgroundColor: "primary.contrastText",
-                                                        color: "text.primary",
-                                                    },
-                                                }}
-                                            >
-                                                Schedule Call
-                                            </Button>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Box >
-    );
+              <Typography
+                sx={{
+                  mt: 2.5,
+                  fontSize: "1.125rem",
+                  lineHeight: 1.45,
+                  letterSpacing: "-0.016em",
+                  color: featured ? color.lime : color.accent,
+                }}
+              >
+                {tier.question}
+              </Typography>
+
+              <Box component="ul" sx={{ listStyle: "none", m: 0, mt: 3.5, p: 0, flexGrow: 1 }}>
+                {tier.details.split(",").map((point) => (
+                  <Typography
+                    key={point}
+                    component="li"
+                    variant="body2"
+                    sx={{
+                      color: muted,
+                      paddingBlock: 1.5,
+                      borderTop: "1px solid",
+                      borderColor: rule,
+                    }}
+                  >
+                    {point.trim()}
+                  </Typography>
+                ))}
+              </Box>
+
+              <Typography
+                className="tabular"
+                sx={{
+                  mt: 4,
+                  fontFamily: font.display,
+                  fontWeight: 300,
+                  fontSize: "2.25rem",
+                  lineHeight: 1,
+                  letterSpacing: "-0.045em",
+                  color: fg,
+                }}
+              >
+                {tier.pricing}
+              </Typography>
+
+              <Box sx={{ mt: 3 }}>
+                <ActionLink href="/contact" onDeep={featured}>
+                  Start here
+                </ActionLink>
+              </Box>
+            </Box>
+          );
+        })}
+      </Box>
+
+      <Typography variant="body2" sx={{ mt: 3, color: color.inkFaint, maxWidth: "70ch" }}>
+        Indicative ranges. Scope, data access and integration surface move the
+        number more than duration does — we quote against a written brief.
+      </Typography>
+    </Section>
+  );
 }
 
 export default PricingSection;

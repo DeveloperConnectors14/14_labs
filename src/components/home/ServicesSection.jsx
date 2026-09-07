@@ -1,189 +1,160 @@
-"use client";
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
+import ActionLink from "@/components/ui/ActionLink";
+import AgentGraph from "@/components/visuals/AgentGraph";
+import EmbeddingField from "@/components/visuals/EmbeddingField";
+import EvalCurve from "@/components/visuals/EvalCurve";
+import SignalGrid from "@/components/visuals/SignalGrid";
 import { getServices } from "@/services/dataService";
-import { Box, Grid, Card, CardContent, Typography, Divider, Button } from "@mui/material";
-import Link from "next/link";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS, BUTTON_RADIUS } from "@/theme/tokens";
-
+import { color, font, measure, motion, radius } from "@/theme/tokens";
 
 const services = getServices();
 
+/**
+ * One figure per practice, keyed by the service number.
+ *
+ * These are drawings of the actual thing each practice does — a traced request
+ * through a topology, a query and its neighbours, a diagonal-heavy matrix, two
+ * eval scores diverging. That is the entire reason they are here instead of
+ * stock imagery: a photograph of a server rack tells a reader nothing about
+ * whether we know what we are doing, and a picture of a regression does.
+ */
+const FIGURES = {
+  "01": AgentGraph,
+  "02": EmbeddingField,
+  "03": SignalGrid,
+  "04": EvalCurve,
+};
+
 function ServicesSection() {
   return (
-    <Box sx={{ px: SECTION_PX, py: SECTION_PY, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
-      <Grid container spacing={3}>
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Typography variant="h2" sx={{ color: "text.primary" }}>
-            Our <Box component="span" sx={{ color: "text.secondary" }}>
-              Services
-            </Box>
-          </Typography>
-          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            We keep our word, align seamlessly with your teams, and deliver outcomes that matter. Integrating the now. Inventing the next.
-          </Typography>
-        </Grid>
-        <Grid size={{ xs: 12, md: 8 }}>
-          <Grid container spacing={3}>
-            {services.map((service, i) => (
-              <Grid
-                size={{ xs: 12, sm: 6, md: 6 }}
-                key={i}
-                sx={{ display: "flex" }}
-              >
-                <Card
-                  sx={{
-                    flex: 1,
-                    border: 1,
-                    borderColor: "divider",
-                    borderRadius: CARD_RADIUS,
-                    display: "flex",
-                    flexDirection: "column",
-                    position: "relative",
-                    minHeight: { xs: 270, sm: 300, md: 340 },
-                    transition: "all 0.4s ease",
-                    "&:hover": {
-                      backgroundImage: 'url("/media/service1.png")',
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      "& .cardContent::before": {
-                        opacity: 1,
-                      },
-                      "& .sNo": {
-                        color: "primary.contrastText",
-                      },
-                      "& .hidden": {
-                        display: "block",
-                        transform: "translateY(0)",
-                        opacity: 1,
-                      }, "&:hover .hidden": {
-                        position: "relative",
-                        opacity: 1,
-                        transform: "translateY(0)",
-                        visibility: "visible",
-                      },
-                      "& .heading": {
-                        color: "secondary.contrastText",
-                      }
-                    },
-                    "@media (max-width: 1023.95px)": {
-                      backgroundImage: 'url("/media/service1.png")',
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      "& .cardContent::before": {
-                        opacity: 1,
-                      },
-                      "& .sNo": {
-                        color: "primary.contrastText",
-                      },
-                      "& .hidden": {
-                        position: "relative",
-                        display: "block",
-                        transform: "translateY(0)",
-                        opacity: 1,
-                        visibility: "visible",
-                      },
-                      "& .heading": {
-                        color: "secondary.contrastText",
-                      },
-                    },
+    <Section id="what-we-do" band="surface" inset>
+      <SectionHead
+        split
+        eyebrow="What we do"
+        title="Four practices, one engineering standard"
+        lede="We work across the whole path from problem statement to production system. Most engagements touch more than one of these."
+        action={<ActionLink href="/services">All capabilities</ActionLink>}
+      />
 
+      <Box
+        sx={{
+          mt: { xs: 5, md: 8 },
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
+          gap: { xs: 1.5, md: 2 },
+        }}
+      >
+        {services.map((service) => {
+          const Figure = FIGURES[service.sNo];
+
+          return (
+            <Box
+              key={service.sNo}
+              sx={{
+                backgroundColor: color.green05,
+                borderRadius: radius.lg,
+                p: { xs: 2, md: 2.5 },
+                display: "flex",
+                flexDirection: "column",
+                transition: `background-color ${motion.base}`,
+                "&:hover": { backgroundColor: color.green10 },
+                "&:hover .service-plate": { backgroundColor: color.green20 },
+                "&:hover .service-index": { color: color.accent },
+              }}
+            >
+              {Figure ? (
+                <Box
+                  className="service-plate"
+                  sx={{
+                    backgroundColor: color.green10,
+                    borderRadius: radius.md,
+                    height: { xs: 160, md: 212 },
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    px: 2,
+                    py: 1.5,
+                    transition: `background-color ${motion.base}`,
                   }}
                 >
-                  <CardContent
-                    className="cardContent"
+                  <Figure
+                    style={{ width: "auto", height: "100%", maxWidth: "100%" }}
+                  />
+                </Box>
+              ) : null}
+
+              <Box sx={{ px: { xs: 1, md: 1.5 }, pt: { xs: 3, md: 3.5 }, pb: 1.5, display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <Box sx={{ display: "flex", alignItems: "baseline", gap: 2.5 }}>
+                  <Typography
+                    className="service-index"
                     sx={{
-                      position: "relative",
-                      flexGrow: 1,
-                      zIndex: 0,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      transition: "background 0.4s ease",
-                      "&::before": {
-                        content: '""',
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                          "linear-gradient(90deg, #016b64bb, #054c64c5, #063864cb, #02185abb)",
-                        opacity: 0,
-                        transition: "opacity 0.4s ease",
-                      }
+                      fontFamily: font.display,
+                      fontWeight: 300,
+                      fontSize: "2rem",
+                      lineHeight: 1,
+                      letterSpacing: "-0.04em",
+                      color: color.green45,
+                      transition: `color ${motion.base}`,
                     }}
                   >
-                    <Box sx={{
-                      flexGrow: 1,
-                      zIndex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      transition: "background 0.4s ease",
-                    }}>
-                      <Box>
-                        <Typography
-                          className="sNo"
-                          variant="caption"
-                          color="text.grey"
-                          sx={{ py: 0.5, display: "block" }}
-                        >
-                          {service.sNo}
-                        </Typography>
-                        <Divider />
-                      </Box>
-                      <Box className="detailBox" >
-                        <Typography
-                          className="heading"
-                          variant="h3"
-                          sx={{ color: "text.black" }}
-                        >
-                          {service.title}
-                        </Typography>
-                        <Box className="hidden" sx={{
-                          position: "absolute",
-                          opacity: 0,
-                          transform: "translateY(50px)",
-                          visibility: "hidden",
-                          transition: "all 0.4s ease",
-                        }} >
-                          <Typography
-                            variant="body2"
-                            color="primary.contrastText"
-                            sx={{ py: 1 }}
-                          >
-                            {service.desc}
-                          </Typography>
-                          <Button
-                            component={Link}
-                            href="/services"
-                            variant="contained"
-                            sx={{
-                              borderRadius: BUTTON_RADIUS,
-                              p: "9px 18px",
-                              mt: 2,
-                              backgroundColor: "background.paper",
-                              color: "text.primary",
-                              boxShadow: "none",
-                              alignSelf: "flex-start",
-                              "&:hover": {
-                                boxShadow: "none",
-                                backgroundColor: "primary.contrastText",
-                                color: "text.primary",
-                              },
-                            }}
-                          >
-                            EXPLORE
-                          </Button>
-                        </Box>
-                      </Box>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
-    </Box>
+                    {service.sNo}
+                  </Typography>
+                  <Typography variant="h3" sx={{ color: color.ink, maxWidth: "16ch" }}>
+                    {service.title}
+                  </Typography>
+                </Box>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    mt: 2.5,
+                    color: color.inkMuted,
+                    maxWidth: measure.body,
+                    flexGrow: 1,
+                  }}
+                >
+                  {service.desc}
+                </Typography>
+
+                <Box
+                  component="ul"
+                  sx={{
+                    listStyle: "none",
+                    m: 0,
+                    mt: 3,
+                    p: 0,
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "8px",
+                  }}
+                >
+                  {service.tags.map((tag) => (
+                    <Typography
+                      key={tag}
+                      component="li"
+                      variant="caption"
+                      sx={{
+                        color: color.accent,
+                        backgroundColor: color.surface,
+                        border: "1px solid",
+                        borderColor: color.green20,
+                        borderRadius: radius.pill,
+                        px: 1.75,
+                        py: 0.75,
+                      }}
+                    >
+                      {tag}
+                    </Typography>
+                  ))}
+                </Box>
+              </Box>
+            </Box>
+          );
+        })}
+      </Box>
+    </Section>
   );
 }
 

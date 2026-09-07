@@ -1,74 +1,74 @@
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
 import { getFeatures } from "@/services/dataService";
-import {
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-} from "@mui/material";
-import Image from "next/image";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+import { color, font, measure } from "@/theme/tokens";
 
 const features = getFeatures();
 
+/**
+ * Three working principles on a deep green slab — the page's second strong
+ * colour block, placed so the run of grey and white sections is interrupted
+ * before it becomes monotonous.
+ */
 function WhyChooseUs() {
   return (
-    <Box sx={{ px: SECTION_PX, py: SECTION_PY, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
-      <Grid container spacing={3}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h2" sx={{ color: "text.primary" }}>
-            What set us <Box component="span" sx={{ color: "text.secondary" }}>
-              apart
-            </Box>
-          </Typography>
-          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            We differentiate ourselves from other AI service providers by:
-          </Typography>
-        </Grid>
-        <Grid size={12}>
-          <Grid container spacing={3}>
-            {features.map((item, i) => (
-              < Grid size={{ xs: 12, md: 4 }} key={i} sx={{ display: "flex" }}>
-                <Card
-                  sx={{
-                    width: "100%",
-                    border: 1,
-                    borderColor: "divider",
-                    borderRadius: CARD_RADIUS,
-                    px: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    transition: "0.3s",
-                  }}
-                >
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Box sx={{ mb: 3 }}>
-                      <Image
-                        src={`/media/${item.icon}`}
-                        alt={item.icon}
-                        width={60}
-                        height={60}
-                        style={{
-                          objectFit: "contain",
-                          borderRadius: "100%",
-                        }}
-                      />
-                    </Box>
-                    <Typography variant="h3">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.grey" sx={{ py: 1 }}>
-                      {item.desc}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
-    </Box >
+    <Section band="deep" inset>
+      <SectionHead
+        split
+        onDeep
+        eyebrow="How we work"
+        title="Three commitments you can hold us to"
+        lede="Stated concretely enough that you could check them against us at the end of an engagement."
+      />
+
+      <Box
+        sx={{
+          mt: { xs: 6, md: 9 },
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+          gap: { xs: 5, md: 6 },
+        }}
+      >
+        {features.map((item, i) => (
+          <Box
+            key={item.sNo}
+            sx={{
+              pt: 4,
+              pl: { md: i === 0 ? 0 : 4 },
+              pr: { md: 2 },
+              borderTop: "1px solid",
+              borderLeft: { md: i === 0 ? 0 : "1px solid" },
+              borderColor: color.ruleOnDeep,
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: font.display,
+                fontWeight: 300,
+                fontSize: "3rem",
+                lineHeight: 1,
+                letterSpacing: "-0.05em",
+                color: color.lime,
+              }}
+            >
+              {item.sNo}
+            </Typography>
+
+            <Typography variant="h4" sx={{ mt: 3, color: color.onDeep, maxWidth: "18ch" }}>
+              {item.title}
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{ mt: 2, color: color.onDeepMuted, maxWidth: measure.body }}
+            >
+              {item.desc}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+    </Section>
   );
 }
 

@@ -1,9 +1,20 @@
+// Research leads the nav on purpose: it is the thing that says "lab" before a
+// visitor reads a single word of copy.
 export const navItems = [
-  { label: "SERVICES", path: "/services" },
-  { label: "CASE STUDIES", path: "/case-studies" },
-  { label: "ABOUT US", path: "/about-us" },
-  { label: "CONTACT", path: "/contact" },
+  { label: "Research", path: "/research" },
+  { label: "Work", path: "/case-studies" },
+  { label: "What we do", path: "/services" },
+  { label: "About", path: "/about-us" },
+  { label: "Contact", path: "/contact" },
 ];
+
+export const site = {
+  motto: "AI engineering, applied machine learning & research",
+  email: "contact@14labs.co",
+  phone: "+92 318 7806914",
+  x: "https://x.com/14labs_co",
+  linkedin: "https://www.linkedin.com/company/14labs",
+};
 
 export const caseStudies = [
   {
@@ -20,158 +31,167 @@ export const caseStudies = [
   },
 ];
 
+// Framed as failure modes we have actually watched happen, not as a generic
+// list of pain points. Each one is answerable by something on the services page.
 export const challanges = [
   {
-    icon: "PrecisionManufacturing",
-    title: "Manual work slowing your team",
-    desc: "Repetitive workflows AI agents can automate",
+    sNo: "01",
+    title: "The demo works. The system doesn't.",
+    desc: "A prototype that answers ten hand-picked questions tells you almost nothing about the thousandth. Most pilots die between the notebook and the first real user.",
   },
   {
-    icon: "Hub",
-    title: "Siloed data across tools",
-    desc: "Knowledge locked in tools your models can't reach",
+    sNo: "02",
+    title: "Nobody can say whether it got better.",
+    desc: "Without an evaluation harness, every prompt change is an argument about vibes. Teams ship regressions they cannot see and roll back things that were working.",
   },
   {
-    icon: "ScienceOutlined",
-    title: "AI pilots that never ship",
-    desc: "Prototypes stuck in notebooks, not production",
+    sNo: "03",
+    title: "The knowledge is there. The model can't reach it.",
+    desc: "Context sits in warehouses, wikis, PDFs and six SaaS tools. Retrieval quality — not model choice — is what decides whether the answer is any good.",
   },
   {
-    icon: "TuneOutlined",
-    title: "Generic tools don't fit your workflow",
-    desc: "You need custom LLM pipelines, not generic tools",
+    sNo: "04",
+    title: "One agent became eleven, and now it's unreadable.",
+    desc: "Multi-agent systems fail quietly: a step retries forever, a tool returns nonsense, cost triples overnight. You need tracing before you need more agents.",
   },
 ];
 
 export const stats = [
-  { value: "15+", label: "Projects Delivered" },
-  { value: "10+", label: "Happy Clients" },
-  { value: "4+", label: "Years Experience" },
-  { value: "95%", label: "Client Satisfaction" },
+  { value: "15+", label: "Systems shipped", note: "In production, not pilots" },
+  { value: "10+", label: "Client teams", note: "Across four industries" },
+  { value: "4+", label: "Years building", note: "Since before the agent boom" },
+  { value: "95%", label: "Satisfaction", note: "Measured post-engagement" },
 ];
 
+// Presented as engagement shapes rather than packages. `question` is the thing
+// each one actually answers — that framing is what a lab sells, not a tier.
 export const pricing = [
   {
     title: "Pilot",
-    duration: "2-3 Weeks",
-    details: "One use-case, Measurable KPI, Limited integrations",
-    pricing: "$1000 - $3000",
+    duration: "2–3 weeks",
+    question: "Is this worth building at all?",
+    details: "One use case, One measurable KPI, Evaluation set you keep, Written go / no-go",
+    pricing: "$1,000 – $3,000",
   },
   {
-    title: "MVP",
-    duration: "4-6 Weeks",
-    details: "Production-ready version, Monitoring, Basic admin",
-    pricing: "$3000 - $8000",
+    title: "Build",
+    duration: "4–6 weeks",
+    question: "Make it survive real users.",
+    details: "Production deployment, Tracing and monitoring, CI regression gates, Handover documentation",
+    pricing: "$3,000 – $8,000",
   },
   {
-    title: "Scale",
+    title: "Partner",
     duration: "Ongoing",
-    details: "Retraining, Evals, New workflows, Cost optimization",
-    pricing: "$8000 +",
+    question: "Keep it improving after launch.",
+    details: "New workflows, Retraining and evals, Cost and latency tuning, Embedded with your team",
+    pricing: "$8,000+",
   },
 ];
 
+// Four practices, no web-development line. Everything here maps to work we
+// have shipped — the tags are capabilities, not keywords.
 export const services = [
   {
     sNo: "01",
-    title: "Multi-Agent Systems",
-    desc: "Development of multi-agent systems with built-in observability, enabling monitoring and optimizing specialized agents operating at enterprise scale.",
+    title: "Multi-agent systems",
+    desc: "Orchestrated pipelines where each step is a specialised agent with a defined contract, a budget and a trace. We design the topology, then build the plumbing that makes it debuggable at three in the morning.",
     tags: [
-      "Agent Orchestration",
-      "Built-in Observability",
-      "Enterprise Scale",
-      "Real-time Monitoring",
+      "Orchestration & routing",
+      "Tool and API contracts",
+      "Tracing & cost control",
+      "Failure and retry design",
     ],
   },
   {
     sNo: "02",
-    title: "AI Integration",
-    desc: "Seamlessly integrate AI capabilities into your existing systems. Enhance today's operations and drive tomorrow's breakthroughs with intelligent automation",
+    title: "Retrieval & knowledge systems",
+    desc: "Getting the right context in front of the model is most of the work. We build the ingestion, chunking, indexing and reranking layers — and measure retrieval quality separately from generation quality, because they fail for different reasons.",
     tags: [
-      "LLM Integration",
-      "Custom AI Models",
-      "Process Automation",
-      "Data Analytics",
+      "Hybrid & semantic retrieval",
+      "Document ingestion pipelines",
+      "Reranking & context assembly",
+      "Domain knowledge bases",
     ],
   },
   {
     sNo: "03",
-    title: "Custom AI Solutions",
-    desc: "Designing intelligent solutions for the future. We build custom AI models and applications tailored to your unique business challenges.",
+    title: "Applied machine learning",
+    desc: "Model work that starts from the decision it has to support. Fine-tuning where it earns its cost, classical models where they beat an LLM, and honest analysis of when neither is the answer.",
     tags: [
-      "RAG Systems",
-      "Fine-tuned Models",
-      "AI Chatbots",
-      "Knowledge Bases",
+      "Fine-tuning & adaptation",
+      "Structured extraction",
+      "Forecasting & classification",
+      "Data & feature pipelines",
     ],
   },
   {
     sNo: "04",
-    title: "Web & App Development",
-    desc: "Modern, AI-enhanced websites and applications built with cutting-edge technologies. From intelligent platforms to seamless mobile experiences.",
+    title: "Evaluation & reliability",
+    desc: "The part most teams skip. Golden sets, offline evals, regression gates in CI and production tracing — so a change to a prompt is a measurable engineering decision instead of a guess.",
     tags: [
-      "React & Next.js",
-      "Mobile Apps",
-      "AI-Powered UX",
-      "API Integration",
+      "Eval harnesses & golden sets",
+      "Regression gates in CI",
+      "Production observability",
+      "Latency & spend budgets",
     ],
   },
 ];
 
 export const tools = [
   {
-    techType: "AI & LLMs",
+    techType: "Models",
     values: [
-      { file: "openai-2", name: "OpenAI" },
       { file: "anthropic", name: "Anthropic" },
-      { file: "langchain", name: "LangChain" },
+      { file: "openai-2", name: "OpenAI" },
+      { file: "gemini", name: "Gemini" },
       { file: "huggingface", name: "Hugging Face" },
     ],
   },
   {
-    techType: "AI Infrastructure",
+    techType: "Orchestration",
     values: [
+      { file: "langchain", name: "LangChain" },
+      { file: "crewai", name: "CrewAI" },
       { file: "python-original", name: "Python" },
+    ],
+  },
+  {
+    techType: "Serving & data",
+    values: [
       { file: "fastapi-original", name: "FastAPI" },
       { file: "postgresql-original", name: "PostgreSQL" },
       { file: "redis-original", name: "Redis" },
+      { file: "supabase", name: "Supabase" },
     ],
   },
   {
-    techType: "Web & Mobile",
-    values: [
-      { file: "react-original", name: "React" },
-      { file: "nextjs-original", name: "Next.js" },
-      { file: "typescript-original", name: "TypeScript" },
-      { file: "reactnative-original", name: "React Native" },
-    ],
-  },
-  {
-    techType: "Cloud & DevOps",
+    techType: "Infrastructure",
     values: [
       { file: "amazonwebservices-original-wordmark", name: "AWS" },
       { file: "docker-original", name: "Docker" },
       { file: "kubernetes-original", name: "Kubernetes" },
-      { file: "vercel-original", name: "Vercel" },
     ],
   },
 ];
 
+// How we work. Deliberately stated as commitments that can be checked against
+// us later — "Fast / Competitive Pricing / Support" could have described anyone.
 export const features = [
   {
-    icon: "feature1.png",
-    title: "Fast",
-    desc: "Offering faster training times without compromising accuracy.",
+    sNo: "01",
+    title: "Measure before you optimise",
+    desc: "Every engagement starts by building the evaluation set. If we cannot tell you whether week four is better than week one, we have not built you a system — we have built you a demo.",
   },
   {
-    icon: "feature2.png",
-    title: "Competitive Pricing",
-    desc: "Providing competitive pricing options tailored to your budget & requirements.",
+    sNo: "02",
+    title: "Smallest thing that could work",
+    desc: "A regex beats a classifier beats a fine-tune beats an agent, until it doesn't. We reach for the cheapest mechanism that clears the bar and keep the complexity budget for where it actually buys accuracy.",
   },
   {
-    icon: "feature3.png",
-    title: "Support",
-    desc: "Ensuring ongoing support to maximize the value of our services.",
+    sNo: "03",
+    title: "You own what we build",
+    desc: "Source, infrastructure, evals and documentation land in your repositories as we go. No wrapper platform, no per-seat licence, nothing that stops working when the engagement ends.",
   },
 ];
 
@@ -270,7 +290,7 @@ export const caseDetails = [
     pipeline: {
       label: "Architecture",
       title: "Intelligent Pipeline Architecture",
-      text: "Click on any node to explore its role and data flow",
+      text: "Every node in the flow, in the order the data moves through it",
       nodes: [
         { id: "global", label: "Global Config", color: "#377BBB" },
         { id: "geo", label: "Geography Input", color: "#377BBB" },
@@ -632,5 +652,40 @@ export const values = [
   {
     title: "Genuine Partnership",
     desc: "We align seamlessly with your teams, keep our word, and stay invested in your outcomes long after delivery.",
+  },
+];
+
+/**
+ * The people on the engagement.
+ *
+ * PLACEHOLDER CONTENT — names and roles are scaffolding so the section can be
+ * built and reviewed. Replace every entry before this goes public.
+ *
+ * `photo` is a filename inside /public/media/team. Leave it out and the card
+ * falls back to a monogram tile, which is a deliberate design state rather than
+ * a broken image — so the section ships correctly with no photography at all,
+ * and upgrades one person at a time as headshots arrive.
+ */
+export const team = [
+  {
+    name: "Muhammad Baqir",
+    role: "Founder, AI engineering",
+    focus: "Agent topologies, tracing, cost control",
+    // photo: "baqir.jpg",
+  },
+  {
+    name: "Research lead",
+    role: "Retrieval & evaluation",
+    focus: "Ranking quality, golden sets, regression gates",
+  },
+  {
+    name: "ML engineer",
+    role: "Applied machine learning",
+    focus: "Fine-tuning, classical baselines, error analysis",
+  },
+  {
+    name: "Platform engineer",
+    role: "Infrastructure",
+    focus: "Deployment, observability, latency and spend",
   },
 ];

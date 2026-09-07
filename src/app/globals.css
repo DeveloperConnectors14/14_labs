@@ -1,0 +1,80 @@
+/* Base layer. MUI's CssBaseline handles the reset; this adds the things a
+   reset does not: selection colour, focus rings, and sane media defaults. */
+
+:root {
+  color-scheme: light;
+  --ground: #ebebeb;
+  --ink: #1c1c1c;
+  --accent: #006130;
+  --lime: #78d147;
+  --rule: #d4d4d4;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* GSAP ScrollTrigger drives scroll position directly, so CSS smooth scrolling
+   is deliberately left off — the two fight each other. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--ground);
+  color: var(--ink);
+  /* Stops the layout shifting sideways when a long page loses its scrollbar. */
+  scrollbar-gutter: stable;
+}
+
+::selection {
+  background-color: var(--ink);
+  color: var(--ground);
+}
+
+/* One visible focus ring for the whole site, keyboard-only. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+
+/* Headline numerals should line up in tables and stat rows. */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Interactive figures. Every diagram on the site is a server-rendered SVG, so
+   the hover behaviour is CSS only: a mark names itself when you point at it or
+   tab to it, and nothing about it needs JavaScript.
+
+   `.fx-hot` is the hit group, `.fx-tip` the readout, `.fx-grow` any mark that
+   should answer the pointer. Transform-box keeps the scale centred on the shape
+   rather than on the SVG origin. */
+.fx-hot { cursor: crosshair; }
+.fx-hot .fx-tip { opacity: 0; transition: opacity 140ms ease; pointer-events: none; }
+.fx-hot:hover .fx-tip,
+.fx-hot:focus-visible .fx-tip { opacity: 1; }
+.fx-grow {
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), opacity 140ms ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fx-hot:hover .fx-grow,
+.fx-hot:focus-visible .fx-grow { transform: scale(1.3); opacity: 1; }
+.fx-hot:focus { outline: none; }
+.fx-lift {
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fx-hot:hover .fx-lift,
+.fx-hot:focus-visible .fx-lift { transform: scale(1.07); }
+.fx-mark { transition: opacity 140ms ease; }
+.fx-hot:hover .fx-mark,
+.fx-hot:focus-visible .fx-mark { opacity: 1; }

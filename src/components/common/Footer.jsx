@@ -1,119 +1,144 @@
-"use client";
-
-import React from "react";
-import Link from "next/link";
-import {
-    Box,
-    Container,
-    Grid,
-    Typography,
-    Divider,
-    Button,
-} from "@mui/material";
-
-import XIcon from "@mui/icons-material/X";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Image from "next/image";
-import { getNavItems } from "@/services/dataService";
-import { SECTION_PX } from "@/theme/tokens";
+import { Box, Container, Typography } from "@mui/material";
+import LinkBox from "@/components/ui/LinkBox";
+import { getNavItems, getServices, getSite } from "@/services/dataService";
+import { color, motion, layout } from "@/theme/tokens";
 
 const navItems = getNavItems();
+const services = getServices();
+const site = getSite();
 
-const Footer = () => {
+const linkSx = {
+    textDecoration: "none",
+    color: color.onBlackMuted,
+    fontSize: "0.9375rem",
+    lineHeight: 2,
+    transition: `color ${motion.fast}`,
+    "&:hover": { color: color.lime },
+};
+
+function FooterColumn({ heading, children }) {
     return (
-        <Box sx={{ px: SECTION_PX, py: 5 }}>
-            <Grid container alignItems="center" spacing={3}>
-                <Grid size={{ xs: 6, md: 3 }}>
-                    <Button
-                        component={Link}
-                        href="/"
-                        sx={{
-                            "&:hover": {
-                                backgroundColor: "transparent",
-                            },
-                        }}
-                    >
-                        <Image
-                            src="/media/logo.svg"
-                            alt="14Labs Logo"
-                            width={85.53}
-                            height={32}
-                        />
-                    </Button>
-                </Grid>
-                <Grid size={{ xs: 12, md: 6 }} sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", alignItems: "center", }}>
-                    <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-evenly", alignItems: "center", width: "100%" }}>
-
-                        {navItems.map((item) => (
-                            <Link key={item.path} href={item.path} style={{
-                                textDecoration: "none",
-                            }}>
-                                <Typography sx={{
-                                    fontStyle: "medium",
-                                    height: "24px",
-                                    fontWeight: 500,
-                                    fontsize: "16px",
-                                    lineHeight: "150%",
-                                    color: "text.primary",
-                                    transition: 'all 0.3s ease',
-                                    fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
-                                        color: "text.secondary",
-                                    },
-                                }}>
-                                    {item.label}
-                                </Typography>
-                            </Link>
-                        ))}
-                    </Box>
-                </Grid>
-                <Grid size={{ xs: 6, sm: 6, md: 3 }}>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "flex-end",
-                        }}
-                    >
-                        <Link
-                            href="https://x.com/14labs_co"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ display: "inline-flex", padding: 8 }}
-                        >
-                            <XIcon fontSize="small" sx={{
-                                color: "text.black",
-                                transition: "color 0.3s ease",
-                                "&:hover": {
-                                    color: "text.secondary",
-                                },
-                            }} />
-                        </Link>
-                        <Link
-                            href="https://www.linkedin.com/company/14labs"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ display: "inline-flex", padding: 8 }}
-                        >
-                            <LinkedInIcon fontSize="small" sx={{
-                                color: "text.black",
-                                transition: "color 0.3s ease",
-                                "&:hover": {
-                                    color: "text.secondary",
-                                },
-                            }} />
-                        </Link>
-                    </Box>
-                </Grid>
-            </Grid>
-
-            <Divider sx={{ my: 3 }} />
-
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, pt: 1 }}>
-                <Typography variant="body2" sx={{ color: "text.grey" }}>
-                    © Copyright 2026, All Rights Reserved
-                </Typography>
+        <Box>
+            <Typography variant="eyebrow" sx={{ color: color.onBlackMuted, mb: 2.5 }}>
+                {heading}
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                {children}
             </Box>
         </Box>
     );
-};
+}
+
+function Footer() {
+    return (
+        <Box
+            component="footer"
+            /* Black rather than the darkest green. The closing CTA above it is
+               already a deep green band, and two greens stacked read as one
+               long section with a rule through it; black gives the page a
+               floor. It is the palette's second dark tone and already carries
+               its own on-black text and rule steps, so nothing here is a
+               one-off colour. */
+            sx={{
+                backgroundColor: color.black,
+                color: color.onBlack,
+                paddingBlock: "clamp(48px, 6vw, 88px)",
+            }}
+        >
+            <Container>
+                <Box
+                    sx={{
+                        display: "grid",
+                        gridTemplateColumns: {
+                            xs: "1fr",
+                            sm: "repeat(2, 1fr)",
+                            md: "1.6fr repeat(3, 1fr)",
+                        },
+                        gap: { xs: 5, md: 6 },
+                    }}
+                >
+                    <Box>
+                        <LinkBox href="/" aria-label="14Labs home" sx={{ display: "inline-flex" }}>
+                            <Image src="/media/logo-onink.svg" alt="14Labs" width={92} height={34} />
+                        </LinkBox>
+                        <Typography
+                            sx={{
+                                mt: 3,
+                                maxWidth: "30ch",
+                                fontSize: "1.0625rem",
+                                lineHeight: 1.55,
+                                color: color.onBlackMuted,
+                            }}
+                        >
+                            AI engineering, applied machine learning and research — built to run
+                            in production, not in a notebook.
+                        </Typography>
+                    </Box>
+
+                    <FooterColumn heading="Site">
+                        {navItems.map((item) => (
+                            <LinkBox key={item.path} href={item.path} sx={linkSx}>
+                                {item.label}
+                            </LinkBox>
+                        ))}
+                    </FooterColumn>
+
+                    <FooterColumn heading="Practice">
+                        {services.map((service) => (
+                            <LinkBox key={service.sNo} href="/services" sx={linkSx}>
+                                {service.title}
+                            </LinkBox>
+                        ))}
+                    </FooterColumn>
+
+                    <FooterColumn heading="Contact">
+                        <Box component="a" href={`mailto:${site.email}`} sx={linkSx}>
+                            {site.email}
+                        </Box>
+                        <Box
+                            component="a"
+                            href={site.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={linkSx}
+                        >
+                            LinkedIn
+                        </Box>
+                        <Box
+                            component="a"
+                            href={site.x}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={linkSx}
+                        >
+                            X / Twitter
+                        </Box>
+                    </FooterColumn>
+                </Box>
+
+                <Box
+                    sx={{
+                        mt: { xs: 6, md: 9 },
+                        pt: 3,
+                        borderTop: "1px solid",
+                        borderColor: color.ruleOnBlack,
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 2,
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <Typography variant="caption" sx={{ color: color.onBlackMuted }}>
+                        © {new Date().getFullYear()} 14Labs
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: color.onBlackMuted }}>
+                        AI Engineering · Applied ML · Research
+                    </Typography>
+                </Box>
+            </Container>
+        </Box>
+    );
+}
 
 export default Footer;

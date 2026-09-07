@@ -1,55 +1,98 @@
+import { Box, Typography } from "@mui/material";
+import Section from "@/components/ui/Section";
 import { getStats } from "@/services/dataService";
-import { Box, Grid, Typography } from "@mui/material";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+import { color, font, radius } from "@/theme/tokens";
 
 const stats = getStats();
 
+/**
+ * The figures, on a ramp that darkens left to right and lands on the deep
+ * green. Four identical white slabs was the correct call when the page had no
+ * other colour in it; now that the band above is full-bleed green, the row
+ * reads as a bridge out of it rather than as a hard reset to grey.
+ *
+ * Deliberately no figure behind the numerals. A distribution was drawn on the
+ * last card and it lost: the whole job of a stat card is one number read at a
+ * glance, and anything behind it is competing with the only thing it is for.
+ */
+const TONES = [
+  { bg: color.surface, fg: color.ink, muted: color.inkFaint, rule: color.lime },
+  { bg: color.green05, fg: color.ink, muted: color.inkFaint, rule: color.lime },
+  { bg: color.green20, fg: color.ink, muted: color.inkMuted, rule: color.accent },
+  { bg: color.deep, fg: color.onDeep, muted: color.onDeepMuted, rule: color.lime },
+];
+
 function ImpactSection() {
   return (
-    <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-      <Grid container spacing={3}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <Typography variant="h2" sx={{ color: "text.primary" }}>
-            Our <Box component="span" sx={{ color: "text.secondary" }}>
-              impact
-            </Box>
-          </Typography>
-          <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            From multi-agent systems to custom LLM integrations, we specialize in building AI infrastructure that scales. We believe in genuine support, seamless team alignment, and delivering outcomes that matter.
-          </Typography>
-        </Grid>
-        <Grid size={12}>
-          <Grid container spacing={3}>
-            {stats.slice(0, 3).map((item, i) => (
-              < Grid size={{ xs: 12, sm: (i === 0 ? 12 : 6), md: (i === 0 ? 6 : 3) }} key={i}>
+    <Section tight>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(4, 1fr)" },
+          gap: { xs: 1.5, md: 2 },
+        }}
+      >
+        {stats.map((item, i) => {
+          const t = TONES[i % TONES.length];
+
+          return (
+            <Box
+              key={item.label}
+              sx={{
+                position: "relative",
+                overflow: "hidden",
+                backgroundColor: t.bg,
+                borderRadius: radius.lg,
+                px: { xs: 2.5, md: 3.5 },
+                py: { xs: 3, md: 4 },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                minHeight: { xs: 160, md: 220 },
+              }}
+            >
+              <Typography
+                className="tabular"
+                sx={{
+                  position: "relative",
+                  fontFamily: font.display,
+                  fontWeight: 300,
+                  fontSize: "clamp(2.75rem, 1.6rem + 4vw, 4.5rem)",
+                  lineHeight: 1,
+                  letterSpacing: "-0.05em",
+                  color: t.fg,
+                }}
+              >
+                {item.value}
+              </Typography>
+
+              <Box sx={{ position: "relative", mt: 3 }}>
                 <Box
+                  aria-hidden
+                  sx={{ width: 32, height: "3px", backgroundColor: t.rule, mb: 2 }}
+                />
+                <Typography
                   sx={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 2.5,
-                    p: 2,
-                    borderRadius: CARD_RADIUS,
-                    border: 1,
-                    borderColor: "divider",
-                    backgroundColor: "background.paper",
-                    transition: "0.3s",
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    color: t.fg,
+                    letterSpacing: "-0.012em",
                   }}
                 >
-                  <Box>
-                    <Typography sx={{ lineHeight: 1, mb: 3, fontWeight: 700, fontSize: { xs: "48px", sm: "72px", md: "104px" }, color: "text.primary", fontFamily: "'Instrument Sans', sans-serif" }}>
-                      {item.value}
-                    </Typography>
-                    <Typography variant="h3" sx={{ color: "text.black" }}>
-                      {item.label}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
-    </Box >
+                  {item.label}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ display: "block", mt: 0.75, color: t.muted }}
+                >
+                  {item.note}
+                </Typography>
+              </Box>
+            </Box>
+          );
+        })}
+      </Box>
+    </Section>
   );
 }
 
