@@ -90,8 +90,12 @@ const IN_THE_LAB = [
 const headlineSx = {
   fontFamily: "var(--font-display)",
   fontWeight: 400,
-  lineHeight: 0.86,
-  letterSpacing: "-0.05em",
+  lineHeight: 0.88,
+  // Tight, but not so tight the letters touch. At -0.05em pairs like the "y t"
+  // in "systems that" collided at hero size; the word gap goes back separately
+  // because negative tracking eats the space character along with the letters.
+  letterSpacing: "-0.025em",
+  wordSpacing: "0.06em",
   color: color.ink,
   "@keyframes heroLineIn": {
     from: { clipPath: "inset(0 0 104% 0)", translate: "0 0.12em" },
