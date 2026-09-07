@@ -90,14 +90,14 @@ const IN_THE_LAB = [
 const headlineSx = {
   fontFamily: "var(--font-display)",
   fontWeight: 400,
-  lineHeight: 0.88,
-  // Near-normal tracking, and the word gap opened past it. This used to run at
-  // -0.05em, where pairs like the "y t" in "systems that" touched at hero size.
-  // Loosening it is not free: FitLines re-fits the line to the same width, so a
-  // wider setting comes back as a smaller font-size, and a small nudge cancels
-  // itself out. Only a change this size actually reads as air between letters.
-  letterSpacing: "-0.008em",
-  wordSpacing: "0.09em",
+  // Leading is set off the two glyphs that decide it, not off taste: Inter
+  // Tight drops "y" about 0.21em below the baseline and carries "t" about
+  // 0.70em above it, so anything under ~0.91em lets the descenders of one line
+  // land on the ascenders of the next — which is what 0.86 was doing to the "y"
+  // in "systems" and the "t" in "contact". This keeps the poster stack tight
+  // and leaves roughly 0.05em of daylight between the two.
+  lineHeight: 0.96,
+  letterSpacing: "-0.05em",
   color: color.ink,
   "@keyframes heroLineIn": {
     from: { clipPath: "inset(0 0 104% 0)", translate: "0 0.12em" },
