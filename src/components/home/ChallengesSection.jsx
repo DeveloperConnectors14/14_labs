@@ -87,6 +87,12 @@ function PanelBody({ item, index, t, animated }) {
 
   return (
     <Container
+      /* The dimming of an outgoing panel is applied here rather than to the
+         panel itself: the panel carries the opaque background that hides the
+         panels stacked beneath it, and fading that background turns the whole
+         stack translucent — which is how two panels' worth of headline ended
+         up legible at once. */
+      className="panel-body"
       sx={{
         height: animated ? "100%" : "auto",
         display: "flex",
@@ -233,13 +239,17 @@ function ChallengesSection() {
       });
 
       panels.slice(1).forEach((panel, i) => {
+        const outgoing = panels[i];
+
         timeline
           .to(panel, { yPercent: 0, ease: "none" }, i)
-          // The outgoing panel drifts and dims slightly, so the covering motion
-          // reads as depth rather than as a sheet of paper sliding.
+          // The outgoing panel drifts and its content dims, so the covering
+          // motion reads as depth rather than as a sheet of paper sliding. The
+          // panel keeps full opacity; only its contents fade.
+          .to(outgoing, { yPercent: -12, ease: "none" }, i)
           .to(
-            panels[i],
-            { yPercent: -12, opacity: 0.55, ease: "none" },
+            outgoing.querySelector(".panel-body"),
+            { opacity: 0.55, ease: "none" },
             i
           );
       });

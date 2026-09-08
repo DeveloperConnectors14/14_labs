@@ -14,6 +14,7 @@ import {
     useScrollTrigger,
 } from "@mui/material";
 import { getNavItems } from "@/services/dataService";
+import { useNavHidden } from "@/components/common/navVisibility";
 import { color, layout, motion, radius } from "@/theme/tokens";
 
 const navItems = getNavItems();
@@ -55,6 +56,10 @@ function Navbar() {
 
     const isScrolled = useScrollTrigger({ disableHysteresis: true, threshold: 8 });
 
+    // Pinned full-bleed sections take the bar off screen while they hold the
+    // viewport — see navVisibility.
+    const hidden = useNavHidden();
+
     // Route changes should never leave the overlay hanging open.
     useEffect(() => {
         setMobileOpen(false);
@@ -83,7 +88,12 @@ function Navbar() {
                     backdropFilter: isScrolled ? "saturate(180%) blur(12px)" : "none",
                     borderBottom: "1px solid",
                     borderColor: isScrolled ? color.rule : "transparent",
-                    transition: `border-color ${motion.base}, background-color ${motion.base}`,
+                    transform: hidden ? "translateY(-100%)" : "none",
+                    // Leaves before it fades so the bar does not sit half-lit
+                    // over the panel it is uncovering.
+                    opacity: hidden ? 0 : 1,
+                    pointerEvents: hidden ? "none" : "auto",
+                    transition: `border-color ${motion.base}, background-color ${motion.base}, transform ${motion.base}, opacity ${motion.fast}`,
                     zIndex: 1300,
                 }}
             >

@@ -6,7 +6,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SignalPanel from "@/components/home/SignalPanel";
 import RetrievalLab from "@/components/home/RetrievalLab";
-import { color, layout } from "@/theme/tokens";
+import { holdNav } from "@/components/common/navVisibility";
+import { color } from "@/theme/tokens";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -57,7 +58,33 @@ function LoadSequence() {
   useIsomorphicLayoutEffect(() => {
     if (!animated || !runwayRef.current || !trackRef.current) return;
 
+    // The rail fills the viewport for its whole runway, and the fixed nav sits
+    // over the panel headings the entire time. It leaves while the rail holds
+    // and comes back the moment the pin releases.
+    let releaseNav = null;
+
     const ctx = gsap.context(() => {
+      const navHold = ScrollTrigger.create({
+        trigger: runwayRef.current,
+        start: "top top",
+        // The sticky child unsticks exactly when the runway's bottom reaches
+        // the bottom of the viewport, so that is where the hold ends.
+        end: "bottom bottom",
+        invalidateOnRefresh: true,
+        onToggle: (self) => {
+          if (self.isActive) {
+            releaseNav = releaseNav || holdNav();
+          } else if (releaseNav) {
+            releaseNav();
+            releaseNav = null;
+          }
+        },
+      });
+
+      // A reload landing mid-rail creates the trigger already active, and
+      // ScrollTrigger does not replay onToggle for the state it starts in.
+      if (navHold.isActive) releaseNav = releaseNav || holdNav();
+
       gsap.to(trackRef.current, {
         /* The track is two panels wide, so half of it is exactly one panel. */
         xPercent: -50,
@@ -80,7 +107,15 @@ function LoadSequence() {
       });
     }, runwayRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      // ScrollTrigger.kill() does not fire onToggle, so a rail unmounted while
+      // it is pinned would take the nav with it.
+      if (releaseNav) {
+        releaseNav();
+        releaseNav = null;
+      }
+    };
   }, [animated]);
 
   if (!animated) {
@@ -129,8 +164,6 @@ function LoadSequence() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                /* The nav is fixed and sits over the rail. */
-                paddingTop: `${layout.navHeight.md}px`,
                 overflow: "hidden",
               }}
             >
