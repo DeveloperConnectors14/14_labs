@@ -5,10 +5,14 @@ const BANDS = {
   ground: { backgroundColor: color.ground, color: color.ink },
   surface: { backgroundColor: color.surface, color: color.ink },
   alt: { backgroundColor: color.surfaceAlt, color: color.ink },
-  // The lightest step of the green ramp. Reads as a surface rather than as a
+  // The lightest step of the sand ramp. Reads as a surface rather than as a
   // colour, which is the point: it separates two adjacent white slabs without
-  // spending a second strong tone on the page.
-  tint: { backgroundColor: color.green05, color: color.ink },
+  // spending a strong tone on the page.
+  tint: { backgroundColor: color.sand05, color: color.ink },
+  // Peach in the light theme, a warm brown-black in the dark one. Text on it
+  // is the ordinary ink, so anything written for the ground works here as is.
+  warm: { backgroundColor: color.warm, color: color.ink },
+  // Forest. The primary — keep it to the closing band and the odd highlight.
   deep: { backgroundColor: color.deep, color: color.onDeep },
   black: { backgroundColor: color.black, color: color.onBlack },
   deepAlt: { backgroundColor: color.deepAlt, color: color.onDeep },

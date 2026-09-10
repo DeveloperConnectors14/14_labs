@@ -76,7 +76,7 @@ function ResearchPreview() {
                 position: "relative",
                 height: { xs: 132, md: 150 },
                 borderRadius: radius.md,
-                backgroundColor: color.green10,
+                backgroundColor: color.sand10,
                 overflow: "hidden",
                 transition: `background-color ${motion.base}`,
               }}
@@ -130,7 +130,7 @@ function ResearchPreview() {
                     fontSize: "1.75rem",
                     lineHeight: 1,
                     letterSpacing: "-0.04em",
-                    color: color.green45,
+                    color: color.sand45,
                     transition: `color ${motion.base}`,
                   }}
                 >

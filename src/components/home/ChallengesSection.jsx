@@ -18,19 +18,19 @@ gsap.registerPlugin(ScrollTrigger);
 const challenges = getChallanges();
 
 /**
- * Panel tones walk one ramp: paper, grey, deep green, black. Keeping them on a
+ * Panel tones walk one warm ramp: paper, cream, peach, brown. Keeping them on a
  * single ramp is what makes the sequence read as one idea getting heavier
- * rather than as four unrelated coloured slides — and the last step lands on
- * black rather than on a fourth green, which is where the page would otherwise
- * start repeating itself.
+ * rather than as four unrelated coloured slides. There is no forest panel on
+ * purpose — four full screens is too much area to hand the primary, and the
+ * figures on the light panels already carry one green line each.
  *
  * `card` is the figure plate, always one step away from the panel it sits on —
  * a plate the same colour as its ground is not a plate.
  */
 const PANEL_TONES = [
-  { bg: color.surface, fg: color.ink, muted: color.inkMuted, faint: color.inkFaint, rule: color.rule, card: color.green05, cardRule: color.green20, fig: "light" },
+  { bg: color.surface, fg: color.ink, muted: color.inkMuted, faint: color.inkFaint, rule: color.rule, card: color.sand05, cardRule: color.sand20, fig: "light" },
   { bg: color.surfaceAlt, fg: color.ink, muted: color.inkMuted, faint: color.inkFaint, rule: color.ruleStrong, card: color.surface, cardRule: color.rule, fig: "light" },
-  { bg: color.deep, fg: color.onDeep, muted: color.onDeepMuted, faint: color.lime, rule: color.ruleOnDeep, card: color.deepAlt, cardRule: color.ruleOnDeep, fig: "deep" },
+  { bg: color.warm, fg: color.ink, muted: color.inkMuted, faint: color.warmMark, rule: color.ruleOnWarm, card: color.warmAlt, cardRule: color.ruleOnWarm, fig: "light" },
   { bg: color.black, fg: color.onBlack, muted: color.onBlackMuted, faint: color.lime, rule: color.ruleOnBlack, card: color.blackAlt, cardRule: color.ruleOnBlack, fig: "black" },
 ];
 

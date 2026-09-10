@@ -7,13 +7,13 @@ import { color, font } from "@/theme/tokens";
 const services = getServices();
 
 /**
- * The curtain. This is the first band that scrolls over the pinned hero, so it
- * runs full bleed in the darkest green on the site — the hero goes soft behind
- * a hard edge, which is the whole reason the defocus reads as depth instead of
- * as a smear.
+ * The four practices, straight after the hero, on the cream surface.
  *
- * It used to be a rounded slab inside the hero. Moving it out is what let the
- * hero fit one viewport.
+ * This was a full-bleed forest band. It was the first thing under the hero and
+ * the page's first strong colour, which spent the primary on an index — and
+ * made green the colour of the page rather than the colour of its actions. It
+ * is now a quiet step off the ground, with brown numerals, so the first green a
+ * reader meets below the fold is a button.
  */
 function PracticeIndex() {
   return (
@@ -22,8 +22,8 @@ function PracticeIndex() {
       sx={{
         position: "relative",
         overflow: "hidden",
-        backgroundColor: color.deep,
-        color: color.onDeep,
+        backgroundColor: color.surfaceAlt,
+        color: color.ink,
         paddingBlock: { xs: "56px", md: "clamp(64px, 8vw, 104px)" },
       }}
     >
@@ -38,11 +38,11 @@ function PracticeIndex() {
           top: "-24%",
           right: "-10%",
           width: { xs: "80%", md: "38%" },
-          opacity: 0.1,
+          opacity: 0.35,
           pointerEvents: "none",
         }}
       >
-        <SignalGrid tone="deep" seed={44} style={{ width: "100%", height: "auto" }} />
+        <SignalGrid tone="light" seed={44} style={{ width: "100%", height: "auto" }} />
       </Box>
 
       <Container sx={{ position: "relative" }}>
@@ -54,19 +54,17 @@ function PracticeIndex() {
             gap: { xs: 3, md: 6 },
             pb: { xs: 5, md: 7 },
             borderBottom: "1px solid",
-            borderColor: color.ruleOnDeep,
+            borderColor: color.ruleStrong,
           }}
         >
           <Typography
             variant="h3"
             component="h2"
-            sx={{ color: color.onDeep, maxWidth: "34ch" }}
+            sx={{ color: color.ink, maxWidth: "34ch" }}
           >
             Four practices. One engineering standard applied across all of them.
           </Typography>
-          <ActionLink href="/services" onDeep>
-            What we do
-          </ActionLink>
+          <ActionLink href="/services">What we do</ActionLink>
         </Box>
 
         <Box
@@ -88,7 +86,7 @@ function PracticeIndex() {
                 pl: { md: i === 0 ? 0 : 4 },
                 pr: { md: 3 },
                 borderLeft: { md: i === 0 ? 0 : "1px solid" },
-                borderColor: { md: color.ruleOnDeep },
+                borderColor: { md: color.ruleStrong },
               }}
             >
               <Typography
@@ -98,7 +96,7 @@ function PracticeIndex() {
                   fontSize: "2.25rem",
                   lineHeight: 1,
                   letterSpacing: "-0.04em",
-                  color: color.lime,
+                  color: color.warmMark,
                 }}
               >
                 {service.sNo}
@@ -108,7 +106,7 @@ function PracticeIndex() {
                   mt: 1.5,
                   fontSize: "1rem",
                   fontWeight: 500,
-                  color: color.onDeep,
+                  color: color.ink,
                   letterSpacing: "-0.012em",
                 }}
               >
@@ -116,7 +114,7 @@ function PracticeIndex() {
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ mt: 1, color: color.onDeepMuted, maxWidth: "26ch" }}
+                sx={{ mt: 1, color: color.inkMuted, maxWidth: "26ch" }}
               >
                 {service.tags[0]}
               </Typography>

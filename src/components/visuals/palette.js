@@ -7,18 +7,18 @@ import { color } from "@/theme/tokens";
  * can never quietly invent a colour.
  *
  * Every entry is a theme variable, so a figure follows the light/dark switch
- * without knowing it exists. The ground palette leads with `accent` rather than
- * `deep` for that reason: forest is a band colour, and on the dark ground it is
- * a line nobody can see. `accent` is forest in the light theme and peach in the
- * dark one — peach never lands on cream, where it sits around 1.2:1.
+ * without knowing it exists. On the ground, the lead series is `accent` — forest
+ * in the light theme, a light sage in the dark one — and everything behind it is
+ * sand, so a chart has exactly one green line and it is the one that matters.
+ * Peach never lands on cream, where it sits around 1.2:1.
  */
 const PALETTES = {
   light: {
-    field: color.green20,
+    field: color.sand20,
     grid: color.rule,
     axis: color.ruleStrong,
-    mark: color.green45,
-    series: [color.accent, color.green60, color.green30],
+    mark: color.sand45,
+    series: [color.accent, color.green60, color.sand30],
     highlight: color.accent,
     // Text sitting *inside* a filled highlight. It flips with the highlight.
     onHighlight: color.onAccent,
@@ -42,7 +42,7 @@ const PALETTES = {
   deep: {
     field: color.ruleOnDeep,
     grid: color.ruleOnDeep,
-    axis: color.green70,
+    axis: color.ruleOnDeep,
     mark: color.onDeepMuted,
     series: [color.lime, color.limeSoft, color.onDeepMuted],
     highlight: color.lime,

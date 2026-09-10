@@ -6,19 +6,19 @@ import { color, font, radius } from "@/theme/tokens";
 const stats = getStats();
 
 /**
- * The figures, on a ramp that darkens left to right and lands on the deep
- * green. Four identical white slabs was the correct call when the page had no
- * other colour in it; now that the band above is full-bleed green, the row
- * reads as a bridge out of it rather than as a hard reset to grey.
+ * The figures, on a warm ramp that deepens left to right — white, sand, peach —
+ * and lands on forest. One tile of the primary, at the end of the row, is the
+ * whole of the green here: the ramp walks up to it, so it reads as the
+ * destination rather than as one more coloured card.
  *
  * Deliberately no figure behind the numerals. A distribution was drawn on the
  * last card and it lost: the whole job of a stat card is one number read at a
  * glance, and anything behind it is competing with the only thing it is for.
  */
 const TONES = [
-  { bg: color.surface, fg: color.ink, muted: color.inkFaint, rule: color.lime },
-  { bg: color.green05, fg: color.ink, muted: color.inkFaint, rule: color.lime },
-  { bg: color.green20, fg: color.ink, muted: color.inkMuted, rule: color.accent },
+  { bg: color.surface, fg: color.ink, muted: color.inkFaint, rule: color.limeDeep },
+  { bg: color.sand10, fg: color.ink, muted: color.inkFaint, rule: color.limeDeep },
+  { bg: color.warm, fg: color.ink, muted: color.inkMuted, rule: color.warmMark },
   { bg: color.deep, fg: color.onDeep, muted: color.onDeepMuted, rule: color.lime },
 ];
 

@@ -70,7 +70,7 @@ function SingleCaseApproach({ approaches }) {
                 width: 9,
                 height: 9,
                 borderRadius: radius.pill,
-                backgroundColor: color.green45,
+                backgroundColor: color.sand45,
                 transformOrigin: "center",
                 transition: `background-color ${motion.base}, transform ${motion.base}`,
               }}

@@ -96,7 +96,7 @@ function AboutPage() {
                       color: color.accent,
                       backgroundColor: color.surface,
                       border: "1px solid",
-                      borderColor: color.green20,
+                      borderColor: color.sand20,
                       borderRadius: radius.pill,
                       px: 1.75,
                       py: 0.75,
@@ -111,9 +111,9 @@ function AboutPage() {
             <Box
               sx={{
                 display: { xs: "none", md: "block" },
-                backgroundColor: color.green05,
+                backgroundColor: color.sand05,
                 border: "1px solid",
-                borderColor: color.green20,
+                borderColor: color.sand20,
                 borderRadius: radius.lg,
                 p: 4,
               }}
@@ -126,7 +126,7 @@ function AboutPage() {
                   mt: 3,
                   pt: 3,
                   borderTop: "1px solid",
-                  borderColor: color.green20,
+                  borderColor: color.sand20,
                   color: color.inkMuted,
                 }}
               >
@@ -169,7 +169,7 @@ function AboutPage() {
                 },
               }}
             >
-              <Typography variant="eyebrow" sx={{ color: color.green45, minWidth: "3ch" }}>
+              <Typography variant="eyebrow" sx={{ color: color.sand45, minWidth: "3ch" }}>
                 {String(i + 1).padStart(2, "0")}
               </Typography>
               <Typography variant="h3" sx={{ color: color.ink, maxWidth: "20ch" }}>
@@ -206,7 +206,7 @@ function AboutPage() {
             <Box
               key={value.title}
               sx={{
-                backgroundColor: color.green05,
+                backgroundColor: color.sand05,
                 borderRadius: radius.lg,
                 p: { xs: 3, md: 3.5 },
               }}

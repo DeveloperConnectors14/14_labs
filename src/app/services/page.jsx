@@ -108,7 +108,7 @@ function ServicesPage() {
                     "&:hover": { color: color.accent, paddingLeft: "8px" },
                   }}
                 >
-                  <Typography variant="caption" sx={{ color: color.green45 }}>
+                  <Typography variant="caption" sx={{ color: color.sand45 }}>
                     {service.sNo}
                   </Typography>
                   <Typography sx={{ fontSize: "1rem", fontWeight: 500 }}>
@@ -199,7 +199,7 @@ function ServicesPage() {
                           width: 5,
                           height: 5,
                           borderRadius: radius.pill,
-                          backgroundColor: color.green45,
+                          backgroundColor: color.sand45,
                         }}
                       />
                       <Typography variant="body2" sx={{ color: color.inkMuted }}>
@@ -214,9 +214,9 @@ function ServicesPage() {
                 <Box
                   sx={{
                     order: { md: flipped ? 1 : 2 },
-                    backgroundColor: i % 2 === 0 ? color.green05 : color.surface,
+                    backgroundColor: i % 2 === 0 ? color.sand05 : color.surface,
                     border: "1px solid",
-                    borderColor: i % 2 === 0 ? color.green20 : color.rule,
+                    borderColor: i % 2 === 0 ? color.sand20 : color.rule,
                     borderRadius: radius.lg,
                     p: { xs: 2.5, md: 4 },
                     display: "flex",
@@ -261,7 +261,7 @@ function ServicesPage() {
                 borderColor: color.rule,
               }}
             >
-              <Typography variant="eyebrow" sx={{ color: color.green45 }}>
+              <Typography variant="eyebrow" sx={{ color: color.sand45 }}>
                 {String(i + 1).padStart(2, "0")}
               </Typography>
               <Typography

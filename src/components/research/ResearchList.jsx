@@ -60,7 +60,7 @@ function ResearchList({ posts }) {
                 px: 2,
                 py: 1,
                 border: "1px solid",
-                borderColor: active ? color.deep : color.green20,
+                borderColor: active ? color.deep : color.sand20,
                 backgroundColor: active ? color.deep : color.surface,
                 color: active ? color.onDeep : color.inkMuted,
                 borderRadius: radius.pill,
@@ -68,7 +68,7 @@ function ResearchList({ posts }) {
                 font: "inherit",
                 transition: `background-color ${motion.fast}, color ${motion.fast}, border-color ${motion.fast}`,
                 "&:hover": {
-                  borderColor: active ? color.deep : color.green45,
+                  borderColor: active ? color.deep : color.sand45,
                   color: active ? color.onDeep : color.ink,
                 },
               }}
@@ -107,7 +107,7 @@ function ResearchList({ posts }) {
               borderColor: color.rule,
               textDecoration: "none",
               "&:hover .post-title": { color: color.accent },
-              "&:hover .row-plate": { backgroundColor: color.green20 },
+              "&:hover .row-plate": { backgroundColor: color.sand20 },
             }}
           >
             <Box
@@ -120,7 +120,7 @@ function ResearchList({ posts }) {
                 px: 1.5,
                 py: 1,
                 borderRadius: radius.md,
-                backgroundColor: color.green10,
+                backgroundColor: color.sand10,
                 transition: `background-color ${motion.base}`,
               }}
             >

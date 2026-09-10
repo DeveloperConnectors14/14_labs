@@ -2,17 +2,17 @@ import { Box, Typography } from "@mui/material";
 import { color, font, motion, radius } from "@/theme/tokens";
 
 /**
- * A row of figures, on a ramp that darkens left to right and lands on the deep
- * green — the same device the home page uses for its numbers, kept in one place
- * so a case study can never invent a second style of stat card.
+ * A row of figures, on a warm ramp that deepens left to right and lands on
+ * forest — the same device the home page uses for its numbers, kept in one
+ * place so a case study can never invent a second style of stat card.
  *
  * The ramp is walked, not repeated: with three slabs the row still ends on the
- * dark step, so a row of three and a row of four read as the same object.
+ * forest step, so a row of three and a row of four read as the same object.
  */
 const RAMP = [
-  { bg: color.surface, fg: color.ink, muted: color.inkFaint, rule: color.lime },
-  { bg: color.green05, fg: color.ink, muted: color.inkFaint, rule: color.lime },
-  { bg: color.green20, fg: color.ink, muted: color.inkMuted, rule: color.accent },
+  { bg: color.surface, fg: color.ink, muted: color.inkFaint, rule: color.limeDeep },
+  { bg: color.sand10, fg: color.ink, muted: color.inkFaint, rule: color.limeDeep },
+  { bg: color.warm, fg: color.ink, muted: color.inkMuted, rule: color.warmMark },
   { bg: color.deep, fg: color.onDeep, muted: color.onDeepMuted, rule: color.lime },
 ];
 

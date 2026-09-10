@@ -29,7 +29,7 @@ const fieldSx = {
       borderColor: color.rule,
       transition: `border-color ${motion.fast}`,
     },
-    "&:hover fieldset": { borderColor: color.green30 },
+    "&:hover fieldset": { borderColor: color.sand30 },
     "&.Mui-focused fieldset": {
       borderColor: color.accent,
       borderWidth: "1.5px",
@@ -220,7 +220,7 @@ function ContactPage() {
                         fontFamily: font.mono,
                         fontSize: "0.75rem",
                         letterSpacing: "0.11em",
-                        color: color.green45,
+                        color: color.sand45,
                         pt: "3px",
                       }}
                     >
@@ -239,9 +239,9 @@ function ContactPage() {
             component="form"
             onSubmit={handleSubmit}
             sx={{
-              backgroundColor: color.green05,
+              backgroundColor: color.sand05,
               border: "1px solid",
-              borderColor: color.green20,
+              borderColor: color.sand20,
               borderRadius: { xs: radius.lg, md: radius.xl },
               p: { xs: 3, md: 4.5 },
               display: "flex",

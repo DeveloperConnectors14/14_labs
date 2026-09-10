@@ -62,7 +62,7 @@ function CaseStudies({ heading = true }) {
                   borderRadius: radius.lg,
                   // Green rather than grey, so the plate reads as part of the
                   // palette while the screenshot is still decoding.
-                  backgroundColor: color.green20,
+                  backgroundColor: color.sand20,
                 }}
               >
                 <Image

@@ -7,16 +7,16 @@ import { color, font, measure } from "@/theme/tokens";
 const features = getFeatures();
 
 /**
- * Three working principles on a deep green slab — the page's second strong
- * colour block, placed so the run of grey and white sections is interrupted
- * before it becomes monotonous.
+ * Three working principles on the peach slab — the page's warm colour block,
+ * placed so the run of cream sections is interrupted before it becomes
+ * monotonous. It was forest; peach keeps the break in rhythm without spending
+ * the primary, which is saved for the closing band a few sections later.
  */
 function WhyChooseUs() {
   return (
-    <Section band="deep" inset>
+    <Section band="warm" inset>
       <SectionHead
         split
-        onDeep
         eyebrow="How we work"
         title="Three commitments you can hold us to"
         lede="Stated concretely enough that you could check them against us at the end of an engagement."
@@ -39,7 +39,7 @@ function WhyChooseUs() {
               pr: { md: 2 },
               borderTop: "1px solid",
               borderLeft: { md: i === 0 ? 0 : "1px solid" },
-              borderColor: color.ruleOnDeep,
+              borderColor: color.ruleOnWarm,
             }}
           >
             <Typography
@@ -49,19 +49,19 @@ function WhyChooseUs() {
                 fontSize: "3rem",
                 lineHeight: 1,
                 letterSpacing: "-0.05em",
-                color: color.lime,
+                color: color.warmMark,
               }}
             >
               {item.sNo}
             </Typography>
 
-            <Typography variant="h4" sx={{ mt: 3, color: color.onDeep, maxWidth: "18ch" }}>
+            <Typography variant="h4" sx={{ mt: 3, color: color.ink, maxWidth: "18ch" }}>
               {item.title}
             </Typography>
 
             <Typography
               variant="body1"
-              sx={{ mt: 2, color: color.onDeepMuted, maxWidth: measure.body }}
+              sx={{ mt: 2, color: color.inkMuted, maxWidth: measure.body }}
             >
               {item.desc}
             </Typography>

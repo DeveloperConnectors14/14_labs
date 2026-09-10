@@ -63,7 +63,7 @@ function MoreCaseStudies({ moreCases }) {
                 aspectRatio: "16 / 11",
                 overflow: "hidden",
                 borderRadius: radius.md,
-                backgroundColor: color.green20,
+                backgroundColor: color.sand20,
               }}
             >
               <Image

@@ -105,7 +105,7 @@ function SingleCaseHero({ heroData, caseId }) {
               aspectRatio: { xs: "4 / 3", md: "16 / 7" },
               overflow: "hidden",
               borderRadius: { xs: radius.lg, md: radius.xl },
-              backgroundColor: color.green20,
+              backgroundColor: color.sand20,
             }}
           >
             <Image

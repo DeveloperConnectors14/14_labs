@@ -19,9 +19,9 @@ const PAD = 18;
  * worth keeping is five foreign hues on a page built from one green.
  */
 const STAGE_TONES = {
-  "#377BBB": { bg: color.surface, fg: color.ink, rule: color.green30 },
-  "#00895E": { bg: color.green20, fg: color.ink, rule: color.green45 },
-  "#BB7000": { bg: color.green05, fg: color.ink, rule: color.green30 },
+  "#377BBB": { bg: color.surface, fg: color.ink, rule: color.sand30 },
+  "#00895E": { bg: color.sand20, fg: color.ink, rule: color.sand45 },
+  "#BB7000": { bg: color.sand05, fg: color.ink, rule: color.sand30 },
   "#BC2831": { bg: color.accent, fg: color.onAccent, rule: color.accent },
   "#4B4DB6": { bg: color.deep, fg: color.onDeep, rule: color.deep },
 };
@@ -145,9 +145,9 @@ function SingleCasePipeline({ casePipeline }) {
 
         <Box
           sx={{
-            backgroundColor: color.green05,
+            backgroundColor: color.sand05,
             border: "1px solid",
-            borderColor: color.green20,
+            borderColor: color.sand20,
             borderRadius: radius.lg,
             p: { xs: 2, md: 3 },
             display: "flex",
@@ -172,11 +172,11 @@ function SingleCasePipeline({ casePipeline }) {
                 markerHeight="5"
                 orient="auto"
               >
-                <path d="M 0 1 L 7 4 L 0 7 z" fill={color.green45} />
+                <path d="M 0 1 L 7 4 L 0 7 z" fill={color.sand45} />
               </marker>
             </defs>
 
-            <g fill="none" stroke={color.green45} strokeWidth="1.25">
+            <g fill="none" stroke={color.sand45} strokeWidth="1.25">
               {connectors.map((edge) => (
                 <path key={edge.key} d={edge.d} markerEnd="url(#pipeline-arrow)" />
               ))}
