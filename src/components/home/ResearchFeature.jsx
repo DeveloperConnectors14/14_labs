@@ -30,15 +30,35 @@ const clamp = (lines) => ({
   overflow: "hidden",
 });
 
+// Graph paper for the plate: a lab notebook, not a blank card.
+const GRAPH = `color-mix(in srgb, ${color.ruleStrong} 55%, transparent)`;
+const GRAPH_FADE = "radial-gradient(ellipse 80% 75% at 50% 50%, #000 40%, transparent 100%)";
+
+// One sheet under the top note, offset and turned a little further each time.
+const sheetSx = (turn, x, y, opacity) => ({
+  position: "absolute",
+  inset: 0,
+  borderRadius: "18px",
+  border: "1px solid",
+  borderColor: color.rule,
+  backgroundColor: color.surface,
+  opacity,
+  transform: `rotate(${turn}deg) translate(${x}px, ${y}px)`,
+  transition: `transform ${motion.slow}`,
+});
+
 /**
- * Research, composed the way a research page lays out a finding: a figure on a
- * plate, the latest note laid over its corner like a printout on a desk, and a
- * pencil annotation pointing at it — drawn the first time the section scrolls
- * into view. Opposite, the argument, the topics we write about, and one way
- * in. Below, the notes themselves as a dated index.
+ * Research, composed the way a research page lays out a finding.
  *
- * Everything on the page is real: the note on the desk is the newest one, and
- * the topics are the topics the notes are filed under.
+ * The desk: a figure on graph paper, and the newest note on top of a small
+ * stack of them — hovering it lifts the top sheet and fans the others out —
+ * with a pencil annotation pointing at it, drawn the first time the section
+ * scrolls into view. Opposite: the argument, two plain facts about the notes,
+ * the topics they are filed under (each a way in), and one action. Below: every
+ * note as a dated index.
+ *
+ * Everything on it is real: the note on the desk is the newest one, the count
+ * and the date come from the notes, and the topics are the notes' own.
  */
 function ResearchFeature() {
   return (
@@ -57,6 +77,7 @@ function ResearchFeature() {
             <Box
               sx={{
                 position: "relative",
+                overflow: "hidden",
                 borderRadius: radius.card,
                 backgroundColor: color.grey10,
                 aspectRatio: "5 / 4",
@@ -66,7 +87,19 @@ function ResearchFeature() {
                 p: { xs: 3, md: 5 },
               }}
             >
-              <EmbeddingField tone="light" style={{ width: "100%", height: "auto" }} />
+              <Box
+                aria-hidden
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage: `linear-gradient(${GRAPH} 1px, transparent 1px), linear-gradient(90deg, ${GRAPH} 1px, transparent 1px)`,
+                  backgroundSize: "24px 24px",
+                  backgroundPosition: "-1px -1px",
+                  maskImage: GRAPH_FADE,
+                  WebkitMaskImage: GRAPH_FADE,
+                }}
+              />
+              <EmbeddingField tone="light" style={{ position: "relative", width: "100%", height: "auto" }} />
             </Box>
 
             <Box
@@ -82,43 +115,57 @@ function ResearchFeature() {
               }}
             />
 
-            <LinkBox
-              href={`/research/${latest.slug}`}
+            {/* The stack of notes, newest on top. */}
+            <Box
               sx={{
                 position: "absolute",
                 right: 0,
                 bottom: 0,
                 width: { xs: "82%", sm: 320 },
-                p: 2.75,
-                borderRadius: "18px",
-                backgroundColor: color.ground,
-                border: "1px solid",
-                borderColor: color.ruleStrong,
-                color: color.ink,
-                textDecoration: "none",
                 transform: "rotate(-3deg)",
-                transition: `transform ${motion.slow}`,
-                "&:hover": { transform: "rotate(-1.5deg) translateY(-4px)" },
-                "&:hover .note-cta": { color: color.accent },
+                "&:hover .sheet-1": { transform: "rotate(5deg) translate(14px, -10px)" },
+                "&:hover .sheet-2": { transform: "rotate(10deg) translate(26px, -18px)" },
+                "&:hover .note-top": { transform: "rotate(1.5deg) translateY(-6px)" },
               }}
             >
-              <Box sx={{ display: "flex", gap: 2, fontSize: "0.8125rem", color: color.inkFaint }}>
-                <span>{latest.topic}</span>
-                <span>{monthYear(latest.date)}</span>
-              </Box>
-              <Typography sx={{ mt: 1, fontSize: "1.1875rem", lineHeight: 1.3, letterSpacing: "-0.01em" }}>
-                {latest.title}
-              </Typography>
-              <Typography variant="body2" sx={{ mt: 1, color: color.inkMuted, ...clamp(3) }}>
-                {latest.summary}
-              </Typography>
-              <Typography
-                className="note-cta"
-                sx={{ mt: 1.75, fontSize: "0.875rem", fontWeight: 500, transition: `color ${motion.fast}` }}
+              <Box aria-hidden className="sheet-2" sx={sheetSx(6, 12, -8, 0.55)} />
+              <Box aria-hidden className="sheet-1" sx={sheetSx(3, 6, -4, 0.9)} />
+
+              <LinkBox
+                href={`/research/${latest.slug}`}
+                className="note-top"
+                sx={{
+                  position: "relative",
+                  display: "block",
+                  p: 2.75,
+                  borderRadius: "18px",
+                  backgroundColor: color.ground,
+                  border: "1px solid",
+                  borderColor: color.ruleStrong,
+                  color: color.ink,
+                  textDecoration: "none",
+                  transition: `transform ${motion.slow}`,
+                  "&:hover .note-cta": { color: color.accent },
+                }}
               >
-                Read the Note ›
-              </Typography>
-            </LinkBox>
+                <Box sx={{ display: "flex", gap: 2, fontSize: "0.8125rem", color: color.inkFaint }}>
+                  <span>{latest.topic}</span>
+                  <span>{monthYear(latest.date)}</span>
+                </Box>
+                <Typography sx={{ mt: 1, fontSize: "1.1875rem", lineHeight: 1.3, letterSpacing: "-0.01em" }}>
+                  {latest.title}
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1, color: color.inkMuted, ...clamp(3) }}>
+                  {latest.summary}
+                </Typography>
+                <Typography
+                  className="note-cta"
+                  sx={{ mt: 1.75, fontSize: "0.875rem", fontWeight: 500, transition: `color ${motion.fast}` }}
+                >
+                  Read the Note ›
+                </Typography>
+              </LinkBox>
+            </Box>
 
             {/* Pencil: a note and an arrow at the printout. */}
             <Box
@@ -154,22 +201,62 @@ function ResearchFeature() {
               building at all.
             </Typography>
 
+            {/* Two plain facts about the notes. */}
+            <Box
+              component="dl"
+              sx={{
+                mt: 4,
+                mb: 0,
+                display: "flex",
+                columnGap: 5,
+                rowGap: 2,
+                flexWrap: "wrap",
+                pt: 3,
+                borderTop: "1px solid",
+                borderColor: color.rule,
+              }}
+            >
+              {[
+                { value: posts.length, label: "Notes Published" },
+                { value: topics.length, label: "Topics Covered" },
+                { value: monthYear(latest.date), label: "Latest Note" },
+              ].map((fact) => (
+                <Box key={fact.label}>
+                  <Typography
+                    component="dd"
+                    className="tabular"
+                    sx={{ m: 0, fontSize: "1.75rem", lineHeight: 1.1, letterSpacing: "-0.02em", color: color.ink }}
+                  >
+                    {fact.value}
+                  </Typography>
+                  <Typography component="dt" variant="body2" sx={{ mt: 0.5, color: color.inkFaint }}>
+                    {fact.label}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+
             <Box sx={{ mt: 3.5, display: "flex", flexWrap: "wrap", gap: 1 }}>
               {topics.map((topic) => (
-                <Box
+                <LinkBox
                   key={topic}
-                  component="span"
+                  href="/research"
                   sx={{
                     px: 1.75,
                     py: 0.75,
                     borderRadius: radius.pill,
+                    border: "1px solid",
+                    borderColor: "transparent",
                     backgroundColor: color.surfaceAlt,
                     fontSize: "0.875rem",
                     color: color.inkMuted,
+                    textDecoration: "none",
+                    transition: `border-color ${motion.fast}, color ${motion.fast}, background-color ${motion.fast}`,
+                    "&:hover": { borderColor: color.limeDeep, color: color.ink, backgroundColor: color.accentSoft },
                   }}
                 >
                   {topic}
-                </Box>
+                </LinkBox>
               ))}
             </Box>
 

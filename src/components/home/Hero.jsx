@@ -1,10 +1,15 @@
 import Image from "next/image";
 import { Box, Container, Typography } from "@mui/material";
+import HubOutlined from "@mui/icons-material/HubOutlined";
+import TravelExploreOutlined from "@mui/icons-material/TravelExploreOutlined";
+import ScienceOutlined from "@mui/icons-material/ScienceOutlined";
+import FactCheckOutlined from "@mui/icons-material/FactCheckOutlined";
 import HandArrow from "@/components/ui/HandArrow";
 import HandNote from "@/components/ui/HandNote";
+import LinkBox from "@/components/ui/LinkBox";
 import PillLink from "@/components/ui/PillLink";
 import HeroMark from "@/components/home/HeroMark";
-import { color, radius } from "@/theme/tokens";
+import { color, motion, radius } from "@/theme/tokens";
 
 /**
  * Each piece rises into place once, in reading order. Reduced motion is
@@ -19,6 +24,13 @@ const rise = (delay) => ({
   animation: `heroRise 900ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms both`,
 });
 
+// The pencil underline under "Production.", drawn once the headline has landed.
+const drawOn = (delay) => ({
+  "@keyframes heroDraw": { from: { strokeDashoffset: 1 }, to: { strokeDashoffset: 0 } },
+  strokeDasharray: 1,
+  animation: `heroDraw 1000ms cubic-bezier(0.65, 0, 0.35, 1) ${delay}ms both`,
+});
+
 const HEADLINE = "clamp(2.75rem, 0.8rem + 5.6vw, 6.25rem)";
 
 const lineSx = {
@@ -31,6 +43,14 @@ const lineSx = {
 };
 
 const DOT_FIELD = "radial-gradient(ellipse 75% 65% at 50% 45%, #000 15%, transparent 78%)";
+
+// The four practices, in the same order and with the same icons as the footer.
+const PRACTICES = [
+  { icon: HubOutlined, label: "Multi-Agent Systems" },
+  { icon: TravelExploreOutlined, label: "Retrieval" },
+  { icon: ScienceOutlined, label: "Applied ML" },
+  { icon: FactCheckOutlined, label: "Evaluation" },
+];
 
 /** Who this is, before what it says: the mark, the name, the practice. */
 function BrandTag() {
@@ -75,18 +95,78 @@ function BrandTag() {
   );
 }
 
+/** The practices as a row of small chips, each a way into What We Do. */
+function PracticeChips() {
+  return (
+    <Box
+      sx={{
+        mt: { xs: 5, md: 6 },
+        pt: { xs: 3, md: 3.5 },
+        borderTop: "1px solid",
+        borderColor: color.rule,
+        maxWidth: 600,
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 1,
+      }}
+    >
+      {PRACTICES.map(({ icon: Icon, label }, i) => (
+        <LinkBox
+          key={label}
+          href="/services"
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 1,
+            pl: 0.625,
+            pr: 1.75,
+            py: 0.625,
+            borderRadius: radius.pill,
+            border: "1px solid",
+            borderColor: color.rule,
+            backgroundColor: `color-mix(in srgb, ${color.ground} 70%, transparent)`,
+            color: color.inkMuted,
+            textDecoration: "none",
+            fontSize: "0.875rem",
+            transition: `border-color ${motion.fast}, color ${motion.fast}, background-color ${motion.fast}`,
+            "&:hover": { borderColor: color.limeDeep, color: color.ink, backgroundColor: color.accentSoft },
+            ...rise(500 + i * 70),
+          }}
+        >
+          <Box
+            aria-hidden
+            sx={{
+              width: 26,
+              height: 26,
+              borderRadius: "50%",
+              display: "grid",
+              placeItems: "center",
+              backgroundColor: color.accentSoft,
+              color: color.accent,
+            }}
+          >
+            <Icon sx={{ fontSize: 15 }} />
+          </Box>
+          {label}
+        </LinkBox>
+      ))}
+    </Box>
+  );
+}
+
 /**
  * The type on the left, the brand on the right.
  *
- * The headline is two lines, the second stepped in so the pair still reads as
- * a distance travelled — research, then production. Opposite it is the 14Labs
- * mark made of points (HeroMark): it assembles on load and gives way under the
- * cursor. A pencil arrow draws itself up towards it once the points have
- * landed, with a note saying it can be touched; both appear only where there
- * is a cursor-sized screen to use them.
+ * Left: the name, a two-line headline stepped in so it reads as a distance
+ * travelled — research, then production — with "Production." underlined in
+ * pencil once it lands; the promise, with the part that matters set a shade
+ * stronger; one action and one alternative; and under a thin rule, the four
+ * practices as ways in.
  *
- * Decoration budget: the dot field, one low green glow, the mark, one arrow,
- * one note. Nothing else moves.
+ * Right: the 14Labs mark made of points (HeroMark), which assembles on load,
+ * turns in 3D towards the cursor and parts under it. A pencil arrow draws
+ * itself up towards it once the points have landed, with a note saying it can
+ * be touched; both appear only where there is a cursor to use them.
  */
 function Hero() {
   return (
@@ -133,11 +213,38 @@ function Hero() {
               <Box component="span" sx={{ ...lineSx, ...rise(90) }}>
                 From Research,
               </Box>
-              <Box
-                component="span"
-                sx={{ ...lineSx, pl: { sm: "1.1em" }, mt: "0.06em", ...rise(190) }}
-              >
-                to Production.
+              <Box component="span" sx={{ ...lineSx, pl: { sm: "1.1em" }, mt: "0.06em", ...rise(190) }}>
+                to{" "}
+                <Box component="span" sx={{ position: "relative", display: "inline-block" }}>
+                  Production.
+                  <Box
+                    component="svg"
+                    aria-hidden
+                    viewBox="0 0 300 20"
+                    preserveAspectRatio="none"
+                    sx={{
+                      position: "absolute",
+                      left: "-1%",
+                      bottom: "-0.12em",
+                      width: "90%",
+                      height: "0.22em",
+                      overflow: "visible",
+                      color: color.lime,
+                    }}
+                  >
+                    <Box
+                      component="path"
+                      d="M4 13 C 60 5, 140 4, 200 9 S 280 15, 296 7"
+                      pathLength="1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      vectorEffect="non-scaling-stroke"
+                      sx={drawOn(1150)}
+                    />
+                  </Box>
+                </Box>
               </Box>
             </Box>
 
@@ -146,7 +253,10 @@ function Hero() {
               sx={{ mt: { xs: 3.5, md: 4.5 }, color: color.inkMuted, maxWidth: "44ch", ...rise(290) }}
             >
               An AI engineering and research practice. We build multi-agent systems,
-              retrieval and evaluation that hold up once real users arrive.
+              retrieval and evaluation that{" "}
+              <Box component="span" sx={{ color: color.ink, fontWeight: 500 }}>
+                hold up once real users arrive.
+              </Box>
             </Typography>
 
             <Box sx={{ mt: { xs: 4.5, md: 5.5 }, display: "flex", gap: 1.5, flexWrap: "wrap", ...rise(390) }}>
@@ -157,6 +267,8 @@ function Hero() {
                 See our work
               </PillLink>
             </Box>
+
+            <PracticeChips />
           </Box>
 
           <Box sx={{ position: "relative" }}>
