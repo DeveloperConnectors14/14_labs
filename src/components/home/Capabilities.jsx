@@ -7,6 +7,7 @@ import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
 import TopicFigure from "@/components/visuals/TopicFigure";
 import PillLink from "@/components/ui/PillLink";
+import RevealText from "@/components/ui/RevealText";
 import { getServices } from "@/services/dataService";
 import { color, layout, motion, radius } from "@/theme/tokens";
 
@@ -69,10 +70,20 @@ const withDrift = Object.fromEntries(
   Object.entries(TRACK_PAD).map(([bp, pad]) => [bp, `calc(${pad} + ${DRIFT}px)`])
 );
 
+// The spotlight follows the pointer across a card through two CSS variables,
+// so moving it costs no re-render.
+const trackPointer = (event) => {
+  const card = event.currentTarget;
+  const rect = card.getBoundingClientRect();
+  card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+  card.style.setProperty("--my", `${event.clientY - rect.top}px`);
+};
+
 function Card({ card }) {
   return (
     <Box
       component="article"
+      onPointerMove={trackPointer}
       sx={{
         position: "relative",
         flex: "0 0 auto",
@@ -85,6 +96,7 @@ function Card({ card }) {
         scrollSnapAlign: "start",
         display: "flex",
         flexDirection: "column",
+        "&:hover .card-spot": { opacity: 1 },
       }}
     >
       {card.image ? (
@@ -139,6 +151,20 @@ function Card({ card }) {
         </>
       )}
 
+      {/* The spotlight under the pointer. */}
+      <Box
+        aria-hidden
+        className="card-spot"
+        sx={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          opacity: 0,
+          transition: `opacity ${motion.slow}`,
+          background: `radial-gradient(380px circle at var(--mx, 50%) var(--my, 40%), color-mix(in srgb, ${color.onBlack} 11%, transparent), transparent 62%)`,
+        }}
+      />
+
       <Box sx={{ position: "relative", p: { xs: 3, md: 4 } }}>
         <Typography
           component="h3"
@@ -176,14 +202,15 @@ function Card({ card }) {
  *   - Scroll drift. As the page scrolls down past the section, the whole row
  *     slides to the right, DRIFT px either side of its resting place, tied
  *     directly to scroll position — so scrolling back up slides it back. It is
- *     a transform on a wrapper, not a change to the scroller, which is why it
- *     leaves the next item alone. Wide screens only, and never under reduced
- *     motion.
+ *     a transform on a wrapper, not a change to the scroller. Wide screens
+ *     only, and never under reduced motion.
  *   - Browsing. The row itself is a native horizontal scroller with snap
  *     points: trackpad swipe, shift-wheel, touch drag and the arrow keys all
  *     work without code, and the two buttons step one card at a time.
  *     `data-lenis-prevent-horizontal` hands sideways gestures to the browser;
  *     vertical wheel over the row still scrolls the page.
+ *
+ * Each card also carries a soft spotlight that follows the pointer.
  */
 function Capabilities() {
   const sectionRef = useRef(null);
@@ -281,9 +308,7 @@ function Capabilities() {
             gap: 3,
           }}
         >
-          <Typography variant="h2" sx={{ maxWidth: "14ch" }}>
-            What we build
-          </Typography>
+          <RevealText text="What we build" sx={{ maxWidth: "14ch" }} />
           <PillLink href="/services" variant="outline">
             All services
           </PillLink>

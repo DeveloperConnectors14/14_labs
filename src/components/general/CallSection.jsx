@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
+import DotWave from "@/components/ui/DotWave";
 import PillLink from "@/components/ui/PillLink";
 import { getSite } from "@/services/dataService";
 import { color, layout, motion, radius, type } from "@/theme/tokens";
@@ -22,14 +23,17 @@ const CONTACT_LINKS = [
   { label: "LinkedIn", href: site.linkedin, external: true },
 ];
 
+const WAVE_FADE = "linear-gradient(to top, #000 30%, transparent 95%)";
+
 /**
  * The closing card, and the last thing anyone reads before the footer: one
  * sentence, two ways forward, and the contact details for anyone who would
  * rather not click through to a form.
  *
  * It is a rounded card inside the page width rather than a full-bleed band, so
- * it reads as an object you can act on rather than as more page. A low green
- * glow at its foot is the only decoration.
+ * it reads as an object you can act on rather than as more page. Underneath
+ * the type, a field of points rolls slowly in perspective (DotWave), fading
+ * out before it reaches the heading.
  */
 function CallSection({ contact = true }) {
   const copy = contact ? COPY.contact : COPY.next;
@@ -49,13 +53,23 @@ function CallSection({ contact = true }) {
             textAlign: "center",
           }}
         >
+          <DotWave
+            sx={{
+              position: "absolute",
+              insetInline: 0,
+              bottom: 0,
+              height: "72%",
+              maskImage: WAVE_FADE,
+              WebkitMaskImage: WAVE_FADE,
+            }}
+          />
           <Box
             aria-hidden
             sx={{
               position: "absolute",
               inset: 0,
               pointerEvents: "none",
-              backgroundImage: `radial-gradient(55% 65% at 50% 115%, color-mix(in srgb, ${color.lime} 32%, transparent), transparent 70%)`,
+              backgroundImage: `radial-gradient(50% 55% at 50% 118%, color-mix(in srgb, ${color.lime} 26%, transparent), transparent 70%)`,
             }}
           />
 

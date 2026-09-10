@@ -4,14 +4,16 @@
  * Two themes, both built to the same rule: a quiet ground, one near-black ink,
  * and colour only where it means something.
  *
- *   light   white ground, navy pill buttons, green for links, dots and marks —
- *           the clean research-page look: white, type and space
- *   dark    #121317 ground, off-white type, white pill buttons and black cards,
- *           with green kept to highlights
+ *   light   a cool off-white ground, navy pill buttons, the logo's teal-green
+ *           for links, dots and marks
+ *   dark    a blue-black ground, off-white type, white pill buttons and black
+ *           cards, with teal kept to highlights
  *
  *   navy    #0B1B36   primary action in the light theme, and the closing band
- *   green   #22C98A   highlight: dots, chart marks, glow on dark cards
- *   black   #0B0D12   the card colour for figures and imagery, in both themes
+ *   teal    #14C9A5   highlight: dots, chart marks, glow on dark surfaces — a
+ *                     step off the logo's own #00D3B1, so the page and the mark
+ *                     are visibly one brand
+ *   black   #0A0D13   the card colour for figures and imagery, in both themes
  *
  * Every value lives in `palettes`; `color` holds only CSS variable references
  * to them, so a component writes `color.ink` once and gets the right ink in
@@ -21,21 +23,21 @@
  *
  * `primary` is the pill button. `deep` is the closing band — navy in light, a
  * raised navy-black in dark — and is no longer a button colour. `lime` is the
- * green highlight and `black` the card colour; both names are older than the
+ * teal highlight and `black` the card colour; both names are older than the
  * colours they now hold.
  */
 
 export const palettes = {
   light: {
     // --- Ground -------------------------------------------------------------
-    ground: "#FFFFFF",
-    surface: "#F8F9FB",
-    surfaceAlt: "#F1F3F6",
-    ink: "#16181D",
-    inkMuted: "#43474E",
-    inkFaint: "#5F6368",
-    rule: "#E6E8EC",
-    ruleStrong: "#CDD2D9",
+    ground: "#FAFBFC",
+    surface: "#F3F5F8",
+    surfaceAlt: "#ECEFF3",
+    ink: "#11151C",
+    inkMuted: "#414753",
+    inkFaint: "#5B6270",
+    rule: "#E3E7EC",
+    ruleStrong: "#C9D0D9",
 
     // --- Primary action (navy pill) -----------------------------------------
     primary: "#0B1B36",
@@ -50,96 +52,96 @@ export const palettes = {
     onDeepMuted: "#AFBAD0",
     ruleOnDeep: "#24385E",
 
-    // --- Green --------------------------------------------------------------
-    // `accent` is green deep enough to be text on white; `lime` is the bright
-    // green for dots, marks and anything on a dark card.
-    accent: "#0E7A52",
-    accentSoft: "#E6F5EE",
+    // --- Teal ---------------------------------------------------------------
+    // `accent` is teal deep enough to be text on the ground; `lime` is the
+    // bright teal for dots, marks and anything on a dark surface.
+    accent: "#0A7563",
+    accentSoft: "#E3F6F1",
     onAccent: "#FFFFFF",
-    lime: "#22C98A",
-    limeSoft: "#9DEBC7",
-    limeDeep: "#16A56F",
+    lime: "#14C9A5",
+    limeSoft: "#95EBD9",
+    limeDeep: "#0FA38A",
 
     // --- Soft band ----------------------------------------------------------
-    soft: "#F4F6F9",
+    soft: "#F1F4F8",
     softAlt: "#FFFFFF",
     softMark: "#0B1B36",
-    ruleOnSoft: "#E1E5EB",
+    ruleOnSoft: "#DFE4EA",
 
     // Greys: the neutral steps plates and thumbnails are cut from.
-    grey05: "#F8F9FB",
-    grey10: "#F1F3F6",
-    grey20: "#E6E9EE",
-    grey30: "#CDD3DC",
-    grey45: "#6B7280",
+    grey05: "#F5F7F9",
+    grey10: "#EEF1F5",
+    grey20: "#E3E7ED",
+    grey30: "#CAD1DB",
+    grey45: "#687080",
 
     // --- Black card ---------------------------------------------------------
-    black: "#0B0D12",
-    blackAlt: "#14171E",
+    black: "#0A0D13",
+    blackAlt: "#131720",
     // Chart steps on a black card: field, axis, mark, third series.
-    blackField: "#1A1E27",
-    blackAxis: "#2A2F3A",
-    blackMark: "#4B5261",
-    blackFaint: "#8A93A6",
-    onBlack: "#F1F3F6",
-    onBlackMuted: "#A9B0BE",
-    ruleOnBlack: "#262B35",
+    blackField: "#191E29",
+    blackAxis: "#29303D",
+    blackMark: "#4A5262",
+    blackFaint: "#8892A5",
+    onBlack: "#EEF1F5",
+    onBlackMuted: "#A8B0BF",
+    ruleOnBlack: "#252B36",
   },
 
   /**
-   * Dark is a cool near-black, not navy: the page recedes and the cards and
-   * type carry it. The primary button inverts to a white pill — on a dark page
-   * that is the clearest "act here" there is — and green lifts a step so it
-   * stays legible as text.
+   * Dark is a blue-black, not neutral grey: the page recedes and the cards
+   * and type carry it. The primary button inverts to a white pill — on a dark
+   * page that is the clearest "act here" there is — and teal lifts a step so
+   * it stays legible as text.
    */
   dark: {
-    ground: "#121317",
-    surface: "#1B1C21",
-    surfaceAlt: "#202127",
-    ink: "#E9EAEE",
-    inkMuted: "#BFC3CB",
-    inkFaint: "#9AA0AA",
-    rule: "#2A2C33",
-    ruleStrong: "#3B3E46",
+    ground: "#0B0E13",
+    surface: "#12161D",
+    surfaceAlt: "#171C24",
+    ink: "#E8ECF2",
+    inkMuted: "#B5BDCA",
+    inkFaint: "#8C95A4",
+    rule: "#222833",
+    ruleStrong: "#333B48",
 
-    primary: "#E9EAEE",
-    onPrimary: "#121317",
+    primary: "#E8ECF2",
+    onPrimary: "#0B0E13",
     primaryHover: "#FFFFFF",
 
-    deep: "#151A28",
-    deepAlt: "#1C2233",
-    deepHover: "#242B40",
-    onDeep: "#F1F3F6",
-    onDeepMuted: "#AEB6C8",
-    ruleOnDeep: "#2A3148",
+    deep: "#111A2B",
+    deepAlt: "#17223A",
+    deepHover: "#1F2B46",
+    onDeep: "#EEF1F5",
+    onDeepMuted: "#AEB8CC",
+    ruleOnDeep: "#27324C",
 
-    accent: "#5EE0A6",
-    accentSoft: "#1A2A22",
-    onAccent: "#121317",
-    lime: "#3DDC97",
-    limeSoft: "#A6EFC6",
-    limeDeep: "#2BB673",
+    accent: "#4FE0C0",
+    accentSoft: "#10241F",
+    onAccent: "#0B0E13",
+    lime: "#2EDDB6",
+    limeSoft: "#9CF0DD",
+    limeDeep: "#22B797",
 
-    soft: "#17181D",
-    softAlt: "#1E2026",
-    softMark: "#5EE0A6",
-    ruleOnSoft: "#2A2C33",
+    soft: "#10141A",
+    softAlt: "#161B23",
+    softMark: "#4FE0C0",
+    ruleOnSoft: "#222833",
 
-    grey05: "#17181D",
-    grey10: "#1B1C21",
-    grey20: "#24262C",
-    grey30: "#33363E",
-    grey45: "#8C929C",
+    grey05: "#10141A",
+    grey10: "#141920",
+    grey20: "#1C222B",
+    grey30: "#2B333F",
+    grey45: "#88909E",
 
-    black: "#000000",
-    blackAlt: "#0B0C0F",
-    blackField: "#141519",
-    blackAxis: "#26282E",
-    blackMark: "#474B55",
-    blackFaint: "#7D8390",
-    onBlack: "#E9EAEE",
-    onBlackMuted: "#A2A7B1",
-    ruleOnBlack: "#202227",
+    black: "#040609",
+    blackAlt: "#0A0D12",
+    blackField: "#11151C",
+    blackAxis: "#232A35",
+    blackMark: "#434B59",
+    blackFaint: "#7B8494",
+    onBlack: "#E8ECF2",
+    onBlackMuted: "#A0A8B6",
+    ruleOnBlack: "#1C212A",
   },
 };
 
@@ -174,8 +176,8 @@ export const themeCss = `:root{${declare(palettes.light)}}:root[data-theme="dark
   palettes.dark
 )}}`;
 
-// One family for display and text, as the reference pages do. Mono and serif
-// stay for code and long-form research prose.
+// One family for display and text. Mono and serif stay for code and
+// long-form research prose.
 export const font = {
   display: "var(--font-sans)",
   body: "var(--font-sans)",
@@ -186,9 +188,8 @@ export const font = {
 };
 
 /**
- * Display steps run at weight 400 with moderately tight tracking. Google Sans
- * Flex has an optical-size axis, so large settings tighten on their own and
- * the tracking here only has to finish the job.
+ * Display steps run at weight 400 with moderately tight tracking.
+ * Text steps stay at 400.
  */
 export const type = {
   display: "clamp(2.75rem, 0.5rem + 7.4vw, 7.5rem)",

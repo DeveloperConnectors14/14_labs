@@ -8,6 +8,7 @@ import RetrievalRank from "@/components/visuals/RetrievalRank";
 import TraceWaterfall from "@/components/visuals/TraceWaterfall";
 import LinkBox from "@/components/ui/LinkBox";
 import PillLink from "@/components/ui/PillLink";
+import RevealText from "@/components/ui/RevealText";
 import { getChallanges } from "@/services/dataService";
 import { color, layout, measure, motion, radius } from "@/theme/tokens";
 
@@ -52,7 +53,7 @@ function Plate({ index, sx }) {
  * scrolling and nothing is hijacked. An IntersectionObserver watching a thin
  * band across the middle of the viewport decides which item is current; the
  * panel only cross-fades between states it has already rendered, so the swap
- * costs no layout.
+ * costs no layout. A thin progress bar on the panel fills as you go.
  *
  * The panel repeats what the list says, so it is hidden from assistive tech —
  * the list is the content. Below `md` there is no panel: each item carries its
@@ -89,15 +90,13 @@ function Stalls() {
           }}
         >
           <Box>
-            <Typography variant="h2" sx={{ maxWidth: "16ch" }}>
-              Where AI projects stall
-            </Typography>
+            <RevealText text="Where AI projects stall" sx={{ maxWidth: "16ch" }} />
             <Typography variant="lede" sx={{ mt: 2.5, color: color.inkMuted, maxWidth: measure.lede }}>
               None of these are model problems. They are engineering problems that only
               show up after the demo goes well.
             </Typography>
           </Box>
-          <PillLink href="/research" variant="outline">
+          <PillLink href="/research" variant="outline" sx={{ justifySelf: { xs: "start", md: "auto" } }}>
             Read the research
           </PillLink>
         </Box>
@@ -113,6 +112,19 @@ function Stalls() {
           {/* Left: holds still, follows the list. */}
           <Box aria-hidden sx={{ display: { xs: "none", md: "block" } }}>
             <Box sx={{ position: "sticky", top: `calc(${layout.navHeight.md}px + 32px)` }}>
+              <Box sx={{ height: "2px", backgroundColor: color.rule, mb: 4, overflow: "hidden" }}>
+                <Box
+                  sx={{
+                    height: "100%",
+                    width: "100%",
+                    backgroundColor: color.lime,
+                    transformOrigin: "left",
+                    transform: `scaleX(${(active + 1) / challenges.length})`,
+                    transition: `transform ${motion.slow}`,
+                  }}
+                />
+              </Box>
+
               <Box sx={{ display: "grid" }}>
                 {challenges.map((item, i) => (
                   <Box

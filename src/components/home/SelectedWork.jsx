@@ -1,9 +1,10 @@
-import Image from "next/image";
 import { Box, Container, Typography } from "@mui/material";
 import HandArrow from "@/components/ui/HandArrow";
+import ParallaxImage from "@/components/ui/ParallaxImage";
 import PillLink from "@/components/ui/PillLink";
+import RevealText from "@/components/ui/RevealText";
 import { getCaseDetails, getcaseStudies } from "@/services/dataService";
-import { color, layout, measure, radius } from "@/theme/tokens";
+import { color, layout, measure } from "@/theme/tokens";
 
 const details = getCaseDetails();
 const cases = getcaseStudies().map((item) => ({
@@ -14,8 +15,9 @@ const cases = getcaseStudies().map((item) => ({
 /**
  * Shipped work, one project per row: what it is and what it did on one side,
  * the picture on the other, alternating so two rows never share a silhouette.
- * The facts are the project's own — industry, timeline, team — and nothing is
- * rounded up into a claim.
+ * Each picture opens out of its frame as it arrives and drifts inside it as it
+ * passes (ParallaxImage). The facts are the project's own — industry,
+ * timeline, team — and nothing is rounded up into a claim.
  */
 function SelectedWork() {
   return (
@@ -30,9 +32,7 @@ function SelectedWork() {
             gap: 3,
           }}
         >
-          <Typography variant="h2" sx={{ maxWidth: "14ch" }}>
-            Selected work
-          </Typography>
+          <RevealText text="Selected work" sx={{ maxWidth: "14ch" }} />
           <PillLink href="/case-studies" variant="outline">
             All case studies
           </PillLink>
@@ -99,23 +99,7 @@ function SelectedWork() {
                 </Box>
 
                 <Box sx={{ position: "relative", order: { md: flip ? 1 : 2 } }}>
-                  <Box
-                    sx={{
-                      position: "relative",
-                      aspectRatio: "16 / 10",
-                      borderRadius: radius.card,
-                      overflow: "hidden",
-                      backgroundColor: color.grey10,
-                    }}
-                  >
-                    <Image
-                      src={`/media/${item.img}`}
-                      alt=""
-                      fill
-                      sizes="(max-width: 900px) 100vw, 640px"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </Box>
+                  <ParallaxImage src={`/media/${item.img}`} sizes="(max-width: 900px) 100vw, 640px" />
                   <Box
                     aria-hidden
                     sx={{
@@ -133,9 +117,9 @@ function SelectedWork() {
                       sx={{
                         display: { xs: "none", lg: "block" },
                         position: "absolute",
-                        width: 130,
+                        width: 120,
                         right: 24,
-                        top: -86,
+                        top: -76,
                         transform: "scaleX(-1)",
                       }}
                     />

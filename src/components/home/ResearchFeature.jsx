@@ -6,6 +6,7 @@ import HandArrow from "@/components/ui/HandArrow";
 import HandNote from "@/components/ui/HandNote";
 import LinkBox from "@/components/ui/LinkBox";
 import PillLink from "@/components/ui/PillLink";
+import RevealText from "@/components/ui/RevealText";
 import { getResearch } from "@/services/dataService";
 import { color, layout, measure, motion, radius } from "@/theme/tokens";
 
@@ -141,9 +142,7 @@ function ResearchFeature() {
           {/* The argument. */}
           <Box>
             <Eyebrow>Research</Eyebrow>
-            <Typography variant="h2" sx={{ mt: 3, maxWidth: "15ch" }}>
-              Research is how we de-risk the build
-            </Typography>
+            <RevealText text="Research is how we de-risk the build" sx={{ mt: 3, maxWidth: "15ch" }} />
             <Typography variant="lede" sx={{ mt: 3, color: color.inkMuted, maxWidth: measure.lede }}>
               Before we write production code, we measure. We publish the notes behind
               our engineering decisions — what we tested, what failed and what we would

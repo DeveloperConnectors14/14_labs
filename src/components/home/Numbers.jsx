@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
+import CountUp from "@/components/ui/CountUp";
 import { getStats } from "@/services/dataService";
 import { color, layout } from "@/theme/tokens";
 
@@ -6,7 +7,8 @@ const stats = getStats();
 
 /**
  * Four figures on one rule. No cards, no colour, no icons: a number, what it
- * counts, and the qualifier that keeps it honest.
+ * counts, and the qualifier that keeps it honest. The numbers count up the
+ * first time they are seen.
  */
 function Numbers() {
   return (
@@ -34,7 +36,7 @@ function Numbers() {
                   color: color.ink,
                 }}
               >
-                {item.value}
+                <CountUp value={item.value} />
               </Typography>
               <Typography sx={{ mt: 2, fontSize: "1rem", fontWeight: 500, color: color.ink }}>
                 {item.label}

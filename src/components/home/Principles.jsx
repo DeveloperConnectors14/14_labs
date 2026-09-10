@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
+import RevealText from "@/components/ui/RevealText";
 import { getFeatures } from "@/services/dataService";
 import { color, layout, measure } from "@/theme/tokens";
 
@@ -20,9 +21,7 @@ function Principles() {
           }}
         >
           <Box>
-            <Typography variant="h2" sx={{ maxWidth: "13ch" }}>
-              Three commitments you can hold us to
-            </Typography>
+            <RevealText text="Three commitments you can hold us to" sx={{ maxWidth: "13ch" }} />
             <Typography variant="lede" sx={{ mt: 3, color: color.inkMuted, maxWidth: "40ch" }}>
               Stated concretely enough that you could check them against us at the end
               of an engagement.

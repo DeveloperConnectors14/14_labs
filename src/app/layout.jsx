@@ -1,4 +1,4 @@
-import { Caveat, Google_Sans_Flex, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
+import { Caveat, IBM_Plex_Mono, Instrument_Sans, Source_Serif_4 } from "next/font/google";
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 import SmoothScroll from "@/components/common/SmoothScroll";
@@ -12,14 +12,12 @@ const SITE_URL = "https://14labs.co";
 
 // Self-hosted through next/font: no render-blocking request to Google, and no
 // flash of fallback text on first paint the way the old <link> tag caused.
-// One variable family for display and text; the optical-size axis is what
-// lets the same face set a 7rem headline and a 15px caption well.
-//
-// next/font has no fallback metrics for this family, so it cannot synthesise a
-// size-adjusted fallback; the stack below is chosen by eye instead.
-const sans = Google_Sans_Flex({
+// One variable family for display and text. Instrument Sans is a clean
+// grotesque with a little editorial character, and a width axis that lets the
+// large headings sit slightly tighter than the text.
+const sans = Instrument_Sans({
   subsets: ["latin"],
-  axes: ["opsz"],
+  axes: ["wdth"],
   variable: "--font-sans",
   display: "swap",
   adjustFontFallback: false,
