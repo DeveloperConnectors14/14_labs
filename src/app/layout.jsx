@@ -1,6 +1,7 @@
-import { Inter, Inter_Tight, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
+import { Google_Sans_Flex, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
+import SmoothScroll from "@/components/common/SmoothScroll";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { themeCss } from "@/theme/tokens";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
@@ -11,18 +12,18 @@ const SITE_URL = "https://14labs.co";
 
 // Self-hosted through next/font: no render-blocking request to Google, and no
 // flash of fallback text on first paint the way the old <link> tag caused.
-const display = Inter_Tight({
+// One variable family for display and text; the optical-size axis is what
+// lets the same face set a 7rem headline and a 15px caption well.
+//
+// next/font has no fallback metrics for this family, so it cannot synthesise a
+// size-adjusted fallback; the stack below is chosen by eye instead.
+const sans = Google_Sans_Flex({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
-  variable: "--font-display",
+  axes: ["opsz"],
+  variable: "--font-sans",
   display: "swap",
-});
-
-const body = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
-  display: "swap",
+  adjustFontFallback: false,
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial", "sans-serif"],
 });
 
 const mono = IBM_Plex_Mono({
@@ -98,7 +99,7 @@ function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable} ${serif.variable}`}
+      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -112,6 +113,7 @@ function RootLayout({ children }) {
         {/* Picks light or dark from the saved choice or the OS setting, before
             first paint. Must run ahead of everything that has a colour. */}
         <InitColorSchemeScript attribute="data-theme" />
+        <SmoothScroll />
         <AppRouterCacheProvider>
           <ThemeProvider>
             <Navbar />

@@ -296,14 +296,14 @@ function ContactPage() {
                 px: 3.5,
                 py: 1.8,
                 borderRadius: radius.pill,
-                backgroundColor: color.deep,
-                color: color.onDeep,
+                backgroundColor: color.primary,
+                color: color.onPrimary,
                 fontFamily: font.body,
                 fontSize: "0.9375rem",
                 fontWeight: 500,
                 transition: `background-color ${motion.fast}, opacity ${motion.fast}`,
                 opacity: isSubmitting ? 0.65 : 1,
-                "&:hover": { backgroundColor: color.deepHover },
+                "&:hover": { backgroundColor: color.primaryHover },
               }}
             >
               {isSubmitting ? "Sending…" : "Send message"}

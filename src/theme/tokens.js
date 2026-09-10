@@ -1,144 +1,145 @@
 /**
  * 14Labs design tokens.
  *
- * The palette is the logo's. The wordmark is indigo and the mark is teal, and
- * everything else on the page is a cool neutral that stays out of their way:
+ * Two themes, both built to the same rule: a quiet ground, one near-black ink,
+ * and colour only where it means something.
  *
- *   indigo    #2E368F   the primary. Actions, links, focus, the lit word in the
- *                       hero, one stat tile and the closing band
- *   teal      #00D3B1   the mark. Highlights on dark bands, and small marks —
- *                       a dot, a chart line — on light ones. Never body text on
- *                       a light ground, where it is ~2:1
- *   midnight  #0F1433   the dark band: footer and instrument panels
- *   greys               the rest — a cool ramp from white to slate
+ *   light   white ground, navy pill buttons, green for links, dots and marks —
+ *           the clean research-page look: white, type and space
+ *   dark    #121317 ground, off-white type, white pill buttons and black cards,
+ *           with green kept to highlights
  *
- * Two brand colours and a quiet ground is what reads as decent: the colour is
- * rationed, so where it appears means something.
+ *   navy    #0B1B36   primary action in the light theme, and the closing band
+ *   green   #22C98A   highlight: dots, chart marks, glow on dark cards
+ *   black   #0B0D12   the card colour for figures and imagery, in both themes
  *
- * There are two themes. Every value lives in `palettes`; `color` holds only CSS
- * variable references to them, so a component writes `color.ink` once and gets
- * the right ink in either theme with no JavaScript on the switch. The variables
- * are emitted by `themeCss` (injected in the root layout) and the active theme
- * is the `data-theme` attribute MUI sets on <html>.
+ * Every value lives in `palettes`; `color` holds only CSS variable references
+ * to them, so a component writes `color.ink` once and gets the right ink in
+ * either theme with no JavaScript on the switch. The variables are emitted by
+ * `themeCss` (injected in the root layout) and the active theme is the
+ * `data-theme` attribute MUI sets on <html>.
  *
- * A few names are kept from earlier palettes so nothing downstream had to be
- * renamed: `lime` is the highlight (teal), `deep` the primary fill (indigo) and
- * `black` the dark band (midnight).
+ * `primary` is the pill button. `deep` is the closing band — navy in light, a
+ * raised navy-black in dark — and is no longer a button colour. `lime` is the
+ * green highlight and `black` the card colour; both names are older than the
+ * colours they now hold.
  */
 
 export const palettes = {
   light: {
     // --- Ground -------------------------------------------------------------
-    ground: "#F7F8FA",
-    surface: "#FFFFFF",
-    surfaceAlt: "#EFF1F6",
-    ink: "#121629",
-    inkMuted: "#4A5068",
-    inkFaint: "#5E6479",
-    rule: "#E3E6EE",
-    ruleStrong: "#CDD2DE",
+    ground: "#FFFFFF",
+    surface: "#F8F9FB",
+    surfaceAlt: "#F1F3F6",
+    ink: "#16181D",
+    inkMuted: "#43474E",
+    inkFaint: "#5F6368",
+    rule: "#E6E8EC",
+    ruleStrong: "#CDD2D9",
 
-    // --- Indigo (primary) ---------------------------------------------------
-    deep: "#2E368F",
-    deepAlt: "#262D7C",
-    deepHover: "#1F2566",
-    accent: "#2E368F",
-    accentSoft: "#E9EBF8",
-    // Text set inside an accent fill. Flips with the accent itself.
+    // --- Primary action (navy pill) -----------------------------------------
+    primary: "#0B1B36",
+    onPrimary: "#FFFFFF",
+    primaryHover: "#1C2F52",
+
+    // --- Closing band -------------------------------------------------------
+    deep: "#0B1B36",
+    deepAlt: "#13264A",
+    deepHover: "#1C2F52",
+    onDeep: "#FFFFFF",
+    onDeepMuted: "#AFBAD0",
+    ruleOnDeep: "#24385E",
+
+    // --- Green --------------------------------------------------------------
+    // `accent` is green deep enough to be text on white; `lime` is the bright
+    // green for dots, marks and anything on a dark card.
+    accent: "#0E7A52",
+    accentSoft: "#E6F5EE",
     onAccent: "#FFFFFF",
-
-    // --- Highlight (teal) ---------------------------------------------------
-    lime: "#00D3B1",
-    limeSoft: "#7EE8D6",
-    // The teal deep enough to hold a line or a dot on a light ground.
-    limeDeep: "#009982",
+    lime: "#22C98A",
+    limeSoft: "#9DEBC7",
+    limeDeep: "#16A56F",
 
     // --- Soft band ----------------------------------------------------------
-    // A pale indigo wash for breaking up a run of white sections. Text on it
-    // is the ordinary ink, so a section written for the ground works here
-    // unchanged. `softMark` is its numeral and index colour.
-    soft: "#EBEDF9",
-    softAlt: "#F5F6FD",
-    softMark: "#2E368F",
-    ruleOnSoft: "#D5D9F0",
+    soft: "#F4F6F9",
+    softAlt: "#FFFFFF",
+    softMark: "#0B1B36",
+    ruleOnSoft: "#E1E5EB",
 
-    // Greys: the neutral steps cards and plates are cut from. Named by depth.
-    grey05: "#F2F4F8",
-    grey10: "#ECEFF5",
-    grey20: "#E1E5EE",
-    grey30: "#CBD1DE",
-    grey45: "#6B7289",
+    // Greys: the neutral steps plates and thumbnails are cut from.
+    grey05: "#F8F9FB",
+    grey10: "#F1F3F6",
+    grey20: "#E6E9EE",
+    grey30: "#CDD3DC",
+    grey45: "#6B7280",
 
-    // --- Midnight band ------------------------------------------------------
-    black: "#0F1433",
-    blackAlt: "#171D45",
-    // Chart steps on the midnight band: field, axis, mark, third series.
-    blackField: "#1B2150",
-    blackAxis: "#2F3668",
-    blackMark: "#5B6395",
-    blackFaint: "#8B92BA",
-    onBlack: "#EEF0F7",
-    onBlackMuted: "#A7ADC8",
-    ruleOnBlack: "#262D5A",
-
-    // --- On the indigo band -------------------------------------------------
-    onDeep: "#FFFFFF",
-    onDeepMuted: "#C5C9EC",
-    ruleOnDeep: "#454EA6",
+    // --- Black card ---------------------------------------------------------
+    black: "#0B0D12",
+    blackAlt: "#14171E",
+    // Chart steps on a black card: field, axis, mark, third series.
+    blackField: "#1A1E27",
+    blackAxis: "#2A2F3A",
+    blackMark: "#4B5261",
+    blackFaint: "#8A93A6",
+    onBlack: "#F1F3F6",
+    onBlackMuted: "#A9B0BE",
+    ruleOnBlack: "#262B35",
   },
 
   /**
-   * Dark is midnight, not black: the same indigo taken almost all the way down,
-   * so the page is recognisably the same brand at night. Colours are lighter
-   * tonal steps rather than inversions — indigo is lifted so a button still
-   * separates from the ground, and link text becomes a light periwinkle, since
-   * the light theme's indigo would vanish here.
+   * Dark is a cool near-black, not navy: the page recedes and the cards and
+   * type carry it. The primary button inverts to a white pill — on a dark page
+   * that is the clearest "act here" there is — and green lifts a step so it
+   * stays legible as text.
    */
   dark: {
-    ground: "#0D1020",
-    surface: "#141830",
-    surfaceAlt: "#1A1F3A",
-    ink: "#EEF0F7",
-    inkMuted: "#B4B9CF",
-    inkFaint: "#8D93AD",
-    rule: "#232845",
-    ruleStrong: "#333A5C",
+    ground: "#121317",
+    surface: "#1B1C21",
+    surfaceAlt: "#202127",
+    ink: "#E9EAEE",
+    inkMuted: "#BFC3CB",
+    inkFaint: "#9AA0AA",
+    rule: "#2A2C33",
+    ruleStrong: "#3B3E46",
 
-    deep: "#3A43A6",
-    deepAlt: "#313996",
-    deepHover: "#4751BA",
-    accent: "#A5ACF7",
-    accentSoft: "#1E2447",
-    onAccent: "#0D1020",
+    primary: "#E9EAEE",
+    onPrimary: "#121317",
+    primaryHover: "#FFFFFF",
 
-    lime: "#2EE6C8",
-    limeSoft: "#8FF0E0",
-    limeDeep: "#21C2A7",
+    deep: "#151A28",
+    deepAlt: "#1C2233",
+    deepHover: "#242B40",
+    onDeep: "#F1F3F6",
+    onDeepMuted: "#AEB6C8",
+    ruleOnDeep: "#2A3148",
 
-    soft: "#171C37",
-    softAlt: "#1E2442",
-    softMark: "#A5ACF7",
-    ruleOnSoft: "#2A3056",
+    accent: "#5EE0A6",
+    accentSoft: "#1A2A22",
+    onAccent: "#121317",
+    lime: "#3DDC97",
+    limeSoft: "#A6EFC6",
+    limeDeep: "#2BB673",
 
-    grey05: "#151A31",
-    grey10: "#191E37",
-    grey20: "#20263F",
-    grey30: "#2E3453",
-    grey45: "#8A90AA",
+    soft: "#17181D",
+    softAlt: "#1E2026",
+    softMark: "#5EE0A6",
+    ruleOnSoft: "#2A2C33",
 
-    black: "#080B1A",
-    blackAlt: "#0E1226",
-    blackField: "#12172E",
-    blackAxis: "#232949",
-    blackMark: "#4B5279",
-    blackFaint: "#7980A5",
-    onBlack: "#EEF0F7",
-    onBlackMuted: "#A3A9C3",
-    ruleOnBlack: "#1C2140",
+    grey05: "#17181D",
+    grey10: "#1B1C21",
+    grey20: "#24262C",
+    grey30: "#33363E",
+    grey45: "#8C929C",
 
-    onDeep: "#FFFFFF",
-    onDeepMuted: "#D0D3F3",
-    ruleOnDeep: "#525BBE",
+    black: "#000000",
+    blackAlt: "#0B0C0F",
+    blackField: "#141519",
+    blackAxis: "#26282E",
+    blackMark: "#474B55",
+    blackFaint: "#7D8390",
+    onBlack: "#E9EAEE",
+    onBlackMuted: "#A2A7B1",
+    ruleOnBlack: "#202227",
   },
 };
 
@@ -173,35 +174,39 @@ export const themeCss = `:root{${declare(palettes.light)}}:root[data-theme="dark
   palettes.dark
 )}}`;
 
+// One family for display and text, as the reference pages do. Mono and serif
+// stay for code and long-form research prose.
 export const font = {
-  display: "var(--font-display)",
-  body: "var(--font-body)",
+  display: "var(--font-sans)",
+  body: "var(--font-sans)",
   mono: "var(--font-mono)",
   serif: "var(--font-serif)",
 };
 
 /**
- * Display steps run at weight 300 with tight tracking (fin.ai's setting).
- * Text steps stay at 400 — light weight below ~28px turns to mush.
+ * Display steps run at weight 400 with moderately tight tracking. Google Sans
+ * Flex has an optical-size axis, so large settings tighten on their own and
+ * the tracking here only has to finish the job.
  */
 export const type = {
-  display: "clamp(2.75rem, 1.1rem + 6.6vw, 6.25rem)",
-  h1: "clamp(2.25rem, 1.2rem + 4.2vw, 4.5rem)",
-  h2: "clamp(1.875rem, 1.15rem + 2.9vw, 3.5rem)",
-  h3: "clamp(1.3125rem, 1.1rem + 0.85vw, 1.75rem)",
-  h4: "clamp(1.0625rem, 1rem + 0.3vw, 1.25rem)",
-  lede: "clamp(1.125rem, 1.02rem + 0.5vw, 1.4375rem)",
+  display: "clamp(2.75rem, 0.5rem + 7.4vw, 7.5rem)",
+  h1: "clamp(2.5rem, 1.4rem + 4.2vw, 5rem)",
+  h2: "clamp(2rem, 1.35rem + 2.6vw, 3.5rem)",
+  h3: "clamp(1.375rem, 1.2rem + 0.75vw, 1.875rem)",
+  h4: "clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem)",
+  lede: "clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem)",
   body: "1.0625rem",
   small: "0.9375rem",
-  eyebrow: "0.75rem",
+  eyebrow: "0.875rem",
 };
 
 export const radius = {
   none: 0,
   sm: "6px",
   md: "12px",
-  lg: "24px",
-  xl: "32px",
+  lg: "20px",
+  xl: "28px",
+  card: "28px",
   pill: "999px",
 };
 
@@ -210,16 +215,15 @@ export const layout = {
   narrow: 780,
   gutter: { xs: "16px", sm: "24px", md: "32px", lg: "40px" },
   // Half-gaps: two adjacent sections each contribute one, so the gap between
-  // them is 2x this. Setting the full gap here is what produced ~300px of dead
-  // ground between every pair of sections.
+  // them is 2x this.
   gapY: "clamp(40px, 4.5vw, 72px)",
   gapYTight: "clamp(28px, 3vw, 44px)",
   // Padding inside an inset slab, which is its own enclosure and needs a real
   // internal margin rather than a half-gap.
   slabY: "clamp(44px, 5.5vw, 88px)",
   sectionY: "clamp(72px, 9vw, 152px)",
-  sectionYTight: "clamp(48px, 6vw, 96px)",
-  navHeight: { xs: 64, md: 76 },
+  sectionYTight: "clamp(56px, 7vw, 120px)",
+  navHeight: { xs: 64, md: 72 },
 };
 
 /** Measure caps. Prose past ~70ch stops being readable. */

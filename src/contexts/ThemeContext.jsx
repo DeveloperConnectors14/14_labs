@@ -7,9 +7,9 @@ import { color, font, type, radius, motion, layout, palettes } from "@/theme/tok
 
 const ThemeContext = createContext();
 
-// Display scale: weight 300 with tight tracking, measured off fin.ai. Light
-// weight only works at size — anything under ~28px stays at 400.
-const displayHeading = (fontSize, { lineHeight = 1.0, letterSpacing = "-0.046em", weight = 300 } = {}) => ({
+// Display scale: weight 400, moderately tight. The optical-size axis of the
+// display face does part of the tightening at large sizes.
+const displayHeading = (fontSize, { lineHeight = 1.05, letterSpacing = "-0.025em", weight = 400 } = {}) => ({
   fontFamily: font.display,
   fontWeight: weight,
   fontSize,
@@ -22,7 +22,7 @@ const displayHeading = (fontSize, { lineHeight = 1.0, letterSpacing = "-0.046em"
 // `color.*`, which are CSS variables switched by the same attribute.
 const schemePalette = (mode, p) => ({
   mode,
-  primary: { main: p.ink, contrastText: p.ground },
+  primary: { main: p.primary, contrastText: p.onPrimary },
   secondary: { main: p.accent, contrastText: p.onAccent },
   background: { default: p.ground, paper: p.surface },
   text: {
@@ -47,9 +47,9 @@ export const ThemeProvider = ({ children }) => {
           dark: { palette: schemePalette("dark", palettes.dark) },
         },
 
-        shape: { borderRadius: 24 },
+        shape: { borderRadius: 20 },
 
-        // Depth comes from the surface split and the bands, not from blur.
+        // Depth comes from surface steps and the black cards, not from shadow.
         shadows: Array(25).fill("none"),
 
         typography: {
@@ -59,50 +59,43 @@ export const ThemeProvider = ({ children }) => {
           fontWeightMedium: 500,
           fontWeightBold: 600,
 
-          display: displayHeading(type.display, { lineHeight: 0.95, letterSpacing: "-0.05em" }),
-          h1: displayHeading(type.h1, { lineHeight: 0.98 }),
-          h2: displayHeading(type.h2, { lineHeight: 1.02, letterSpacing: "-0.042em" }),
-          h3: displayHeading(type.h3, {
-            lineHeight: 1.2,
-            letterSpacing: "-0.022em",
-            weight: 400,
-          }),
-          h4: displayHeading(type.h4, {
-            lineHeight: 1.3,
-            letterSpacing: "-0.012em",
-            weight: 500,
-          }),
+          display: displayHeading(type.display, { lineHeight: 0.98, letterSpacing: "-0.045em" }),
+          h1: displayHeading(type.h1, { lineHeight: 1.02, letterSpacing: "-0.035em" }),
+          h2: displayHeading(type.h2, { lineHeight: 1.08, letterSpacing: "-0.028em" }),
+          h3: displayHeading(type.h3, { lineHeight: 1.2, letterSpacing: "-0.015em" }),
+          h4: displayHeading(type.h4, { lineHeight: 1.3, letterSpacing: "-0.01em", weight: 500 }),
 
           lede: {
             fontFamily: font.body,
             fontWeight: 400,
             fontSize: type.lede,
-            lineHeight: 1.5,
-            letterSpacing: "-0.014em",
+            lineHeight: 1.55,
+            letterSpacing: "-0.005em",
           },
           body1: {
             fontFamily: font.body,
             fontWeight: 400,
             fontSize: type.body,
             lineHeight: 1.65,
-            letterSpacing: "-0.004em",
+            letterSpacing: 0,
           },
           body2: {
             fontFamily: font.body,
             fontWeight: 400,
             fontSize: type.small,
             lineHeight: 1.6,
-            letterSpacing: "-0.002em",
+            letterSpacing: 0,
           },
 
-          // Mono labels the page: eyebrows, indices, dates, tags.
+          // Small section labels. Sentence case in the text face — the tracked
+          // mono capitals they replace read as template chrome.
           eyebrow: {
-            fontFamily: font.mono,
+            fontFamily: font.body,
             fontWeight: 500,
             fontSize: type.eyebrow,
             lineHeight: 1.4,
-            letterSpacing: "0.11em",
-            textTransform: "uppercase",
+            letterSpacing: 0,
+            textTransform: "none",
           },
           mono: {
             fontFamily: font.mono,
@@ -112,11 +105,11 @@ export const ThemeProvider = ({ children }) => {
             letterSpacing: "0.01em",
           },
           caption: {
-            fontFamily: font.mono,
+            fontFamily: font.body,
             fontWeight: 400,
-            fontSize: "0.75rem",
+            fontSize: "0.8125rem",
             lineHeight: 1.5,
-            letterSpacing: "0.03em",
+            letterSpacing: "0.005em",
           },
           button: {
             fontFamily: font.body,
@@ -154,19 +147,19 @@ export const ThemeProvider = ({ children }) => {
               root: {
                 borderRadius: radius.pill,
                 paddingInline: "24px",
-                paddingBlock: "13px",
-                minHeight: 48,
+                paddingBlock: "12px",
+                minHeight: 46,
                 transition: `background-color ${motion.fast}, color ${motion.fast}, border-color ${motion.fast}`,
               },
               contained: {
-                backgroundColor: color.deep,
-                color: color.onDeep,
-                "&:hover": { backgroundColor: color.deepHover },
+                backgroundColor: color.primary,
+                color: color.onPrimary,
+                "&:hover": { backgroundColor: color.primaryHover },
               },
               outlined: {
                 borderColor: color.ruleStrong,
                 color: color.ink,
-                "&:hover": { borderColor: color.ink, backgroundColor: "transparent" },
+                "&:hover": { borderColor: color.ruleStrong, backgroundColor: color.surfaceAlt },
               },
               text: {
                 paddingInline: 0,
@@ -184,9 +177,8 @@ export const ThemeProvider = ({ children }) => {
                 backgroundColor: color.surface,
                 border: "1px solid " + color.rule,
                 color: color.inkMuted,
-                fontFamily: font.mono,
-                fontSize: "0.75rem",
-                letterSpacing: "0.02em",
+                fontFamily: font.body,
+                fontSize: "0.8125rem",
               },
               label: { paddingInline: 12 },
             },

@@ -2,14 +2,14 @@ import { color } from "@/theme/tokens";
 
 /**
  * Every visual on the site is drawn from one of three palettes: on the page
- * ground, on the indigo band, or on the midnight band (keyed `deep` and `black`,
- * the roles they took over). They are kept here rather than in each figure so a
- * chart can never quietly invent a colour.
+ * ground, on the closing band (`deep`), or on a black card (`black`). They are
+ * kept here rather than in each figure so a chart can never quietly invent a
+ * colour.
  *
  * Every entry is a theme variable, so a figure follows the light/dark switch
- * without knowing it exists. On the ground a chart gets the two brand colours
- * and nothing else: the lead series in the accent (indigo, or periwinkle in the
- * dark theme), the second in deep teal, and everything behind them grey.
+ * without knowing it exists. On the ground a chart gets green for the series
+ * that matters, the primary (navy, or off-white in dark) for the second, and
+ * grey for everything else. On a black card the lead is the bright green.
  */
 const PALETTES = {
   light: {
@@ -17,7 +17,7 @@ const PALETTES = {
     grid: color.rule,
     axis: color.ruleStrong,
     mark: color.grey45,
-    series: [color.accent, color.limeDeep, color.grey30],
+    series: [color.accent, color.primary, color.grey30],
     highlight: color.accent,
     // Text sitting *inside* a filled highlight. It flips with the highlight.
     onHighlight: color.onAccent,

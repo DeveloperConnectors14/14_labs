@@ -14,11 +14,14 @@ import {
     useScrollTrigger,
 } from "@mui/material";
 import { useColorScheme } from "@mui/material/styles";
+import PillLink from "@/components/ui/PillLink";
 import { getNavItems } from "@/services/dataService";
 import { useNavHidden } from "@/components/common/navVisibility";
-import { color, layout, motion, radius } from "@/theme/tokens";
+import { color, layout, motion } from "@/theme/tokens";
 
 const navItems = getNavItems();
+// Contact is the pill on the right; listing it again beside it is noise.
+const barItems = navItems.filter((item) => item.path !== "/contact");
 
 /** Two bars that become an X. Cheaper and calmer than swapping icon glyphs. */
 function MenuToggle({ open }) {
@@ -33,20 +36,8 @@ function MenuToggle({ open }) {
 
     return (
         <Box aria-hidden sx={{ position: "relative", width: 20, height: 14 }}>
-            <Box
-                sx={{
-                    ...barSx,
-                    top: open ? 6 : 1,
-                    transform: open ? "rotate(45deg)" : "none",
-                }}
-            />
-            <Box
-                sx={{
-                    ...barSx,
-                    top: open ? 6 : 11,
-                    transform: open ? "rotate(-45deg)" : "none",
-                }}
-            />
+            <Box sx={{ ...barSx, top: open ? 6 : 1, transform: open ? "rotate(45deg)" : "none" }} />
+            <Box sx={{ ...barSx, top: open ? 6 : 11, transform: open ? "rotate(-45deg)" : "none" }} />
         </Box>
     );
 }
@@ -57,7 +48,7 @@ function MenuToggle({ open }) {
  * and the first client render agree whichever theme the visitor lands in; the
  * theme is only read at the moment of the click.
  */
-function ThemeToggle({ sx }) {
+function ThemeToggle() {
     const { mode, systemMode, setMode } = useColorScheme();
 
     const toggle = () => {
@@ -71,14 +62,11 @@ function ThemeToggle({ sx }) {
             aria-label="Toggle dark theme"
             disableRipple
             sx={{
-                width: 36,
-                height: 36,
+                width: 40,
+                height: 40,
                 color: color.ink,
-                border: "1px solid",
-                borderColor: color.rule,
-                transition: `border-color ${motion.fast}`,
-                "&:hover": { borderColor: color.ink, backgroundColor: "transparent" },
-                ...sx,
+                transition: `background-color ${motion.fast}`,
+                "&:hover": { backgroundColor: color.surfaceAlt },
             }}
         >
             <Box
@@ -86,8 +74,8 @@ function ThemeToggle({ sx }) {
                 viewBox="0 0 20 20"
                 aria-hidden
                 sx={{
-                    width: 16,
-                    height: 16,
+                    width: 18,
+                    height: 18,
                     transition: `transform ${motion.slow}`,
                     "[data-theme='dark'] &": { transform: "rotate(180deg)" },
                 }}
@@ -99,20 +87,39 @@ function ThemeToggle({ sx }) {
     );
 }
 
+/** Both marks ship and CSS shows the one for the active theme, so the logo is
+ *  right on the first paint rather than after hydration. */
+export function ThemedLogo({ width = 80, height = 30, priority = false }) {
+    return (
+        <>
+            <Box sx={{ display: "flex", "[data-theme='dark'] &": { display: "none" } }}>
+                <Image src="/media/logo-ink.svg" alt="14Labs" width={width} height={height} priority={priority} />
+            </Box>
+            <Box sx={{ display: "none", "[data-theme='dark'] &": { display: "flex" } }}>
+                <Image src="/media/logo-onink.svg" alt="" width={width} height={height} priority={priority} />
+            </Box>
+        </>
+    );
+}
+
 function Navbar() {
-    const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
+
+    // The menu remembers the page it was opened on and only counts as open
+    // while that is still the page — so a route change closes it without an
+    // effect, and the overlay can never be left hanging over the next page.
+    const [openedOn, setOpenedOn] = useState(null);
+    const mobileOpen = openedOn === pathname;
+    const setMobileOpen = (next) => {
+        const open = typeof next === "function" ? next(mobileOpen) : next;
+        setOpenedOn(open ? pathname : null);
+    };
 
     const isScrolled = useScrollTrigger({ disableHysteresis: true, threshold: 8 });
 
     // Pinned full-bleed sections take the bar off screen while they hold the
     // viewport — see navVisibility.
     const hidden = useNavHidden();
-
-    // Route changes should never leave the overlay hanging open.
-    useEffect(() => {
-        setMobileOpen(false);
-    }, [pathname]);
 
     // The overlay covers the page; letting the page scroll behind it is the
     // classic mobile-menu bug.
@@ -134,9 +141,9 @@ function Navbar() {
                     height: layout.navHeight,
                     justifyContent: "center",
                     backgroundColor: isScrolled
-                        ? `color-mix(in srgb, ${color.ground} 88%, transparent)`
+                        ? `color-mix(in srgb, ${color.ground} 86%, transparent)`
                         : color.ground,
-                    backdropFilter: isScrolled ? "saturate(180%) blur(12px)" : "none",
+                    backdropFilter: isScrolled ? "saturate(160%) blur(14px)" : "none",
                     borderBottom: "1px solid",
                     borderColor: isScrolled ? color.rule : "transparent",
                     transform: hidden ? "translateY(-100%)" : "none",
@@ -149,106 +156,63 @@ function Navbar() {
                 }}
             >
                 <Container>
-                    <Toolbar disableGutters sx={{ minHeight: "0 !important", gap: 2 }}>
-                        <Box
-                            component={Link}
-                            href="/"
-                            aria-label="14Labs home"
-                            sx={{ display: "flex", mr: "auto" }}
-                        >
-                            {/* Both marks ship and CSS shows the one for the
-                                active theme, so the logo is right on the first
-                                paint rather than after hydration. */}
-                            <Box sx={{ display: "flex", "[data-theme='dark'] &": { display: "none" } }}>
-                                <Image src="/media/logo-ink.svg" alt="14Labs" width={80} height={30} priority />
-                            </Box>
-                            <Box sx={{ display: "none", "[data-theme='dark'] &": { display: "flex" } }}>
-                                <Image src="/media/logo-onink.svg" alt="" width={80} height={30} priority />
-                            </Box>
+                    <Toolbar disableGutters sx={{ minHeight: "0 !important", gap: 1 }}>
+                        <Box component={Link} href="/" aria-label="14Labs home" sx={{ display: "flex" }}>
+                            <ThemedLogo priority />
                         </Box>
 
                         <Box
                             component="nav"
-                            sx={{
-                                display: { xs: "none", md: "flex" },
-                                alignItems: "center",
-                                gap: 4,
-                            }}
+                            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: 0.5, ml: 5 }}
                         >
-                            {navItems.map((item) => {
+                            {barItems.map((item) => {
                                 const active = isActive(item.path);
                                 return (
                                     <Box
                                         key={item.path}
                                         component={Link}
                                         href={item.path}
+                                        aria-current={active ? "page" : undefined}
                                         sx={{
+                                            px: 1.75,
+                                            py: 1,
+                                            borderRadius: "999px",
                                             textDecoration: "none",
-                                            position: "relative",
-                                            paddingBlock: "6px",
+                                            fontSize: "0.9375rem",
+                                            fontWeight: active ? 500 : 400,
                                             color: active ? color.ink : color.inkMuted,
-                                            transition: `color ${motion.fast}`,
-                                            "&:hover": { color: color.ink },
-                                            "&::after": {
-                                                content: '""',
-                                                position: "absolute",
-                                                insetInline: 0,
-                                                bottom: 0,
-                                                height: "1px",
-                                                backgroundColor: color.accent,
-                                                transform: active ? "scaleX(1)" : "scaleX(0)",
-                                                transformOrigin: "left",
-                                                transition: `transform ${motion.base}`,
-                                            },
-                                            "&:hover::after": { transform: "scaleX(1)" },
+                                            backgroundColor: active ? color.surfaceAlt : "transparent",
+                                            transition: `color ${motion.fast}, background-color ${motion.fast}`,
+                                            "&:hover": { color: color.ink, backgroundColor: color.surfaceAlt },
                                         }}
                                     >
-                                        <Typography
-                                            component="span"
-                                            sx={{ fontSize: "0.9375rem", fontWeight: 450, letterSpacing: "-0.005em" }}
-                                        >
-                                            {item.label}
-                                        </Typography>
+                                        {item.label}
                                     </Box>
                                 );
                             })}
                         </Box>
 
-                        <ThemeToggle sx={{ ml: { md: 3 } }} />
+                        <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 1 }}>
+                            <ThemeToggle />
 
-                        <Box
-                            component={Link}
-                            href="/contact"
-                            sx={{
-                                display: { xs: "none", md: "inline-flex" },
-                                alignItems: "center",
-                                px: 2.75,
-                                py: 1.35,
-                                borderRadius: radius.pill,
-                                backgroundColor: color.deep,
-                                color: color.onDeep,
-                                textDecoration: "none",
-                                transition: `background-color ${motion.fast}, color ${motion.fast}`,
-                                "&:hover": { backgroundColor: color.deepHover, color: color.onDeep },
-                            }}
-                        >
-                            <Typography
-                                component="span"
-                                sx={{ fontSize: "0.875rem", fontWeight: 500, letterSpacing: "-0.005em" }}
+                            <PillLink
+                                href="/contact"
+                                size="sm"
+                                sx={{ display: { xs: "none", md: "inline-flex" } }}
                             >
                                 Start a project
-                            </Typography>
-                        </Box>
+                            </PillLink>
 
-                        <IconButton
-                            onClick={() => setMobileOpen((prev) => !prev)}
-                            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-                            aria-expanded={mobileOpen}
-                            disableRipple
-                            sx={{ display: { xs: "flex", md: "none" }, mr: -1 }}
-                        >
-                            <MenuToggle open={mobileOpen} />
-                        </IconButton>
+                            <IconButton
+                                onClick={() => setMobileOpen((prev) => !prev)}
+                                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                                aria-expanded={mobileOpen}
+                                disableRipple
+                                sx={{ display: { xs: "flex", md: "none" }, mr: -1 }}
+                            >
+                                <MenuToggle open={mobileOpen} />
+                            </IconButton>
+                        </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
@@ -271,15 +235,13 @@ function Navbar() {
                 aria-hidden={!mobileOpen}
             >
                 <Container>
-                    {navItems.map((item, i) => (
+                    {navItems.map((item) => (
                         <Box
                             key={item.path}
                             component={Link}
                             href={item.path}
                             sx={{
-                                display: "flex",
-                                alignItems: "baseline",
-                                gap: 2,
+                                display: "block",
                                 paddingBlock: 2.25,
                                 borderBottom: "1px solid",
                                 borderColor: color.rule,
@@ -287,14 +249,15 @@ function Navbar() {
                                 color: isActive(item.path) ? color.accent : color.ink,
                             }}
                         >
-                            <Typography variant="caption" sx={{ color: color.inkFaint, width: 24 }}>
-                                {String(i + 1).padStart(2, "0")}
-                            </Typography>
                             <Typography variant="h3" component="span">
                                 {item.label}
                             </Typography>
                         </Box>
                     ))}
+
+                    <PillLink href="/contact" size="lg" sx={{ mt: 4 }}>
+                        Start a project
+                    </PillLink>
                 </Container>
             </Box>
 
