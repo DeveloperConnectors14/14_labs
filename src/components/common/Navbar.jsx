@@ -13,6 +13,7 @@ import {
     Typography,
     useScrollTrigger,
 } from "@mui/material";
+import { useColorScheme } from "@mui/material/styles";
 import { getNavItems } from "@/services/dataService";
 import { useNavHidden } from "@/components/common/navVisibility";
 import { color, layout, motion, radius } from "@/theme/tokens";
@@ -50,6 +51,54 @@ function MenuToggle({ open }) {
     );
 }
 
+/**
+ * One glyph for both themes — a ring, half filled — turned over by CSS when the
+ * page goes dark. Nothing in it is rendered from state, so the server render
+ * and the first client render agree whichever theme the visitor lands in; the
+ * theme is only read at the moment of the click.
+ */
+function ThemeToggle({ sx }) {
+    const { mode, systemMode, setMode } = useColorScheme();
+
+    const toggle = () => {
+        const current = mode === "system" ? systemMode : mode;
+        setMode(current === "dark" ? "light" : "dark");
+    };
+
+    return (
+        <IconButton
+            onClick={toggle}
+            aria-label="Toggle dark theme"
+            disableRipple
+            sx={{
+                width: 36,
+                height: 36,
+                color: color.ink,
+                border: "1px solid",
+                borderColor: color.rule,
+                transition: `border-color ${motion.fast}`,
+                "&:hover": { borderColor: color.ink, backgroundColor: "transparent" },
+                ...sx,
+            }}
+        >
+            <Box
+                component="svg"
+                viewBox="0 0 20 20"
+                aria-hidden
+                sx={{
+                    width: 16,
+                    height: 16,
+                    transition: `transform ${motion.slow}`,
+                    "[data-theme='dark'] &": { transform: "rotate(180deg)" },
+                }}
+            >
+                <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <path d="M10 1.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" />
+            </Box>
+        </IconButton>
+    );
+}
+
 function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
@@ -84,7 +133,9 @@ function Navbar() {
                 sx={{
                     height: layout.navHeight,
                     justifyContent: "center",
-                    backgroundColor: isScrolled ? "rgba(235,235,235,0.88)" : color.ground,
+                    backgroundColor: isScrolled
+                        ? `color-mix(in srgb, ${color.ground} 88%, transparent)`
+                        : color.ground,
                     backdropFilter: isScrolled ? "saturate(180%) blur(12px)" : "none",
                     borderBottom: "1px solid",
                     borderColor: isScrolled ? color.rule : "transparent",
@@ -105,13 +156,15 @@ function Navbar() {
                             aria-label="14Labs home"
                             sx={{ display: "flex", mr: "auto" }}
                         >
-                            <Image
-                                src="/media/logo-ink.svg"
-                                alt="14Labs"
-                                width={80}
-                                height={30}
-                                priority
-                            />
+                            {/* Both marks ship and CSS shows the one for the
+                                active theme, so the logo is right on the first
+                                paint rather than after hydration. */}
+                            <Box sx={{ display: "flex", "[data-theme='dark'] &": { display: "none" } }}>
+                                <Image src="/media/logo-ink.svg" alt="14Labs" width={80} height={30} priority />
+                            </Box>
+                            <Box sx={{ display: "none", "[data-theme='dark'] &": { display: "flex" } }}>
+                                <Image src="/media/logo-onink.svg" alt="" width={80} height={30} priority />
+                            </Box>
                         </Box>
 
                         <Box
@@ -161,13 +214,14 @@ function Navbar() {
                             })}
                         </Box>
 
+                        <ThemeToggle sx={{ ml: { md: 3 } }} />
+
                         <Box
                             component={Link}
                             href="/contact"
                             sx={{
                                 display: { xs: "none", md: "inline-flex" },
                                 alignItems: "center",
-                                ml: 3,
                                 px: 2.75,
                                 py: 1.35,
                                 borderRadius: radius.pill,
@@ -175,7 +229,7 @@ function Navbar() {
                                 color: color.onDeep,
                                 textDecoration: "none",
                                 transition: `background-color ${motion.fast}, color ${motion.fast}`,
-                                "&:hover": { backgroundColor: color.ink, color: color.ground },
+                                "&:hover": { backgroundColor: color.deepHover, color: color.onDeep },
                             }}
                         >
                             <Typography

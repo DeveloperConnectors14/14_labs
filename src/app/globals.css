@@ -1,14 +1,9 @@
 /* Base layer. MUI's CssBaseline handles the reset; this adds the things a
-   reset does not: selection colour, focus rings, and sane media defaults. */
+   reset does not: selection colour, focus rings, and sane media defaults.
 
-:root {
-  color-scheme: light;
-  --ground: #ebebeb;
-  --ink: #1c1c1c;
-  --accent: #006130;
-  --lime: #78d147;
-  --rule: #d4d4d4;
-}
+   The colour variables (--c-*) are not declared here. They are generated for
+   both themes from src/theme/tokens.js and injected by the root layout, so the
+   palette has exactly one source. */
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -26,20 +21,20 @@ html {
 }
 
 body {
-  background-color: var(--ground);
-  color: var(--ink);
+  background-color: var(--c-ground);
+  color: var(--c-ink);
   /* Stops the layout shifting sideways when a long page loses its scrollbar. */
   scrollbar-gutter: stable;
 }
 
 ::selection {
-  background-color: var(--ink);
-  color: var(--ground);
+  background-color: var(--c-ink);
+  color: var(--c-ground);
 }
 
 /* One visible focus ring for the whole site, keyboard-only. */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--c-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }

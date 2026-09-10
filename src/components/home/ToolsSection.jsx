@@ -60,7 +60,21 @@ function ToolsSection() {
                       backgroundColor: color.accentSoft,
                       borderColor: color.green45,
                     },
+                    // Desaturated at rest so fourteen brand palettes do not
+                    // fight the page. Set here rather than inline on the image
+                    // so the dark theme below can override it.
+                    "& .tool-mark": {
+                      filter: "grayscale(1)",
+                      opacity: 0.65,
+                      transition: `opacity ${motion.fast}, filter ${motion.fast}`,
+                    },
                     "&:hover .tool-mark": { opacity: 1, filter: "grayscale(0)" },
+                    // Most marks are drawn dark for a light page. On the dark
+                    // ground they are inverted, and stay grey on hover — an
+                    // inverted brand colour is worse than none.
+                    "[data-theme='dark'] & .tool-mark, [data-theme='dark'] &:hover .tool-mark": {
+                      filter: "grayscale(1) invert(1)",
+                    },
                     "&:hover .tool-name": { color: color.ink },
                   }}
                 >
@@ -70,16 +84,7 @@ function ToolsSection() {
                     alt=""
                     width={20}
                     height={20}
-                    style={{
-                      height: 20,
-                      width: "auto",
-                      objectFit: "contain",
-                      // Desaturated at rest so fourteen brand palettes do not
-                      // fight the two-colour page.
-                      filter: "grayscale(1)",
-                      opacity: 0.65,
-                      transition: `opacity ${motion.fast}, filter ${motion.fast}`,
-                    }}
+                    style={{ height: 20, width: "auto", objectFit: "contain" }}
                   />
                   <Typography
                     className="tool-name"

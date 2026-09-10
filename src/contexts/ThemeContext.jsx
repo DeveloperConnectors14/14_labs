@@ -3,7 +3,7 @@
 import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { createContext, useContext, useMemo } from "react";
-import { color, font, type, radius, motion, layout } from "@/theme/tokens";
+import { color, font, type, radius, motion, layout, palettes } from "@/theme/tokens";
 
 const ThemeContext = createContext();
 
@@ -17,30 +17,39 @@ const displayHeading = (fontSize, { lineHeight = 1.0, letterSpacing = "-0.046em"
   letterSpacing,
 });
 
+// MUI derives its own hover and focus tints from the palette, so it is handed
+// the literal values for each scheme. Everything else on the site reads
+// `color.*`, which are CSS variables switched by the same attribute.
+const schemePalette = (mode, p) => ({
+  mode,
+  primary: { main: p.ink, contrastText: p.ground },
+  secondary: { main: p.accent, contrastText: p.onAccent },
+  background: { default: p.ground, paper: p.surface },
+  text: {
+    primary: p.ink,
+    secondary: p.inkMuted,
+    disabled: p.inkFaint,
+  },
+  divider: p.rule,
+});
+
 export const ThemeProvider = ({ children }) => {
   const theme = useMemo(
     () =>
       createTheme({
-        palette: {
-          mode: "light",
-          primary: { main: color.ink, contrastText: color.ground },
-          secondary: { main: color.accent, contrastText: color.onDeep },
-          background: { default: color.ground, paper: color.surface },
-          text: {
-            primary: color.ink,
-            secondary: color.inkMuted,
-            disabled: color.inkFaint,
-          },
-          divider: color.rule,
-          // Everything the semantic slots cannot express, reached as
-          // theme.palette.brand.* or the "brand.lime" sx string.
-          brand: color,
+        // Both schemes are emitted as CSS variables and chosen by the
+        // `data-theme` attribute on <html>. InitColorSchemeScript in the root
+        // layout sets it before first paint, so a dark-mode visitor never sees
+        // the cream ground flash first.
+        cssVariables: { colorSchemeSelector: "data-theme" },
+        colorSchemes: {
+          light: { palette: schemePalette("light", palettes.light) },
+          dark: { palette: schemePalette("dark", palettes.dark) },
         },
 
         shape: { borderRadius: 24 },
 
-        // Depth comes from the grey/white surface split and the green bands,
-        // not from blur.
+        // Depth comes from the surface split and the bands, not from blur.
         shadows: Array(25).fill("none"),
 
         typography: {
@@ -152,7 +161,7 @@ export const ThemeProvider = ({ children }) => {
               contained: {
                 backgroundColor: color.deep,
                 color: color.onDeep,
-                "&:hover": { backgroundColor: color.ink },
+                "&:hover": { backgroundColor: color.deepHover },
               },
               outlined: {
                 borderColor: color.ruleStrong,
@@ -234,7 +243,9 @@ export const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ theme }}>
-      <MuiThemeProvider theme={theme}>
+      {/* Transitions are suspended for the one frame the theme flips, or every
+          band on the page would cross-fade at its own speed. */}
+      <MuiThemeProvider theme={theme} disableTransitionOnChange>
         <CssBaseline />
         {children}
       </MuiThemeProvider>

@@ -2,7 +2,9 @@ import { Inter, Inter_Tight, IBM_Plex_Mono, Source_Serif_4 } from "next/font/goo
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { themeCss } from "@/theme/tokens";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import "./globals.css";
 
 const SITE_URL = "https://14labs.co";
@@ -90,18 +92,26 @@ const organizationSchema = {
 };
 
 function RootLayout({ children }) {
+  // The theme attribute on <html> is written by InitColorSchemeScript before
+  // React hydrates, so the server's <html> can never match it exactly — hence
+  // suppressHydrationWarning, which covers that one element only.
   return (
     <html
       lang="en"
       className={`${display.variable} ${body.variable} ${mono.variable} ${serif.variable}`}
+      suppressHydrationWarning
     >
       <head>
+        <style id="theme-tokens" dangerouslySetInnerHTML={{ __html: themeCss }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
       <body>
+        {/* Picks light or dark from the saved choice or the OS setting, before
+            first paint. Must run ahead of everything that has a colour. */}
+        <InitColorSchemeScript attribute="data-theme" />
         <AppRouterCacheProvider>
           <ThemeProvider>
             <Navbar />

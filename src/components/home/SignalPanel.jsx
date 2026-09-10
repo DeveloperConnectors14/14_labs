@@ -6,7 +6,7 @@ import { color, motion, radius } from "@/theme/tokens";
 
 const LEGEND = [
   { tone: color.lime, label: "Wired to an alert" },
-  { tone: "#6B6B6B", label: "Sampled and kept" },
+  { tone: color.blackMark, label: "Sampled and kept" },
 ];
 
 /**

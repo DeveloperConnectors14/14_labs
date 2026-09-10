@@ -22,7 +22,7 @@ const STAGE_TONES = {
   "#377BBB": { bg: color.surface, fg: color.ink, rule: color.green30 },
   "#00895E": { bg: color.green20, fg: color.ink, rule: color.green45 },
   "#BB7000": { bg: color.green05, fg: color.ink, rule: color.green30 },
-  "#BC2831": { bg: color.accent, fg: color.onDeep, rule: color.accent },
+  "#BC2831": { bg: color.accent, fg: color.onAccent, rule: color.accent },
   "#4B4DB6": { bg: color.deep, fg: color.onDeep, rule: color.deep },
 };
 

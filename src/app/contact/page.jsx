@@ -303,7 +303,7 @@ function ContactPage() {
                 fontWeight: 500,
                 transition: `background-color ${motion.fast}, opacity ${motion.fast}`,
                 opacity: isSubmitting ? 0.65 : 1,
-                "&:hover": { backgroundColor: color.ink },
+                "&:hover": { backgroundColor: color.deepHover },
               }}
             >
               {isSubmitting ? "Sending…" : "Send message"}

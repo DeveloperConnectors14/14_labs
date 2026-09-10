@@ -183,7 +183,7 @@ function RetrievalLab({ dense = false }) {
                 height: 16,
                 backgroundColor: color.lime,
                 "&:hover, &.Mui-focusVisible": {
-                  boxShadow: `0 0 0 8px ${color.limeDeep}33`,
+                  boxShadow: `0 0 0 8px color-mix(in srgb, ${color.limeDeep} 20%, transparent)`,
                 },
               },
             }}

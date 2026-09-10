@@ -26,8 +26,8 @@ const MEASURE_PX = 200;
  * ever grows it.
  *
  * `maxVh` caps the result against viewport height. The hero has to fit one
- * screen — see DefocusOnScroll — and on a short, wide window the width fit
- * alone would run past the bottom.
+ * screen, and on a short, wide window the width fit alone would run past the
+ * bottom.
  */
 function FitLines({ lines, ratio = 0.45, maxVh, sx, lineSx, ...rest }) {
   const rootRef = useRef(null);

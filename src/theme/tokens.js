@@ -1,78 +1,165 @@
 /**
  * 14Labs design tokens.
  *
- * Palette and geometry are derived from measured values on lab14.group; the
- * display typography is derived from measured values on fin.ai. Both were read
- * off the live sites rather than estimated.
+ * The palette is four brand colours and the steps between them:
  *
- *   ground   #EBEBEB   light grey page — not white, which is the single
- *                      fastest way to stop reading as a default template
- *   deep     #003D21   forest green, used as full-bleed inverted bands
- *   lime     #78D147   highlight — legible ONLY on the deep green band
+ *   forest  #1E4634   full-bleed bands, primary actions, the mark
+ *   cream   #F6E9E0   the light ground
+ *   peach   #F9D2BA   highlight — legible on forest, on brown and on the dark
+ *                     ground; never text on cream, where it is ~1.2:1
+ *   brown   #5E3122   the second dark band: footer and instrument panels
  *
- * Contrast note: lime on grey is ~1.9:1. It is never text on a light ground.
+ * There are two themes. Every value lives in `palettes`; `color` holds only CSS
+ * variable references to them, so a component writes `color.ink` once and gets
+ * the right ink in either theme with no JavaScript on the switch. The variables
+ * are emitted by `themeCss` (injected in the root layout) and the active theme
+ * is the `data-theme` attribute MUI sets on <html>.
+ *
+ * Token names describe role rather than hue, and a few are kept from the old
+ * palette so nothing downstream had to be renamed: `lime` is the highlight (now
+ * peach) and `black` is the second dark band (now brown).
  */
 
+export const palettes = {
+  light: {
+    // --- Ground -------------------------------------------------------------
+    ground: "#F6E9E0",
+    surface: "#FDF8F4",
+    surfaceAlt: "#EFDFD3",
+    ink: "#2A1B14",
+    inkMuted: "#5E4A3F",
+    inkFaint: "#7A6456",
+    rule: "#E7D4C6",
+    ruleStrong: "#D3BBAA",
+
+    // --- Forest -------------------------------------------------------------
+    deep: "#1E4634",
+    deepAlt: "#173729",
+    // What a forest button turns on hover. Ink here; a lifted green in the dark
+    // theme, where ink is cream and would swallow the cream label.
+    deepHover: "#2A1B14",
+    accent: "#24573F",
+    accentSoft: "#E4E4D6",
+    // Text set inside an accent fill. Flips with the accent itself.
+    onAccent: "#F6E9E0",
+
+    // --- Highlight (peach) --------------------------------------------------
+    lime: "#F9D2BA",
+    limeSoft: "#FCE7DA",
+    limeDeep: "#D9926B",
+
+    // Tints of forest over the surface, named by how much green is in them so
+    // a card can pick its own step.
+    green05: "#F1EEE7",
+    green10: "#E6E6DE",
+    green20: "#D2D8CF",
+    green30: "#B6C4B8",
+    green45: "#8FA697",
+    green60: "#4F8069",
+    green70: "#2B5E47",
+
+    // --- Brown band ---------------------------------------------------------
+    black: "#5E3122",
+    blackAlt: "#4E2819",
+    // Chart steps on the brown band: field, axis, mark, third series.
+    blackField: "#6C3D2D",
+    blackAxis: "#85523F",
+    blackMark: "#A87866",
+    blackFaint: "#BF9585",
+    onBlack: "#F6E9E0",
+    onBlackMuted: "#D3B5A5",
+    ruleOnBlack: "#76412F",
+
+    // --- On the forest band -------------------------------------------------
+    onDeep: "#F6E9E0",
+    onDeepMuted: "#A8BFB1",
+    ruleOnDeep: "#2F5B47",
+  },
+
+  /**
+   * Dark is not the light theme inverted. The ground is forest taken almost to
+   * black, so the page still reads as the same brand; the bands keep their own
+   * colours and simply sit lighter than the ground instead of darker. Peach
+   * takes over as the accent, because forest text on a forest-black ground is
+   * not text.
+   */
+  dark: {
+    ground: "#0F1A15",
+    surface: "#15241D",
+    surfaceAlt: "#1B2D24",
+    ink: "#F6E9E0",
+    inkMuted: "#CDBBAE",
+    inkFaint: "#9E8C7F",
+    rule: "#24362C",
+    ruleStrong: "#35493E",
+
+    deep: "#1E4634",
+    deepAlt: "#183A2B",
+    deepHover: "#2B5E47",
+    accent: "#F9D2BA",
+    accentSoft: "#3A2E27",
+    onAccent: "#2A1B14",
+
+    lime: "#F9D2BA",
+    limeSoft: "#FCE7DA",
+    limeDeep: "#D9926B",
+
+    // The ramp runs away from the ground rather than towards green, so every
+    // step keeps the job it has in the light theme.
+    green05: "#14231C",
+    green10: "#192B22",
+    green20: "#1F3429",
+    green30: "#2C4638",
+    green45: "#486B58",
+    green60: "#7FA792",
+    green70: "#A9C6B5",
+
+    black: "#4A2619",
+    blackAlt: "#3C1F14",
+    blackField: "#573122",
+    blackAxis: "#6E4231",
+    blackMark: "#9A6C5A",
+    blackFaint: "#B48C7C",
+    onBlack: "#F6E9E0",
+    onBlackMuted: "#CFAE9D",
+    ruleOnBlack: "#63372A",
+
+    onDeep: "#F6E9E0",
+    onDeepMuted: "#A8BFB1",
+    ruleOnDeep: "#2F5B47",
+  },
+};
+
+const cssVar = (key) => `--c-${key.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`)}`;
+const ref = (key) => `var(${cssVar(key)})`;
+
+// The cast keeps editor completion on `color.*`; fromEntries alone loses the keys.
+const themed = /** @type {{ [K in keyof typeof palettes.light]: string }} */ (
+  Object.fromEntries(Object.keys(palettes.light).map((key) => [key, ref(key)]))
+);
+
 export const color = {
-  // --- Light ground -------------------------------------------------------
-  ground: "#EBEBEB",
-  surface: "#FFFFFF",
-  surfaceAlt: "#E0E0E0",
-  ink: "#1C1C1C",
-  inkMuted: "#616161",
-  inkFaint: "#757575",
-  rule: "#D4D4D4",
-  ruleStrong: "#BEBEBE",
-
-  // --- Green ramp ---------------------------------------------------------
-  deep: "#003D21",
-  deepAlt: "#002916",
-  accent: "#006130",
-  accentSoft: "#DCE8E0",
-  lime: "#78D147",
-
-  // Tints, on the same hue as `deep`. A page of pure-white cards on grey reads
-  // as a default template; carrying a trace of the brand green through the card
-  // surfaces is most of what makes a palette look chosen. Named by how much
-  // green is in them, not by role, so a card can pick its own step.
-  green05: "#F4F8F5",
-  green10: "#E9F1EC",
-  green20: "#D8E6DD",
-  green30: "#BFD5C8",
-  green45: "#8FB6A0",
-  green60: "#1F7A4C",
-  green70: "#0A5C33",
-
-  // Lime only ever appears on a green ground. These two exist so a chart can
-  // draw three distinguishable series there without leaving the palette.
-  limeSoft: "#B9E79A",
-  limeDeep: "#4E9E28",
-
-  // --- Black band ---------------------------------------------------------
-  // The mark itself is black-and-teal, and a page that answers it with nothing
-  // but green bands reads as one long section. Black is the second dark tone:
-  // used where the content is instrumentation rather than argument, it also
-  // stops the green from going stale by being everywhere.
-  black: "#0D0D0D",
-  blackAlt: "#161616",
-  onBlack: "#EBEBEB",
-  onBlackMuted: "#9E9E9E",
-  ruleOnBlack: "#2B2B2B",
-
-  // --- On the deep band ---------------------------------------------------
-  onDeep: "#EBEBEB",
-  onDeepMuted: "#93B3A1",
-  ruleOnDeep: "#0B5231",
+  ...themed,
 
   // Aliases kept so the not-yet-rewritten case-study pages keep compiling.
-  paper: "#EBEBEB",
-  wash: "#E0E0E0",
-  washDeep: "#D4D4D4",
-  inkDeep: "#003D21",
-  onInk: "#EBEBEB",
-  onInkMuted: "#93B3A1",
-  ruleOnInk: "#0B5231",
+  paper: ref("ground"),
+  wash: ref("surfaceAlt"),
+  washDeep: ref("rule"),
+  inkDeep: ref("deep"),
+  onInk: ref("onDeep"),
+  onInkMuted: ref("onDeepMuted"),
+  ruleOnInk: ref("ruleOnDeep"),
 };
+
+const declare = (palette) =>
+  Object.entries(palette)
+    .map(([key, value]) => `${cssVar(key)}:${value};`)
+    .join("");
+
+/** Both themes as one stylesheet. Injected once, in the root layout. */
+export const themeCss = `:root{${declare(palettes.light)}}:root[data-theme="dark"]{${declare(
+  palettes.dark
+)}}`;
 
 export const font = {
   display: "var(--font-display)",
@@ -133,22 +220,6 @@ export const motion = {
   fast: "140ms cubic-bezier(0.4, 0, 0.2, 1)",
   base: "260ms cubic-bezier(0.4, 0, 0.2, 1)",
   slow: "480ms cubic-bezier(0.16, 1, 0.3, 1)",
-};
-
-/**
- * Depth-of-field on the pinned hero, driven by scroll position.
- *
- * `blurMax` is deliberately below the point where the headline stops being
- * readable as a shape — the effect is meant to read as the hero receding, not
- * as a loading state. Scale stays above 0.95 for the same reason.
- */
-export const heroDefocus = {
-  blurMax: 13,
-  opacityMin: 0.32,
-  scaleMin: 0.955,
-  liftMax: -56,
-  /** Fraction of a viewport of scrolling the whole transition takes. */
-  runway: 0.85,
 };
 
 // --- Back-compat -----------------------------------------------------------

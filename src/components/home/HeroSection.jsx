@@ -1,7 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 import ActionLink from "@/components/ui/ActionLink";
-import DefocusOnScroll from "@/components/ui/DefocusOnScroll";
 import FitLines from "@/components/ui/FitLines";
 import LinkBox from "@/components/ui/LinkBox";
 import Marquee from "@/components/ui/Marquee";
@@ -126,15 +125,15 @@ const headlineSx = {
  * guides drawn behind them — which is the thing that makes the hero look built
  * rather than dropped in.
  *
- * It is held to a single viewport. The section is pinned and defocused as the
- * page scrolls over it (DefocusOnScroll), and that only works while the whole
- * hero fits on screen — anything taller gets its bottom clipped the moment it
- * sticks. The `maxVh` cap on each headline variant is what keeps that true on a
- * short, wide window, where fitting the width alone would run off the bottom.
+ * It is held to a single viewport, so the headline, the lede and the way in
+ * all land on the first screen together. The `maxVh` cap on each headline
+ * variant is what keeps that true on a short, wide window, where fitting the
+ * width alone would run off the bottom. Past that it scrolls away like any
+ * other section — nothing pins it or pulls it out of focus.
  */
 function HeroSection() {
   return (
-    <DefocusOnScroll>
+    <Box component="section">
       <Box
         sx={{
           position: "relative",
@@ -197,7 +196,9 @@ function HeroSection() {
                     // hero that says the page is live rather than printed.
                     "@keyframes heroPulse": {
                       "0%, 100%": { boxShadow: `0 0 0 0 ${color.lime}` },
-                      "70%": { boxShadow: `0 0 0 7px rgba(120, 209, 71, 0)` },
+                      "70%": {
+                        boxShadow: `0 0 0 7px color-mix(in srgb, ${color.lime} 0%, transparent)`,
+                      },
                     },
                     animation: "heroPulse 3.2s ease-out infinite",
                   }}
@@ -294,7 +295,7 @@ function HeroSection() {
                   color: color.onDeep,
                   textDecoration: "none",
                   transition: `background-color ${motion.fast}`,
-                  "&:hover": { backgroundColor: color.ink },
+                  "&:hover": { backgroundColor: color.deepHover },
                 }}
               >
                 <Typography
@@ -391,7 +392,7 @@ function HeroSection() {
           </Box>
         </Container>
       </Box>
-    </DefocusOnScroll>
+    </Box>
   );
 }
 
