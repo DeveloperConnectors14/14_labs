@@ -80,6 +80,25 @@ const RUNS = [
 
 const STEP = 0.08; // timeline gap between one word and the next
 
+// Where HeroScene assembles "Why 14Labs" out of its words: wide screens with
+// motion allowed. Matches the hero's own runway conditions.
+const HERO_FORMS_HEADING = "@media (min-width: 900px) and (prefers-reduced-motion: no-preference)";
+
+// Present for screen readers, invisible on screen. Sizes are px strings on
+// purpose: in MUI's sx a bare 1 means 100%, which made this "hidden" box as
+// wide as the page and gave the whole site a horizontal scrollbar.
+const VISUALLY_HIDDEN = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  margin: "-1px",
+  p: 0,
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  whiteSpace: "nowrap",
+  border: 0,
+};
+
 const words = (text) =>
   text.split(" ").map((word, i, all) => (
     <Fragment key={`${word}-${i}`}>
@@ -150,19 +169,33 @@ function Manifesto() {
   }, []);
 
   return (
-    <Box component="section" sx={{ paddingBlock: layout.sectionY }}>
+    <Box
+      component="section"
+      sx={{
+        paddingBlock: layout.sectionY,
+        // On desktop with motion, the hero's words have just assembled into
+        // "Why 14Labs" at the foot of the stage — that is this section's
+        // heading, so the statement starts right under it.
+        [HERO_FORMS_HEADING]: { pt: "clamp(12px, 1.5vw, 24px)" },
+      }}
+    >
       <Container>
-        <Eyebrow>Why 14Labs</Eyebrow>
+        {/* The label is kept for screen readers, and shown wherever the hero
+            does not form the heading itself (phones, reduced motion). */}
+        <Box sx={{ [HERO_FORMS_HEADING]: VISUALLY_HIDDEN }}>
+          <Eyebrow>Why 14Labs</Eyebrow>
+        </Box>
 
         <Typography
           ref={ref}
           sx={{
             mt: { xs: 3, md: 4 },
-            fontSize: "clamp(1.875rem, 1rem + 3.2vw, 4rem)",
-            lineHeight: 1.18,
-            letterSpacing: "-0.03em",
+            [HERO_FORMS_HEADING]: { mt: 0 },
+            fontSize: "clamp(1.625rem, 0.95rem + 2.3vw, 3.125rem)",
+            lineHeight: 1.2,
+            letterSpacing: "-0.028em",
             color: color.ink,
-            maxWidth: "26ch",
+            maxWidth: "30ch",
           }}
         >
           {RUNS.map((run, r) => {

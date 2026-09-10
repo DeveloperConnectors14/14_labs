@@ -11,6 +11,15 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* The page never scrolls sideways. Tilted cards, the drifting card row and
+   decorative marks all sit near the edges; `clip` cuts anything that strays
+   past them without making html/body a scroll container, so every sticky
+   element on the site keeps working — `hidden` would break them. */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* GSAP ScrollTrigger drives scroll position directly, so CSS smooth scrolling
    is deliberately left off — the two fight each other. */
 @media (prefers-reduced-motion: reduce) {
