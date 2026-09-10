@@ -28,7 +28,7 @@ function RealCostDetails({ costData }) {
             sx={{ width: 28, height: "2px", backgroundColor: color.lime }}
           />
           <Typography variant="eyebrow" sx={{ color: color.lime }}>
-            What it costs to leave it
+            What It Costs to Leave It
           </Typography>
         </Box>
 

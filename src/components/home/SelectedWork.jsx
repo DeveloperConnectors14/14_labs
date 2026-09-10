@@ -32,7 +32,11 @@ function SelectedWork() {
             gap: 3,
           }}
         >
-          <RevealText text="Selected work" sx={{ maxWidth: "14ch" }} />
+          <RevealText
+            text="Selected work."
+            muted="What we built and how long it took."
+            sx={{ maxWidth: "20ch" }}
+          />
           <PillLink href="/case-studies" variant="outline">
             All case studies
           </PillLink>

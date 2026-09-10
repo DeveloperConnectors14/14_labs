@@ -52,7 +52,7 @@ function SignalPanel({ dense = false }) {
       >
         <Box>
           <Typography variant="h3" sx={{ color: color.onBlack, maxWidth: "20ch" }}>
-            What we instrument
+            What We Instrument
           </Typography>
 
           <Typography

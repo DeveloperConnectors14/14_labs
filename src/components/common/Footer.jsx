@@ -136,7 +136,7 @@ function Footer() {
                             maxWidth: "14ch",
                         }}
                     >
-                        AI systems that survive contact with production
+                        AI Systems That Survive Contact With Production
                     </Typography>
 
                     <Column heading="Practice">

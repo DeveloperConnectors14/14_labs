@@ -3,7 +3,7 @@
 export const navItems = [
   { label: "Research", path: "/research" },
   { label: "Work", path: "/case-studies" },
-  { label: "What we do", path: "/services" },
+  { label: "What We Do", path: "/services" },
   { label: "About", path: "/about-us" },
   { label: "Contact", path: "/contact" },
 ];
@@ -36,30 +36,30 @@ export const caseStudies = [
 export const challanges = [
   {
     sNo: "01",
-    title: "The demo works. The system doesn't.",
+    title: "The Demo Works. The System Doesn't.",
     desc: "A prototype that answers ten hand-picked questions tells you almost nothing about the thousandth. Most pilots die between the notebook and the first real user.",
   },
   {
     sNo: "02",
-    title: "Nobody can say whether it got better.",
+    title: "Nobody Can Say Whether It Got Better.",
     desc: "Without an evaluation harness, every prompt change is an argument about vibes. Teams ship regressions they cannot see and roll back things that were working.",
   },
   {
     sNo: "03",
-    title: "The knowledge is there. The model can't reach it.",
+    title: "The Knowledge Is There. The Model Can't Reach It.",
     desc: "Context sits in warehouses, wikis, PDFs and six SaaS tools. Retrieval quality — not model choice — is what decides whether the answer is any good.",
   },
   {
     sNo: "04",
-    title: "One agent became eleven, and now it's unreadable.",
+    title: "One Agent Became Eleven, and Now It's Unreadable.",
     desc: "Multi-agent systems fail quietly: a step retries forever, a tool returns nonsense, cost triples overnight. You need tracing before you need more agents.",
   },
 ];
 
 export const stats = [
-  { value: "15+", label: "Systems shipped", note: "In production, not pilots" },
-  { value: "10+", label: "Client teams", note: "Across four industries" },
-  { value: "4+", label: "Years building", note: "Since before the agent boom" },
+  { value: "15+", label: "Systems Shipped", note: "In production, not pilots" },
+  { value: "10+", label: "Client Teams", note: "Across four industries" },
+  { value: "4+", label: "Years Building", note: "Since before the agent boom" },
   { value: "95%", label: "Satisfaction", note: "Measured post-engagement" },
 ];
 
@@ -94,7 +94,7 @@ export const pricing = [
 export const services = [
   {
     sNo: "01",
-    title: "Multi-agent systems",
+    title: "Multi-Agent Systems",
     desc: "Orchestrated pipelines where each step is a specialised agent with a defined contract, a budget and a trace. We design the topology, then build the plumbing that makes it debuggable at three in the morning.",
     tags: [
       "Orchestration & routing",
@@ -105,7 +105,7 @@ export const services = [
   },
   {
     sNo: "02",
-    title: "Retrieval & knowledge systems",
+    title: "Retrieval & Knowledge Systems",
     desc: "Getting the right context in front of the model is most of the work. We build the ingestion, chunking, indexing and reranking layers — and measure retrieval quality separately from generation quality, because they fail for different reasons.",
     tags: [
       "Hybrid & semantic retrieval",
@@ -116,7 +116,7 @@ export const services = [
   },
   {
     sNo: "03",
-    title: "Applied machine learning",
+    title: "Applied Machine Learning",
     desc: "Model work that starts from the decision it has to support. Fine-tuning where it earns its cost, classical models where they beat an LLM, and honest analysis of when neither is the answer.",
     tags: [
       "Fine-tuning & adaptation",
@@ -127,7 +127,7 @@ export const services = [
   },
   {
     sNo: "04",
-    title: "Evaluation & reliability",
+    title: "Evaluation & Reliability",
     desc: "The part most teams skip. Golden sets, offline evals, regression gates in CI and production tracing — so a change to a prompt is a measurable engineering decision instead of a guess.",
     tags: [
       "Eval harnesses & golden sets",
@@ -157,7 +157,7 @@ export const tools = [
     ],
   },
   {
-    techType: "Serving & data",
+    techType: "Serving & Data",
     values: [
       { file: "fastapi-original", name: "FastAPI" },
       { file: "postgresql-original", name: "PostgreSQL" },
@@ -180,17 +180,17 @@ export const tools = [
 export const features = [
   {
     sNo: "01",
-    title: "Measure before you optimise",
+    title: "Measure Before You Optimise",
     desc: "Every engagement starts by building the evaluation set. If we cannot tell you whether week four is better than week one, we have not built you a system — we have built you a demo.",
   },
   {
     sNo: "02",
-    title: "Smallest thing that could work",
+    title: "Smallest Thing That Could Work",
     desc: "A regex beats a classifier beats a fine-tune beats an agent, until it doesn't. We reach for the cheapest mechanism that clears the bar and keep the complexity budget for where it actually buys accuracy.",
   },
   {
     sNo: "03",
-    title: "You own what we build",
+    title: "You Own What We Build",
     desc: "Source, infrastructure, evals and documentation land in your repositories as we go. No wrapper platform, no per-seat licence, nothing that stops working when the engagement ends.",
   },
 ];

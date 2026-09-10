@@ -10,7 +10,7 @@
 export const research = [
   {
     slug: "retrieval-is-the-product",
-    title: "Retrieval is the product",
+    title: "Retrieval Is the Product",
     kicker: "Why swapping models rarely fixes a RAG system that is answering badly",
     date: "2026-07-14",
     readingTime: "8 min",
@@ -57,7 +57,7 @@ export const research = [
   },
   {
     slug: "evaluation-harness-before-agents",
-    title: "Build the evaluation harness first",
+    title: "Build the Evaluation Harness First",
     kicker: "The unglamorous artefact that decides whether an AI project ships",
     date: "2026-05-02",
     readingTime: "6 min",
@@ -95,11 +95,11 @@ export const research = [
   },
   {
     slug: "cost-of-an-extra-agent",
-    title: "The real cost of an extra agent",
+    title: "The Real Cost of an Extra Agent",
     kicker: "Latency, spend and debuggability compound faster than capability does",
     date: "2026-03-19",
     readingTime: "7 min",
-    topic: "Multi-agent systems",
+    topic: "Multi-Agent Systems",
     summary:
       "Notes from instrumenting an eleven-node pipeline: where the time actually went, which steps earned their place, and the three we deleted.",
     body: [
@@ -132,7 +132,7 @@ export const research = [
   },
   {
     slug: "structured-extraction-notes",
-    title: "Structured extraction is mostly a schema problem",
+    title: "Structured Extraction Is Mostly a Schema Problem",
     kicker: "Field-level scoring, and why loose schemas fail quietly",
     date: "2026-01-27",
     readingTime: "5 min",

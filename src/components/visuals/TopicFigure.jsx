@@ -24,10 +24,16 @@ const BY_TOPIC = {
   Reliability: LatencyBars,
 };
 
+// Matched without regard to case, so a topic keeps its figure whether it is
+// written "Multi-agent systems" or "Multi-Agent Systems".
+const BY_KEY = Object.fromEntries(
+  Object.entries(BY_TOPIC).map(([topic, Figure]) => [topic.toLowerCase(), Figure])
+);
+
 function TopicFigure({ topic, ...rest }) {
   // An unmapped topic is a content bug, not a rendering one — fall back to the
   // most neutral figure rather than punching a hole in the layout.
-  const Figure = BY_TOPIC[topic] ?? SignalGrid;
+  const Figure = BY_KEY[String(topic).toLowerCase()] ?? SignalGrid;
   return <Figure {...rest} />;
 }
 

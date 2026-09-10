@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Section from "@/components/ui/Section";
 import SectionHead from "@/components/ui/SectionHead";
 import { color, font, motion, radius } from "@/theme/tokens";
+import { titleCase } from "@/services/titleCase";
 
 /**
  * The method, as ordered steps on one rail.
@@ -91,7 +92,7 @@ function SingleCaseApproach({ approaches }) {
                 color: color.ink,
               }}
             >
-              {step.title}
+              {titleCase(step.title)}
             </Typography>
 
             <Typography variant="body2" sx={{ mt: 1.5, color: color.inkMuted }}>

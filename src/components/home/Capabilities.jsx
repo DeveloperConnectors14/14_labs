@@ -15,19 +15,19 @@ const services = getServices();
 
 // Service title to the figure vocabulary TopicFigure resolves.
 const TOPIC = {
-  "Multi-agent systems": "Multi-agent systems",
-  "Retrieval & knowledge systems": "Retrieval",
-  "Applied machine learning": "Applied ML",
-  "Evaluation & reliability": "Evaluation",
+  "Multi-Agent Systems": "Multi-Agent Systems",
+  "Retrieval & Knowledge Systems": "Retrieval",
+  "Applied Machine Learning": "Applied ML",
+  "Evaluation & Reliability": "Evaluation",
 };
 
 // One line each. The full descriptions live on the services page; a card that
 // makes you read a paragraph is not a card.
 const TAGLINE = {
-  "Multi-agent systems": "Pipelines of specialised agents, each with a contract, a budget and a trace.",
-  "Retrieval & knowledge systems": "The right context in front of the model — measured, not guessed.",
-  "Applied machine learning": "Models chosen for the decision they support, not for the hype cycle.",
-  "Evaluation & reliability": "Golden sets, regression gates and tracing, so every change is measurable.",
+  "Multi-Agent Systems": "Pipelines of specialised agents, each with a contract, a budget and a trace.",
+  "Retrieval & Knowledge Systems": "The right context in front of the model — measured, not guessed.",
+  "Applied Machine Learning": "Models chosen for the decision they support, not for the hype cycle.",
+  "Evaluation & Reliability": "Golden sets, regression gates and tracing, so every change is measurable.",
 };
 
 const CARDS = [
@@ -308,7 +308,11 @@ function Capabilities() {
             gap: 3,
           }}
         >
-          <RevealText text="What we build" sx={{ maxWidth: "14ch" }} />
+          <RevealText
+            text="What we build."
+            muted="Four practices, one engineering standard."
+            sx={{ maxWidth: "22ch" }}
+          />
           <PillLink href="/services" variant="outline">
             All services
           </PillLink>

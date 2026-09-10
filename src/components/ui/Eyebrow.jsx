@@ -1,9 +1,10 @@
 import { Box, Typography } from "@mui/material";
+import { titleCaseChild } from "@/services/titleCase";
 import { color } from "@/theme/tokens";
 
 /**
- * The small label above a heading: a green dot and a few words in sentence
- * case. The dot is the only colour in it, so it marks a new section without
+ * The small label above a heading: a teal dot and a few words in title case.
+ * The dot is the only colour in it, so it marks a new section without
  * shouting — the tracked mono capitals it replaces read as template chrome.
  */
 function Eyebrow({ children, onDeep = false, rule = true, sx }) {
@@ -19,7 +20,7 @@ function Eyebrow({ children, onDeep = false, rule = true, sx }) {
         />
       ) : null}
       <Typography variant="eyebrow" component="span" sx={{ color: fg }}>
-        {children}
+        {titleCaseChild(children)}
       </Typography>
     </Box>
   );

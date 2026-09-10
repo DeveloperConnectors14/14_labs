@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import LinkBox from "@/components/ui/LinkBox";
+import { titleCaseChild } from "@/services/titleCase";
 import { color, motion, radius } from "@/theme/tokens";
 
 const onDarkLine = `color-mix(in srgb, ${color.onBlack} 34%, transparent)`;
 
 /**
- * The site's one button shape: a pill.
+ * The site's one button shape: a pill. Its label is title-cased.
  *
  *   primary         the main action — navy in the light theme, white in dark
  *   outline         the secondary action on the page ground
@@ -46,6 +47,7 @@ const SIZES = {
 function PillLink({ href, variant = "primary", size = "md", children, sx, ...rest }) {
   const v = VARIANTS[variant] ?? VARIANTS.primary;
   const s = SIZES[size] ?? SIZES.md;
+  const label = titleCaseChild(children);
 
   const style = {
     display: "inline-flex",
@@ -81,14 +83,14 @@ function PillLink({ href, variant = "primary", size = "md", children, sx, ...res
         sx={style}
         {...rest}
       >
-        {children}
+        {label}
       </Box>
     );
   }
 
   return (
     <LinkBox href={href} sx={style} {...rest}>
-      {children}
+      {label}
     </LinkBox>
   );
 }

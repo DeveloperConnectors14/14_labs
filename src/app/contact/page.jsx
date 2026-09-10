@@ -134,7 +134,7 @@ function ContactPage() {
             </Typography>
 
             <Typography variant="h1" sx={{ color: color.ink, maxWidth: "13ch" }}>
-              Tell us what is not working yet
+              Tell Us What Isn&apos;t Working Yet
             </Typography>
 
             <Typography
@@ -204,7 +204,7 @@ function ContactPage() {
 
             <Box sx={{ mt: { xs: 5, md: 6 } }}>
               <Typography variant="eyebrow" sx={{ color: color.accent }}>
-                What happens next
+                What Happens Next
               </Typography>
 
               <Box component="ol" sx={{ listStyle: "none", m: 0, mt: 2.5, p: 0 }}>
@@ -250,7 +250,7 @@ function ContactPage() {
             }}
           >
             <Typography variant="h3" sx={{ color: color.ink }}>
-              Send a note
+              Send a Note
             </Typography>
 
             {[

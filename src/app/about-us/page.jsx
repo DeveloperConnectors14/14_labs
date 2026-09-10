@@ -59,7 +59,7 @@ function AboutPage() {
               </Typography>
 
               <Typography variant="h1" sx={{ color: color.ink, maxWidth: "14ch" }}>
-                An engineering practice with a research habit
+                An Engineering Practice With a Research Habit
               </Typography>
 
               <Typography

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Section from "@/components/ui/Section";
 import { color, measure } from "@/theme/tokens";
+import { titleCase } from "@/services/titleCase";
 
 /**
  * The three properties of the build worth stating flatly, as a ruled row.
@@ -39,7 +40,7 @@ function SingleTopFeatures({ topFeatures }) {
                 color: color.ink,
               }}
             >
-              {item.title}
+              {titleCase(item.title)}
             </Typography>
             <Typography
               variant="body2"

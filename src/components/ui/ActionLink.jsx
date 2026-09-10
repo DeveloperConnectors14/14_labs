@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { Box, Typography } from "@mui/material";
+import { titleCaseChild } from "@/services/titleCase";
 import { color, motion } from "@/theme/tokens";
 
 /**
  * The site's tertiary action: a text link with a rule that draws itself on
- * hover and an arrow that nudges. Replaces the pill buttons that used to be
- * scattered through every card.
+ * hover and an arrow that nudges. Its label is title-cased, like every other
+ * action on the site.
  */
 function ActionLink({
   href,
@@ -73,7 +74,7 @@ function ActionLink({
         component="span"
         sx={{ fontSize: "0.9375rem", fontWeight: 500, letterSpacing: "-0.005em" }}
       >
-        {children}
+        {titleCaseChild(children)}
       </Typography>
     </Box>
   );

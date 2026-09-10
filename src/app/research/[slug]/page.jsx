@@ -242,7 +242,7 @@ async function ResearchPost({ params }) {
           {others.length ? (
             <Box sx={{ mt: { xs: 8, md: 12 }, pt: 5, borderTop: "1px solid", borderColor: color.ink }}>
               <Typography variant="eyebrow" sx={{ color: color.inkFaint, mb: 4 }}>
-                Read next
+                Read Next
               </Typography>
 
               <Box

@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Section from "@/components/ui/Section";
 import SectionHead from "@/components/ui/SectionHead";
 import { color, font, motion, radius } from "@/theme/tokens";
+import { titleCase } from "@/services/titleCase";
 
 /**
  * What the system actually does, as a grid of plain cards.
@@ -60,7 +61,7 @@ function SingleKeyFeatures({ keyFeatures }) {
             </Typography>
 
             <Typography variant="h3" sx={{ mt: 2.5, color: color.ink, maxWidth: "18ch" }}>
-              {item.title}
+              {titleCase(item.title)}
             </Typography>
 
             <Typography variant="body2" sx={{ mt: 1.75, color: color.inkMuted }}>

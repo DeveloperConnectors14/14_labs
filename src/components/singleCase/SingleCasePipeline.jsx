@@ -106,7 +106,7 @@ function SingleCasePipeline({ casePipeline }) {
       >
         <Box>
           <Typography variant="h3" sx={{ color: color.ink, maxWidth: "18ch" }}>
-            Every stage the request passes through
+            Every Stage the Request Passes Through
           </Typography>
           <Typography variant="body1" sx={{ mt: 2, color: color.inkMuted, maxWidth: "38ch" }}>
             Point at a node to read its stage number and the id it carries in the

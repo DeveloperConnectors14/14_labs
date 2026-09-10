@@ -52,7 +52,7 @@ function ResearchIndex() {
                 Research
               </Typography>
               <Typography variant="h1" sx={{ color: color.ink, maxWidth: "16ch" }}>
-                Notes from the work
+                Notes From the Work
               </Typography>
               <Typography
                 variant="lede"

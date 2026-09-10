@@ -4,6 +4,7 @@ import Section from "@/components/ui/Section";
 import LinkBox from "@/components/ui/LinkBox";
 import ActionLink from "@/components/ui/ActionLink";
 import { color, motion, radius } from "@/theme/tokens";
+import { titleCase } from "@/services/titleCase";
 
 /**
  * The next case, as a wide plate rather than a grid of one.
@@ -30,7 +31,7 @@ function MoreCaseStudies({ moreCases }) {
         }}
       >
         <Typography variant="eyebrow" sx={{ color: color.accent }}>
-          Read next
+          Read Next
         </Typography>
         <ActionLink href="/case-studies">All work</ActionLink>
       </Box>
@@ -87,7 +88,7 @@ function MoreCaseStudies({ moreCases }) {
                 variant="h3"
                 sx={{ mt: 1, color: color.ink, transition: `color ${motion.fast}` }}
               >
-                {item.title}
+                {titleCase(item.title)}
               </Typography>
             </Box>
           </LinkBox>

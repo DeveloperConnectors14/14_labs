@@ -69,7 +69,7 @@ function BrandTag() {
       </Typography>
       <Box aria-hidden sx={{ width: "1px", height: 14, backgroundColor: color.ruleStrong }} />
       <Typography component="span" sx={{ fontSize: "0.9375rem", color: color.inkMuted }}>
-        AI engineering and research lab
+        AI Engineering and Research Lab
       </Typography>
     </Box>
   );
@@ -131,13 +131,13 @@ function Hero() {
 
             <Box component="h1" sx={{ m: 0, mt: { xs: 4, md: 5 }, fontWeight: 400 }}>
               <Box component="span" sx={{ ...lineSx, ...rise(90) }}>
-                From research,
+                From Research,
               </Box>
               <Box
                 component="span"
                 sx={{ ...lineSx, pl: { sm: "1.1em" }, mt: "0.06em", ...rise(190) }}
               >
-                to production.
+                to Production.
               </Box>
             </Box>
 

@@ -1,9 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import Eyebrow from "./Eyebrow";
+import { titleCaseChild } from "@/services/titleCase";
 import { color, measure } from "@/theme/tokens";
 
 /**
- * Section opener: mono eyebrow, headline, optional lede.
+ * Section opener: eyebrow, headline, optional lede. The headline is
+ * title-cased here, so every page that uses this gets it without thinking
+ * about it.
  *
  * `split` puts the lede in a second column beside the headline instead of under
  * it. Alternating the two across a page is what stops every section from having
@@ -40,7 +43,7 @@ function SectionHead({
           textWrap: "balance",
         }}
       >
-        {title}
+        {titleCaseChild(title)}
       </Typography>
     </Box>
   );

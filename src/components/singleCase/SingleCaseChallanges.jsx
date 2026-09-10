@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Section from "@/components/ui/Section";
 import SectionHead from "@/components/ui/SectionHead";
 import { color, font, measure } from "@/theme/tokens";
+import { titleCase } from "@/services/titleCase";
 
 /**
  * What was wrong before the work started, as a numbered ledger.
@@ -58,7 +59,7 @@ function SingleCaseChallanges({ challanges }) {
 
             {item.title ? (
               <Typography variant="h3" sx={{ color: color.ink, maxWidth: "20ch" }}>
-                {item.title}
+                {titleCase(item.title)}
               </Typography>
             ) : (
               <Box aria-hidden />

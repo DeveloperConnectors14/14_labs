@@ -74,10 +74,10 @@ function CaseStudiesPage() {
           >
             <Box>
               <Typography variant="eyebrow" sx={{ color: color.accent, mb: 4 }}>
-                Selected work
+                Selected Work
               </Typography>
               <Typography variant="h1" sx={{ color: color.ink, maxWidth: "15ch" }}>
-                Systems running in production
+                Systems Running in Production
               </Typography>
               <Typography
                 variant="lede"

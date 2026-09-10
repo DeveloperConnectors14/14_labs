@@ -116,7 +116,7 @@ function ResearchFeature() {
                 className="note-cta"
                 sx={{ mt: 1.75, fontSize: "0.875rem", fontWeight: 500, transition: `color ${motion.fast}` }}
               >
-                Read the note ›
+                Read the Note ›
               </Typography>
             </LinkBox>
 
@@ -142,7 +142,11 @@ function ResearchFeature() {
           {/* The argument. */}
           <Box>
             <Eyebrow>Research</Eyebrow>
-            <RevealText text="Research is how we de-risk the build" sx={{ mt: 3, maxWidth: "15ch" }} />
+            <RevealText
+              text="Research is how we de-risk the build."
+              muted="Measure first, build second."
+              sx={{ mt: 3, maxWidth: "17ch" }}
+            />
             <Typography variant="lede" sx={{ mt: 3, color: color.inkMuted, maxWidth: measure.lede }}>
               Before we write production code, we measure. We publish the notes behind
               our engineering decisions — what we tested, what failed and what we would

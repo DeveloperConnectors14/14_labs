@@ -66,10 +66,10 @@ function ServicesPage() {
           >
             <Box>
               <Typography variant="eyebrow" sx={{ color: color.accent, mb: 4 }}>
-                What we do
+                What We Do
               </Typography>
               <Typography variant="h1" sx={{ color: color.ink, maxWidth: "16ch" }}>
-                Four practices, one engineering standard
+                Four Practices, One Engineering Standard
               </Typography>
               <Typography
                 variant="lede"

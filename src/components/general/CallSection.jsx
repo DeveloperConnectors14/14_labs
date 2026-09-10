@@ -8,7 +8,7 @@ const site = getSite();
 
 const COPY = {
   contact: {
-    title: "Tell us what is not working yet",
+    title: "Tell Us What Isn't Working Yet",
     lede: "Send the shape of the problem, the data you have and what a good outcome would look like. We will reply with an honest read on whether it is worth building — including when it is not.",
   },
   next: {
