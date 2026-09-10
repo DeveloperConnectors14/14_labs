@@ -181,6 +181,8 @@ export const font = {
   body: "var(--font-sans)",
   mono: "var(--font-mono)",
   serif: "var(--font-serif)",
+  // Pencil notes beside the drawn arrows only.
+  hand: "var(--font-hand)",
 };
 
 /**

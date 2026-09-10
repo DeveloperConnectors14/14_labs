@@ -1,4 +1,4 @@
-import { Google_Sans_Flex, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
+import { Caveat, Google_Sans_Flex, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 import SmoothScroll from "@/components/common/SmoothScroll";
@@ -40,6 +40,14 @@ const serif = Source_Serif_4({
   weight: ["400", "600"],
   style: ["normal", "italic"],
   variable: "--font-serif",
+  display: "swap",
+});
+
+// Pencil notes beside the drawn arrows. A few words at a time, never text.
+const hand = Caveat({
+  subsets: ["latin"],
+  weight: ["500"],
+  variable: "--font-hand",
   display: "swap",
 });
 
@@ -99,7 +107,7 @@ function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
+      className={`${sans.variable} ${mono.variable} ${serif.variable} ${hand.variable}`}
       suppressHydrationWarning
     >
       <head>

@@ -1,53 +1,98 @@
 import Image from "next/image";
 import { Box, Container, Typography } from "@mui/material";
 import HandArrow from "@/components/ui/HandArrow";
+import HandNote from "@/components/ui/HandNote";
 import PillLink from "@/components/ui/PillLink";
-import { color, type } from "@/theme/tokens";
+import HeroMark from "@/components/home/HeroMark";
+import { color, radius } from "@/theme/tokens";
 
 /**
- * The page's one orchestrated moment: each piece rises into place once, in
- * reading order, and nothing moves again. Reduced motion is handled globally
- * (globals.css collapses the duration) and `both` keeps the end state, so the
- * setting removes the movement rather than the content.
+ * Each piece rises into place once, in reading order. Reduced motion is
+ * handled globally (globals.css collapses the duration) and `both` keeps the
+ * end state, so the setting removes the movement rather than the content.
  */
 const rise = (delay) => ({
   "@keyframes heroRise": {
-    from: { opacity: 0, transform: "translateY(0.16em)" },
+    from: { opacity: 0, transform: "translateY(0.4rem)" },
     to: { opacity: 1, transform: "none" },
   },
   animation: `heroRise 900ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms both`,
 });
 
+const HEADLINE = "clamp(2.75rem, 0.8rem + 5.6vw, 6.25rem)";
+
 const lineSx = {
   display: "block",
-  fontSize: type.display,
+  fontSize: HEADLINE,
   fontWeight: 400,
   lineHeight: 1,
   letterSpacing: "-0.045em",
   color: color.ink,
 };
 
-const DOT_FIELD = "radial-gradient(ellipse 70% 60% at 50% 42%, #000 15%, transparent 75%)";
+const DOT_FIELD = "radial-gradient(ellipse 75% 65% at 50% 45%, #000 15%, transparent 78%)";
+
+/** Who this is, before what it says: the mark, the name, the practice. */
+function BrandTag() {
+  return (
+    <Box
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 1.25,
+        pl: 0.75,
+        pr: 2,
+        py: 0.75,
+        borderRadius: radius.pill,
+        border: "1px solid",
+        borderColor: color.rule,
+        backgroundColor: `color-mix(in srgb, ${color.ground} 80%, transparent)`,
+        backdropFilter: "blur(6px)",
+        ...rise(0),
+      }}
+    >
+      <Box
+        aria-hidden
+        sx={{
+          width: 28,
+          height: 28,
+          borderRadius: radius.pill,
+          backgroundColor: color.black,
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <Image src="/logo-14.png" alt="" width={16} height={16} priority />
+      </Box>
+      <Typography component="span" sx={{ fontSize: "0.9375rem", fontWeight: 600, color: color.ink }}>
+        14Labs
+      </Typography>
+      <Box aria-hidden sx={{ width: "1px", height: 14, backgroundColor: color.ruleStrong }} />
+      <Typography component="span" sx={{ fontSize: "0.9375rem", color: color.inkMuted }}>
+        AI engineering and research lab
+      </Typography>
+    </Box>
+  );
+}
 
 /**
- * Two lines of type, staggered across the width — the first set left, the
- * second set right — and the page's claim is the gap between them: the
- * practice lives in the distance from a research result to a system in
- * production.
+ * The type on the left, the brand on the right.
  *
- * On wide screens the two corners the lines leave empty are used: a small
- * image, one green dot and a pencil arrow top right, beside the first line;
- * the lede bottom left, beside the second. Both are sized to their line's
- * height — the second line drops by a third of an em so the image clears it,
- * and the lede is held to three lines so it never climbs into the first. Below
- * `lg` all of it stacks and the decoration goes, since the type alone fills
- * the screen.
+ * The headline is two lines, the second stepped in so the pair still reads as
+ * a distance travelled — research, then production. Opposite it is the 14Labs
+ * mark made of points (HeroMark): it assembles on load and gives way under the
+ * cursor. A pencil arrow draws itself up towards it once the points have
+ * landed, with a note saying it can be touched; both appear only where there
+ * is a cursor-sized screen to use them.
+ *
+ * Decoration budget: the dot field, one low green glow, the mark, one arrow,
+ * one note. Nothing else moves.
  */
 function Hero() {
   return (
     <Box
       component="section"
-      sx={{ position: "relative", overflow: "hidden", pt: { xs: 7, md: 11 }, pb: { xs: 9, md: 13 } }}
+      sx={{ position: "relative", overflow: "hidden", pt: { xs: 6, md: 9 }, pb: { xs: 8, md: 12 } }}
     >
       <Box
         aria-hidden
@@ -61,93 +106,81 @@ function Hero() {
           WebkitMaskImage: DOT_FIELD,
         }}
       />
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          backgroundImage: `radial-gradient(34% 46% at 78% 48%, color-mix(in srgb, ${color.lime} 13%, transparent), transparent 72%)`,
+        }}
+      />
 
       <Container sx={{ position: "relative" }}>
-        <Box sx={{ position: "relative", fontSize: type.display }}>
-          <Box component="h1" sx={{ m: 0, fontWeight: 400 }}>
-            <Box component="span" sx={{ ...lineSx, ...rise(60) }}>
-              From research,
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 1.2fr) minmax(0, 1fr)" },
+            columnGap: 4,
+            rowGap: { xs: 5, md: 6 },
+            alignItems: "center",
+          }}
+        >
+          <Box>
+            <BrandTag />
+
+            <Box component="h1" sx={{ m: 0, mt: { xs: 4, md: 5 }, fontWeight: 400 }}>
+              <Box component="span" sx={{ ...lineSx, ...rise(90) }}>
+                From research,
+              </Box>
+              <Box
+                component="span"
+                sx={{ ...lineSx, pl: { sm: "1.1em" }, mt: "0.06em", ...rise(190) }}
+              >
+                to production.
+              </Box>
             </Box>
-            <Box
-              component="span"
-              sx={{
-                ...lineSx,
-                textAlign: { lg: "right" },
-                mt: { xs: "0.06em", lg: "0.34em" },
-                ...rise(170),
-              }}
+
+            <Typography
+              variant="lede"
+              sx={{ mt: { xs: 3.5, md: 4.5 }, color: color.inkMuted, maxWidth: "44ch", ...rise(290) }}
             >
-              to production.
+              An AI engineering and research practice. We build multi-agent systems,
+              retrieval and evaluation that hold up once real users arrive.
+            </Typography>
+
+            <Box sx={{ mt: { xs: 4.5, md: 5.5 }, display: "flex", gap: 1.5, flexWrap: "wrap", ...rise(390) }}>
+              <PillLink href="/contact" size="lg">
+                Start a project
+              </PillLink>
+              <PillLink href="/case-studies" variant="outline" size="lg">
+                See our work
+              </PillLink>
             </Box>
           </Box>
 
-          {/* Top right, inside the first line's height. */}
-          <Box
-            aria-hidden
-            sx={{
-              display: { xs: "none", lg: "block" },
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: 220,
-              height: "1.28em",
-              ...rise(340),
-            }}
-          >
-            <HandArrow variant="loop" sx={{ position: "absolute", width: 104, left: -112, top: 18 }} />
+          <Box sx={{ position: "relative" }}>
+            <HeroMark sx={{ height: { xs: 250, sm: 340, lg: 470 } }} />
+
+            {/* Pencil annotation, pointer screens only. */}
             <Box
               sx={{
+                display: { xs: "none", lg: "flex" },
+                alignItems: "flex-end",
+                gap: 0.5,
                 position: "absolute",
-                right: 8,
-                top: 4,
-                width: 184,
-                aspectRatio: "4 / 3",
-                borderRadius: "18px",
-                overflow: "hidden",
-                transform: "rotate(4deg)",
+                left: -8,
+                bottom: -18,
+                pointerEvents: "none",
+                "@media (hover: none)": { display: "none" },
               }}
             >
-              <Image src="/media/hero.png" alt="" fill sizes="184px" priority style={{ objectFit: "cover" }} />
+              <HandNote delay={2500} rotate={-6} sx={{ mb: 0.5 }}>
+                move your cursor through it
+              </HandNote>
+              <HandArrow variant="rise" delay={1500} duration={1000} sx={{ width: 96, mb: 1.5 }} />
             </Box>
-            <Box
-              sx={{
-                position: "absolute",
-                left: 14,
-                top: 108,
-                width: 18,
-                height: 18,
-                borderRadius: "50%",
-                backgroundColor: color.lime,
-              }}
-            />
           </Box>
-
-          {/* Bottom left beside the second line on wide screens; under it elsewhere. */}
-          <Typography
-            sx={{
-              position: { lg: "absolute" },
-              left: 0,
-              bottom: "0.08em",
-              mt: { xs: 4, lg: 0 },
-              maxWidth: { xs: "36ch", lg: 360 },
-              fontSize: { xs: "1.125rem", lg: "1.0625rem" },
-              lineHeight: 1.55,
-              color: color.inkMuted,
-              ...rise(260),
-            }}
-          >
-            An AI engineering and research practice. We build agents, retrieval and
-            evaluation that hold up under real traffic.
-          </Typography>
-        </Box>
-
-        <Box sx={{ mt: { xs: 5, md: 7 }, display: "flex", gap: 1.5, flexWrap: "wrap", ...rise(380) }}>
-          <PillLink href="/contact" size="lg">
-            Start a project
-          </PillLink>
-          <PillLink href="/case-studies" variant="outline" size="lg">
-            See our work
-          </PillLink>
         </Box>
       </Container>
     </Box>
