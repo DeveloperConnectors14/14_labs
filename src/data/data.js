@@ -95,6 +95,8 @@ export const services = [
   {
     sNo: "01",
     title: "Multi-Agent Systems",
+    short: "Multi-Agent Systems",
+    tagline: "Pipelines of specialised agents, each with a contract, a budget and a trace.",
     desc: "Orchestrated pipelines where each step is a specialised agent with a defined contract, a budget and a trace. We design the topology, then build the plumbing that makes it debuggable at three in the morning.",
     tags: [
       "Orchestration & routing",
@@ -106,6 +108,8 @@ export const services = [
   {
     sNo: "02",
     title: "Retrieval & Knowledge Systems",
+    short: "Retrieval",
+    tagline: "The right context in front of the model — measured, not guessed.",
     desc: "Getting the right context in front of the model is most of the work. We build the ingestion, chunking, indexing and reranking layers — and measure retrieval quality separately from generation quality, because they fail for different reasons.",
     tags: [
       "Hybrid & semantic retrieval",
@@ -117,6 +121,8 @@ export const services = [
   {
     sNo: "03",
     title: "Applied Machine Learning",
+    short: "Applied ML",
+    tagline: "Models chosen for the decision they support, not for the hype cycle.",
     desc: "Model work that starts from the decision it has to support. Fine-tuning where it earns its cost, classical models where they beat an LLM, and honest analysis of when neither is the answer.",
     tags: [
       "Fine-tuning & adaptation",
@@ -128,6 +134,8 @@ export const services = [
   {
     sNo: "04",
     title: "Evaluation & Reliability",
+    short: "Evaluation",
+    tagline: "Golden sets, regression gates and tracing, so every change is measurable.",
     desc: "The part most teams skip. Golden sets, offline evals, regression gates in CI and production tracing — so a change to a prompt is a measurable engineering decision instead of a guess.",
     tags: [
       "Eval harnesses & golden sets",

@@ -1,15 +1,19 @@
 import Image from "next/image";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import HubOutlined from "@mui/icons-material/HubOutlined";
 import TravelExploreOutlined from "@mui/icons-material/TravelExploreOutlined";
 import ScienceOutlined from "@mui/icons-material/ScienceOutlined";
 import FactCheckOutlined from "@mui/icons-material/FactCheckOutlined";
 import HandArrow from "@/components/ui/HandArrow";
 import HandNote from "@/components/ui/HandNote";
+import InfoTip from "@/components/ui/InfoTip";
 import LinkBox from "@/components/ui/LinkBox";
 import PillLink from "@/components/ui/PillLink";
-import HeroMark from "@/components/home/HeroMark";
+import HeroScene from "@/components/home/HeroScene";
+import { getServices } from "@/services/dataService";
 import { color, motion, radius } from "@/theme/tokens";
+
+const services = getServices();
 
 /**
  * Each piece rises into place once, in reading order. Reduced motion is
@@ -31,7 +35,8 @@ const drawOn = (delay) => ({
   animation: `heroDraw 1000ms cubic-bezier(0.65, 0, 0.35, 1) ${delay}ms both`,
 });
 
-const HEADLINE = "clamp(2.75rem, 0.8rem + 5.6vw, 6.25rem)";
+// Sized to the copy column, not the screen, so both lines always fit it.
+const HEADLINE = "clamp(2.5rem, 0.6rem + 5vw, 5.75rem)";
 
 const lineSx = {
   display: "block",
@@ -40,17 +45,12 @@ const lineSx = {
   lineHeight: 1,
   letterSpacing: "-0.045em",
   color: color.ink,
+  // A line of the headline never breaks: "to" and "Production." belong together.
+  whiteSpace: "nowrap",
 };
 
-const DOT_FIELD = "radial-gradient(ellipse 75% 65% at 50% 45%, #000 15%, transparent 78%)";
-
-// The four practices, in the same order and with the same icons as the footer.
-const PRACTICES = [
-  { icon: HubOutlined, label: "Multi-Agent Systems" },
-  { icon: TravelExploreOutlined, label: "Retrieval" },
-  { icon: ScienceOutlined, label: "Applied ML" },
-  { icon: FactCheckOutlined, label: "Evaluation" },
-];
+// Same order and icons as the footer.
+const ICONS = [HubOutlined, TravelExploreOutlined, ScienceOutlined, FactCheckOutlined];
 
 /** Who this is, before what it says: the mark, the name, the practice. */
 function BrandTag() {
@@ -95,7 +95,11 @@ function BrandTag() {
   );
 }
 
-/** The practices as a row of small chips, each a way into What We Do. */
+/**
+ * The practices as a row of small chips, each a way into What We Do. Hover or
+ * focus one and a tip unfolds above it with the practice's full name and what
+ * it is, in one sentence.
+ */
 function PracticeChips() {
   return (
     <Box
@@ -110,192 +114,143 @@ function PracticeChips() {
         gap: 1,
       }}
     >
-      {PRACTICES.map(({ icon: Icon, label }, i) => (
-        <LinkBox
-          key={label}
-          href="/services"
-          sx={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 1,
-            pl: 0.625,
-            pr: 1.75,
-            py: 0.625,
-            borderRadius: radius.pill,
-            border: "1px solid",
-            borderColor: color.rule,
-            backgroundColor: `color-mix(in srgb, ${color.ground} 70%, transparent)`,
-            color: color.inkMuted,
-            textDecoration: "none",
-            fontSize: "0.875rem",
-            transition: `border-color ${motion.fast}, color ${motion.fast}, background-color ${motion.fast}`,
-            "&:hover": { borderColor: color.limeDeep, color: color.ink, backgroundColor: color.accentSoft },
-            ...rise(500 + i * 70),
-          }}
-        >
-          <Box
-            aria-hidden
-            sx={{
-              width: 26,
-              height: 26,
-              borderRadius: "50%",
-              display: "grid",
-              placeItems: "center",
-              backgroundColor: color.accentSoft,
-              color: color.accent,
-            }}
-          >
-            <Icon sx={{ fontSize: 15 }} />
-          </Box>
-          {label}
-        </LinkBox>
-      ))}
+      {services.map((service, i) => {
+        const Icon = ICONS[i];
+        return (
+          <InfoTip key={service.sNo} title={service.title} body={service.tagline}>
+            <LinkBox
+              href="/services"
+              sx={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 1,
+                pl: 0.625,
+                pr: 1.75,
+                py: 0.625,
+                borderRadius: radius.pill,
+                border: "1px solid",
+                borderColor: color.rule,
+                backgroundColor: `color-mix(in srgb, ${color.ground} 70%, transparent)`,
+                color: color.inkMuted,
+                textDecoration: "none",
+                fontSize: "0.875rem",
+                transition: `border-color ${motion.fast}, color ${motion.fast}, background-color ${motion.fast}, transform ${motion.base}`,
+                "&:hover, &:focus-visible": {
+                  borderColor: color.limeDeep,
+                  color: color.ink,
+                  backgroundColor: color.accentSoft,
+                  transform: "translateY(-2px)",
+                },
+                ...rise(500 + i * 70),
+              }}
+            >
+              <Box
+                aria-hidden
+                sx={{
+                  width: 26,
+                  height: 26,
+                  borderRadius: "50%",
+                  display: "grid",
+                  placeItems: "center",
+                  backgroundColor: color.accentSoft,
+                  color: color.accent,
+                }}
+              >
+                {Icon ? <Icon sx={{ fontSize: 15 }} /> : null}
+              </Box>
+              {service.short}
+            </LinkBox>
+          </InfoTip>
+        );
+      })}
     </Box>
   );
 }
 
 /**
- * The type on the left, the brand on the right.
+ * The hero copy, handed to HeroScene — which owns the globe of words, the
+ * scroll runway and the moment the globe becomes the wordmark.
  *
- * Left: the name, a two-line headline stepped in so it reads as a distance
- * travelled — research, then production — with "Production." underlined in
- * pencil once it lands; the promise, with the part that matters set a shade
- * stronger; one action and one alternative; and under a thin rule, the four
- * practices as ways in.
- *
- * Right: the 14Labs mark made of points (HeroMark), which assembles on load,
- * turns in 3D towards the cursor and parts under it. A pencil arrow draws
- * itself up towards it once the points have landed, with a note saying it can
- * be touched; both appear only where there is a cursor to use them.
+ * Left: the name; a two-line headline stepped in so it reads as a distance
+ * travelled, with "Production." underlined in pencil once it lands; the
+ * promise, with the part that matters set a shade stronger; one action and one
+ * alternative; and, under a thin rule, the four practices with tips.
  */
 function Hero() {
   return (
-    <Box
-      component="section"
-      sx={{ position: "relative", overflow: "hidden", pt: { xs: 6, md: 9 }, pb: { xs: 8, md: 12 } }}
+    <HeroScene
+      note={
+        <Box sx={{ display: "flex", alignItems: "flex-end", gap: 0.5 }}>
+          <HandNote delay={2400} rotate={-6} sx={{ mb: 0.5 }}>
+            move your cursor through it
+          </HandNote>
+          <HandArrow variant="rise" delay={1500} duration={1000} sx={{ width: 96, mb: 1.5 }} />
+        </Box>
+      }
     >
-      <Box
-        aria-hidden
-        sx={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          backgroundImage: `radial-gradient(${color.ruleStrong} 1px, transparent 1.4px)`,
-          backgroundSize: "26px 26px",
-          maskImage: DOT_FIELD,
-          WebkitMaskImage: DOT_FIELD,
-        }}
-      />
-      <Box
-        aria-hidden
-        sx={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          backgroundImage: `radial-gradient(34% 46% at 78% 48%, color-mix(in srgb, ${color.lime} 13%, transparent), transparent 72%)`,
-        }}
-      />
+      <BrandTag />
 
-      <Container sx={{ position: "relative" }}>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 1.2fr) minmax(0, 1fr)" },
-            columnGap: 4,
-            rowGap: { xs: 5, md: 6 },
-            alignItems: "center",
-          }}
-        >
-          <Box>
-            <BrandTag />
-
-            <Box component="h1" sx={{ m: 0, mt: { xs: 4, md: 5 }, fontWeight: 400 }}>
-              <Box component="span" sx={{ ...lineSx, ...rise(90) }}>
-                From Research,
-              </Box>
-              <Box component="span" sx={{ ...lineSx, pl: { sm: "1.1em" }, mt: "0.06em", ...rise(190) }}>
-                to{" "}
-                <Box component="span" sx={{ position: "relative", display: "inline-block" }}>
-                  Production.
-                  <Box
-                    component="svg"
-                    aria-hidden
-                    viewBox="0 0 300 20"
-                    preserveAspectRatio="none"
-                    sx={{
-                      position: "absolute",
-                      left: "-1%",
-                      bottom: "-0.12em",
-                      width: "90%",
-                      height: "0.22em",
-                      overflow: "visible",
-                      color: color.lime,
-                    }}
-                  >
-                    <Box
-                      component="path"
-                      d="M4 13 C 60 5, 140 4, 200 9 S 280 15, 296 7"
-                      pathLength="1"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                      vectorEffect="non-scaling-stroke"
-                      sx={drawOn(1150)}
-                    />
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-
-            <Typography
-              variant="lede"
-              sx={{ mt: { xs: 3.5, md: 4.5 }, color: color.inkMuted, maxWidth: "44ch", ...rise(290) }}
-            >
-              An AI engineering and research practice. We build multi-agent systems,
-              retrieval and evaluation that{" "}
-              <Box component="span" sx={{ color: color.ink, fontWeight: 500 }}>
-                hold up once real users arrive.
-              </Box>
-            </Typography>
-
-            <Box sx={{ mt: { xs: 4.5, md: 5.5 }, display: "flex", gap: 1.5, flexWrap: "wrap", ...rise(390) }}>
-              <PillLink href="/contact" size="lg">
-                Start a project
-              </PillLink>
-              <PillLink href="/case-studies" variant="outline" size="lg">
-                See our work
-              </PillLink>
-            </Box>
-
-            <PracticeChips />
-          </Box>
-
-          <Box sx={{ position: "relative" }}>
-            <HeroMark sx={{ height: { xs: 250, sm: 340, lg: 470 } }} />
-
-            {/* Pencil annotation, pointer screens only. */}
+      <Box component="h1" sx={{ m: 0, mt: { xs: 4, md: 5 }, fontWeight: 400 }}>
+        <Box component="span" sx={{ ...lineSx, ...rise(90) }}>
+          From Research,
+        </Box>
+        <Box component="span" sx={{ ...lineSx, pl: { sm: "0.8em" }, mt: "0.06em", ...rise(190) }}>
+          to{" "}
+          <Box component="span" sx={{ position: "relative", display: "inline-block" }}>
+            Production.
             <Box
+              component="svg"
+              aria-hidden
+              viewBox="0 0 300 20"
+              preserveAspectRatio="none"
               sx={{
-                display: { xs: "none", lg: "flex" },
-                alignItems: "flex-end",
-                gap: 0.5,
                 position: "absolute",
-                left: -8,
-                bottom: -18,
-                pointerEvents: "none",
-                "@media (hover: none)": { display: "none" },
+                left: "-1%",
+                bottom: "-0.12em",
+                width: "90%",
+                height: "0.22em",
+                overflow: "visible",
+                color: color.lime,
               }}
             >
-              <HandNote delay={2500} rotate={-6} sx={{ mb: 0.5 }}>
-                move your cursor through it
-              </HandNote>
-              <HandArrow variant="rise" delay={1500} duration={1000} sx={{ width: 96, mb: 1.5 }} />
+              <Box
+                component="path"
+                d="M4 13 C 60 5, 140 4, 200 9 S 280 15, 296 7"
+                pathLength="1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="4"
+                strokeLinecap="round"
+                vectorEffect="non-scaling-stroke"
+                sx={drawOn(1150)}
+              />
             </Box>
           </Box>
         </Box>
-      </Container>
-    </Box>
+      </Box>
+
+      <Typography
+        variant="lede"
+        sx={{ mt: { xs: 3.5, md: 4.5 }, color: color.inkMuted, maxWidth: "44ch", ...rise(290) }}
+      >
+        An AI engineering and research practice. We build multi-agent systems,
+        retrieval and evaluation that{" "}
+        <Box component="span" sx={{ color: color.ink, fontWeight: 500 }}>
+          hold up once real users arrive.
+        </Box>
+      </Typography>
+
+      <Box sx={{ mt: { xs: 4.5, md: 5.5 }, display: "flex", gap: 1.5, flexWrap: "wrap", ...rise(390) }}>
+        <PillLink href="/contact" size="lg">
+          Start a project
+        </PillLink>
+        <PillLink href="/case-studies" variant="outline" size="lg">
+          See our work
+        </PillLink>
+      </Box>
+
+      <PracticeChips />
+    </HeroScene>
   );
 }
 

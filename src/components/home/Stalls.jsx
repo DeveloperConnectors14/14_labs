@@ -39,6 +39,11 @@ const TINTS = [
 // rather than a band with hard lines.
 const EDGE_FADE = "linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent)";
 
+// Each tint rises from the bottom behind a soft edge 40% of the section tall,
+// its height set by --reveal (0 to 1) — so there is never a hard line to see
+// moving, only a wash coming up.
+const RISING = "linear-gradient(to top, #000 calc(var(--reveal, 0) * 140% - 40%), transparent calc(var(--reveal, 0) * 140%))";
+
 const fade = `opacity ${motion.slow}, transform ${motion.slow}`;
 
 /** A black plate holding one figure. */
@@ -66,15 +71,18 @@ function Plate({ index, sx }) {
  * normally, and the panel on the left holds still and follows it — whichever
  * failure mode is in the middle of the screen is the one the panel shows.
  *
- * Each failure mode also has its own faint ground. When the current item
- * changes, the new tint wipes up over the section from the bottom; scrolling
- * back up pulls it down again. The tints are stacked layers revealed by
- * clip-path, so a change is one compositor transition and no layout.
+ * Each failure mode also has its own faint ground, and the grounds are tied to
+ * scroll position rather than to the switch between items: as you scroll from
+ * one item to the next, the next tint rises up the section behind a soft,
+ * tall edge, and it sinks back as you scroll up. Because the position is
+ * continuous there is no moment where anything jumps — the wash simply keeps
+ * pace with the page. It is a CSS variable per layer, written in one rAF per
+ * scroll, so no React render is involved.
  *
  * The left panel is sticky CSS, not a pinned runway, so the page never stops
  * scrolling and nothing is hijacked. An IntersectionObserver watching a thin
- * band across the middle of the viewport decides which item is current; the
- * panel only cross-fades between states it has already rendered. A thin
+ * band across the middle of the viewport decides which item the panel shows;
+ * the panel only cross-fades between states it has already rendered. A thin
  * progress bar on the panel fills as you go.
  *
  * The panel repeats what the list says, so it is hidden from assistive tech —
@@ -84,7 +92,10 @@ function Plate({ index, sx }) {
 function Stalls() {
   const [active, setActive] = useState(0);
   const itemRefs = useRef([]);
+  const listRef = useRef(null);
+  const tintRefs = useRef([]);
 
+  // Which item the panel shows.
   useEffect(() => {
     const items = itemRefs.current.filter(Boolean);
     const observer = new IntersectionObserver(
@@ -100,13 +111,48 @@ function Stalls() {
     return () => observer.disconnect();
   }, []);
 
+  // How far each tint has risen, from scroll position.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return undefined;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let frame = 0;
+
+    const paint = () => {
+      frame = 0;
+      const rect = list.getBoundingClientRect();
+      // Continuous position along the list: 0 with the first item's middle at
+      // the middle of the screen, 1 with the second's, and so on.
+      const at = ((window.innerHeight / 2 - rect.top) / rect.height) * TINTS.length - 0.5;
+      tintRefs.current.forEach((el, i) => {
+        if (!el || i === 0) return;
+        const raw = Math.min(1, Math.max(0, at - (i - 1)));
+        const reveal = still ? (raw >= 0.5 ? 1 : 0) : raw * raw * (3 - 2 * raw);
+        el.style.setProperty("--reveal", reveal.toFixed(4));
+      });
+    };
+
+    const request = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+
+    request();
+    window.addEventListener("scroll", request, { passive: true });
+    window.addEventListener("resize", request);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", request);
+      window.removeEventListener("resize", request);
+    };
+  }, []);
+
   return (
     <Box
       component="section"
       sx={{ position: "relative", isolation: "isolate", paddingBlock: layout.sectionYTight }}
     >
-      {/* The grounds: every tint up to the current one is open, the rest are
-          clipped away below, and the newest sits on top. */}
+      {/* The grounds, stacked in order; each one above the first rises over
+          the one before it. */}
       <Box
         aria-hidden
         sx={{
@@ -121,13 +167,15 @@ function Stalls() {
         {TINTS.map((tint, i) => (
           <Box
             key={tint}
+            ref={(el) => {
+              tintRefs.current[i] = el;
+            }}
             sx={{
               position: "absolute",
               inset: 0,
               zIndex: i,
               backgroundColor: tint,
-              clipPath: i <= active ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)",
-              transition: "clip-path 1400ms cubic-bezier(0.65, 0, 0.35, 1)",
+              ...(i ? { maskImage: RISING, WebkitMaskImage: RISING } : null),
             }}
           />
         ))}
@@ -249,7 +297,7 @@ function Stalls() {
           </Box>
 
           {/* Right: the list, scrolling normally. */}
-          <Box component="ol" sx={{ listStyle: "none", m: 0, p: 0 }}>
+          <Box ref={listRef} component="ol" sx={{ listStyle: "none", m: 0, p: 0 }}>
             {challenges.map((item, i) => (
               <Box
                 component="li"

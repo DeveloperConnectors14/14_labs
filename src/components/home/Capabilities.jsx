@@ -21,20 +21,13 @@ const TOPIC = {
   "Evaluation & Reliability": "Evaluation",
 };
 
-// One line each. The full descriptions live on the services page; a card that
-// makes you read a paragraph is not a card.
-const TAGLINE = {
-  "Multi-Agent Systems": "Pipelines of specialised agents, each with a contract, a budget and a trace.",
-  "Retrieval & Knowledge Systems": "The right context in front of the model — measured, not guessed.",
-  "Applied Machine Learning": "Models chosen for the decision they support, not for the hype cycle.",
-  "Evaluation & Reliability": "Golden sets, regression gates and tracing, so every change is measurable.",
-};
-
+// The one-line tagline lives with the service in the data, so the cards, the
+// hero chips' tooltips and anything else that summarises a practice agree.
 const CARDS = [
   ...services.map((service) => ({
     key: service.sNo,
     title: service.title,
-    tagline: TAGLINE[service.title],
+    tagline: service.tagline,
     topic: TOPIC[service.title],
     href: "/services",
   })),

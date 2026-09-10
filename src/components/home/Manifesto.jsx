@@ -8,40 +8,74 @@ import SpeedOutlined from "@mui/icons-material/SpeedOutlined";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Eyebrow from "@/components/ui/Eyebrow";
-import { color, layout, radius } from "@/theme/tokens";
+import InfoTip from "@/components/ui/InfoTip";
+import LinkBox from "@/components/ui/LinkBox";
+import { getCaseDetails, getcaseStudies, getResearch } from "@/services/dataService";
+import { color, layout, motion, radius } from "@/theme/tokens";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// The statement, in runs. Runs with an icon become inline chips that fill in
-// as they are read; the last run is underlined in pencil.
-const RUNS = [
-  { text: "We are engineers who measure. Every system we ship comes with" },
-  { text: "the evaluation", icon: InsightsOutlined },
-  { text: "that proves it works," },
-  { text: "the traces", icon: AccountTreeOutlined },
-  { text: "that show why it didn't, and" },
-  { text: "a cost", icon: SpeedOutlined },
-  { text: "you can predict. That is the difference between a demo and" },
-  { text: "a product.", underline: true },
-];
+const posts = getResearch();
+const latest = posts[0];
+const details = getCaseDetails();
+const caseTitles = getcaseStudies().map(
+  (item) => details.find((d) => d.caseId === item.id)?.hero?.title ?? item.title
+);
 
-// The three chips, made concrete. Same icons, so the eye can join them up.
-const PROOF = [
-  {
+const monthYear = (iso) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+
+// The three things every system ships with. Same icons in the statement and
+// in the proof points below it, so the eye can join them up.
+const PROOF = {
+  evaluation: {
     icon: InsightsOutlined,
     title: "Evaluation You Keep",
     body: "Golden sets and regression gates, built first and handed over with the system.",
   },
-  {
+  traces: {
     icon: AccountTreeOutlined,
     title: "Traces You Can Read",
     body: "Every step of every request recorded, so a failure has an address.",
   },
-  {
+  cost: {
     icon: SpeedOutlined,
     title: "Costs You Can Predict",
     body: "Latency and spend budgets agreed up front and watched in production.",
   },
+};
+
+// The statement, in runs:
+//   link   a word that goes somewhere, with a tip that previews it
+//   chip   a phrase that fills in as it is read, with a tip that explains it
+//   line   the last phrase, underlined in pencil as the sentence lands
+const RUNS = [
+  { text: "We are engineers who measure. Our" },
+  {
+    link: "/research",
+    text: "research",
+    tip: {
+      title: "Our Research",
+      body: `${posts.length} published notes. Latest: ${latest.title} (${monthYear(latest.date)}).`,
+    },
+  },
+  { text: "decides what we build, and every system in our" },
+  {
+    link: "/case-studies",
+    text: "work",
+    tip: {
+      title: "Selected Work",
+      body: `${caseTitles.length} case studies: ${caseTitles.join(" and ")}.`,
+    },
+  },
+  { text: "ships with" },
+  { chip: "evaluation", text: "the evaluation" },
+  { text: "that proves it works," },
+  { chip: "traces", text: "the traces" },
+  { text: "that show why it didn't, and" },
+  { chip: "cost", text: "a cost" },
+  { text: "you can predict. That is the difference between a demo and" },
+  { line: true, text: "a product." },
 ];
 
 const STEP = 0.08; // timeline gap between one word and the next
@@ -55,16 +89,19 @@ const words = (text) =>
   ));
 
 /**
- * One large statement, read at the speed you scroll.
+ * Why 14Labs: one large statement, read at the speed you scroll.
  *
  * Every word starts faint and comes up to full ink as the paragraph moves up
- * the screen. The three things we ship with every system — evaluation, traces,
- * a predictable cost — are inline chips: each one's tint and icon fill in at
- * the moment its words are reached, and "a product." is underlined in pencil
- * as the sentence lands. All of it is one GSAP timeline scrubbed to scroll
- * position, so scrolling back runs it backwards.
+ * the screen. "research" and "work" are links with a dotted teal underline and
+ * a small pulsing dot; hovering either unfolds a tip previewing what is behind
+ * it — the latest note, the case studies. The three things we ship with every
+ * system are inline chips that fill in at the moment they are reached, each
+ * with a tip of its own, and "a product." is underlined in pencil as the
+ * sentence lands. The reading effects are one GSAP timeline scrubbed to scroll
+ * position, so scrolling back runs them backwards.
  *
- * Below, the same three icons open three short proof points.
+ * Below, the same three icons open three short proof points — the same
+ * information as the tips, for anyone on a screen without hover.
  *
  * The text is all there from the first paint and the final state is the
  * default: only opacity, a tint and a stroke are animated, so nothing reflows,
@@ -131,45 +168,93 @@ function Manifesto() {
           {RUNS.map((run, r) => {
             let node = words(run.text);
 
-            if (run.icon) {
-              const Icon = run.icon;
+            if (run.link) {
               node = (
-                <Box
-                  component="span"
-                  className="mf-chip"
-                  sx={{
-                    position: "relative",
-                    isolation: "isolate",
-                    display: "inline-flex",
-                    alignItems: "baseline",
-                    gap: "0.2em",
-                    px: "0.26em",
-                    borderRadius: "0.3em",
-                    whiteSpace: "nowrap",
-                  }}
-                >
+                <InfoTip title={run.tip.title} body={run.tip.body}>
+                  <LinkBox
+                    href={run.link}
+                    sx={{
+                      position: "relative",
+                      color: "inherit",
+                      textDecorationLine: "underline",
+                      textDecorationStyle: "dotted",
+                      textDecorationColor: color.lime,
+                      textDecorationThickness: "0.07em",
+                      textUnderlineOffset: "0.16em",
+                      transition: `color ${motion.fast}`,
+                      "&:hover, &:focus-visible": { color: color.accent, textDecorationStyle: "solid" },
+                      // A small live dot: this word has something behind it.
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        top: "0.12em",
+                        right: "-0.22em",
+                        width: "0.14em",
+                        height: "0.14em",
+                        borderRadius: "50%",
+                        backgroundColor: color.lime,
+                        "@keyframes mfPing": {
+                          "0%": { boxShadow: `0 0 0 0 color-mix(in srgb, ${color.lime} 70%, transparent)` },
+                          "80%, 100%": { boxShadow: `0 0 0 0.3em color-mix(in srgb, ${color.lime} 0%, transparent)` },
+                        },
+                        animation: "mfPing 2.2s ease-out infinite",
+                      },
+                    }}
+                  >
+                    {node}
+                  </LinkBox>
+                </InfoTip>
+              );
+            } else if (run.chip) {
+              const proof = PROOF[run.chip];
+              const Icon = proof.icon;
+              node = (
+                <InfoTip title={proof.title} body={proof.body}>
                   <Box
                     component="span"
-                    className="mf-fill"
-                    aria-hidden
+                    tabIndex={0}
+                    className="mf-chip"
                     sx={{
-                      position: "absolute",
-                      inset: "0.1em 0 0",
-                      zIndex: -1,
-                      borderRadius: "inherit",
-                      backgroundColor: color.accentSoft,
-                      transformOrigin: "left center",
+                      position: "relative",
+                      isolation: "isolate",
+                      display: "inline-flex",
+                      alignItems: "baseline",
+                      gap: "0.2em",
+                      px: "0.26em",
+                      borderRadius: "0.3em",
+                      whiteSpace: "nowrap",
+                      cursor: "help",
+                      transition: `transform ${motion.base}`,
+                      "&:hover, &:focus-visible": { transform: "translateY(-0.04em)" },
+                      "&:hover .mf-fill, &:focus-visible .mf-fill": {
+                        boxShadow: `inset 0 0 0 1px ${color.limeDeep}`,
+                      },
                     }}
-                  />
-                  <Icon
-                    className="mf-icon"
-                    aria-hidden
-                    sx={{ fontSize: "0.7em", color: color.accent, alignSelf: "center" }}
-                  />
-                  {node}
-                </Box>
+                  >
+                    <Box
+                      component="span"
+                      className="mf-fill"
+                      aria-hidden
+                      sx={{
+                        position: "absolute",
+                        inset: "0.1em 0 0",
+                        zIndex: -1,
+                        borderRadius: "inherit",
+                        backgroundColor: color.accentSoft,
+                        transformOrigin: "left center",
+                        transition: `box-shadow ${motion.fast}`,
+                      }}
+                    />
+                    <Icon
+                      className="mf-icon"
+                      aria-hidden
+                      sx={{ fontSize: "0.7em", color: color.accent, alignSelf: "center" }}
+                    />
+                    {node}
+                  </Box>
+                </InfoTip>
               );
-            } else if (run.underline) {
+            } else if (run.line) {
               node = (
                 <Box component="span" sx={{ position: "relative", display: "inline-block", whiteSpace: "nowrap" }}>
                   {node}
@@ -221,7 +306,7 @@ function Manifesto() {
             gap: { xs: 4, md: 5 },
           }}
         >
-          {PROOF.map(({ icon: Icon, title, body }) => (
+          {Object.values(PROOF).map(({ icon: Icon, title, body }) => (
             <Box key={title} sx={{ pt: 3, borderTop: "1px solid", borderColor: color.rule }}>
               <Box
                 aria-hidden

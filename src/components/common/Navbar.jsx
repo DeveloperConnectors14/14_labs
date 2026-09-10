@@ -14,14 +14,44 @@ import {
     useScrollTrigger,
 } from "@mui/material";
 import { useColorScheme } from "@mui/material/styles";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import ChevronRight from "@mui/icons-material/ChevronRight";
 import PillLink from "@/components/ui/PillLink";
-import { getNavItems } from "@/services/dataService";
+import { getCaseDetails, getcaseStudies, getNavItems, getResearch } from "@/services/dataService";
 import { useNavHidden } from "@/components/common/navVisibility";
 import { color, layout, motion } from "@/theme/tokens";
 
 const navItems = getNavItems();
 // Contact is the pill on the right; listing it again beside it is noise.
 const barItems = navItems.filter((item) => item.path !== "/contact");
+
+const monthYear = (iso) =>
+    new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+
+const caseDetails = getCaseDetails();
+
+// What each dropdown lists: the real notes and case studies, then the index.
+const MENUS = {
+    "/research": {
+        items: getResearch().map((post) => ({
+            href: `/research/${post.slug}`,
+            meta: `${post.topic}  ·  ${monthYear(post.date)}`,
+            title: post.title,
+        })),
+        all: { href: "/research", label: "All Research" },
+    },
+    "/case-studies": {
+        items: getcaseStudies().map((item) => {
+            const hero = caseDetails.find((d) => d.caseId === item.id)?.hero;
+            return {
+                href: `/case-studies/${item.id}`,
+                meta: hero?.stats?.[0]?.value ?? "Case study",
+                title: hero?.title ?? item.title,
+            };
+        }),
+        all: { href: "/case-studies", label: "All Case Studies" },
+    },
+};
 
 /** Two bars that become an X. Cheaper and calmer than swapping icon glyphs. */
 function MenuToggle({ open }) {
@@ -102,6 +132,165 @@ export function ThemedLogo({ width = 80, height = 30, priority = false }) {
     );
 }
 
+const linkSx = (active) => ({
+    display: "inline-flex",
+    alignItems: "center",
+    px: 1.75,
+    py: 1,
+    borderRadius: "999px",
+    textDecoration: "none",
+    fontSize: "0.9375rem",
+    fontWeight: active ? 500 : 400,
+    color: active ? color.ink : color.inkMuted,
+    backgroundColor: active ? color.surfaceAlt : "transparent",
+    transition: `color ${motion.fast}, background-color ${motion.fast}`,
+    "&:hover": { color: color.ink, backgroundColor: color.surfaceAlt },
+});
+
+/**
+ * A nav item with a panel under it.
+ *
+ * Pure CSS: the panel opens on hover and whenever anything inside the item has
+ * keyboard focus (`:focus-within`), so tabbing onto "Research" opens it and
+ * tabbing on walks through the notes. It closes a beat after the pointer
+ * leaves, so crossing the gap to the panel does not drop it. The trigger is
+ * still the section's link — on a touch screen a tap simply goes there.
+ */
+function DropdownItem({ item, active }) {
+    const menu = MENUS[item.path];
+
+    return (
+        <Box
+            sx={{
+                position: "relative",
+                "&:hover .nav-panel, &:focus-within .nav-panel": {
+                    opacity: 1,
+                    visibility: "visible",
+                    transform: "translate(-50%, 0)",
+                    transition: `opacity 200ms ease, transform 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s`,
+                },
+                "&:hover .nav-chev, &:focus-within .nav-chev": { transform: "rotate(180deg)" },
+            }}
+        >
+            <Box
+                component={Link}
+                href={item.path}
+                aria-current={active ? "page" : undefined}
+                aria-haspopup="true"
+                sx={linkSx(active)}
+            >
+                {item.label}
+                <ExpandMore
+                    className="nav-chev"
+                    aria-hidden
+                    sx={{ fontSize: 17, ml: 0.25, mr: -0.5, transition: `transform ${motion.base}` }}
+                />
+            </Box>
+
+            <Box
+                className="nav-panel"
+                sx={{
+                    position: "absolute",
+                    top: "100%",
+                    left: "50%",
+                    pt: 1.5,
+                    opacity: 0,
+                    visibility: "hidden",
+                    transform: "translate(-50%, 8px)",
+                    // Close after a short grace, then hide from the tab order.
+                    transition: `opacity 180ms ease 120ms, transform 220ms ease 120ms, visibility 0s linear 320ms`,
+                    zIndex: 10,
+                }}
+            >
+                <Box
+                    sx={{
+                        position: "relative",
+                        width: 380,
+                        p: 1,
+                        borderRadius: "18px",
+                        border: "1px solid",
+                        borderColor: color.rule,
+                        backgroundColor: color.ground,
+                        boxShadow: "0 28px 60px -28px rgba(0, 0, 0, 0.4)",
+                        // The pointer up to the trigger.
+                        "&::before": {
+                            content: '""',
+                            position: "absolute",
+                            top: -6,
+                            left: "50%",
+                            width: 11,
+                            height: 11,
+                            backgroundColor: color.ground,
+                            borderLeft: "1px solid",
+                            borderTop: "1px solid",
+                            borderColor: color.rule,
+                            transform: "translateX(-50%) rotate(45deg)",
+                        },
+                    }}
+                >
+                    {menu.items.map((entry) => (
+                        <Box
+                            key={entry.href}
+                            component={Link}
+                            href={entry.href}
+                            sx={{
+                                position: "relative",
+                                display: "block",
+                                px: 1.5,
+                                py: 1.25,
+                                borderRadius: "12px",
+                                textDecoration: "none",
+                                color: color.ink,
+                                transition: `background-color ${motion.fast}`,
+                                "&:hover, &:focus-visible": { backgroundColor: color.surfaceAlt },
+                                "&:hover .nav-entry-title": { color: color.accent },
+                            }}
+                        >
+                            <Typography sx={{ fontSize: "0.75rem", color: color.inkFaint, whiteSpace: "pre" }}>
+                                {entry.meta}
+                            </Typography>
+                            <Typography
+                                className="nav-entry-title"
+                                sx={{ mt: 0.25, fontSize: "0.9375rem", lineHeight: 1.35, transition: `color ${motion.fast}` }}
+                            >
+                                {entry.title}
+                            </Typography>
+                        </Box>
+                    ))}
+
+                    <Box
+                        component={Link}
+                        href={menu.all.href}
+                        sx={{
+                            mt: 0.5,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            px: 1.5,
+                            py: 1.25,
+                            borderTop: "1px solid",
+                            borderColor: color.rule,
+                            textDecoration: "none",
+                            fontSize: "0.875rem",
+                            fontWeight: 500,
+                            color: color.ink,
+                            "&:hover": { color: color.accent },
+                            "&:hover .nav-all-chev": { transform: "translateX(3px)" },
+                        }}
+                    >
+                        {menu.all.label}
+                        <ChevronRight
+                            className="nav-all-chev"
+                            aria-hidden
+                            sx={{ fontSize: 18, transition: `transform ${motion.base}` }}
+                        />
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+    );
+}
+
 function Navbar() {
     const pathname = usePathname();
 
@@ -167,24 +356,15 @@ function Navbar() {
                         >
                             {barItems.map((item) => {
                                 const active = isActive(item.path);
-                                return (
+                                return MENUS[item.path] ? (
+                                    <DropdownItem key={item.path} item={item} active={active} />
+                                ) : (
                                     <Box
                                         key={item.path}
                                         component={Link}
                                         href={item.path}
                                         aria-current={active ? "page" : undefined}
-                                        sx={{
-                                            px: 1.75,
-                                            py: 1,
-                                            borderRadius: "999px",
-                                            textDecoration: "none",
-                                            fontSize: "0.9375rem",
-                                            fontWeight: active ? 500 : 400,
-                                            color: active ? color.ink : color.inkMuted,
-                                            backgroundColor: active ? color.surfaceAlt : "transparent",
-                                            transition: `color ${motion.fast}, background-color ${motion.fast}`,
-                                            "&:hover": { color: color.ink, backgroundColor: color.surfaceAlt },
-                                        }}
+                                        sx={linkSx(active)}
                                     >
                                         {item.label}
                                     </Box>
