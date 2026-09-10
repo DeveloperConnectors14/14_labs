@@ -6,9 +6,9 @@ import { color, font, radius } from "@/theme/tokens";
 const stats = getStats();
 
 /**
- * The figures, on a warm ramp that deepens left to right — white, sand, peach —
- * and lands on forest. One tile of the primary, at the end of the row, is the
- * whole of the green here: the ramp walks up to it, so it reads as the
+ * The figures, on a ramp that deepens left to right — white, grey, indigo wash
+ * — and lands on solid indigo. One tile of the primary, at the end of the row,
+ * is the only strong colour here: the ramp walks up to it, so it reads as the
  * destination rather than as one more coloured card.
  *
  * Deliberately no figure behind the numerals. A distribution was drawn on the
@@ -17,8 +17,8 @@ const stats = getStats();
  */
 const TONES = [
   { bg: color.surface, fg: color.ink, muted: color.inkFaint, rule: color.limeDeep },
-  { bg: color.sand10, fg: color.ink, muted: color.inkFaint, rule: color.limeDeep },
-  { bg: color.warm, fg: color.ink, muted: color.inkMuted, rule: color.warmMark },
+  { bg: color.grey10, fg: color.ink, muted: color.inkFaint, rule: color.limeDeep },
+  { bg: color.soft, fg: color.ink, muted: color.inkMuted, rule: color.softMark },
   { bg: color.deep, fg: color.onDeep, muted: color.onDeepMuted, rule: color.lime },
 ];
 

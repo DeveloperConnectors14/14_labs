@@ -40,9 +40,9 @@ function PricingSection() {
             <Box
               key={tier.title}
               sx={{
-                backgroundColor: featured ? color.deep : color.sand05,
+                backgroundColor: featured ? color.deep : color.grey05,
                 border: featured ? "1px solid transparent" : "1px solid",
-                borderColor: featured ? "transparent" : color.sand20,
+                borderColor: featured ? "transparent" : color.grey20,
                 borderRadius: radius.lg,
                 p: { xs: 3, md: 4 },
                 display: "flex",

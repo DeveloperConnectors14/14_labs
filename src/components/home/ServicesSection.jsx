@@ -53,14 +53,14 @@ function ServicesSection() {
             <Box
               key={service.sNo}
               sx={{
-                backgroundColor: color.sand05,
+                backgroundColor: color.grey05,
                 borderRadius: radius.lg,
                 p: { xs: 2, md: 2.5 },
                 display: "flex",
                 flexDirection: "column",
                 transition: `background-color ${motion.base}`,
-                "&:hover": { backgroundColor: color.sand10 },
-                "&:hover .service-plate": { backgroundColor: color.sand20 },
+                "&:hover": { backgroundColor: color.grey10 },
+                "&:hover .service-plate": { backgroundColor: color.grey20 },
                 "&:hover .service-index": { color: color.accent },
               }}
             >
@@ -68,7 +68,7 @@ function ServicesSection() {
                 <Box
                   className="service-plate"
                   sx={{
-                    backgroundColor: color.sand10,
+                    backgroundColor: color.grey10,
                     borderRadius: radius.md,
                     height: { xs: 160, md: 212 },
                     display: "flex",
@@ -95,7 +95,7 @@ function ServicesSection() {
                       fontSize: "2rem",
                       lineHeight: 1,
                       letterSpacing: "-0.04em",
-                      color: color.sand45,
+                      color: color.grey45,
                       transition: `color ${motion.base}`,
                     }}
                   >
@@ -139,7 +139,7 @@ function ServicesSection() {
                         color: color.accent,
                         backgroundColor: color.surface,
                         border: "1px solid",
-                        borderColor: color.sand20,
+                        borderColor: color.grey20,
                         borderRadius: radius.pill,
                         px: 1.75,
                         py: 0.75,

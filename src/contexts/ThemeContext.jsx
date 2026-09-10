@@ -40,7 +40,7 @@ export const ThemeProvider = ({ children }) => {
         // Both schemes are emitted as CSS variables and chosen by the
         // `data-theme` attribute on <html>. InitColorSchemeScript in the root
         // layout sets it before first paint, so a dark-mode visitor never sees
-        // the cream ground flash first.
+        // the light ground flash first.
         cssVariables: { colorSchemeSelector: "data-theme" },
         colorSchemes: {
           light: { palette: schemePalette("light", palettes.light) },

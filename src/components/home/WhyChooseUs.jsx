@@ -7,14 +7,15 @@ import { color, font, measure } from "@/theme/tokens";
 const features = getFeatures();
 
 /**
- * Three working principles on the peach slab — the page's warm colour block,
- * placed so the run of cream sections is interrupted before it becomes
- * monotonous. It was forest; peach keeps the break in rhythm without spending
- * the primary, which is saved for the closing band a few sections later.
+ * Three working principles on the soft indigo slab, placed so the run of white
+ * sections is interrupted before it becomes monotonous. It is a wash rather
+ * than a full-strength band on purpose: the solid primary is saved for the
+ * closing band a few sections later, and two of them this close together would
+ * make neither one the ending.
  */
 function WhyChooseUs() {
   return (
-    <Section band="warm" inset>
+    <Section band="soft" inset>
       <SectionHead
         split
         eyebrow="How we work"
@@ -39,7 +40,7 @@ function WhyChooseUs() {
               pr: { md: 2 },
               borderTop: "1px solid",
               borderLeft: { md: i === 0 ? 0 : "1px solid" },
-              borderColor: color.ruleOnWarm,
+              borderColor: color.ruleOnSoft,
             }}
           >
             <Typography
@@ -49,7 +50,7 @@ function WhyChooseUs() {
                 fontSize: "3rem",
                 lineHeight: 1,
                 letterSpacing: "-0.05em",
-                color: color.warmMark,
+                color: color.softMark,
               }}
             >
               {item.sNo}

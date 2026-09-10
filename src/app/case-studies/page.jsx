@@ -157,7 +157,7 @@ function CaseStudiesPage() {
                 borderColor: color.rule,
               }}
             >
-              <Typography variant="eyebrow" sx={{ color: color.sand45 }}>
+              <Typography variant="eyebrow" sx={{ color: color.grey45 }}>
                 {String(i + 1).padStart(2, "0")}
               </Typography>
               <Typography

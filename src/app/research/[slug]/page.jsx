@@ -191,7 +191,7 @@ async function ResearchPost({ params }) {
           <Box sx={{ mt: { xs: 5, md: 7 }, maxWidth: 720 }}>
             <Box
               sx={{
-                backgroundColor: color.sand10,
+                backgroundColor: color.grey10,
                 borderRadius: radius.lg,
                 px: { xs: 3, md: 5 },
                 py: { xs: 3, md: 4.5 },

@@ -49,7 +49,7 @@ function SingleCaseChallanges({ challanges }) {
                 fontSize: "1.75rem",
                 lineHeight: 1,
                 letterSpacing: "-0.04em",
-                color: color.sand45,
+                color: color.grey45,
                 minWidth: "2.5ch",
               }}
             >

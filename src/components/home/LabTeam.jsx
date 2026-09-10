@@ -10,7 +10,7 @@ const team = getTeam();
 
 // The tile tones walk down the green ramp so a row of monograms reads as one
 // designed object rather than four identical grey squares.
-const TILE_TONES = [color.sand20, color.sand30, color.sand20, color.sand30];
+const TILE_TONES = [color.grey20, color.grey30, color.grey20, color.grey30];
 
 const initials = (name) =>
   name
@@ -108,7 +108,7 @@ function LabTeam() {
                 mt: 1.5,
                 pt: 1.5,
                 borderTop: "1px solid",
-                borderColor: color.sand20,
+                borderColor: color.grey20,
                 color: color.inkFaint,
               }}
             >

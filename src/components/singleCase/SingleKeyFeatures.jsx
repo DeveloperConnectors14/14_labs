@@ -43,7 +43,7 @@ function SingleKeyFeatures({ keyFeatures }) {
               flexDirection: "column",
               transition: `border-color ${motion.base}, transform ${motion.base}`,
               "&:hover": {
-                borderColor: color.sand30,
+                borderColor: color.grey30,
                 transform: "translateY(-4px)",
               },
             }}
@@ -53,7 +53,7 @@ function SingleKeyFeatures({ keyFeatures }) {
                 fontFamily: font.mono,
                 fontSize: "0.75rem",
                 letterSpacing: "0.11em",
-                color: color.sand45,
+                color: color.grey45,
               }}
             >
               {String(i + 1).padStart(2, "0")}

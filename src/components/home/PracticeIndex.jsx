@@ -7,12 +7,12 @@ import { color, font } from "@/theme/tokens";
 const services = getServices();
 
 /**
- * The four practices, straight after the hero, on the cream surface.
+ * The four practices, straight after the hero, on the alternate surface.
  *
- * This was a full-bleed forest band. It was the first thing under the hero and
- * the page's first strong colour, which spent the primary on an index — and
- * made green the colour of the page rather than the colour of its actions. It
- * is now a quiet step off the ground, with brown numerals, so the first green a
+ * This used to be a full-bleed band in the primary colour. It was the first
+ * thing under the hero, which spent the primary on an index and made it the
+ * colour of the page rather than the colour of its actions. It is now a quiet
+ * step off the ground with indigo numerals, so the first strong colour a
  * reader meets below the fold is a button.
  */
 function PracticeIndex() {
@@ -96,7 +96,7 @@ function PracticeIndex() {
                   fontSize: "2.25rem",
                   lineHeight: 1,
                   letterSpacing: "-0.04em",
-                  color: color.warmMark,
+                  color: color.accent,
                 }}
               >
                 {service.sNo}

@@ -1,17 +1,19 @@
 /**
  * 14Labs design tokens.
  *
- * Four brand colours, each with one job:
+ * The palette is the logo's. The wordmark is indigo and the mark is teal, and
+ * everything else on the page is a cool neutral that stays out of their way:
  *
- *   forest  #1E4634   the primary. Actions, links, focus, the one lit word in
- *                     the hero, and a single closing band. Nothing else — a
- *                     primary that is on every surface stops meaning "act here"
- *   cream   #F6E9E0   the alternate surface; the ground is a lighter step of it
- *   peach   #F9D2BA   the warm band, and the highlight on dark bands
- *   brown   #5E3122   the dark band: footer and instrument panels
+ *   indigo    #2E368F   the primary. Actions, links, focus, the lit word in the
+ *                       hero, one stat tile and the closing band
+ *   teal      #00D3B1   the mark. Highlights on dark bands, and small marks —
+ *                       a dot, a chart line — on light ones. Never body text on
+ *                       a light ground, where it is ~2:1
+ *   midnight  #0F1433   the dark band: footer and instrument panels
+ *   greys               the rest — a cool ramp from white to slate
  *
- * Everything between them is a warm sand ramp, not a green one. Most of the
- * page is neutral on purpose; the colour lands harder for being rationed.
+ * Two brand colours and a quiet ground is what reads as decent: the colour is
+ * rationed, so where it appears means something.
  *
  * There are two themes. Every value lives in `palettes`; `color` holds only CSS
  * variable references to them, so a component writes `color.ink` once and gets
@@ -19,128 +21,124 @@
  * are emitted by `themeCss` (injected in the root layout) and the active theme
  * is the `data-theme` attribute MUI sets on <html>.
  *
- * A few names are kept from the old palette so nothing downstream had to be
- * renamed: `lime` is the highlight (peach) and `black` is the dark band (brown).
+ * A few names are kept from earlier palettes so nothing downstream had to be
+ * renamed: `lime` is the highlight (teal), `deep` the primary fill (indigo) and
+ * `black` the dark band (midnight).
  */
 
 export const palettes = {
   light: {
     // --- Ground -------------------------------------------------------------
-    ground: "#FAF5F0",
-    surface: "#FFFDFA",
-    surfaceAlt: "#F6E9E0",
-    ink: "#231813",
-    inkMuted: "#5C4A40",
-    inkFaint: "#6F5C50",
-    rule: "#EBDDD2",
-    ruleStrong: "#D9C4B5",
+    ground: "#F7F8FA",
+    surface: "#FFFFFF",
+    surfaceAlt: "#EFF1F6",
+    ink: "#121629",
+    inkMuted: "#4A5068",
+    inkFaint: "#5E6479",
+    rule: "#E3E6EE",
+    ruleStrong: "#CDD2DE",
 
-    // --- Forest (primary) ---------------------------------------------------
-    deep: "#1E4634",
-    deepAlt: "#173729",
-    deepHover: "#15342A",
-    accent: "#1E4634",
-    accentSoft: "#E6ECE7",
+    // --- Indigo (primary) ---------------------------------------------------
+    deep: "#2E368F",
+    deepAlt: "#262D7C",
+    deepHover: "#1F2566",
+    accent: "#2E368F",
+    accentSoft: "#E9EBF8",
     // Text set inside an accent fill. Flips with the accent itself.
-    onAccent: "#FAF5F0",
+    onAccent: "#FFFFFF",
 
-    // --- Highlight (peach) --------------------------------------------------
-    lime: "#F9D2BA",
-    limeSoft: "#FCE6D8",
-    limeDeep: "#C98763",
+    // --- Highlight (teal) ---------------------------------------------------
+    lime: "#00D3B1",
+    limeSoft: "#7EE8D6",
+    // The teal deep enough to hold a line or a dot on a light ground.
+    limeDeep: "#009982",
 
-    // --- Warm band (peach) --------------------------------------------------
-    // Text on it is the ordinary ink, so a section written for the ground
-    // works here unchanged. `warmMark` is its numeral and index colour.
-    warm: "#F9D2BA",
-    warmAlt: "#FCE3D3",
-    warmMark: "#5E3122",
-    ruleOnWarm: "#EDBB9D",
+    // --- Soft band ----------------------------------------------------------
+    // A pale indigo wash for breaking up a run of white sections. Text on it
+    // is the ordinary ink, so a section written for the ground works here
+    // unchanged. `softMark` is its numeral and index colour.
+    soft: "#EBEDF9",
+    softAlt: "#F5F6FD",
+    softMark: "#2E368F",
+    ruleOnSoft: "#D5D9F0",
 
-    // Sand: the neutral steps cards and plates are cut from. Named by depth.
-    sand05: "#F7EEE7",
-    sand10: "#F2E5DB",
-    sand20: "#EADBCF",
-    sand30: "#DCC7B8",
-    sand45: "#8A6D5B",
+    // Greys: the neutral steps cards and plates are cut from. Named by depth.
+    grey05: "#F2F4F8",
+    grey10: "#ECEFF5",
+    grey20: "#E1E5EE",
+    grey30: "#CBD1DE",
+    grey45: "#6B7289",
 
-    // Two greens survive in the ramp, for chart series only.
-    green60: "#3F7A5C",
-    green70: "#2B5E47",
+    // --- Midnight band ------------------------------------------------------
+    black: "#0F1433",
+    blackAlt: "#171D45",
+    // Chart steps on the midnight band: field, axis, mark, third series.
+    blackField: "#1B2150",
+    blackAxis: "#2F3668",
+    blackMark: "#5B6395",
+    blackFaint: "#8B92BA",
+    onBlack: "#EEF0F7",
+    onBlackMuted: "#A7ADC8",
+    ruleOnBlack: "#262D5A",
 
-    // --- Brown band ---------------------------------------------------------
-    black: "#5E3122",
-    blackAlt: "#4E2819",
-    // Chart steps on the brown band: field, axis, mark, third series.
-    blackField: "#6C3D2D",
-    blackAxis: "#85523F",
-    blackMark: "#A87866",
-    blackFaint: "#BF9585",
-    onBlack: "#F6E9E0",
-    onBlackMuted: "#D3B5A5",
-    ruleOnBlack: "#76412F",
-
-    // --- On the forest band -------------------------------------------------
-    onDeep: "#F6E9E0",
-    onDeepMuted: "#A8BFB1",
-    ruleOnDeep: "#2F5B47",
+    // --- On the indigo band -------------------------------------------------
+    onDeep: "#FFFFFF",
+    onDeepMuted: "#C5C9EC",
+    ruleOnDeep: "#454EA6",
   },
 
   /**
-   * Dark is warm charcoal — the brown taken almost to black — not green-black:
-   * a dark page in the primary colour is the same "all green" problem, only
-   * darker. Colours are desaturated tonal steps rather than inversions. Forest
-   * is lifted a step so a button still separates from the ground, and the text
-   * accent becomes a light sage so green stays the primary in both themes.
+   * Dark is midnight, not black: the same indigo taken almost all the way down,
+   * so the page is recognisably the same brand at night. Colours are lighter
+   * tonal steps rather than inversions — indigo is lifted so a button still
+   * separates from the ground, and link text becomes a light periwinkle, since
+   * the light theme's indigo would vanish here.
    */
   dark: {
-    ground: "#16110E",
-    surface: "#1E1814",
-    surfaceAlt: "#261E19",
-    ink: "#F6E9E0",
-    inkMuted: "#CDBBAE",
-    inkFaint: "#A08E81",
-    rule: "#30261F",
-    ruleStrong: "#44372E",
+    ground: "#0D1020",
+    surface: "#141830",
+    surfaceAlt: "#1A1F3A",
+    ink: "#EEF0F7",
+    inkMuted: "#B4B9CF",
+    inkFaint: "#8D93AD",
+    rule: "#232845",
+    ruleStrong: "#333A5C",
 
-    deep: "#24533F",
-    deepAlt: "#1C4332",
-    deepHover: "#2E6750",
-    accent: "#93C6A9",
-    accentSoft: "#22302A",
-    onAccent: "#16110E",
+    deep: "#3A43A6",
+    deepAlt: "#313996",
+    deepHover: "#4751BA",
+    accent: "#A5ACF7",
+    accentSoft: "#1E2447",
+    onAccent: "#0D1020",
 
-    lime: "#F9D2BA",
-    limeSoft: "#FCE6D8",
-    limeDeep: "#D9926B",
+    lime: "#2EE6C8",
+    limeSoft: "#8FF0E0",
+    limeDeep: "#21C2A7",
 
-    warm: "#33241D",
-    warmAlt: "#3D2C23",
-    warmMark: "#F9D2BA",
-    ruleOnWarm: "#4A372C",
+    soft: "#171C37",
+    softAlt: "#1E2442",
+    softMark: "#A5ACF7",
+    ruleOnSoft: "#2A3056",
 
-    sand05: "#1D1713",
-    sand10: "#221B17",
-    sand20: "#2A221C",
-    sand30: "#372C25",
-    sand45: "#9A8474",
+    grey05: "#151A31",
+    grey10: "#191E37",
+    grey20: "#20263F",
+    grey30: "#2E3453",
+    grey45: "#8A90AA",
 
-    green60: "#7DB394",
-    green70: "#A8CDB8",
+    black: "#080B1A",
+    blackAlt: "#0E1226",
+    blackField: "#12172E",
+    blackAxis: "#232949",
+    blackMark: "#4B5279",
+    blackFaint: "#7980A5",
+    onBlack: "#EEF0F7",
+    onBlackMuted: "#A3A9C3",
+    ruleOnBlack: "#1C2140",
 
-    black: "#3A2219",
-    blackAlt: "#2F1B13",
-    blackField: "#45291E",
-    blackAxis: "#5C3A2C",
-    blackMark: "#8F6453",
-    blackFaint: "#AD8573",
-    onBlack: "#F6E9E0",
-    onBlackMuted: "#CFAE9D",
-    ruleOnBlack: "#553226",
-
-    onDeep: "#F6E9E0",
-    onDeepMuted: "#B3C9BC",
-    ruleOnDeep: "#336450",
+    onDeep: "#FFFFFF",
+    onDeepMuted: "#D0D3F3",
+    ruleOnDeep: "#525BBE",
   },
 };
 

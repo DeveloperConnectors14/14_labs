@@ -18,19 +18,19 @@ gsap.registerPlugin(ScrollTrigger);
 const challenges = getChallanges();
 
 /**
- * Panel tones walk one warm ramp: paper, cream, peach, brown. Keeping them on a
- * single ramp is what makes the sequence read as one idea getting heavier
- * rather than as four unrelated coloured slides. There is no forest panel on
- * purpose — four full screens is too much area to hand the primary, and the
- * figures on the light panels already carry one green line each.
+ * Panel tones walk one ramp: white, grey, indigo wash, midnight. Keeping them
+ * on a single ramp is what makes the sequence read as one idea getting heavier
+ * rather than as four unrelated coloured slides. There is no solid indigo
+ * panel on purpose — four full screens is too much area to hand the primary,
+ * and the figures on the light panels already carry one indigo line each.
  *
  * `card` is the figure plate, always one step away from the panel it sits on —
  * a plate the same colour as its ground is not a plate.
  */
 const PANEL_TONES = [
-  { bg: color.surface, fg: color.ink, muted: color.inkMuted, faint: color.inkFaint, rule: color.rule, card: color.sand05, cardRule: color.sand20, fig: "light" },
+  { bg: color.surface, fg: color.ink, muted: color.inkMuted, faint: color.inkFaint, rule: color.rule, card: color.grey05, cardRule: color.grey20, fig: "light" },
   { bg: color.surfaceAlt, fg: color.ink, muted: color.inkMuted, faint: color.inkFaint, rule: color.ruleStrong, card: color.surface, cardRule: color.rule, fig: "light" },
-  { bg: color.warm, fg: color.ink, muted: color.inkMuted, faint: color.warmMark, rule: color.ruleOnWarm, card: color.warmAlt, cardRule: color.ruleOnWarm, fig: "light" },
+  { bg: color.soft, fg: color.ink, muted: color.inkMuted, faint: color.softMark, rule: color.ruleOnSoft, card: color.softAlt, cardRule: color.ruleOnSoft, fig: "light" },
   { bg: color.black, fg: color.onBlack, muted: color.onBlackMuted, faint: color.lime, rule: color.ruleOnBlack, card: color.blackAlt, cardRule: color.ruleOnBlack, fig: "black" },
 ];
 

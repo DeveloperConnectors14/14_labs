@@ -48,9 +48,9 @@ function ToolsSection() {
                     display: "flex",
                     alignItems: "center",
                     gap: 1.25,
-                    backgroundColor: color.sand05,
+                    backgroundColor: color.grey05,
                     border: "1px solid",
-                    borderColor: color.sand20,
+                    borderColor: color.grey20,
                     borderRadius: radius.pill,
                     pl: 1.5,
                     pr: 2.25,
@@ -58,7 +58,7 @@ function ToolsSection() {
                     transition: `background-color ${motion.base}, border-color ${motion.base}`,
                     "&:hover": {
                       backgroundColor: color.accentSoft,
-                      borderColor: color.sand45,
+                      borderColor: color.grey45,
                     },
                     // Desaturated at rest so fourteen brand palettes do not
                     // fight the page. Set here rather than inline on the image

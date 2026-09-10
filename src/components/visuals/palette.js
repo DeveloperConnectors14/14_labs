@@ -2,23 +2,22 @@ import { color } from "@/theme/tokens";
 
 /**
  * Every visual on the site is drawn from one of three palettes: on the page
- * ground, on the deep forest band, or on the brown band (keyed `black`, the
- * role it took over). They are kept here rather than in each figure so a chart
- * can never quietly invent a colour.
+ * ground, on the indigo band, or on the midnight band (keyed `deep` and `black`,
+ * the roles they took over). They are kept here rather than in each figure so a
+ * chart can never quietly invent a colour.
  *
  * Every entry is a theme variable, so a figure follows the light/dark switch
- * without knowing it exists. On the ground, the lead series is `accent` — forest
- * in the light theme, a light sage in the dark one — and everything behind it is
- * sand, so a chart has exactly one green line and it is the one that matters.
- * Peach never lands on cream, where it sits around 1.2:1.
+ * without knowing it exists. On the ground a chart gets the two brand colours
+ * and nothing else: the lead series in the accent (indigo, or periwinkle in the
+ * dark theme), the second in deep teal, and everything behind them grey.
  */
 const PALETTES = {
   light: {
-    field: color.sand20,
+    field: color.grey20,
     grid: color.rule,
     axis: color.ruleStrong,
-    mark: color.sand45,
-    series: [color.accent, color.green60, color.sand30],
+    mark: color.grey45,
+    series: [color.accent, color.limeDeep, color.grey30],
     highlight: color.accent,
     // Text sitting *inside* a filled highlight. It flips with the highlight.
     onHighlight: color.onAccent,
