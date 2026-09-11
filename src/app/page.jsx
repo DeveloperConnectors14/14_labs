@@ -15,7 +15,7 @@ import CallSection from "@/components/general/CallSection";
  *
  * Each section has one job and one moment of motion at most: the mark that
  * assembles, the statement that fills in as you read it, the row that drifts,
- * the panel that follows the list, the pictures that open, the ground that
+ * the cards that stack, the pictures that open, the ground that
  * rolls under the last card.
  */
 function Home() {
