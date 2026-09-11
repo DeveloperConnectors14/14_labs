@@ -9,12 +9,12 @@ import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import XIcon from "@mui/icons-material/X";
 import LinkBox from "@/components/ui/LinkBox";
-import { getNavItems, getResearch, getServices, getSite } from "@/services/dataService";
+import { getNavItems, getPublishedPapers, getServices, getSite } from "@/services/dataService";
 import { color, motion } from "@/theme/tokens";
 
 const navItems = getNavItems();
 const services = getServices();
-const research = getResearch();
+const papers = getPublishedPapers();
 const site = getSite();
 
 // One icon per practice, in the same order as the data.
@@ -148,9 +148,9 @@ function Footer() {
                     </Column>
 
                     <Column heading="Research">
-                        {research.map((post) => (
-                            <Item key={post.slug} href={`/research/${post.slug}`}>
-                                {post.title}
+                        {papers.map((paper) => (
+                            <Item key={paper.slug} href={`/research/papers/${paper.slug}`}>
+                                {paper.short}
                             </Item>
                         ))}
                     </Column>

@@ -10,13 +10,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Eyebrow from "@/components/ui/Eyebrow";
 import InfoTip from "@/components/ui/InfoTip";
 import LinkBox from "@/components/ui/LinkBox";
-import { getCaseDetails, getcaseStudies, getResearch } from "@/services/dataService";
+import {
+  getCaseDetails,
+  getcaseStudies,
+  getPublicationCounts,
+  getPublishedPapers,
+} from "@/services/dataService";
 import { color, layout, motion, radius } from "@/theme/tokens";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const posts = getResearch();
-const latest = posts[0];
+const latest = getPublishedPapers()[0];
+const counts = getPublicationCounts();
 const details = getCaseDetails();
 const caseTitles = getcaseStudies().map(
   (item) => details.find((d) => d.caseId === item.id)?.hero?.title ?? item.title
@@ -56,7 +61,7 @@ const RUNS = [
     text: "research",
     tip: {
       title: "Our Research",
-      body: `${posts.length} published notes. Latest: ${latest.title} (${monthYear(latest.date)}).`,
+      body: `${counts.published} peer-reviewed papers and ${counts.underReview} under review. Latest: ${latest.short} (${latest.venue}, ${monthYear(latest.date)}).`,
     },
   },
   { text: "decides what we build, and every system in our" },
@@ -113,7 +118,7 @@ const words = (text) =>
  * Every word starts faint and comes up to full ink as the paragraph moves up
  * the screen. "research" and "work" are links with a dotted teal underline and
  * a small pulsing dot; hovering either unfolds a tip previewing what is behind
- * it — the latest note, the case studies. The three things we ship with every
+ * it — the latest paper, the case studies. The three things we ship with every
  * system are inline chips that fill in at the moment they are reached, each
  * with a tip of its own, and "a product." is underlined in pencil as the
  * sentence lands. The reading effects are one GSAP timeline scrubbed to scroll

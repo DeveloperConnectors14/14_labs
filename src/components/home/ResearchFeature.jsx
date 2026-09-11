@@ -1,21 +1,24 @@
 import { Box, Container, Typography } from "@mui/material";
 import EmbeddingField from "@/components/visuals/EmbeddingField";
-import TopicFigure from "@/components/visuals/TopicFigure";
+import ActionLink from "@/components/ui/ActionLink";
 import Eyebrow from "@/components/ui/Eyebrow";
 import HandArrow from "@/components/ui/HandArrow";
 import HandNote from "@/components/ui/HandNote";
 import LinkBox from "@/components/ui/LinkBox";
 import PillLink from "@/components/ui/PillLink";
 import RevealText from "@/components/ui/RevealText";
-import { getResearch } from "@/services/dataService";
+import { getPublicationCounts, getPublishedPapers } from "@/services/dataService";
 import { color, layout, measure, motion, radius } from "@/theme/tokens";
 
-const posts = getResearch();
-const latest = posts[0];
-const topics = [...new Set(posts.map((post) => post.topic))];
+const papers = getPublishedPapers();
+const latest = papers[0];
+const counts = getPublicationCounts();
+
+// The table here is a taste of the work, not the index: the newest few.
+const SHOWN = 3;
 
 // Dates are stored as ISO days; read them as UTC so the server's zone never
-// shifts a note into the previous month.
+// shifts a paper into the previous month.
 const monthYear = (iso) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
     month: "short",
@@ -34,7 +37,7 @@ const clamp = (lines) => ({
 const GRAPH = `color-mix(in srgb, ${color.ruleStrong} 55%, transparent)`;
 const GRAPH_FADE = "radial-gradient(ellipse 80% 75% at 50% 50%, #000 40%, transparent 100%)";
 
-// One sheet under the top note, offset and turned a little further each time.
+// One sheet under the top paper, offset and turned a little further each time.
 const sheetSx = (turn, x, y, opacity) => ({
   position: "absolute",
   inset: 0,
@@ -47,22 +50,28 @@ const sheetSx = (turn, x, y, opacity) => ({
   transition: `transform ${motion.slow}`,
 });
 
+// Where a row's own padding starts, so its rule and its hover plate line up
+// with the text column rather than with the page edge.
+const ROW_INSET = { xs: "12px", md: "20px" };
+
 /**
  * Research, composed the way a research page lays out a finding.
  *
- * The desk: a figure on graph paper, and the newest note on top of a small
- * stack of them — hovering it lifts the top sheet and fans the others out —
- * with a pencil annotation pointing at it, drawn the first time the section
- * scrolls into view. Opposite: the argument, two plain facts about the notes,
- * the topics they are filed under (each a way in), and one action. Below: every
- * note as a dated index.
+ * The desk: a figure on graph paper, and the newest paper on top of a small
+ * stack — hovering it lifts the top sheet and fans the others out — with a
+ * pencil annotation pointing at it, drawn the first time the section scrolls
+ * into view. Opposite: the argument, the counts of papers out, under review and
+ * in progress, and one action. Below: the newest papers as a short table, each
+ * row going to our summary of the paper with the links out to the paper and
+ * its DOI beside it. Pointing at a row lifts it onto a plate and lets the
+ * others fall back, so the eye stays on the one being read.
  *
- * Everything on it is real: the note on the desk is the newest one, the count
- * and the date come from the notes, and the topics are the notes' own.
+ * Everything on it is real: the paper on the desk is the newest one, and the
+ * counts and dates come from the papers.
  */
 function ResearchFeature() {
   return (
-    <Box component="section" sx={{ paddingBlock: layout.sectionYTight }}>
+    <Box id="research" component="section" sx={{ paddingBlock: layout.sectionYTight }}>
       <Container>
         <Box
           sx={{
@@ -115,7 +124,7 @@ function ResearchFeature() {
               }}
             />
 
-            {/* The stack of notes, newest on top. */}
+            {/* The stack of papers, newest on top. */}
             <Box
               sx={{
                 position: "absolute",
@@ -132,7 +141,7 @@ function ResearchFeature() {
               <Box aria-hidden className="sheet-1" sx={sheetSx(3, 6, -4, 0.9)} />
 
               <LinkBox
-                href={`/research/${latest.slug}`}
+                href={`/research/papers/${latest.slug}`}
                 className="note-top"
                 sx={{
                   position: "relative",
@@ -149,20 +158,22 @@ function ResearchFeature() {
                 }}
               >
                 <Box sx={{ display: "flex", gap: 2, fontSize: "0.8125rem", color: color.inkFaint }}>
-                  <span>{latest.topic}</span>
+                  <span>{latest.venue}</span>
                   <span>{monthYear(latest.date)}</span>
                 </Box>
-                <Typography sx={{ mt: 1, fontSize: "1.1875rem", lineHeight: 1.3, letterSpacing: "-0.01em" }}>
+                <Typography
+                  sx={{ mt: 1, fontSize: "1.125rem", lineHeight: 1.3, letterSpacing: "-0.01em", ...clamp(3) }}
+                >
                   {latest.title}
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1, color: color.inkMuted, ...clamp(3) }}>
-                  {latest.summary}
+                <Typography variant="body2" sx={{ mt: 1, color: color.inkMuted, ...clamp(2) }}>
+                  {latest.description}
                 </Typography>
                 <Typography
                   className="note-cta"
                   sx={{ mt: 1.75, fontSize: "0.875rem", fontWeight: 500, transition: `color ${motion.fast}` }}
                 >
-                  Read the Note ›
+                  Read the Summary ›
                 </Typography>
               </LinkBox>
             </Box>
@@ -180,7 +191,7 @@ function ResearchFeature() {
               }}
             >
               <HandNote delay={900} rotate={-5}>
-                our latest note
+                our latest paper
               </HandNote>
               <HandArrow variant="reach" delay={250} duration={900} sx={{ width: 104, mt: 1.5 }} />
             </Box>
@@ -195,13 +206,13 @@ function ResearchFeature() {
               sx={{ mt: 3, maxWidth: "17ch" }}
             />
             <Typography variant="lede" sx={{ mt: 3, color: color.inkMuted, maxWidth: measure.lede }}>
-              Before we write production code, we measure. We publish the notes behind
-              our engineering decisions — what we tested, what failed and what we would
-              do again — and the same work tells you early whether a system is worth
-              building at all.
+              Before we write production code, we measure — and we publish what we
+              find. Our peer-reviewed papers cover renewable-energy forecasting,
+              materials engineering and applied machine learning, and the same
+              discipline tells you early whether a system is worth building at all.
             </Typography>
 
-            {/* Two plain facts about the notes. */}
+            {/* Plain facts about the papers. */}
             <Box
               component="dl"
               sx={{
@@ -217,9 +228,10 @@ function ResearchFeature() {
               }}
             >
               {[
-                { value: posts.length, label: "Notes Published" },
-                { value: topics.length, label: "Topics Covered" },
-                { value: monthYear(latest.date), label: "Latest Note" },
+                { value: counts.published, label: "Papers Published" },
+                { value: counts.underReview, label: "Under Review" },
+                { value: counts.inProgress, label: "In Progress" },
+                { value: monthYear(latest.date), label: "Latest Paper" },
               ].map((fact) => (
                 <Box key={fact.label}>
                   <Typography
@@ -236,30 +248,6 @@ function ResearchFeature() {
               ))}
             </Box>
 
-            <Box sx={{ mt: 3.5, display: "flex", flexWrap: "wrap", gap: 1 }}>
-              {topics.map((topic) => (
-                <LinkBox
-                  key={topic}
-                  href="/research"
-                  sx={{
-                    px: 1.75,
-                    py: 0.75,
-                    borderRadius: radius.pill,
-                    border: "1px solid",
-                    borderColor: "transparent",
-                    backgroundColor: color.surfaceAlt,
-                    fontSize: "0.875rem",
-                    color: color.inkMuted,
-                    textDecoration: "none",
-                    transition: `border-color ${motion.fast}, color ${motion.fast}, background-color ${motion.fast}`,
-                    "&:hover": { borderColor: color.limeDeep, color: color.ink, backgroundColor: color.accentSoft },
-                  }}
-                >
-                  {topic}
-                </LinkBox>
-              ))}
-            </Box>
-
             <Box sx={{ mt: 4.5 }}>
               <PillLink href="/research" size="lg">
                 Read the research
@@ -268,77 +256,125 @@ function ResearchFeature() {
           </Box>
         </Box>
 
-        {/* The index. */}
-        <Box
-          sx={{
-            mt: { xs: 9, md: 13 },
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-            columnGap: 8,
-          }}
-        >
-          {posts.map((post) => (
-            <LinkBox
-              key={post.slug}
-              href={`/research/${post.slug}`}
-              sx={{
-                display: "grid",
-                gridTemplateColumns: { xs: "80px 1fr", md: "104px 1fr auto" },
-                gap: 3,
-                alignItems: "center",
-                py: 3,
-                borderTop: "1px solid",
-                borderColor: color.rule,
-                textDecoration: "none",
-                color: color.ink,
-                "&:hover .note-title": { color: color.accent },
-                "&:hover .note-go": { transform: "translateX(3px)", color: color.ink },
-              }}
+        {/* The newest papers. The title goes to our summary of the paper; the
+            pills go out to the publisher and the DOI. They sit beside the
+            title rather than wrapping the row, so no link is nested in another. */}
+        <Box sx={{ mt: { xs: 9, md: 13 } }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+              columnGap: 3,
+              rowGap: 1.5,
+              mb: 2.5,
+            }}
+          >
+            <Typography
+              component="h3"
+              sx={{ fontSize: "1.5rem", lineHeight: 1.2, letterSpacing: "-0.02em", color: color.ink }}
             >
+              Latest Papers
+            </Typography>
+            <ActionLink href="/research#publications">{`All ${papers.length} papers`}</ActionLink>
+          </Box>
+
+          <Box
+            sx={{
+              // Pointing at one row lets the others fall back a step.
+              "@media (hover: hover)": {
+                "&:hover .paper-row:not(:hover)": { opacity: 0.45 },
+              },
+            }}
+          >
+            {papers.slice(0, SHOWN).map((paper, i) => (
               <Box
+                key={paper.slug}
+                component="article"
+                className="paper-row"
                 sx={{
-                  aspectRatio: "1",
+                  position: "relative",
+                  display: "grid",
+                  gridTemplateColumns: { xs: "1fr", md: "200px minmax(0, 1fr) auto" },
+                  columnGap: 5,
+                  rowGap: 1.5,
+                  alignItems: "start",
+                  py: 3,
+                  mx: { xs: -1.5, md: -2.5 },
+                  px: { xs: 1.5, md: 2.5 },
                   borderRadius: radius.lg,
-                  backgroundColor: color.grey10,
-                  p: 1.5,
-                  display: "flex",
-                  alignItems: "center",
+                  transition: `opacity ${motion.base}, transform ${motion.base}, background-color ${motion.base}, box-shadow ${motion.base}`,
+                  // The rule between rows, drawn inside the row's padding so it
+                  // lines up with the text and can step aside for the plate.
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: ROW_INSET,
+                    right: ROW_INSET,
+                    height: "1px",
+                    backgroundColor: color.rule,
+                    transition: `opacity ${motion.base}`,
+                  },
+                  "&:hover, &:focus-within": {
+                    backgroundColor: color.surface,
+                    boxShadow: "0 22px 44px -30px rgba(0, 0, 0, 0.45)",
+                  },
+                  "&:hover::before, &:hover + .paper-row::before, &:focus-within::before, &:focus-within + .paper-row::before":
+                    { opacity: 0 },
+                  "@media (hover: hover)": {
+                    "&:hover": { transform: "scale(1.012)" },
+                  },
+                  "&:hover .paper-title": { color: color.accent },
                 }}
               >
-                <TopicFigure topic={post.topic} tone="light" style={{ width: "100%", height: "auto" }} />
-              </Box>
-              <Box>
-                <Box sx={{ display: "flex", gap: 2, fontSize: "0.8125rem", color: color.inkFaint }}>
-                  <span>{post.topic}</span>
-                  <span>{monthYear(post.date)}</span>
-                </Box>
-                <Typography
-                  className="note-title"
-                  sx={{
-                    mt: 0.5,
-                    fontSize: "1.1875rem",
-                    lineHeight: 1.35,
-                    letterSpacing: "-0.01em",
-                    transition: `color ${motion.fast}`,
-                  }}
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", gap: 0.5, fontSize: "0.8125rem", pt: { md: 0.5 } }}
                 >
-                  {post.title}
-                </Typography>
+                  <Box component="span" sx={{ color: color.accent }}>
+                    {paper.venue}
+                  </Box>
+                  <Box component="span" sx={{ color: color.inkFaint }}>
+                    {monthYear(paper.date)}
+                  </Box>
+                </Box>
+
+                <Box>
+                  {/* Kept exactly as published, so it is not title-cased. */}
+                  <Typography
+                    component="h4"
+                    sx={{ fontSize: "1.1875rem", lineHeight: 1.35, letterSpacing: "-0.01em", maxWidth: "62ch" }}
+                  >
+                    <LinkBox
+                      href={`/research/papers/${paper.slug}`}
+                      className="paper-title"
+                      sx={{ color: color.ink, textDecoration: "none", transition: `color ${motion.fast}` }}
+                    >
+                      {paper.title}
+                    </LinkBox>
+                  </Typography>
+                  <Typography variant="body2" sx={{ mt: 1, color: color.inkFaint, maxWidth: measure.body }}>
+                    {paper.authors.join(", ")}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, pt: { md: 0.25 } }}>
+                  <PillLink href={paper.url} variant="outline" size="sm">
+                    View paper ↗
+                  </PillLink>
+                  <PillLink
+                    href={paper.doi}
+                    variant="outline"
+                    size="sm"
+                    aria-label={`DOI ${paper.doi.replace("https://doi.org/", "")}`}
+                  >
+                    DOI ↗
+                  </PillLink>
+                </Box>
               </Box>
-              <Box
-                className="note-go"
-                aria-hidden
-                sx={{
-                  display: { xs: "none", md: "block" },
-                  color: color.inkFaint,
-                  fontSize: "1.25rem",
-                  transition: `transform ${motion.base}, color ${motion.fast}`,
-                }}
-              >
-                ›
-              </Box>
-            </LinkBox>
-          ))}
+            ))}
+          </Box>
         </Box>
       </Container>
     </Box>

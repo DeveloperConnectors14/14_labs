@@ -528,14 +528,15 @@ function HeroScene({ children, note }) {
         <Box
           aria-hidden
           sx={{
+            display: { xs: "none", md: "block" },
             position: "absolute",
             inset: 0,
             pointerEvents: "none",
-            backgroundImage: `radial-gradient(30% 45% at 72% 50%, color-mix(in srgb, ${color.lime} 11%, transparent), transparent 72%)`,
+            backgroundImage: `radial-gradient(30% 45% at 72% 50%,color-mix(in srgb, ${color.lime} 11%, transparent), transparent 72%)`,
           }}
         />
 
-        <Container sx={{ position: "relative", zIndex: 1, pt: { xs: 6, md: 0 } }}>
+        <Container sx={{ position: "relative", zIndex: 1, pt: { xs: 6, md: 0 }, pb: { xs: 8, md: 0 } }}>
           {/* Marks the text column's left edge, which the heading lines up on. */}
           <Box ref={anchorRef} aria-hidden sx={{ height: 0 }} />
           <Box ref={textRef} sx={{ maxWidth: { md: "56%", lg: "54%" } }}>
@@ -547,10 +548,11 @@ function HeroScene({ children, note }) {
           ref={wrapRef}
           aria-hidden
           sx={{
-            position: { xs: "relative", md: "absolute" },
-            inset: { md: 0 },
-            height: { xs: 340, md: "auto" },
-            mt: { xs: 2, md: 0 },
+            // The cloud is the right-hand half of the hero; on a phone there
+            // is no right-hand half, so it is left out rather than stacked.
+            display: { xs: "none", md: "block" },
+            position: "absolute",
+            inset: 0,
             pointerEvents: "none",
           }}
         >

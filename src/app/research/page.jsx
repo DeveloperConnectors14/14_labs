@@ -1,32 +1,22 @@
 import { Box, Container, Typography } from "@mui/material";
-import Section from "@/components/ui/Section";
-import SectionHead from "@/components/ui/SectionHead";
 import CallSection from "@/components/general/CallSection";
 import LinkBox from "@/components/ui/LinkBox";
-import ResearchList from "@/components/research/ResearchList";
+import Publications from "@/components/research/Publications";
 import TopicFigure from "@/components/visuals/TopicFigure";
-import { getResearch } from "@/services/dataService";
+import { getPublicationCounts, getPublishedPapers } from "@/services/dataService";
 import { formatPostDate } from "@/services/format";
 import { color, layout, measure, motion, radius } from "@/theme/tokens";
 
-const posts = getResearch();
-const [lead, ...rest] = posts;
+const papers = getPublishedPapers();
+const lead = papers[0];
+const counts = getPublicationCounts();
+const pad = (n) => String(n).padStart(2, "0");
 
 export const metadata = {
   title: "Research",
   description:
-    "Notes from 14Labs on retrieval, evaluation, multi-agent systems and applied machine learning — measurement methods, negative results and what turned out to matter.",
+    "Peer-reviewed papers from 14Labs and our co-authors in renewable-energy forecasting, materials engineering and applied machine learning — published, under review and in progress.",
 };
-
-/** The index carries the same card metadata the list does, minus the body. */
-const summarise = ({ slug, title, summary, topic, date, readingTime }) => ({
-  slug,
-  title,
-  summary,
-  topic,
-  date,
-  readingTime,
-});
 
 function ResearchIndex() {
   return (
@@ -52,21 +42,20 @@ function ResearchIndex() {
                 Research
               </Typography>
               <Typography variant="h1" sx={{ color: color.ink, maxWidth: "16ch" }}>
-                Notes From the Work
+                Research From the Lab
               </Typography>
               <Typography
                 variant="lede"
                 sx={{ mt: 4, color: color.inkMuted, maxWidth: measure.lede }}
               >
-                Write-ups of things we learned building production AI systems. Mostly
-                measurement methods, negative results and the parts of the problem that
-                turned out to matter more than the model did.
+                Peer-reviewed papers from 14Labs and our co-authors, across renewable-energy
+                forecasting, materials engineering and applied machine learning — with the
+                work under review and still in progress alongside it.
               </Typography>
             </Box>
 
-            {/* A ledger rather than an illustration. It says how much writing
-                exists and how recent it is, which is the only thing a reader
-                actually wants to know about an index before scrolling it. */}
+            {/* A ledger rather than an illustration: how much of the work is
+                out, how much is on its way, and how recent it is. */}
             <Box
               sx={{
                 display: "grid",
@@ -76,10 +65,10 @@ function ResearchIndex() {
               }}
             >
               {[
-                { label: "Notes published", value: String(posts.length).padStart(2, "0") },
-                { label: "Subjects", value: String(new Set(posts.map((p) => p.topic)).size).padStart(2, "0") },
+                { label: "Papers published", value: pad(counts.published) },
+                { label: "Under review", value: pad(counts.underReview) },
+                { label: "In progress", value: pad(counts.inProgress) },
                 { label: "Most recent", value: formatPostDate(lead.date) },
-                { label: "Longest read", value: posts.reduce((a, b) => (parseInt(b.readingTime, 10) > parseInt(a.readingTime, 10) ? b : a)).readingTime },
               ].map((row) => (
                 <Box
                   key={row.label}
@@ -111,8 +100,8 @@ function ResearchIndex() {
         </Container>
       </Box>
 
-      {/* The newest note, given the room to actually be read as a headline
-          rather than as row one of a table. */}
+      {/* The newest paper, given the room to be read as a headline rather
+          than as row one of a list. */}
       <Box
         component="section"
         sx={{
@@ -122,7 +111,7 @@ function ResearchIndex() {
       >
         <Container disableGutters>
           <LinkBox
-            href={`/research/${lead.slug}`}
+            href={`/research/papers/${lead.slug}`}
             sx={{
               display: "grid",
               gridTemplateColumns: { xs: "1fr", md: "1fr 1.1fr" },
@@ -145,7 +134,7 @@ function ResearchIndex() {
               }}
             >
               <TopicFigure
-                topic={lead.topic}
+                topic="Applied ML"
                 tone="deep"
                 style={{ width: "100%", height: "auto", maxHeight: 260 }}
               />
@@ -161,23 +150,25 @@ function ResearchIndex() {
             >
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2.5 }}>
                 <Typography variant="caption" sx={{ color: color.lime }}>
-                  Latest
+                  Latest paper
                 </Typography>
                 <Typography variant="caption" sx={{ color: color.onDeepMuted }}>
-                  {lead.topic}
+                  {lead.venue}
                 </Typography>
                 <Typography variant="caption" sx={{ color: color.onDeepMuted }}>
                   {formatPostDate(lead.date)}
                 </Typography>
               </Box>
 
+              {/* Kept exactly as published, so it is not title-cased. */}
               <Typography
                 className="lead-title"
-                variant="h2"
+                variant="h3"
+                component="h2"
                 sx={{
                   mt: 3,
                   color: color.onDeep,
-                  maxWidth: "18ch",
+                  maxWidth: "32ch",
                   transition: `color ${motion.base}`,
                 }}
               >
@@ -185,15 +176,14 @@ function ResearchIndex() {
               </Typography>
 
               <Typography
-                variant="lede"
+                variant="body1"
                 sx={{ mt: 3, color: color.onDeepMuted, maxWidth: measure.lede }}
               >
-                {lead.kicker}
+                {lead.description}
               </Typography>
 
               {/* Presentational, not a link: the whole card is already an
-                  anchor, and nesting a second one inside it is invalid HTML
-                  that screen readers announce as two overlapping targets. */}
+                  anchor, and nesting a second one inside it is invalid HTML. */}
               <Box
                 className="lead-cue"
                 sx={{
@@ -209,7 +199,7 @@ function ResearchIndex() {
                   component="span"
                   sx={{ fontSize: "0.9375rem", fontWeight: 500, letterSpacing: "-0.005em" }}
                 >
-                  Read the note
+                  Read the Summary
                 </Typography>
                 <Box component="span" aria-hidden sx={{ fontSize: "0.9375rem", lineHeight: 1 }}>
                   &#8594;
@@ -220,14 +210,7 @@ function ResearchIndex() {
         </Container>
       </Box>
 
-      <Section tight>
-        <SectionHead
-          eyebrow="Archive"
-          title="Everything else we have written"
-          sx={{ mb: { xs: 4, md: 6 } }}
-        />
-        <ResearchList posts={rest.map(summarise)} />
-      </Section>
+      <Publications />
 
       <CallSection contact />
     </>

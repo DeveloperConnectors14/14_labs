@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -17,7 +17,7 @@ import { useColorScheme } from "@mui/material/styles";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ChevronRight from "@mui/icons-material/ChevronRight";
 import PillLink from "@/components/ui/PillLink";
-import { getCaseDetails, getcaseStudies, getNavItems, getResearch } from "@/services/dataService";
+import { getCaseDetails, getcaseStudies, getNavItems, getPublishedPapers } from "@/services/dataService";
 import { useNavHidden } from "@/components/common/navVisibility";
 import { color, layout, motion } from "@/theme/tokens";
 
@@ -30,14 +30,17 @@ const monthYear = (iso) =>
 
 const caseDetails = getCaseDetails();
 
-// What each dropdown lists: the real notes and case studies, then the index.
+// What each dropdown lists: the newest papers and the case studies, then the
+// index.
 const MENUS = {
     "/research": {
-        items: getResearch().map((post) => ({
-            href: `/research/${post.slug}`,
-            meta: `${post.topic}  ·  ${monthYear(post.date)}`,
-            title: post.title,
-        })),
+        items: getPublishedPapers()
+            .slice(0, 3)
+            .map((paper) => ({
+                href: `/research/papers/${paper.slug}`,
+                meta: `${paper.venue}  ·  ${monthYear(paper.date)}`,
+                title: paper.short,
+            })),
         all: { href: "/research", label: "All Research" },
     },
     "/case-studies": {
@@ -150,33 +153,86 @@ const linkSx = (active) => ({
 /**
  * A nav item with a panel under it.
  *
- * Pure CSS: the panel opens on hover and whenever anything inside the item has
- * keyboard focus (`:focus-within`), so tabbing onto "Research" opens it and
- * tabbing on walks through the notes. It closes a beat after the pointer
- * leaves, so crossing the gap to the panel does not drop it. The trigger is
- * still the section's link — on a touch screen a tap simply goes there.
+ * Open is state, not CSS. The panel opens while the pointer is over the item —
+ * closing a beat after it leaves, so crossing the gap to the panel does not
+ * drop it — or when keyboard focus arrives in it. It closes when a link in it
+ * is chosen, when the page changes, when focus leaves it and on Escape. Plain
+ * `:hover`/`:focus-within` left it open after a click: the clicked link kept
+ * focus, and the bar outlives the page change. The trigger is still the
+ * section's link — on a touch screen a tap simply goes there.
  */
-function DropdownItem({ item, active }) {
+function DropdownItem({ item, active, pathname }) {
     const menu = MENUS[item.path];
+    const triggerRef = useRef(null);
+    const timer = useRef(0);
+    const refocusing = useRef(false);
+
+    // Remembered with the page it was opened on, like the mobile menu, so a
+    // route change closes it without an effect.
+    const [openedOn, setOpenedOn] = useState(null);
+    const open = openedOn === pathname;
+
+    useEffect(() => () => clearTimeout(timer.current), []);
+
+    const show = () => {
+        clearTimeout(timer.current);
+        setOpenedOn(pathname);
+    };
+    const hide = (delay = 0) => {
+        clearTimeout(timer.current);
+        if (delay) timer.current = setTimeout(() => setOpenedOn(null), delay);
+        else setOpenedOn(null);
+    };
+    // Choosing a link is the end of the menu: close it and let go of focus, so
+    // nothing holds it open over the next page.
+    const choose = (event) => {
+        hide();
+        event.currentTarget.blur();
+    };
 
     return (
         <Box
+            data-open={open ? "true" : undefined}
+            onMouseEnter={show}
+            onMouseLeave={() => hide(140)}
+            onFocus={(event) => {
+                if (refocusing.current) {
+                    refocusing.current = false;
+                    return;
+                }
+                // Keyboard focus opens it; the focus a mouse click leaves does not.
+                if (event.target.matches(":focus-visible")) show();
+            }}
+            onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) hide();
+            }}
+            onKeyDown={(event) => {
+                if (event.key !== "Escape" || !open) return;
+                hide();
+                if (event.target !== triggerRef.current) {
+                    refocusing.current = true;
+                    triggerRef.current?.focus();
+                }
+            }}
             sx={{
                 position: "relative",
-                "&:hover .nav-panel, &:focus-within .nav-panel": {
+                '&[data-open="true"] .nav-panel': {
                     opacity: 1,
                     visibility: "visible",
                     transform: "translate(-50%, 0)",
                     transition: `opacity 200ms ease, transform 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s`,
                 },
-                "&:hover .nav-chev, &:focus-within .nav-chev": { transform: "rotate(180deg)" },
+                '&[data-open="true"] .nav-chev': { transform: "rotate(180deg)" },
             }}
         >
             <Box
+                ref={triggerRef}
                 component={Link}
                 href={item.path}
+                onClick={choose}
                 aria-current={active ? "page" : undefined}
                 aria-haspopup="true"
+                aria-expanded={open}
                 sx={linkSx(active)}
             >
                 {item.label}
@@ -233,6 +289,7 @@ function DropdownItem({ item, active }) {
                             key={entry.href}
                             component={Link}
                             href={entry.href}
+                            onClick={choose}
                             sx={{
                                 position: "relative",
                                 display: "block",
@@ -246,7 +303,7 @@ function DropdownItem({ item, active }) {
                                 "&:hover .nav-entry-title": { color: color.accent },
                             }}
                         >
-                            <Typography sx={{ fontSize: "0.75rem", color: color.inkFaint, whiteSpace: "pre" }}>
+                            <Typography sx={{ fontSize: "0.75rem", color: color.inkFaint, whiteSpace: "pre-wrap" }}>
                                 {entry.meta}
                             </Typography>
                             <Typography
@@ -261,6 +318,7 @@ function DropdownItem({ item, active }) {
                     <Box
                         component={Link}
                         href={menu.all.href}
+                        onClick={choose}
                         sx={{
                             mt: 0.5,
                             display: "flex",
@@ -357,7 +415,7 @@ function Navbar() {
                             {barItems.map((item) => {
                                 const active = isActive(item.path);
                                 return MENUS[item.path] ? (
-                                    <DropdownItem key={item.path} item={item} active={active} />
+                                    <DropdownItem key={item.path} item={item} active={active} pathname={pathname} />
                                 ) : (
                                     <Box
                                         key={item.path}

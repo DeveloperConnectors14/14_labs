@@ -13,7 +13,7 @@ import {
   tools,
   values,
 } from "@/data/data";
-import { research } from "@/data/research";
+import { publications, publicationSources, publicationStatuses } from "@/data/publications";
 
 export const getNavItems = () => navItems;
 export const getSite = () => site;
@@ -29,9 +29,30 @@ export const getPillars = () => pillars;
 export const getValues = () => values;
 export const getTeam = () => team;
 
-/** Newest first, so callers never have to remember to sort. */
-export const getResearch = () =>
-  [...research].sort((a, b) => b.date.localeCompare(a.date));
+/** Papers grouped by status, in the order the statuses are listed. */
+export const getPublications = () => ({
+  sources: publicationSources,
+  groups: publicationStatuses.map((status) => ({
+    status,
+    papers: publications.filter((paper) => paper.status === status),
+  })),
+});
 
-export const getResearchPost = (slug) =>
-  research.find((post) => post.slug === slug) ?? null;
+/** Published papers with a page of their own, newest first. */
+export const getPublishedPapers = () =>
+  publications
+    .filter((paper) => paper.slug)
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+export const getPublication = (slug) =>
+  publications.find((paper) => paper.slug && paper.slug === slug) ?? null;
+
+/** How many papers sit at each status. */
+export const getPublicationCounts = () => {
+  const count = (status) => publications.filter((paper) => paper.status === status).length;
+  return {
+    published: count("Published"),
+    underReview: count("Under review"),
+    inProgress: count("Work in progress"),
+  };
+};
