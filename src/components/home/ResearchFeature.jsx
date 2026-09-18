@@ -60,11 +60,11 @@ const ROW_INSET = { xs: "12px", md: "20px" };
  * The desk: a figure on graph paper, and the newest paper on top of a small
  * stack — hovering it lifts the top sheet and fans the others out — with a
  * pencil annotation pointing at it, drawn the first time the section scrolls
- * into view. Opposite: the argument, the counts of papers out, under review and
- * in progress, and one action. Below: the newest papers as a short table, each
- * row going to our summary of the paper with the links out to the paper and
- * its DOI beside it. Pointing at a row lifts it onto a plate and lets the
- * others fall back, so the eye stays on the one being read.
+ * into view. Opposite: the argument in two paragraphs, the counts of papers
+ * out, under review and in progress, and one action. Below: the newest papers
+ * as a short table, each row going to our summary of the paper with the links
+ * out to the paper and its DOI beside it. Pointing at a row lifts it onto a
+ * plate and lets the others fall back, so the eye stays on the one being read.
  *
  * Everything on it is real: the paper on the desk is the newest one, and the
  * counts and dates come from the papers.
@@ -200,16 +200,15 @@ function ResearchFeature() {
           {/* The argument. */}
           <Box>
             <Eyebrow>Research</Eyebrow>
-            <RevealText
-              text="Research is how we de-risk the build."
-              muted="Measure first, build second."
-              sx={{ mt: 3, maxWidth: "17ch" }}
-            />
+            <RevealText text="Research Guides What We Build." sx={{ mt: 3, maxWidth: "17ch" }} />
             <Typography variant="lede" sx={{ mt: 3, color: color.inkMuted, maxWidth: measure.lede }}>
-              Before we write production code, we measure — and we publish what we
-              find. Our peer-reviewed papers cover renewable-energy forecasting,
-              materials engineering and applied machine learning, and the same
-              discipline tells you early whether a system is worth building at all.
+              We research, experiment, and measure before committing to a production
+              build. What we learn helps us understand what works, what doesn&apos;t, and
+              what is worth building.
+            </Typography>
+            <Typography variant="body1" sx={{ mt: 2.5, color: color.inkMuted, maxWidth: measure.lede }}>
+              Our research explores applied machine learning across different domains.
+              The methods we develop inform how we approach real-world AI systems.
             </Typography>
 
             {/* Plain facts about the papers. */}

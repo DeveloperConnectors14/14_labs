@@ -231,7 +231,7 @@ function ServicesPage() {
         );
       })}
 
-      <SignalPanel />
+    {/*   <SignalPanel /> */}
 
       <Section band="alt">
         <SectionHead

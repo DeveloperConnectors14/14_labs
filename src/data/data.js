@@ -32,27 +32,28 @@ export const caseStudies = [
 ];
 
 // Framed as failure modes we have actually watched happen, not as a generic
-// list of pain points. Each one is answerable by something on the services page.
+// list of pain points. Each one is answerable by a practice on the services
+// page or by the work — Stalls carries the link per card.
 export const challanges = [
   {
     sNo: "01",
     title: "The Demo Works. The System Doesn't.",
-    desc: "A prototype that answers ten hand-picked questions tells you almost nothing about the thousandth. Most pilots die between the notebook and the first real user.",
+    desc: "Moving from a controlled prototype to a real product requires handling unpredictable users, data, and scale. Most pilots die between the notebook and the first real user.",
   },
   {
     sNo: "02",
-    title: "Nobody Can Say Whether It Got Better.",
-    desc: "Without an evaluation harness, every prompt change is an argument about vibes. Teams ship regressions they cannot see and roll back things that were working.",
+    title: "You Can't Improve What You Can't Measure.",
+    desc: "AI systems can change from one release to the next without anyone knowing what actually improved. Good evaluation makes those changes measurable.",
   },
   {
     sNo: "03",
     title: "The Knowledge Is There. The Model Can't Reach It.",
-    desc: "Context sits in warehouses, wikis, PDFs and six SaaS tools. Retrieval quality — not model choice — is what decides whether the answer is any good.",
+    desc: "Your knowledge may live across documents, databases, wikis, and internal tools. The challenge is finding the right information when the user needs it.",
   },
   {
     sNo: "04",
-    title: "One Agent Became Eleven, and Now It's Unreadable.",
-    desc: "Multi-agent systems fail quietly: a step retries forever, a tool returns nonsense, cost triples overnight. You need tracing before you need more agents.",
+    title: "Adding More Agents Doesn't Always Help.",
+    desc: "Complex workflows can become difficult to debug, trace, and control. The first step is understanding what each agent is doing and why.",
   },
 ];
 
@@ -188,18 +189,18 @@ export const tools = [
 export const features = [
   {
     sNo: "01",
-    title: "Measure Before You Optimise",
-    desc: "Every engagement starts by building the evaluation set. If we cannot tell you whether week four is better than week one, we have not built you a system — we have built you a demo.",
+    title: "We Measure What We Build",
+    desc: "We define how success will be measured from the start, so we can see what is improving and what needs to change.",
   },
   {
     sNo: "02",
-    title: "Smallest Thing That Could Work",
-    desc: "A regex beats a classifier beats a fine-tune beats an agent, until it doesn't. We reach for the cheapest mechanism that clears the bar and keep the complexity budget for where it actually buys accuracy.",
+    title: "We Start With What Works",
+    desc: "We use the simplest approach that can solve the problem well. We add complexity only when it brings a clear improvement.",
   },
   {
     sNo: "03",
     title: "You Own What We Build",
-    desc: "Source, infrastructure, evals and documentation land in your repositories as we go. No wrapper platform, no per-seat licence, nothing that stops working when the engagement ends.",
+    desc: "The code, infrastructure, evaluation, and documentation stay with you. We don't build systems that depend on us to keep working.",
   },
 ];
 

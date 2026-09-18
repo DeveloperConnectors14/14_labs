@@ -45,6 +45,9 @@ function Section({
   const tones = BANDS[band] ?? BANDS.ground;
   const onDark = band === "deep" || band === "deepAlt" || band === "black";
   const gap = tight ? layout.gapYTight : layout.gapY;
+  // A section with an id can be jumped to from elsewhere, and the nav is
+  // sticky: leave it room so the top of the section is not underneath it.
+  const anchor = id ? { scrollMarginTop: `${layout.navHeight.md + 16}px` } : null;
 
   if (!inset) {
     return (
@@ -53,6 +56,7 @@ function Section({
         component="section"
         sx={{
           ...tones,
+          ...anchor,
           paddingBlock: gap,
           borderTop: divider ? "1px solid" : 0,
           borderColor: band === "black" ? color.ruleOnBlack : onDark ? color.ruleOnDeep : color.rule,
@@ -71,6 +75,7 @@ function Section({
       component="section"
       sx={{
         backgroundColor: color.ground,
+        ...anchor,
         paddingBlock: gap,
         paddingInline: layout.gutter,
       }}

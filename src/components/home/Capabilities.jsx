@@ -301,11 +301,7 @@ function Capabilities() {
             gap: 3,
           }}
         >
-          <RevealText
-            text="What we build."
-            muted="Four practices, one engineering standard."
-            sx={{ maxWidth: "22ch" }}
-          />
+          <RevealText text="What We Build" sx={{ maxWidth: "22ch" }} />
           <PillLink href="/services" variant="outline">
             All services
           </PillLink>
@@ -319,7 +315,7 @@ function Capabilities() {
             ref={trackRef}
             data-lenis-prevent-horizontal
             role="region"
-            aria-label="What we build"
+            aria-label="What We Build"
             tabIndex={0}
             sx={{
               display: "flex",

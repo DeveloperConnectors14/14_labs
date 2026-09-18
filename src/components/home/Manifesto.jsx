@@ -30,8 +30,8 @@ const caseTitles = getcaseStudies().map(
 const monthYear = (iso) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
 
-// The three things every system ships with. Same icons in the statement and
-// in the proof points below it, so the eye can join them up.
+// The three things every system ships with: the proof points below the
+// statement, and the tip behind the "Evaluation" chip inside it.
 const PROOF = {
   evaluation: {
     icon: InsightsOutlined,
@@ -55,31 +55,27 @@ const PROOF = {
 //   chip   a phrase that fills in as it is read, with a tip that explains it
 //   line   the last phrase, underlined in pencil as the sentence lands
 const RUNS = [
-  { text: "We are engineers who measure. Our" },
+  { text: "We don't just build AI systems. We measure them." },
   {
     link: "/research",
-    text: "research",
+    text: "Research",
     tip: {
       title: "Our Research",
       body: `${counts.published} peer-reviewed papers and ${counts.underReview} under review. Latest: ${latest.short} (${latest.venue}, ${monthYear(latest.date)}).`,
     },
   },
-  { text: "decides what we build, and every system in our" },
+  { text: "guides our decisions." },
+  { chip: "evaluation", text: "Evaluation" },
+  { text: "validates our systems. Engineering turns ideas into" },
   {
     link: "/case-studies",
-    text: "work",
+    text: "reliable products",
     tip: {
       title: "Selected Work",
       body: `${caseTitles.length} case studies: ${caseTitles.join(" and ")}.`,
     },
   },
-  { text: "ships with" },
-  { chip: "evaluation", text: "the evaluation" },
-  { text: "that proves it works," },
-  { chip: "traces", text: "the traces" },
-  { text: "that show why it didn't, and" },
-  { chip: "cost", text: "a cost" },
-  { text: "you can predict. That is the difference between a demo and" },
+  { text: "that perform in the real world. That is the difference between a demo and" },
   { line: true, text: "a product." },
 ];
 
@@ -116,13 +112,13 @@ const words = (text) =>
  * Why 14Labs: one large statement, read at the speed you scroll.
  *
  * Every word starts faint and comes up to full ink as the paragraph moves up
- * the screen. "research" and "work" are links with a dotted teal underline and
- * a small pulsing dot; hovering either unfolds a tip previewing what is behind
- * it — the latest paper, the case studies. The three things we ship with every
- * system are inline chips that fill in at the moment they are reached, each
- * with a tip of its own, and "a product." is underlined in pencil as the
- * sentence lands. The reading effects are one GSAP timeline scrubbed to scroll
- * position, so scrolling back runs them backwards.
+ * the screen. "Research" and "reliable products" are links with a dotted teal
+ * underline and a small pulsing dot; hovering either unfolds a tip previewing
+ * what is behind it — the latest paper, the case studies. "Evaluation" is an
+ * inline chip that fills in at the moment it is reached, with a tip of its own,
+ * and "a product." is underlined in pencil as the sentence lands. The reading
+ * effects are one GSAP timeline scrubbed to scroll position, so scrolling back
+ * runs them backwards.
  *
  * Below, the same three icons open three short proof points — the same
  * information as the tips, for anyone on a screen without hover.

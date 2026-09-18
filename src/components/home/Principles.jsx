@@ -21,10 +21,9 @@ function Principles() {
           }}
         >
           <Box>
-            <RevealText text="Three commitments" muted="you can hold us to." sx={{ maxWidth: "13ch" }} />
+            <RevealText text="How We Work" sx={{ maxWidth: "13ch" }} />
             <Typography variant="lede" sx={{ mt: 3, color: color.inkMuted, maxWidth: "40ch" }}>
-              Stated concretely enough that you could check them against us at the end
-              of an engagement.
+              Clear principles. Practical engineering. No unnecessary complexity.
             </Typography>
           </Box>
 

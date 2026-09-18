@@ -28,7 +28,7 @@ const rise = (delay) => ({
   animation: `heroRise 900ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms both`,
 });
 
-// The pencil underline under "Production.", drawn once the headline has landed.
+// The pencil underline under "Production Systems", drawn once the headline has landed.
 const drawOn = (delay) => ({
   "@keyframes heroDraw": { from: { strokeDashoffset: 1 }, to: { strokeDashoffset: 0 } },
   strokeDasharray: 1,
@@ -36,7 +36,7 @@ const drawOn = (delay) => ({
 });
 
 // Sized to the copy column, not the screen, so both lines always fit it.
-const HEADLINE = "clamp(2.5rem, 0.6rem + 5vw, 5.75rem)";
+const HEADLINE = "clamp(2.25rem, 0.25rem + 3.4vw, 3.5rem)";
 
 const lineSx = {
   display: "block",
@@ -45,8 +45,9 @@ const lineSx = {
   lineHeight: 1,
   letterSpacing: "-0.045em",
   color: color.ink,
-  // A line of the headline never breaks: "to" and "Production." belong together.
-  whiteSpace: "nowrap",
+  // A line of the headline holds together from `sm` up, where the column is
+  // wide enough for it; on a phone it is allowed to wrap rather than overflow.
+  whiteSpace: { xs: "normal", sm: "nowrap" },
 };
 
 // Same order and icons as the footer.
@@ -172,7 +173,7 @@ function PracticeChips() {
  * scroll runway and the moment the globe becomes the wordmark.
  *
  * Left: the name; a two-line headline stepped in so it reads as a distance
- * travelled, with "Production." underlined in pencil once it lands; the
+ * travelled, with "Production Systems" underlined in pencil once it lands; the
  * promise, with the part that matters set a shade stronger; one action and one
  * alternative; and, under a thin rule, the four practices with tips.
  */
@@ -192,12 +193,12 @@ function Hero() {
 
       <Box component="h1" sx={{ m: 0, mt: { xs: 4, md: 5 }, fontWeight: 400 }}>
         <Box component="span" sx={{ ...lineSx, ...rise(90) }}>
-          From Research,
+          From AI Research
         </Box>
         <Box component="span" sx={{ ...lineSx, pl: { sm: "0.8em" }, mt: "0.06em", ...rise(190) }}>
           to{" "}
           <Box component="span" sx={{ position: "relative", display: "inline-block" }}>
-            Production.
+            Production Systems
             <Box
               component="svg"
               aria-hidden
@@ -207,7 +208,7 @@ function Hero() {
                 position: "absolute",
                 left: "-1%",
                 bottom: "-0.12em",
-                width: "90%",
+                width: "102%",
                 height: "0.22em",
                 overflow: "visible",
                 color: color.lime,
@@ -231,12 +232,13 @@ function Hero() {
 
       <Typography
         variant="lede"
-        sx={{ mt: { xs: 3.5, md: 4.5 }, color: color.inkMuted, maxWidth: "44ch", ...rise(290) }}
+        sx={{ mt: { xs: 3.5, md: 4.5 }, color: color.inkMuted, maxWidth: "48ch", ...rise(290) }}
       >
-        An AI engineering and research practice. We build multi-agent systems,
-        retrieval and evaluation that{" "}
+        14Labs builds reliable AI solutions by combining research, engineering,
+        and evaluation. We create intelligent agents, retrieval systems, and
+        machine learning products{" "}
         <Box component="span" sx={{ color: color.ink, fontWeight: 500 }}>
-          hold up once real users arrive.
+          designed for real-world users.
         </Box>
       </Typography>
 

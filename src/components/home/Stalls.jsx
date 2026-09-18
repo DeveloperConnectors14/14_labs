@@ -15,12 +15,39 @@ import { color, layout, measure, motion, radius } from "@/theme/tokens";
 const challenges = getChallanges();
 const TOTAL = String(challenges.length).padStart(2, "0");
 
-// One figure per failure mode — the drawing is the evidence for the sentence.
+// One figure per failure mode — the drawing is the evidence for the sentence —
+// and one way out of it. `href` goes to the thing that actually answers the
+// card: the shipped work for the first, and the practice that owns the problem
+// for the other three (the services page anchors each practice by its number).
 const DETAIL = [
-  { topic: "Production", Figure: LatencyBars, caption: "Median against tail latency, once the traffic is real." },
-  { topic: "Evaluation", Figure: ReleaseDelta, caption: "Per-suite change across one release. The blend moved +0.01." },
-  { topic: "Retrieval", Figure: RetrievalRank, caption: "Top-k retrieval for one query. The answer ranked twelfth." },
-  { topic: "Multi-Agent Systems", Figure: TraceWaterfall, caption: "One request on a clock. Four of twelve seconds were retries." },
+  {
+    topic: "Production",
+    Figure: LatencyBars,
+    caption: "Median against tail latency, once the traffic is real.",
+    cta: "See our approach",
+    href: "/case-studies",
+  },
+  {
+    topic: "Evaluation",
+    Figure: ReleaseDelta,
+    caption: "Per-suite change across one release. The blend moved +0.01.",
+    cta: "How we approach it",
+    href: "/services#practice-04",
+  },
+  {
+    topic: "Retrieval",
+    Figure: RetrievalRank,
+    caption: "Top-k retrieval for one query. The answer ranked twelfth.",
+    cta: "Our approach",
+    href: "/services#practice-02",
+  },
+  {
+    topic: "Multi-Agent Systems",
+    Figure: TraceWaterfall,
+    caption: "One request on a clock. Four of twelve seconds were retries.",
+    cta: "Explore the practice",
+    href: "/services#practice-01",
+  },
 ];
 
 /**
@@ -83,9 +110,9 @@ function Plate({ index, sx }) {
 }
 
 /**
- * Where projects stall, told as a deck of cards: one card per failure mode,
- * each sticking a step below the last as the page scrolls, so the next one
- * slides up over it.
+ * Where AI gets hard, told as a deck of cards: one card per failure mode, each
+ * sticking a step below the last as the page scrolls, so the next one slides up
+ * over it. Every card ends in a link to the thing that answers it.
  *
  * Every card has two motions, both tied to scroll position:
  *
@@ -226,14 +253,10 @@ function Stalls() {
           }}
         >
           <Box>
-            <RevealText
-              text="Where AI projects stall."
-              muted="And how we keep yours moving."
-              sx={{ maxWidth: "20ch" }}
-            />
+            <RevealText text="Where AI Gets Hard" sx={{ maxWidth: "20ch" }} />
             <Typography variant="lede" sx={{ mt: 2.5, color: color.inkMuted, maxWidth: measure.lede }}>
-              None of these are model problems. They are engineering problems that only
-              show up after the demo goes well.
+              Building an AI prototype is only the beginning. The real challenges appear
+              when systems need to become reliable, scalable, and ready for real users.
             </Typography>
           </Box>
           <PillLink href="/research" variant="outline" sx={{ justifySelf: { xs: "start", md: "auto" } }}>
@@ -304,7 +327,7 @@ function Stalls() {
                     {item.desc}
                   </Typography>
                   <LinkBox
-                    href="/services"
+                    href={DETAIL[i].href}
                     sx={{
                       display: "inline-block",
                       mt: 2.5,
@@ -315,7 +338,7 @@ function Stalls() {
                       "&:hover": { color: color.accent },
                     }}
                   >
-                    How We Fix It ›
+                    {DETAIL[i].cta} ›
                   </LinkBox>
                 </Box>
               </Box>
