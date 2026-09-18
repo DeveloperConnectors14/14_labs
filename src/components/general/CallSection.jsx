@@ -35,8 +35,9 @@ const WAVE_FADE = "linear-gradient(to top, #000 30%, transparent 95%)";
  * the type, a field of points rolls slowly in perspective (DotWave), fading
  * out before it reaches the heading.
  */
-function CallSection({ contact = true }) {
-  const copy = contact ? COPY.contact : COPY.next;
+function CallSection({ contact = true, title, lede }) {
+  const base = contact ? COPY.contact : COPY.next;
+  const copy = { title: title ?? base.title, lede: lede ?? base.lede };
 
   return (
     <Box component="section" sx={{ paddingBlock: layout.gapY }}>

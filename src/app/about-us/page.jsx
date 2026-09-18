@@ -4,7 +4,7 @@ import LabTeam from "@/components/home/LabTeam";
 import Section from "@/components/ui/Section";
 import SectionHead from "@/components/ui/SectionHead";
 import StatSlabs from "@/components/ui/StatSlabs";
-import EmbeddingField from "@/components/visuals/EmbeddingField";
+import ResearchToProduct from "@/components/visuals/ResearchToProduct";
 import { getPillars, getStats, getValues } from "@/services/dataService";
 import { color, measure, radius } from "@/theme/tokens";
 
@@ -15,22 +15,22 @@ const values = getValues();
 export const metadata = {
   title: "About",
   description:
-    "14Labs is an AI engineering and applied machine learning practice: multi-agent systems, retrieval and research-grade infrastructure that runs in production.",
+    "14Labs is a software company working across Web, App, AI and Cyber Security, combining practical engineering with applied research.",
 };
 
 // How the practice actually works, stated as commitments rather than adjectives.
 const HOW_WE_WORK = [
   {
-    title: "We start from the decision, not the model",
-    desc: "The first question is what has to be true for the output to be worth acting on. Model choice is downstream of that, and usually less interesting than it looks.",
+    title: "We Start With the Problem",
+    desc: "We first understand what needs to be solved and what success looks like before choosing the technology.",
   },
   {
-    title: "We measure before we optimise",
-    desc: "An evaluation set exists before the second version does. Without one, every change after the demo is an argument about taste.",
+    title: "We Measure What We Build",
+    desc: "We define clear ways to evaluate the work so progress is based on results, not assumptions.",
   },
   {
-    title: "We hand it over properly",
-    desc: "Code, infrastructure, evals and documentation land in your repositories as we go — so the system outlives the engagement.",
+    title: "You Own What We Build",
+    desc: "We provide the code, documentation, infrastructure, and knowledge needed to run and maintain the system.",
   },
 ];
 
@@ -59,25 +59,17 @@ function AboutPage() {
               </Typography>
 
               <Typography variant="h1" sx={{ color: color.ink, maxWidth: "14ch" }}>
-                An Engineering Practice With a Research Habit
+                Software Engineering, Backed by Research.
               </Typography>
 
               <Typography
                 variant="lede"
                 sx={{ mt: 4, color: color.inkMuted, maxWidth: measure.lede }}
               >
-                14Labs builds AI systems that run in production: multi-agent
-                pipelines, retrieval and knowledge infrastructure, and the
-                evaluation work that decides whether any of it is trustworthy.
-              </Typography>
-
-              <Typography
-                variant="body1"
-                sx={{ mt: 3, color: color.inkMuted, maxWidth: measure.body }}
-              >
-                We are deliberately small and deliberately technical. The people
-                who scope the work are the people who write it, and the write-up
-                you get at the end says what did not work as clearly as what did.
+                14Labs is a software company working across Web, App, AI, and
+                Cyber Security. We build digital products and provide software
+                services for local and international clients, combining practical
+                engineering with applied research.
               </Typography>
 
               <Box
@@ -118,7 +110,7 @@ function AboutPage() {
                 p: 4,
               }}
             >
-              <EmbeddingField style={{ width: "100%", height: "auto" }} />
+              <ResearchToProduct style={{ width: "100%", height: "auto" }} />
               <Typography
                 variant="caption"
                 sx={{
@@ -130,8 +122,8 @@ function AboutPage() {
                   color: color.inkMuted,
                 }}
               >
-                A query and its nearest neighbours — the figure from our retrieval
-                write-up. Point at a mark to read it.
+                Research → Engineering → Products. What holds up in research is
+                engineered into products that ship. Point at a mark to read it.
               </Typography>
             </Box>
           </Box>
@@ -145,8 +137,8 @@ function AboutPage() {
       <Section band="alt">
         <SectionHead
           split
-          eyebrow="How we work"
-          title="Three commitments, and they are checkable"
+          eyebrow="Commitments"
+          title="How We Work"
           lede="Every one of these is something a client can hold us to at the end of an engagement rather than a value on a wall."
         />
 
@@ -222,9 +214,17 @@ function AboutPage() {
         </Box>
       </Section>
 
-      <LabTeam />
+      <LabTeam
+        title="You Work Directly With the Team."
+        lede="From the first discussion to delivery, you work directly with the people designing and building your system."
+        showAboutLink={false}
+      />
 
-      <CallSection contact />
+      <CallSection
+        contact
+        title="Have a Project in Mind?"
+        lede="Tell us what you’re building, what you’re trying to solve, or where you need help. We’ll start from there."
+      />
     </>
   );
 }

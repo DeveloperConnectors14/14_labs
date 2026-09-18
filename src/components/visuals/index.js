@@ -4,6 +4,7 @@ export { default as EmbeddingField } from "./EmbeddingField";
 export { default as EvalCurve } from "./EvalCurve";
 export { default as LatencyBars } from "./LatencyBars";
 export { default as ReleaseDelta } from "./ReleaseDelta";
+export { default as ResearchToProduct } from "./ResearchToProduct";
 export { default as RetrievalRank } from "./RetrievalRank";
 export { default as SignalGrid } from "./SignalGrid";
 export { default as TopicFigure } from "./TopicFigure";

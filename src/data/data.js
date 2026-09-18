@@ -58,7 +58,7 @@ export const challanges = [
 ];
 
 export const stats = [
-  { value: "15+", label: "Systems Shipped", note: "In production, not pilots" },
+  { value: "15+", label: "Projects Delivered", note: "In production, not pilots" },
   { value: "10+", label: "Client Teams", note: "Across four industries" },
   { value: "4+", label: "Years Building", note: "Since before the agent boom" },
   { value: "95%", label: "Satisfaction", note: "Measured post-engagement" },
@@ -651,50 +651,50 @@ export const pillars = [
 
 export const values = [
   {
-    title: "Deep AI Expertise",
-    desc: "From multi-agent architectures to fine-tuned LLMs, our team brings cutting-edge knowledge to every engagement.",
+    title: "Research and Engineering",
+    desc: "We combine applied research with software engineering to turn ideas into working systems.",
   },
   {
-    title: "Practical Engineering",
-    desc: "We don't just design systems — we build and ship them. Every solution is engineered for reliability and real-world performance.",
+    title: "Built for Real Use",
+    desc: "We focus on reliable products and systems that work beyond prototypes and demos.",
   },
   {
-    title: "Genuine Partnership",
-    desc: "We align seamlessly with your teams, keep our word, and stay invested in your outcomes long after delivery.",
+    title: "Long-Term Ownership",
+    desc: "We build with maintainability, documentation, and your team’s ability to take over in mind.",
   },
 ];
 
 /**
  * The people on the engagement.
  *
- * PLACEHOLDER CONTENT — names and roles are scaffolding so the section can be
- * built and reviewed. Replace every entry before this goes public.
- *
- * `photo` is a filename inside /public/media/team. Leave it out and the card
- * falls back to a monogram tile, which is a deliberate design state rather than
- * a broken image — so the section ships correctly with no photography at all,
- * and upgrades one person at a time as headshots arrive.
+ * `photo` is a filename inside /public/media/team. Until that file exists the
+ * card falls back to a monogram tile, which is a deliberate design state rather
+ * than a broken image — so the section ships correctly with no photography at
+ * all, and upgrades one person at a time as headshots are added.
  */
 export const team = [
   {
     name: "Muhammad Baqir",
     role: "Founder, AI engineering",
     focus: "Agent topologies, tracing, cost control",
-    // photo: "baqir.jpg",
+    photo: "muhammad-baqir.jpg",
   },
   {
-    name: "Research lead",
-    role: "Retrieval & evaluation",
-    focus: "Ranking quality, golden sets, regression gates",
+    name: "Faisal Ali",
+    role: "Research Lead",
+    focus: "Researcher",
+    photo: "faisal-ali.jpg",
   },
   {
-    name: "ML engineer",
-    role: "Applied machine learning",
-    focus: "Fine-tuning, classical baselines, error analysis",
+    name: "Abdullah Sajjad",
+    role: "Development Lead",
+    focus: "Full stack developer",
+    photo: "abdullah-sajjad.jpg",
   },
   {
-    name: "Platform engineer",
-    role: "Infrastructure",
-    focus: "Deployment, observability, latency and spend",
+    name: "Ikram Ali",
+    role: "AI Lead",
+    focus: "AI Engineer",
+    photo: "ikram-ali.jpg",
   },
 ];

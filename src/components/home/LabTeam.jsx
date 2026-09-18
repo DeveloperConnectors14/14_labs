@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 import Section from "@/components/ui/Section";
@@ -6,7 +8,19 @@ import ActionLink from "@/components/ui/ActionLink";
 import { getTeam } from "@/services/dataService";
 import { color, font, motion, radius } from "@/theme/tokens";
 
-const team = getTeam();
+const TEAM_DIR = path.join(process.cwd(), "public", "media", "team");
+
+// A photo only counts once its file is actually in /public/media/team, so a
+// name in the data never renders as a broken image.
+const team = getTeam().map((person) => ({
+  ...person,
+  photo: person.photo && fs.existsSync(path.join(TEAM_DIR, person.photo)) ? person.photo : null,
+}));
+
+const DEFAULT_COPY = {
+  title: "You work with the engineers, not an account layer",
+  lede: "Small team by design. The person who writes the evaluation harness is the person who explains the number to you.",
+};
 
 // The tile tones walk down the green ramp so a row of monograms reads as one
 // designed object rather than four identical grey squares.
@@ -29,15 +43,15 @@ const initials = (name) =>
  * what the card looks like until a headshot exists, and photographs can land one
  * at a time without the row ever going half-broken.
  */
-function LabTeam() {
+function LabTeam({ title = DEFAULT_COPY.title, lede = DEFAULT_COPY.lede, showAboutLink = true }) {
   return (
     <Section id="team" band="tint" inset>
       <SectionHead
         split
         eyebrow="The people"
-        title="You work with the engineers, not an account layer"
-        lede="Small team by design. The person who writes the evaluation harness is the person who explains the number to you."
-        action={<ActionLink href="/about-us">About the practice</ActionLink>}
+        title={title}
+        lede={lede}
+        action={showAboutLink ? <ActionLink href="/about-us">About the practice</ActionLink> : null}
       />
 
       <Box

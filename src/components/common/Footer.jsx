@@ -133,10 +133,10 @@ function Footer() {
                             lineHeight: 1.12,
                             letterSpacing: "-0.025em",
                             color: color.ink,
-                            maxWidth: "14ch",
+                            maxWidth: "18ch",
                         }}
                     >
-                        AI Systems That Survive Contact With Production
+                        We build software and AI systems for real-world use.
                     </Typography>
 
                     <Column heading="Practice">
