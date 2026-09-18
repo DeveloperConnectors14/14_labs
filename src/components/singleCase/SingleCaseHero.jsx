@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Box, Container, Typography } from "@mui/material";
 import ActionLink from "@/components/ui/ActionLink";
 import { getcaseStudies } from "@/services/dataService";
-import { color, layout, measure, radius } from "@/theme/tokens";
+import { color, measure, radius } from "@/theme/tokens";
 
 const studies = getcaseStudies();
 
@@ -32,28 +32,67 @@ function SingleCaseHero({ heroData, caseId }) {
           All work
         </ActionLink>
 
-        <Typography
-          variant="display"
-          component="h1"
+        {/* Title and subtitle on the left; the cover art — only 407×220 at
+            source — sits beside them at close to its own size. */}
+        <Box
           sx={{
             mt: { xs: 4, md: 6 },
-            color: color.ink,
-            maxWidth: "18ch",
-            textWrap: "balance",
-            fontSize: "clamp(2.25rem, 1rem + 4.4vw, 4.25rem)",
+            display: "grid",
+            gridTemplateColumns: study?.img
+              ? { xs: "1fr", md: "minmax(0, 1fr) minmax(0, 420px)" }
+              : "1fr",
+            columnGap: { md: 6, lg: 10 },
+            rowGap: { xs: 5, md: 0 },
+            alignItems: "end",
           }}
         >
-          {heroData.title}
-        </Typography>
+          <Box>
+            <Typography
+              variant="display"
+              component="h1"
+              sx={{
+                color: color.ink,
+                maxWidth: "18ch",
+                textWrap: "balance",
+                fontSize: "clamp(2.25rem, 1rem + 4.4vw, 4.25rem)",
+              }}
+            >
+              {heroData.title}
+            </Typography>
 
-        {heroData.subtitle ? (
-          <Typography
-            variant="lede"
-            sx={{ mt: { xs: 3, md: 4 }, color: color.inkMuted, maxWidth: measure.lede }}
-          >
-            {heroData.subtitle}
-          </Typography>
-        ) : null}
+            {heroData.subtitle ? (
+              <Typography
+                variant="lede"
+                sx={{ mt: { xs: 3, md: 4 }, color: color.inkMuted, maxWidth: measure.lede }}
+              >
+                {heroData.subtitle}
+              </Typography>
+            ) : null}
+          </Box>
+
+          {study?.img ? (
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                maxWidth: { xs: "100%", sm: "440px", md: "100%" },
+                aspectRatio: "407 / 220",
+                overflow: "hidden",
+                borderRadius: radius.lg,
+                backgroundColor: color.grey20,
+              }}
+            >
+              <Image
+                src={`/media/${study.img}`}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 600px) 100vw, 440px"
+                style={{ objectFit: "cover" }}
+              />
+            </Box>
+          ) : null}
+        </Box>
 
         {heroData.stats?.length ? (
           <Box
@@ -95,30 +134,6 @@ function SingleCaseHero({ heroData, caseId }) {
           </Box>
         ) : null}
       </Container>
-
-      {study?.img ? (
-        <Box sx={{ mt: { xs: 5, md: 8 }, paddingInline: layout.gutter }}>
-          <Box
-            sx={{
-              position: "relative",
-              width: "100%",
-              aspectRatio: { xs: "4 / 3", md: "16 / 7" },
-              overflow: "hidden",
-              borderRadius: { xs: radius.lg, md: radius.xl },
-              backgroundColor: color.grey20,
-            }}
-          >
-            <Image
-              src={`/media/${study.img}`}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              style={{ objectFit: "cover" }}
-            />
-          </Box>
-        </Box>
-      ) : null}
     </Box>
   );
 }

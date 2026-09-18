@@ -35,18 +35,18 @@ const monthYear = (iso) =>
 const PROOF = {
   evaluation: {
     icon: InsightsOutlined,
-    title: "Evaluation You Keep",
-    body: "Golden sets and regression gates, built first and handed over with the system.",
+    title: "We Measure Quality",
+    body: "We test the system regularly to understand what is improving and what needs attention.",
   },
   traces: {
     icon: AccountTreeOutlined,
-    title: "Traces You Can Read",
-    body: "Every step of every request recorded, so a failure has an address.",
+    title: "We Understand Failures",
+    body: "We track how the system works so problems can be identified and fixed quickly.",
   },
   cost: {
     icon: SpeedOutlined,
-    title: "Costs You Can Predict",
-    body: "Latency and spend budgets agreed up front and watched in production.",
+    title: "We Control Performance and Cost",
+    body: "We monitor speed and usage costs to keep the system reliable and practical.",
   },
 };
 
