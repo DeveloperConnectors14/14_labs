@@ -4,7 +4,7 @@ import { Box, Typography, Grid } from "@mui/material";
 import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
 
 export const metadata = {
-    title: "About | 14Labs",
+    title: "About",
     description: "14Labs, Lahore, Pakistan: original, rigorous machine learning research turned into solutions that work and benefit people.",
 };
 

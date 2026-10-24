@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
 
   const description = paper.overview[0].length > 160 ? `${paper.overview[0].slice(0, 157)}…` : paper.overview[0];
   return {
-    title: `${paper.shortTitle} | 14Labs Research`,
+    title: `${paper.shortTitle} · Research`,
     description,
     openGraph: {
       title: paper.title,

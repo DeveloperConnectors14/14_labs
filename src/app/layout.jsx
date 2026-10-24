@@ -3,12 +3,56 @@ import Navbar from "@/components/common/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
+const SITE_URL = "https://14labs.co";
+
 export const metadata = {
-  title: "14Labs | AI Engineering, Applied Machine Learning & Research",
-  description: "14Labs, Lahore, Pakistan: AI engineering, applied machine learning and peer-reviewed research in solar energy forecasting, explainable ML and computer vision.",
-  icons: {
-    icon: '/Favicon.svg',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "14Labs · AI Engineering, Applied Machine Learning & Research",
+    // Pages set their own title; this frames it. Without a template every route
+    // inherits the bare site name, which is what shipped until now.
+    template: "%s · 14Labs",
   },
+  description:
+    "14Labs, Lahore, Pakistan: AI engineering, applied machine learning and peer-reviewed research in solar energy forecasting, explainable ML and computer vision.",
+  icons: {
+    // Google's favicon crawler looks for /favicon.ico by that exact name.
+    // Both files are generated from public/logo-14.png — see scripts/generate-icons.mjs.
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "14Labs",
+    url: SITE_URL,
+    title: "14Labs",
+    description:
+      "AI engineering, applied machine learning and peer-reviewed research, from Lahore, Pakistan.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "14Labs" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@14labs_co",
+    title: "14Labs",
+    description:
+      "AI engineering, applied machine learning and peer-reviewed research, from Lahore, Pakistan.",
+    images: ["/og.png"],
+  },
+};
+
+// Without this Google has no declared logo for the domain and picks a page image
+// instead — which is how OpenAI's mark ended up on our search result.
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "14Labs",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+  image: `${SITE_URL}/og.png`,
+  email: "contact@14labs.co",
+  description:
+    "14Labs, Lahore, Pakistan: AI engineering, applied machine learning and peer-reviewed research in solar energy forecasting, explainable ML and computer vision.",
+  sameAs: ["https://x.com/14labs_co", "https://www.linkedin.com/company/14labs"],
 };
 
 function RootLayout({ children }) {
@@ -18,6 +62,10 @@ function RootLayout({ children }) {
         <link
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Instrument+Sans&family=Inter&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
       <body>
@@ -32,6 +80,5 @@ function RootLayout({ children }) {
     </html>
   );
 }
-
 
 export default RootLayout;
