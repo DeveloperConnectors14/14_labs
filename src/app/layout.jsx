@@ -2,6 +2,7 @@ import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 
 const SITE_URL = "https://14labs.co";
 
@@ -57,7 +58,7 @@ const organizationSchema = {
 
 function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Instrument+Sans&family=Inter&display=swap"
@@ -69,6 +70,8 @@ function RootLayout({ children }) {
         />
       </head>
       <body>
+        {/* Applies the visitor's saved colour scheme (light by default) before the page paints. */}
+        <InitColorSchemeScript attribute="class" defaultMode="light" />
         <AppRouterCacheProvider>
           <ThemeProvider>
             <Navbar />

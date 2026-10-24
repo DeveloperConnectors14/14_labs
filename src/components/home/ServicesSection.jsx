@@ -1,14 +1,14 @@
 "use client";
 import { getServices } from "@/services/dataService";
 import { Box, Grid, Chip, Typography } from "@mui/material";
-import { SECTION_PX, SECTION_PY, NAV_SCROLL_MARGIN } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, NAV_SCROLL_MARGIN, SOFT_GRADIENT } from "@/theme/tokens";
 import NumberedCard from "@/components/general/NumberedCard";
 
 const services = getServices();
 
 function ServicesSection() {
   return (
-    <Box component="section" id="services" sx={{ px: SECTION_PX, py: SECTION_PY, scrollMarginTop: NAV_SCROLL_MARGIN, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)" }}>
+    <Box component="section" id="services" sx={{ px: SECTION_PX, py: SECTION_PY, scrollMarginTop: NAV_SCROLL_MARGIN, background: SOFT_GRADIENT }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 4 }}>
           <Typography variant="h2" sx={{ color: "text.primary" }}>

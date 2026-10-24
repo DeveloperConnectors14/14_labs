@@ -1,12 +1,12 @@
 import { Box, Chip, Typography } from "@mui/material";
 import { SectionTitle, DetailsList, DashList } from "@/components/general/ArticleParts";
-import { SECTION_PX, SECTION_PY, TILE_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, TILE_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 
 const calloutSx = {
   mt: 3,
   p: { xs: 2, md: 3 },
   borderRadius: TILE_RADIUS,
-  background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+  background: SOFT_GRADIENT,
 };
 
 // A case study in the same reading-column layout as the research paper pages.

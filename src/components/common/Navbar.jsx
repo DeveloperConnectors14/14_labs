@@ -18,7 +18,8 @@ import {
     Menu as MenuIcon,
     Close as CloseIcon,
 } from "@mui/icons-material";
-import Image from "next/image";
+import ThemedLogo from "@/components/common/ThemedLogo";
+import ThemeToggle from "@/components/common/ThemeToggle";
 import { BUTTON_RADIUS } from "@/theme/tokens";
 import { getNavItems, hasDarkHero } from "@/services/dataService";
 
@@ -47,6 +48,9 @@ function Navbar() {
             <AppBar
                 position="fixed"
                 elevation={0}
+                // Without this, MUI's built-in dark-mode bar colour overrides the
+                // transparent bar over the hero.
+                enableColorOnDark
                 sx={{
                     height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
                     backgroundColor: transparent ? "transparent" : "background.paper",
@@ -75,15 +79,7 @@ function Navbar() {
                                 },
                             }}
                         >
-                            <Image
-                                src={transparent ? "/media/logo-white.svg" : "/media/logo.svg"}
-                                alt="14Labs Logo"
-                                // Whole pixels matching the SVG's own size, so the browser
-                                // never rescales it. Above the fold, so it loads eagerly.
-                                width={86}
-                                height={32}
-                                loading="eager"
-                            />
+                            <ThemedLogo white={transparent} />
                         </Button>
 
                         {/* Desktop Menu */}
@@ -116,6 +112,8 @@ function Navbar() {
 
                         </Box>
                     </Box>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, md: 2 } }}>
+                    <ThemeToggle color={linkColor} />
                     <Button
                         component={Link}
                         href="/contact"
@@ -129,7 +127,7 @@ function Navbar() {
                             // Per-breakpoint so it overrides the theme's responsive button size.
                             fontSize: { xs: "15px", md: "15px" },
                             lineHeight: "20px",
-                            color: "text.primary",
+                            color: "brand.navy",
                             fontFamily: "'IBM Plex Mono', monospace",
                             backgroundColor: "secondary.main",
                             boxShadow: "none",
@@ -137,7 +135,7 @@ function Navbar() {
                             "&:hover": {
                                 boxShadow: "none",
                                 backgroundColor: "primary.contrastText",
-                                color: "text.primary",
+                                color: "brand.navy",
                             },
                         }}
                     >
@@ -158,6 +156,7 @@ function Navbar() {
                                 <CloseIcon sx={{ position: "absolute" }} />
                             </Fade>
                         </IconButton>
+                    </Box>
                     </Box>
                 </Toolbar>
             </AppBar>
@@ -214,14 +213,14 @@ function Navbar() {
                                 fontWeight: 600,
                                 fontSize: { xs: "15px", sm: "15px" },
                                 fontFamily: "'IBM Plex Mono', monospace",
-                                color: "text.primary",
+                                color: "brand.navy",
                                 backgroundColor: "secondary.main",
                                 boxShadow: "none",
                                 transition: 'all 0.3s ease',
                                 "&:hover": {
                                     boxShadow: "none",
                                     backgroundColor: "primary.contrastText",
-                                    color: "text.primary",
+                                    color: "brand.navy",
                                 },
                             }}
                         >

@@ -43,10 +43,11 @@ function CallSection({ contact }) {
                 borderRadius: BUTTON_RADIUS,
                 p: "10px 22px",
                 fontSize: { xs: "15px", md: "15px" },
-                backgroundColor: "background.paper",
-                color: "text.primary",
+                // Always white: it sits on the brand gradient in both themes.
+                backgroundColor: "common.white",
+                color: "brand.navy",
                 boxShadow: "none",
-                "&:hover": { boxShadow: "none", backgroundColor: "primary.contrastText", color: "text.primary" },
+                "&:hover": { boxShadow: "none", backgroundColor: "primary.contrastText", color: "brand.navy" },
               }}
             >
               Start a conversation

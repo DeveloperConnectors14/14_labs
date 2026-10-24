@@ -10,7 +10,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 import { getContactInfo } from "@/services/dataService";
 
 const contactInfo = getContactInfo();
@@ -30,6 +30,9 @@ const textFieldSx = {
     "&.Mui-focused fieldset": {
       borderColor: "text.secondary",
       borderWidth: "1.5px",
+    },
+    "&.Mui-error fieldset": {
+      borderColor: "error.main",
     },
   },
   "& .MuiInputBase-input": {
@@ -57,6 +60,8 @@ function ContactPage() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // Subject and message are each optional, but at least one must be filled in.
+  const [contentMissing, setContentMissing] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbar, setSnackbar] = useState({ severity: "success", message: "" });
 
@@ -65,10 +70,15 @@ function ContactPage() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    if (e.target.name === "subject" || e.target.name === "message") setContentMissing(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.subject.trim() && !formData.message.trim()) {
+      setContentMissing(true);
+      return;
+    }
     setIsSubmitted(true);
 
     try {
@@ -103,7 +113,7 @@ function ContactPage() {
       sx={{
         px: SECTION_PX,
         py: SECTION_PY,
-        background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+        background: SOFT_GRADIENT,
       }}
     >
       <Grid container spacing={3} alignItems="flex-start">
@@ -184,7 +194,7 @@ function ContactPage() {
               value={formData.subject}
               onChange={handleChange}
               fullWidth
-              required
+              error={contentMissing}
               sx={textFieldSx}
             />
 
@@ -196,7 +206,8 @@ function ContactPage() {
               multiline
               rows={5}
               fullWidth
-              required
+              error={contentMissing}
+              helperText={contentMissing ? "Add a subject or a message" : ""}
               sx={textFieldSx}
             />
 
@@ -209,12 +220,12 @@ function ContactPage() {
                 sx={{
                   borderRadius: BUTTON_RADIUS,
                   p: "9px 18px",
-                  color: "text.primary",
+                  color: "brand.navy",
                   backgroundColor: "secondary.main",
                   transition: "all 0.3s ease",
                   "&:hover": {
                     backgroundColor: "primary.contrastText",
-                    color: "text.primary",
+                    color: "brand.navy",
                   },
                 }}
               >

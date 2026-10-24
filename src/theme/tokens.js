@@ -8,3 +8,5 @@ export const BUTTON_PADDING = { px: 3, py: 1.4 };
 export const NAV_SCROLL_MARGIN = { xs: "80px", sm: "90px", md: "80px", lg: "104px" };
 // Brand teal-to-navy gradient used by the homepage hero and paper headers.
 export const BRAND_GRADIENT = "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)";
+// Pale page-section gradient; a dark navy version in dark mode (theme palette).
+export const SOFT_GRADIENT = "var(--mui-palette-customColors-softGradient)";

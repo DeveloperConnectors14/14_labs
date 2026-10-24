@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import ShareButton from "@/components/general/ShareButton";
 import ScrollToButton from "@/components/general/ScrollToButton";
 import { keepHyphenatedWords } from "@/components/general/ArticleParts";
-import { SECTION_PX, CARD_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, CARD_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 
 // Centred article header (layout from a DeepMind blog post, in the site's own
 // style): meta line, title, buttons, a large rounded cover, then the lead.
@@ -36,7 +36,7 @@ function CaseHeader({ data }) {
           aspectRatio: { xs: "4 / 3", md: "21 / 9" },
           borderRadius: CARD_RADIUS,
           overflow: "hidden",
-          background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+          background: SOFT_GRADIENT,
         }}
       >
         {data.cover && (

@@ -128,7 +128,7 @@ function ResearchCard({ paper }) {
             borderRadius: BUTTON_RADIUS,
             p: "8px 16px",
             backgroundColor: "secondary.main",
-            color: "text.primary",
+            color: "brand.navy",
           })}
         >
           Learn more

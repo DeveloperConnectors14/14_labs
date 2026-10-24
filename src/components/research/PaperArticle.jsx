@@ -4,7 +4,7 @@ import { ArrowOutward } from "@mui/icons-material";
 import CopyCitationButton from "@/components/research/CopyCitationButton";
 import { SectionTitle, DetailsList, DashList } from "@/components/general/ArticleParts";
 import { formatCitation, formatPublishedDate, isTeamAuthor } from "@/services/dataService";
-import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 
 const externalLink = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -55,8 +55,8 @@ function PaperArticle({ paper }) {
                   borderRadius: BUTTON_RADIUS,
                   p: "9px 18px",
                   backgroundColor: "secondary.main",
-                  color: "text.primary",
-                  "&:hover": { backgroundColor: "primary.contrastText", color: "text.primary" },
+                  color: "brand.navy",
+                  "&:hover": { backgroundColor: "primary.contrastText", color: "brand.navy" },
                 }}
               >
                 View paper
@@ -116,7 +116,7 @@ function PaperArticle({ paper }) {
               sx={{
                 p: { xs: 2, md: 3 },
                 borderRadius: TILE_RADIUS,
-                background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+                background: SOFT_GRADIENT,
               }}
             >
               <Typography variant="body2" color="text.primary" sx={{ overflowWrap: "anywhere" }}>

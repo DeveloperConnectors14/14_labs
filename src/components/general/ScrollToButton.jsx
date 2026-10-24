@@ -28,9 +28,9 @@ function ScrollToButton({ targetId, children }) {
         fontSize: { xs: "14px", md: "15px" },
         whiteSpace: "nowrap",
         backgroundColor: "secondary.main",
-        color: "text.primary",
+        color: "brand.navy",
         boxShadow: "none",
-        "&:hover": { boxShadow: "none", backgroundColor: "primary.contrastText", color: "text.primary" },
+        "&:hover": { boxShadow: "none", backgroundColor: "primary.contrastText", color: "brand.navy" },
       }}
     >
       {children}

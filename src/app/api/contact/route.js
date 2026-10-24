@@ -5,14 +5,22 @@ const DESTINATION = "contact@14labs.co";
 
 export async function POST(request) {
     try {
-        const { name, email, subject, message } = await request.json();
+        const body = await request.json();
+        const [name, email, subject, message] = ["name", "email", "subject", "message"].map(
+            (field) => String(body[field] ?? "").trim()
+        );
 
-        if (!name || !email || !subject || !message) {
+        // Name and email are required; subject and message are each optional,
+        // but at least one of them must be filled in.
+        if (!name || !email || (!subject && !message)) {
             return NextResponse.json(
                 { error: "Missing required fields" },
                 { status: 400 }
             );
         }
+
+        const emailSubject = subject || `Message from ${name}`;
+        const messageText = message || "(No message)";
 
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
@@ -28,16 +36,16 @@ export async function POST(request) {
             from: `"14Labs Website" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
             to: DESTINATION,
             replyTo: email,
-            subject: `[Contact Form] ${subject}`,
-            text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+            subject: `[Contact Form] ${emailSubject}`,
+            text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject || "(No subject)"}\n\n${messageText}`,
             html: `
                 <div style="font-family: sans-serif; max-width: 600px;">
                     <h2 style="color: #0a3b60;">New contact form submission</h2>
                     <p><strong>Name:</strong> ${escapeHtml(name)}</p>
                     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-                    <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+                    <p><strong>Subject:</strong> ${escapeHtml(subject || "(No subject)")}</p>
                     <p><strong>Message:</strong></p>
-                    <p style="white-space: pre-wrap; padding: 12px; background: #f5f5f5; border-radius: 8px;">${escapeHtml(message)}</p>
+                    <p style="white-space: pre-wrap; padding: 12px; background: #f5f5f5; border-radius: 8px;">${escapeHtml(messageText)}</p>
                 </div>
             `,
         });
