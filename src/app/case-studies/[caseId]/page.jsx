@@ -2,6 +2,8 @@
 
 import { notFound } from "next/navigation";
 import CallSection from "@/components/general/CallSection";
+import CaseHeader from "@/components/singleCase/CaseHeader";
+import CaseArticle from "@/components/singleCase/CaseArticle";
 import MoreCaseStudies from "@/components/singleCase/MoreCaseStudies";
 import RealCostDetails from "@/components/singleCase/RealCostDetails";
 import SingleCaseApproach from "@/components/singleCase/SingleCaseApproach";
@@ -23,6 +25,20 @@ function SingleCasePage({ params }) {
   const searchParams = React.use(params);
   const data = caseDetails.find(item => item.caseId === searchParams.caseId);
   if (!data) return notFound();
+
+  // Trial: the article layout from the research paper pages. The pipeline
+  // diagram is kept as the one visual section.
+  if (data.layout === "article") {
+    return (
+      <>
+        <CaseHeader data={data} />
+        <CaseArticle data={data} />
+        {data.pipeline && <SingleCasePipeline casePipeline={data.pipeline} />}
+        <MoreCaseStudies moreCases={data.more_cases} />
+        <CallSection contact={true} />
+      </>
+    );
+  }
 
   return (
     <>

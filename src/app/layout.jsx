@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 export const metadata = {
-  title: "14 LABS",
-  description: "14 Labs official website",
+  title: "14Labs | AI Engineering, Applied Machine Learning & Research",
+  description: "14Labs, Lahore, Pakistan: AI engineering, applied machine learning and peer-reviewed research in solar energy forecasting, explainable ML and computer vision.",
   icons: {
     icon: '/Favicon.svg',
   },

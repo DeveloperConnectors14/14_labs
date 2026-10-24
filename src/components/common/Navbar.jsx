@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
     AppBar,
     Toolbar,
@@ -19,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 import { BUTTON_RADIUS } from "@/theme/tokens";
-import { getNavItems } from "@/services/dataService";
+import { getNavItems, hasDarkHero } from "@/services/dataService";
 
 const APP_BAR_HEIGHT = "104px";
 
@@ -33,6 +34,14 @@ function Navbar() {
 
     const navItems = getNavItems();
 
+    // Pages that open with the dark full-width hero get a transparent bar with
+    // white text on top of it (like the DeepMind reference). It turns solid
+    // white as soon as the page scrolls or the mobile menu opens.
+    const pathname = usePathname();
+    const overHero = hasDarkHero(pathname);
+    const transparent = overHero && !isScrolled && !mobileOpen;
+    const linkColor = transparent ? "secondary.contrastText" : "text.primary";
+
     return (
         <>
             <AppBar
@@ -40,7 +49,8 @@ function Navbar() {
                 elevation={0}
                 sx={{
                     height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
-                    backgroundColor: "background.paper",
+                    backgroundColor: transparent ? "transparent" : "background.paper",
+                    boxShadow: transparent ? "none" : "0 2px 10px rgba(0,0,0,0.05)",
                     backdropFilter: isScrolled ? "blur(10px)" : "none",
                     transition: "all 0.4s ease",
                     zIndex: 1200,
@@ -54,54 +64,57 @@ function Navbar() {
                         justifyContent: "space-between",
                     }}
                 >
-                    {/* Logo */}
-                    <Button
-                        component={Link}
-                        href="/"
-                        sx={{
-                            "&:hover": {
-                                backgroundColor: "transparent",
-                            },
-                        }}
-                    >
-                        <Image
-                            src="/media/logo.svg"
-                            alt="14Labs Logo"
-                            width={85.53}
-                            height={32}
-                        />
-                    </Button>
+                    {/* Logo with the links right beside it, left-aligned like the DeepMind reference. */}
+                    <Box sx={{ display: "flex", alignItems: "center", gap: { md: 5, lg: 8 } }}>
+                        <Button
+                            component={Link}
+                            href="/"
+                            sx={{
+                                "&:hover": {
+                                    backgroundColor: "transparent",
+                                },
+                            }}
+                        >
+                            <Image
+                                src={transparent ? "/media/logo-white.svg" : "/media/logo.svg"}
+                                alt="14Labs Logo"
+                                // Whole pixels matching the SVG's own size, so the browser
+                                // never rescales it. Above the fold, so it loads eagerly.
+                                width={86}
+                                height={32}
+                                loading="eager"
+                            />
+                        </Button>
 
-                    {/* Desktop Menu */}
-                    <Box sx={{
-                        display: { xs: "none", md: "flex" },
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        gap: 2,
-                        width: "538px",
-                        p: "4px"
-                    }}>
-                        {navItems.map((item) => (
-                            <Link key={item.path} href={item.path} style={{
-                                textDecoration: "none",
-                            }}>
-                                <Typography sx={{
-                                    fontStyle: "medium",
-                                    height: "24px",
-                                    fontWeight: 500,
-                                    fontsize: "16px",
-                                    lineHeight: "150%",
-                                    color: "text.primary",
-                                    transition: 'all 0.3s ease',
-                                    fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
-                                        color: "text.secondary",
-                                    },
+                        {/* Desktop Menu */}
+                        <Box sx={{
+                            display: { xs: "none", md: "flex" },
+                            alignItems: "center",
+                            gap: { md: 4, lg: 5 },
+                            p: "4px"
+                        }}>
+                            {navItems.map((item) => (
+                                <Link key={item.path} href={item.path} style={{
+                                    textDecoration: "none",
                                 }}>
-                                    {item.label}
-                                </Typography>
-                            </Link>
-                        ))}
+                                    <Typography sx={{
+                                        fontStyle: "medium",
+                                        height: "24px",
+                                        fontWeight: 500,
+                                        fontsize: "16px",
+                                        lineHeight: "150%",
+                                        color: linkColor,
+                                        transition: 'all 0.3s ease',
+                                        fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
+                                            color: "text.secondary",
+                                        },
+                                    }}>
+                                        {item.label}
+                                    </Typography>
+                                </Link>
+                            ))}
 
+                        </Box>
                     </Box>
                     <Button
                         component={Link}
@@ -110,11 +123,12 @@ function Navbar() {
                         sx={{
                             display: { xs: "none", md: "flex" },
                             borderRadius: BUTTON_RADIUS,
-                            p: "16px 24px",
+                            p: "10px 20px",
                             fontWeight: 600,
                             fontStyle: "semiBold",
-                            fontSize: { xs: "16px", sm: "18px", md: "20px" },
-                            lineHeight: "24px",
+                            // Per-breakpoint so it overrides the theme's responsive button size.
+                            fontSize: { xs: "15px", md: "15px" },
+                            lineHeight: "20px",
                             color: "text.primary",
                             fontFamily: "'IBM Plex Mono', monospace",
                             backgroundColor: "secondary.main",
@@ -127,13 +141,15 @@ function Navbar() {
                             },
                         }}
                     >
-                        GET STARTED
+                        LET&apos;S CONNECT
                     </Button>
 
                     {/* Mobile Menu Icon */}
                     <Box sx={{ display: { xs: "flex", md: "none" } }}>
                         <IconButton
+                            aria-label={mobileOpen ? "Close menu" : "Open menu"}
                             onClick={() => setMobileOpen((prev) => !prev)}
+                            sx={{ color: linkColor }}
                         >
                             <Fade in={!mobileOpen}>
                                 <MenuIcon />
@@ -196,7 +212,7 @@ function Navbar() {
                                 px: 2.5,
                                 py: 1,
                                 fontWeight: 600,
-                                fontsize: 16,
+                                fontSize: { xs: "15px", sm: "15px" },
                                 fontFamily: "'IBM Plex Mono', monospace",
                                 color: "text.primary",
                                 backgroundColor: "secondary.main",
@@ -209,14 +225,14 @@ function Navbar() {
                                 },
                             }}
                         >
-                            GET STARTED
+                            LET&apos;S CONNECT
                         </Button>
                     </Box>
                 </Box>
             </Collapse>
 
-            {/* space for fixed navbar */}
-            <Toolbar sx={{ height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT }, }} />
+            {/* Space for the fixed navbar, except where the hero sits behind it. */}
+            {!overHero && <Toolbar sx={{ height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT }, }} />}
         </>
     );
 }

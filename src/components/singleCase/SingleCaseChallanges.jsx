@@ -1,5 +1,6 @@
-import { Box, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+import NumberedCard from "@/components/general/NumberedCard";
 
 
 function SingleCaseChallanges({ challanges }) {
@@ -56,135 +57,7 @@ function SingleCaseChallanges({ challanges }) {
                                     key={i}
                                     sx={{ display: "flex" }}
                                 >
-                                    <Card
-                                        sx={{
-                                            flex: 1,
-                                            border: 1,
-                                            borderColor: "divider",
-                                            borderRadius: CARD_RADIUS,
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            position: "relative",
-                                            minHeight: 250,
-                                            transition: "all 0.4s ease",
-                                            "&:hover": {
-                                                backgroundImage: 'url("/media/service1.png")',
-                                                backgroundPosition: "center",
-                                                backgroundSize: "cover",
-                                                backgroundRepeat: "no-repeat",
-                                                "& .cardContent::before": {
-                                                    opacity: 1,
-                                                },
-                                                "& .sNo": {
-                                                    color: "primary.contrastText",
-                                                },
-                                                "& .hidden": {
-                                                    opacity: 1,
-                                                    maxHeight: "500px",
-                                                },
-                                                "& .heading": {
-                                                    color: "secondary.contrastText",
-                                                }
-                                            },
-                                            "@media (max-width: 1023.95px)": {
-                                                backgroundImage: 'url("/media/service1.png")',
-                                                backgroundPosition: "center",
-                                                backgroundSize: "cover",
-                                                backgroundRepeat: "no-repeat",
-                                                "& .cardContent::before": {
-                                                    opacity: 1,
-                                                },
-                                                "& .sNo": {
-                                                    color: "primary.contrastText",
-                                                },
-                                                "& .hidden": {
-                                                    opacity: 1,
-                                                    maxHeight: "500px",
-                                                },
-                                                "& .heading": {
-                                                    color: "secondary.contrastText",
-                                                },
-                                            },
-                                        }}
-                                    >
-                                        <CardContent
-                                            className="cardContent"
-                                            sx={{
-                                                position: "relative",
-                                                flexGrow: 1,
-                                                zIndex: 0,
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                justifyContent: "space-between",
-                                                transition: "background 0.4s ease",
-                                                "&::before": {
-                                                    content: '""',
-                                                    position: "absolute",
-                                                    inset: 0,
-                                                    background:
-                                                        "linear-gradient(90deg, #016b64bb, #054c64c5, #063864cb, #02185abb)",
-                                                    opacity: 0,
-                                                    transition: "opacity 0.4s ease",
-                                                }
-                                            }}
-                                        >
-                                            <Box sx={{
-                                                flexGrow: 1,
-                                                zIndex: 1,
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                gap: 2,
-                                                transition: "background 0.4s ease",
-                                            }}>
-                                                <Box>
-                                                    <Typography
-                                                        className="sNo"
-                                                        variant="caption"
-                                                        color="text.grey"
-                                                        sx={{ py: 0.5, display: "block" }}
-                                                    >
-                                                        {challange.sNo}
-                                                    </Typography>
-                                                    <Divider />
-                                                </Box>
-                                                <Box className="detailBox">
-                                                    {challange.title ? (
-                                                        <>
-                                                            <Typography
-                                                                className="heading"
-                                                                variant="h3"
-                                                                sx={{ color: "text.black" }}
-                                                            >
-                                                                {challange.title}
-                                                            </Typography>
-                                                            <Box className="hidden" sx={{
-                                                                opacity: 0,
-                                                                maxHeight: 0,
-                                                                overflow: "hidden",
-                                                                transition: "all 0.4s ease",
-                                                            }} >
-                                                                <Typography
-                                                                    variant="body2"
-                                                                    color="primary.contrastText"
-                                                                    sx={{ py: 1 }}
-                                                                >
-                                                                    {challange.desc}
-                                                                </Typography>
-                                                            </Box>
-                                                        </>
-                                                    ) : (
-                                                        <Typography
-                                                            className="heading"
-                                                            variant="h3"
-                                                            sx={{ color: "text.black" }}
-                                                        >
-                                                            {challange.desc}
-                                                        </Typography>
-                                                    )}
-                                                </Box>
-                                            </Box>
-                                        </CardContent>
-                                    </Card>
+                                    <NumberedCard number={challange.sNo} title={challange.title} desc={challange.desc} />
                                 </Grid>
                             ))}
                         </Grid>

@@ -12,7 +12,7 @@ function SingleCaseArchitechture({ architectureData }) {
                         <Typography variant="h2" sx={{ color: "text.primary" }}>
                             Architecture{" "}
                             <Box component="span" sx={{ color: "text.secondary" }}>
-                                Highlights
+                                highlights
                             </Box>
                         </Typography>
                     </Grid>

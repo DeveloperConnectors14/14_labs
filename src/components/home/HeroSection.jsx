@@ -6,77 +6,98 @@ import {
     Typography,
     Button,
 } from "@mui/material";
+import { keyframes } from "@mui/material/styles";
 import Link from "next/link";
 import { BUTTON_RADIUS } from "@/theme/tokens";
+import CollaboratorStrip from "@/components/home/CollaboratorStrip";
+import HeroSlideshow from "@/components/home/HeroSlideshow";
+
+const fadeUp = keyframes`
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+`;
+
+// Staggered entrance; skipped entirely for visitors who prefer reduced motion.
+const enter = (delay) => ({
+    animation: `${fadeUp} 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) ${delay}s both`,
+    "@media (prefers-reduced-motion: reduce)": { animation: "none" },
+});
+
+
+// Scrolls smoothly to a homepage section instead of jumping; the href stays
+// as a fallback. scroll-margin-top on each section keeps it below the navbar.
+const scrollToSection = (id) => (event) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+};
 
 function HeroSection() {
     return (
-        <Box
-            sx={{
-                px: 2,
-                pt: { xs: 1, md: 2 },
-            }}
-        >
+        <Box>
             <Box
                 sx={{
                     width: "100%",
-                    minHeight: { xs: "70vh", sm: "75vh", md: "87vh" },
-                    backgroundImage: 'url("/media/hero.png")',
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    borderRadius: 4,
+                    // Fills the first screen; the transparent navbar sits on top of it.
+                    minHeight: "100vh",
+                    "@supports (height: 100svh)": { minHeight: "100svh" },
+                    // Full width, edge to edge, like the DeepMind reference.
                     position: "relative",
                     overflow: "hidden",
+                    // Plain dark fallback shown only until the first photo loads.
+                    backgroundColor: "#0b1218",
                 }}
             >
+                <HeroSlideshow />
+
                 <Box
                     sx={{
                         width: "100%",
                         position: "absolute",
                         inset: 0,
                         background:
-                            "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65))",
+                            // Neutral (black) shading only where text sits: behind the headline and at the bottom for the logos.
+                            "radial-gradient(ellipse 60% 45% at 50% 50%, rgba(0,0,0,0.4), transparent 70%), linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 30%, transparent 60%, rgba(0,0,0,0.25) 100%)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         textAlign: "center",
                     }}
                 >
-                    <Container sx={{ maxWidth: "803px", width: "100%", display: "flex", flexDirection: "column", gap: "24px" }}>
+                    <Container sx={{ position: "relative", maxWidth: "803px", width: "100%", display: "flex", flexDirection: "column", gap: "24px" }}>
                         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "16px", }}>
-                            <Typography variant="h1" sx={{ color: "secondary.contrastText" }}>
-                                We are 14 Labs <br /> Engineered for enterprise. Inspired by what's next.
-                            </Typography>
-
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    display: { xs: "none", sm: "block" },
-                                    color: "primary.contrastText",
-                                }}
-                            >
-                                Delivering AI-powered innovation. We turn complex technology challenges into seamless, scalable solutions that are delivered on time and on target.
+                            {/* Balanced wrapping keeps "Research" from sitting alone on the second line.
+                                The teal phrase matches the site's two-tone section headings. */}
+                            <Typography variant="h1" sx={{ color: "secondary.contrastText", textWrap: "balance", textShadow: "0 2px 24px rgba(0,0,0,0.5)", fontSize: { xs: "34px", sm: "44px", md: "58px" }, ...enter(0.15) }}>
+                                AI Engineering,{" "}
+                                <Box component="span" sx={{ color: "secondary.main" }}>Applied Machine Learning</Box>
+                                {" "}& Research
                             </Typography>
                         </Box>
                         <Box
                             sx={{
                                 display: "flex",
-                                flexDirection: { xs: "column", sm: "row" },
+                                flexDirection: "row",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 gap: 2,
                                 flexWrap: "wrap",
+                                ...enter(0.45),
                             }}
                         >
                             <Button
                                 component={Link}
-                                href="/services"
+                                href="/#research"
+                                onClick={scrollToSection("research")}
                                 variant="contained"
                                 sx={{
                                     borderRadius: BUTTON_RADIUS,
-                                    p: "16px 24px",
-                                    backgroundColor: "background.paper",
+                                    p: "10px 22px",
+                                    fontSize: { xs: "15px", md: "16px" },
+                                    // Teal like the navbar's Let's connect: teal marks the main action.
+                                    backgroundColor: "secondary.main",
                                     color: "text.primary",
                                     transition: 'all 0.3s ease',
                                     "&:hover": {
@@ -86,31 +107,35 @@ function HeroSection() {
                                     },
                                 }}
                             >
-                                Explore AI Services
+                                Research
                             </Button>
 
                             <Button
                                 component={Link}
-                                href="/contact"
-                                variant="contained"
+                                href="/#services"
+                                onClick={scrollToSection("services")}
+                                variant="outlined"
                                 sx={{
                                     borderRadius: BUTTON_RADIUS,
-                                    p: "16px 24px",
-                                    color: "text.primary",
-                                    backgroundColor: "secondary.main",
-                                    boxShadow: "none",
+                                    p: "9px 21px",
+                                    fontSize: { xs: "15px", md: "16px" },
+                                    color: "secondary.contrastText",
+                                    borderColor: "rgba(255,255,255,0.6)",
                                     transition: 'all 0.3s ease',
                                     "&:hover": {
-                                        boxShadow: "none",
-                                        backgroundColor: "primary.contrastText",
-                                        color: "text.primary",
+                                        borderColor: "secondary.contrastText",
+                                        backgroundColor: "rgba(255,255,255,0.08)",
                                     },
                                 }}
                             >
-                                Contact Us
+                                AI services
                             </Button>
                         </Box>
                     </Container>
+                </Box>
+
+                <Box sx={{ position: "absolute", left: 0, right: 0, bottom: { xs: 24, md: 40 }, ...enter(0.6) }}>
+                    <CollaboratorStrip />
                 </Box>
             </Box>
         </Box>

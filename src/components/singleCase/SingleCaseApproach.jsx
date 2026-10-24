@@ -39,7 +39,7 @@ function SingleCaseApproach({ approaches }) {
             <Grid container spacing={2}>
                 <Grid size={{ xs: 12, md: 5 }}>
                     <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
-                        {approaches.label || "Our Approach"}
+                        {approaches.label || "Our approach"}
                     </Typography>
                     <Typography variant="h2" sx={{ color: "text.primary" }}>
                         {approaches.title}

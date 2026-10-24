@@ -9,7 +9,7 @@ function RealCostDetails({ costData }) {
                 <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 5 }}>
                         <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
-                            The Real Cost of Manual Operations
+                            The real cost of manual operations
                         </Typography>
                     </Grid>
 

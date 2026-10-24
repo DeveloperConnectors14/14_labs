@@ -2,7 +2,7 @@
 
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import Xarrow, { Xwrapper } from "react-xarrows";
-import { SECTION_PX, SECTION_PY, TILE_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, TILE_RADIUS, NAV_SCROLL_MARGIN } from "@/theme/tokens";
 
 
 const Node = ({ id, label, color = "#377BBB" }) => {
@@ -58,7 +58,8 @@ function SingleCasePipeline({ casePipeline }) {
     );
 
     return (
-        <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
+        // `id` is the target of the "See the architecture" button on article-style case studies.
+        <Box id="architecture" sx={{ px: SECTION_PX, py: SECTION_PY, scrollMarginTop: NAV_SCROLL_MARGIN }}>
             <Grid container spacing={2}>
                 <Grid size={{ xs: 12, md: 6 }}>
                     <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
@@ -67,7 +68,7 @@ function SingleCasePipeline({ casePipeline }) {
 
                     <Typography variant="h2" sx={{ color: "text.primary" }}>
                         {(() => {
-                            const raw = casePipeline.title || "Intelligent Pipeline Architecture";
+                            const raw = casePipeline.title || "Intelligent pipeline architecture";
                             const words = raw.split(" ");
                             const last = words.pop();
                             const rest = words.join(" ");

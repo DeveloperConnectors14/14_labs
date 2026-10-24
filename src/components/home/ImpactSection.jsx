@@ -10,17 +10,17 @@ function ImpactSection() {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h2" sx={{ color: "text.primary" }}>
-            Our <Box component="span" sx={{ color: "text.secondary" }}>
-              impact
+            Research <Box component="span" sx={{ color: "text.secondary" }}>
+              output
             </Box>
           </Typography>
           <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            From multi-agent systems to custom LLM integrations, we specialize in building AI infrastructure that scales. We believe in genuine support, seamless team alignment, and delivering outcomes that matter.
+            Our work is reviewed by other researchers and published in international journals, and the methods feed directly into the systems we build.
           </Typography>
         </Grid>
         <Grid size={12}>
           <Grid container spacing={3}>
-            {stats.slice(0, 3).map((item, i) => (
+            {stats.map((item, i) => (
               < Grid size={{ xs: 12, sm: (i === 0 ? 12 : 6), md: (i === 0 ? 6 : 3) }} key={i}>
                 <Box
                   sx={{

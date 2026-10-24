@@ -1,108 +1,91 @@
 "use client";
-import { Box, Container, Typography, Button, Grid } from "@mui/material";
+import { Box, Typography, Button, Grid } from "@mui/material";
+import { ArrowForward, MailOutline, PhoneOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import { SECTION_PX, SECTION_PY, BUTTON_RADIUS } from "@/theme/tokens";
+import { getContactInfo } from "@/services/dataService";
 
+const contactInfo = getContactInfo();
+
+const contactRows = [
+  { label: "Email", value: contactInfo.email, href: `mailto:${contactInfo.email}`, Icon: MailOutline },
+  { label: "Phone", value: contactInfo.phone, href: `tel:${contactInfo.phone.replace(/\s/g, "")}`, Icon: PhoneOutlined },
+];
+
+// Closing call to action shown at the bottom of most pages. The `contact` prop
+// is kept for existing callers but no longer changes anything.
 function CallSection({ contact }) {
   return (
-    <Box
-      sx={{
-        color: "white",
-        px: SECTION_PX,
-        py: SECTION_PY,
-      }}
-    >
-      <Box sx={{ background: "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)", borderRadius: 4, py: { xs: 6, md: 8 }, px: { xs: 2, md: 5 } }}>
-        <Container sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-          {(contact ? (
-            <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 8 }}>
-                <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
-                  <Typography variant="h2" sx={{ color: "secondary.contrastText" }} >
-                    Ready to Build Your AI Solution?
-                  </Typography>
-                  <Typography variant="body1" sx={{ pt: 2 }} color="primary.contrastText">
-                    We design and build multi-agent AI systems tailored to your unique business needs. From architecture to deployment, we handle it all.
-                  </Typography>
-                  <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" }, mt: 2 }}>
-                    <Button
-                      component={Link}
-                      href="/contact"
-                      variant="contained"
+    <Box component="section" sx={{ px: SECTION_PX, py: SECTION_PY }}>
+      <Box
+        sx={{
+          background: "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)",
+          borderRadius: 4,
+          py: { xs: 5, md: 8 },
+          px: { xs: 3, md: 6 },
+        }}
+      >
+        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="flex-start">
+          <Grid size={{ xs: 12, md: 8 }}>
+            <Typography variant="h2" sx={{ color: "secondary.contrastText", textWrap: "balance" }}>
+              Collaborate with us on research or production AI
+            </Typography>
+            <Typography variant="body1" sx={{ pt: 2, maxWidth: 640, color: "rgba(255,255,255,0.85)" }}>
+              Whether you&apos;re a company with a problem to solve or a university looking for a research partner, we&apos;d like to hear from you.
+            </Typography>
+            <Button
+              component={Link}
+              href="/contact"
+              variant="contained"
+              endIcon={<ArrowForward fontSize="small" />}
+              sx={{
+                mt: 3,
+                borderRadius: BUTTON_RADIUS,
+                p: "10px 22px",
+                fontSize: { xs: "15px", md: "15px" },
+                backgroundColor: "background.paper",
+                color: "text.primary",
+                boxShadow: "none",
+                "&:hover": { boxShadow: "none", backgroundColor: "primary.contrastText", color: "text.primary" },
+              }}
+            >
+              Start a conversation
+            </Button>
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Box component="ul" sx={{ listStyle: "none", m: 0, p: 0, display: "flex", flexDirection: "column", gap: 2.5 }}>
+              {contactRows.map(({ label, value, href, Icon }) => (
+                <Box component="li" key={label} sx={{ display: "flex", alignItems: "flex-start", gap: 1.5 }}>
+                  <Icon sx={{ color: "rgba(255,255,255,0.85)", fontSize: 22, mt: 0.5 }} />
+                  <Box>
+                    <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.75)" }}>
+                      {label}
+                    </Typography>
+                    <Typography
+                      component="a"
+                      href={href}
+                      variant="h3"
                       sx={{
-                        borderRadius: BUTTON_RADIUS,
-                        px: 3,
-                        py: 1.4,
-                        backgroundColor: "background.paper",
-                        color: "text.primary",
-                        "&:hover": {
-                          backgroundColor: "primary.contrastText",
-                          color: "text.primary"
-                        },
+                        color: "secondary.contrastText",
+                        textDecoration: "none",
+                        overflowWrap: "anywhere",
+                        transition: "color 0.2s",
+                        "&:hover": { color: "secondary.main", textDecoration: "underline", textUnderlineOffset: "4px" },
+                        "&:focus-visible": { outline: 2, outlineColor: "secondary.contrastText", outlineOffset: 3, borderRadius: "4px" },
                       }}
                     >
-                      Discuss Your Project
-                    </Button>
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <Box sx={{ height: "100%", display: "flex", flexDirection: "column", gap: 2, justifyContent: { xs: "flex-start", md: "space-between" }, alignItems: { xs: "center", md: "flex-start" }, textAlign: { xs: "center", md: "left" } }}>
-                  <Box>
-                    <Typography variant="body2" color="primary.contrastText">
-                      Email
-                    </Typography>
-                    <Typography variant="h3" color="secondary.contrastText">
-                      contact@14labs.co
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="primary.contrastText">
-                      Phone
-                    </Typography>
-                    <Typography variant="h3" color="secondary.contrastText">
-                      +92 318 7806914
+                      {value}
                     </Typography>
                   </Box>
                 </Box>
-              </Grid>
-            </Grid>
-          ) : (
-            <Box sx={{ textAlign: "center" }}>
-              <Typography variant="h2" sx={{ color: "secondary.contrastText" }} >
-                Have an idea or challenge in mind?
-              </Typography>
-              <Typography variant="body1" color="primary.contrastText" sx={{ py: 1 }}>
-                Let's talk about how AI and custom software can help your business move faster and smarter.
-              </Typography>
-              <Button
-                component={Link}
-                href="contact"
-                variant="contained"
-                sx={{
-                  borderRadius: BUTTON_RADIUS,
-                  p: "9px 18px",
-                  backgroundColor: "background.paper",
-                  color: "text.primary",
-                  transition: 'all 0.3s ease',
-                  "&:hover": {
-                    boxShadow: "none",
-                    backgroundColor: "primary.contrastText",
-                    color: "text.primary",
-                  },
-                }}
-              >
-                Contact Us
-              </Button>
+              ))}
             </Box>
-          )
-          )}
-
-        </Container>
-      </Box >
-    </Box >
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 }
-
 
 export default CallSection;

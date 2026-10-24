@@ -25,7 +25,7 @@ export async function POST(request) {
         });
 
         await transporter.sendMail({
-            from: `"14 Labs Website" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+            from: `"14Labs Website" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
             to: DESTINATION,
             replyTo: email,
             subject: `[Contact Form] ${subject}`,
