@@ -1,183 +1,156 @@
 export const navItems = [
-  { label: "SERVICES", path: "/services" },
-  { label: "CASE STUDIES", path: "/case-studies" },
+  { label: "RESEARCH", path: "/#research" },
+  { label: "SERVICES", path: "/#services" },
+  { label: "CASE STUDIES", path: "/#case-studies" },
   { label: "ABOUT US", path: "/about-us" },
-  { label: "CONTACT", path: "/contact" },
+];
+
+export const contactInfo = {
+  email: "contact@14labs.co",
+  phone: "+92 318 7806914",
+  location: "Lahore, Pakistan",
+};
+
+export const socialLinks = [
+  { type: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/company/14labs" },
+  { type: "x", label: "X", url: "https://x.com/14labs_co" },
+];
+
+export const footerColumns = [
+  {
+    title: "Explore",
+    links: [
+      { label: "Services", path: "/#services" },
+      { label: "Case studies", path: "/#case-studies" },
+      { label: "About us", path: "/about-us" },
+      { label: "Contact", path: "/contact" },
+    ],
+  },
+  {
+    title: "Research",
+    links: [
+      { label: "Publications", path: "/#research" },
+      { label: "Our focus", path: "/#research-areas" },
+    ],
+  },
+];
+
+// Institutions our papers' co-authors are affiliated with (from the publishers'
+// affiliation records). Shown as "co-authored with researchers from", not as
+// partners. Logos are white versions; width/height are the files' pixel sizes.
+// `label` adds the name beside seal-only logos, which are unreadable when small.
+export const collaborators = [
+  { name: "DFKI (German Research Center for Artificial Intelligence)", country: "Germany", logo: "partners/dfki.webp", width: 290, height: 240 },
+  { name: "University of Engineering and Technology, Lahore", country: "Pakistan", logo: "partners/uet.webp", width: 240, height: 240, label: "UET Lahore" },
+  { name: "Istanbul Technical University", country: "Türkiye", logo: "partners/itu.webp", width: 426, height: 240 },
+  { name: "Yonsei University", country: "South Korea", logo: "partners/yonsei.webp", width: 239, height: 239, label: "Yonsei University" },
+  { name: "Osaka Metropolitan University", country: "Japan", logo: "partners/osaka.webp", width: 1139, height: 222 },
+  { name: "University of Pittsburgh", country: "United States", logo: "partners/pitt.webp", width: 530, height: 236 },
+  { name: "University of Udine", country: "Italy", logo: "partners/udine.webp", width: 240, height: 240, label: "University of Udine" },
+];
+
+// Homepage hero background photos, shown as a slow crossfade under the brand
+// gradient. Unsplash photos (downloaded via the API download endpoint).
+export const heroSlides = [
+  { src: "hero/agriculture.webp", theme: "Agriculture", credit: "Bernd Dittrich", url: "https://unsplash.com/photos/aerial-view-of-agricultural-fields-at-sunset-with-distant-hills-ZIBr6-klEVE" },
+  { src: "hero/materials.webp", theme: "Materials", credit: "Clayton Cardinalli", url: "https://unsplash.com/photos/laser-cutting-machine-with-orange-sparks-hkJNx0EDbjE" },
+  { src: "hero/energy-city-grid.webp", theme: "Energy", credit: "Shio Yang", url: "https://unsplash.com/photos/aerial-view-of-city-during-night-time-b6i9pe16pAg" },
 ];
 
 export const caseStudies = [
   {
     id: "find-sites-workflow",
     title: "AI Find Sites Real Estate Solution",
-    img: "case1.png",
-    date: "1st January 2024",
+    img: "cases/find-sites-card.webp",
   },
   {
     id: "ai-admission-counselor",
     title: "AI Admission Counselor",
-    img: "case2.png",
-    date: "1st January 2024",
+    img: "cases/admission-card.webp",
   },
 ];
 
-export const challanges = [
+export const researchAreas = [
   {
-    icon: "PrecisionManufacturing",
-    title: "Manual work slowing your team",
-    desc: "Repetitive workflows AI agents can automate",
+    icon: "WbSunnyOutlined",
+    title: "Solar energy forecasting",
+    desc: "Multi-horizon irradiance and PV power forecasting.",
+    topics: ["solar"],
   },
   {
-    icon: "Hub",
-    title: "Siloed data across tools",
-    desc: "Knowledge locked in tools your models can't reach",
+    icon: "Biotech",
+    title: "Explainable ML for materials",
+    desc: "Interpretable prediction of material properties and fatigue life.",
+    topics: ["materials", "nano"],
   },
   {
-    icon: "ScienceOutlined",
-    title: "AI pilots that never ship",
-    desc: "Prototypes stuck in notebooks, not production",
+    icon: "CenterFocusStrongOutlined",
+    title: "Computer vision & safety",
+    desc: "Real-time detection with vision and sensor fusion.",
+    topics: ["vision"],
   },
   {
-    icon: "TuneOutlined",
-    title: "Generic tools don't fit your workflow",
-    desc: "You need custom LLM pipelines, not generic tools",
-  },
-];
-
-export const stats = [
-  { value: "15+", label: "Projects Delivered" },
-  { value: "10+", label: "Happy Clients" },
-  { value: "4+", label: "Years Experience" },
-  { value: "95%", label: "Client Satisfaction" },
-];
-
-export const pricing = [
-  {
-    title: "Pilot",
-    duration: "2-3 Weeks",
-    details: "One use-case, Measurable KPI, Limited integrations",
-    pricing: "$1000 - $3000",
-  },
-  {
-    title: "MVP",
-    duration: "4-6 Weeks",
-    details: "Production-ready version, Monitoring, Basic admin",
-    pricing: "$3000 - $8000",
-  },
-  {
-    title: "Scale",
-    duration: "Ongoing",
-    details: "Retraining, Evals, New workflows, Cost optimization",
-    pricing: "$8000 +",
+    icon: "EnergySavingsLeafOutlined",
+    title: "Sustainability analytics",
+    desc: "Air quality prediction for sustainable cities.",
+    topics: ["environment"],
   },
 ];
 
 export const services = [
   {
     sNo: "01",
-    title: "Multi-Agent Systems",
-    desc: "Development of multi-agent systems with built-in observability, enabling monitoring and optimizing specialized agents operating at enterprise scale.",
+    title: "Applied ML & forecasting",
+    desc: "Predictive and explainable machine learning for energy, engineering and operations, from data pipelines to validated models.",
     tags: [
-      "Agent Orchestration",
-      "Built-in Observability",
-      "Enterprise Scale",
-      "Real-time Monitoring",
+      "Time-series forecasting",
+      "Explainable ML (SHAP)",
+      "Predictive modelling",
+      "Model evaluation",
     ],
   },
   {
     sNo: "02",
-    title: "AI Integration",
-    desc: "Seamlessly integrate AI capabilities into your existing systems. Enhance today's operations and drive tomorrow's breakthroughs with intelligent automation",
+    title: "Research & academic collaboration",
+    desc: "Joint research with universities and labs: problem framing, experiments, publications and supervised student projects.",
     tags: [
-      "LLM Integration",
-      "Custom AI Models",
-      "Process Automation",
-      "Data Analytics",
+      "Joint research",
+      "Peer-reviewed publications",
+      "Student projects",
+      "MOUs",
     ],
   },
   {
     sNo: "03",
-    title: "Custom AI Solutions",
-    desc: "Designing intelligent solutions for the future. We build custom AI models and applications tailored to your unique business challenges.",
+    title: "Multi-agent systems",
+    desc: "Development of multi-agent systems with built-in observability, enabling monitoring and optimizing specialized agents operating at enterprise scale.",
     tags: [
-      "RAG Systems",
-      "Fine-tuned Models",
-      "AI Chatbots",
-      "Knowledge Bases",
+      "Agent orchestration",
+      "Built-in observability",
+      "Enterprise scale",
+      "Real-time monitoring",
     ],
   },
   {
     sNo: "04",
-    title: "Web & App Development",
-    desc: "Modern, AI-enhanced websites and applications built with cutting-edge technologies. From intelligent platforms to seamless mobile experiences.",
+    title: "Custom AI solutions",
+    desc: "Designing intelligent solutions for the future. We build custom AI models and applications tailored to your unique business challenges.",
     tags: [
-      "React & Next.js",
-      "Mobile Apps",
-      "AI-Powered UX",
-      "API Integration",
+      "RAG systems",
+      "Fine-tuned models",
+      "AI chatbots",
+      "Knowledge bases",
     ],
-  },
-];
-
-export const tools = [
-  {
-    techType: "AI & LLMs",
-    values: [
-      { file: "openai-2", name: "OpenAI" },
-      { file: "anthropic", name: "Anthropic" },
-      { file: "langchain", name: "LangChain" },
-      { file: "huggingface", name: "Hugging Face" },
-    ],
-  },
-  {
-    techType: "AI Infrastructure",
-    values: [
-      { file: "python-original", name: "Python" },
-      { file: "fastapi-original", name: "FastAPI" },
-      { file: "postgresql-original", name: "PostgreSQL" },
-      { file: "redis-original", name: "Redis" },
-    ],
-  },
-  {
-    techType: "Web & Mobile",
-    values: [
-      { file: "react-original", name: "React" },
-      { file: "nextjs-original", name: "Next.js" },
-      { file: "typescript-original", name: "TypeScript" },
-      { file: "reactnative-original", name: "React Native" },
-    ],
-  },
-  {
-    techType: "Cloud & DevOps",
-    values: [
-      { file: "amazonwebservices-original-wordmark", name: "AWS" },
-      { file: "docker-original", name: "Docker" },
-      { file: "kubernetes-original", name: "Kubernetes" },
-      { file: "vercel-original", name: "Vercel" },
-    ],
-  },
-];
-
-export const features = [
-  {
-    icon: "feature1.png",
-    title: "Fast",
-    desc: "Offering faster training times without compromising accuracy.",
-  },
-  {
-    icon: "feature2.png",
-    title: "Competitive Pricing",
-    desc: "Providing competitive pricing options tailored to your budget & requirements.",
-  },
-  {
-    icon: "feature3.png",
-    title: "Support",
-    desc: "Ensuring ongoing support to maximize the value of our services.",
   },
 ];
 
 export const caseDetails = [
   {
     caseId: "find-sites-workflow",
+    // Article layout (centred header, cover, reading column); see CaseHeader/CaseArticle.
+    layout: "article",
+    // Photos: Unsplash (free licence) by Max Böttinger (cover) and Sean Pollock (card).
+    cover: "cases/find-sites-cover.webp",
     hero: {
       title: "AI Find Sites Real Estate Solution",
       subtitle:
@@ -186,32 +159,32 @@ export const caseDetails = [
         { label: "Industry", value: "Real Estate" },
         { label: "Timeline", value: "1 Month" },
         { label: "Engineers", value: "3" },
-        { label: "Pipeline Nodes", value: "11" },
+        { label: "Pipeline nodes", value: "11" },
       ],
     },
     challenges: {
-      label: "The Challenge",
-      title: "Commercial Real Estate Site Discovery Pain Points",
+      label: "The challenge",
+      title: "Commercial real estate site discovery pain points",
       text: "Traditional site research methods are inefficient, error-prone, and lack the automation that modern commercial real estate professionals need.",
       items: [
         {
           sNo: "01",
-          title: "Time-Intensive Research",
+          title: "Time-intensive research",
           desc: "Analysts spend 6-8 hours per day manually searching across LoopNet, CBRE, JLL, and local broker websites with no integration or automation",
         },
         {
           sNo: "02",
-          title: "Fragmented & Incomplete Data",
+          title: "Fragmented & incomplete data",
           desc: "Property information scattered across 5+ sources with missing contact details, broker information, and geographic data that requires manual consolidation",
         },
         {
           sNo: "03",
-          title: "No Verification Standards",
+          title: "No verification standards",
           desc: "Addresses, square footage, property attributes, and contact details lack systematic verification, leading to 30%+ data inaccuracy rates",
         },
         {
           sNo: "04",
-          title: "Missed Opportunities",
+          title: "Missed opportunities",
           desc: "Manual processes create response delays, duplicate efforts, and significant property discovery gaps that competitors find through automation",
         },
       ],
@@ -220,32 +193,32 @@ export const caseDetails = [
       text: "These challenges compound daily: analysts spend 6-8 hours per property discovery, data accuracy drops to 70%, and critical opportunities are missed entirely. The result is slower deal cycles, higher operational costs, and competitive disadvantage. Automation is no longer optional—it's essential.",
     },
     approach: {
-      label: "Our Approach",
-      title: "AI-Powered Workflow",
+      label: "Our approach",
+      title: "AI-powered workflow",
       text: "An intelligent sequential pipeline that automates commercial real estate research from initial discovery through final qualification.",
       steps: [
         {
           step: "STEP 1",
           icon: "SearchOutlined",
-          title: "Automated Deep Research",
+          title: "Automated deep research",
           desc: "AI searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically, discovering properties that match your criteria.",
         },
         {
           step: "STEP 2",
           icon: "StorageOutlined",
-          title: "Structured Data Extraction",
+          title: "Structured data extraction",
           desc: "Intelligently extracts property details, broker contacts (name, title, email, phone), and rental information from research findings.",
         },
         {
           step: "STEP 3",
           icon: "LocationOnOutlined",
-          title: "Geolocation Verification",
+          title: "Geolocation verification",
           desc: "Verifies address accuracy using Google Geocoding API and enriches data with GPS coordinates and CBSA information.",
         },
         {
           step: "STEP 4",
           icon: "VisibilityOutlined",
-          title: "Computer Vision Analysis",
+          title: "Computer vision analysis",
           desc: "Analyzes aerial and street-view imagery to verify property attributes like square footage, asset type, and premises classification.",
         },
       ],
@@ -253,7 +226,7 @@ export const caseDetails = [
     architecture_highlights: [
       {
         value: "11",
-        label: "Pipeline Nodes",
+        label: "Pipeline nodes",
         desc: "Sequential workflow with specialized processing at each stage",
       },
       {
@@ -263,26 +236,26 @@ export const caseDetails = [
       },
       {
         value: "100%",
-        label: "Data Quality",
+        label: "Data quality",
         desc: "Multi-stage QA with verification and validation",
       },
     ],
     pipeline: {
       label: "Architecture",
-      title: "Intelligent Pipeline Architecture",
+      title: "Intelligent pipeline architecture",
       text: "Click on any node to explore its role and data flow",
       nodes: [
-        { id: "global", label: "Global Config", color: "#377BBB" },
-        { id: "geo", label: "Geography Input", color: "#377BBB" },
-        { id: "research", label: "Deep Research", color: "#00895E" },
-        { id: "extract", label: "Site Extraction", color: "#BB7000" },
+        { id: "global", label: "Global config", color: "#377BBB" },
+        { id: "geo", label: "Geography input", color: "#377BBB" },
+        { id: "research", label: "Deep research", color: "#00895E" },
+        { id: "extract", label: "Site extraction", color: "#BB7000" },
         { id: "geocode", label: "Geocode", color: "#BB7000" },
-        { id: "analysis", label: "Site Attribute Analysis", color: "#BB7000" },
+        { id: "analysis", label: "Site attribute analysis", color: "#BB7000" },
         { id: "join", label: "Join", color: "#BB7000" },
         { id: "filter", label: "Filter", color: "#BB7000" },
-        { id: "qa", label: "QA Node", color: "#BC2831" },
-        { id: "excel", label: "Excel Output", color: "#4B4DB6" },
-        { id: "log", label: "Workflow Log", color: "#4B4DB6" },
+        { id: "qa", label: "QA node", color: "#BC2831" },
+        { id: "excel", label: "Excel output", color: "#4B4DB6" },
+        { id: "log", label: "Workflow log", color: "#4B4DB6" },
       ],
 
       edges: [
@@ -313,38 +286,38 @@ export const caseDetails = [
     },
     key_features: {
       label: "Capabilities",
-      title: "Key Features",
+      title: "Key features",
       text: "A comprehensive suite of AI-powered tools to automate commercial real estate site discovery and qualification.",
       list: [
         {
-          title: "Deep Research Automation",
+          title: "Deep research automation",
           desc: "Searches across LoopNet, CBRE, JLL, Brixmor, and local broker websites automatically, discovering properties missed by manual searching.",
         },
         {
-          title: "Comprehensive Contact Data",
+          title: "Comprehensive contact data",
           desc: "Extracts complete broker information including name, title, company, direct email, and phone numbers for immediate outreach.",
         },
         {
-          title: "Geolocation Verification",
+          title: "Geolocation verification",
           desc: "Validates addresses and enriches with GPS coordinates, CBSA codes, and metropolitan area data for accurate location intelligence.",
         },
         {
-          title: "Computer Vision Analysis",
+          title: "Computer vision analysis",
           desc: "Analyzes aerial and street view imagery to verify property attributes, square footage, and premises classification.",
         },
         {
-          title: "Multi-Stage Quality Assurance",
+          title: "Multi-stage quality assurance",
           desc: "User-configurable qualification criteria with data legitimacy, recency, and criteria matching for transparent decision making.",
         },
         {
-          title: "Real-Time Monitoring",
+          title: "Real-time monitoring",
           desc: "Google Sheets integration logs all workflow executions for tracking, debugging, and maintaining an audit trail.",
         },
       ],
     },
     techStack: {
-      label: "Built With",
-      title: "Technology Stack",
+      label: "Built with",
+      title: "Technology stack",
       text: "Enterprise-grade technologies powering scalable, intelligent multi-agent systems.",
       stacks: [
         {
@@ -379,15 +352,15 @@ export const caseDetails = [
     },
     top_features: [
       {
-        title: "Sequential Pipeline Architecture",
+        title: "Sequential pipeline architecture",
         desc: "11-node data enrichment pipeline processing sites through multiple AI-powered stages for comprehensive analysis.",
       },
       {
-        title: "Multi-Source Integration",
+        title: "Multi-source integration",
         desc: "Integrates Google APIs, AI research, computer vision, and geocoding services into unified workflow.",
       },
       {
-        title: "Real-Time Monitoring & Logging",
+        title: "Real-time monitoring & logging",
         desc: "Google Sheets integration for workflow monitoring, execution tracking, and audit trails.",
       },
     ],
@@ -395,13 +368,15 @@ export const caseDetails = [
       {
         id: "ai-admission-counselor",
         title: "AI Admission Counselor",
-        img: "case2.png",
-        date: "1st January 2024",
+        img: "cases/admission-card.webp",
       },
     ],
   },
   {
     caseId: "ai-admission-counselor",
+    layout: "article",
+    // Photos: Unsplash (free licence) by Zhanhui Li (cover) and Dragos Blaga (card).
+    cover: "cases/admission-cover.webp",
     hero: {
       title: "AI-Powered Admission Counselor",
       subtitle:
@@ -409,13 +384,13 @@ export const caseDetails = [
       stats: [
         { label: "Industry", value: "EdTech" },
         { label: "Timeline", value: "3 months" },
-        { label: "Team Size", value: "4 engineers" },
+        { label: "Team size", value: "4 engineers" },
         { label: "Agents", value: "7 AI" },
       ],
     },
     challenges: {
-      label: "The Challenge",
-      title: "The Problem",
+      label: "The challenge",
+      title: "The problem",
       text: "Applying to universities—especially internationally—is a fragmented and overwhelming process.",
       items: [
         {
@@ -441,32 +416,32 @@ export const caseDetails = [
       ],
     },
     approach: {
-      label: "Our Approach",
-      title: "The Solution",
+      label: "Our approach",
+      title: "The solution",
       text: "We built an AI-driven, agentic admissions consulting platform that breaks the process into specialized domains with intelligent orchestration at the core.",
       steps: [
         {
           step: "STEP 1",
           icon: "AccountTreeOutlined",
-          title: "Master-Worker Architecture",
+          title: "Master-worker architecture",
           desc: "Centralized orchestrator agent coordinates with 6 specialist agents, each handling specific domains",
         },
         {
           step: "STEP 2",
           icon: "GroupsOutlined",
-          title: "1 Orchestrator + 6 Specialists",
+          title: "1 orchestrator + 6 specialists",
           desc: "Admission Counselor routes requests to University Search, Application Requirements, Scholarship Search, Scholarship Requirements, Essay, and Visa agents",
         },
         {
           step: "STEP 3",
           icon: "InsightsOutlined",
-          title: "Data-Driven Recommendations",
+          title: "Data-driven recommendations",
           desc: "Personalized recommendations based on student profiles and real data, not generic advice",
         },
         {
           step: "STEP 4",
           icon: "BoltOutlined",
-          title: "Automated Discovery",
+          title: "Automated discovery",
           desc: "Automates research across universities, scholarships, and visa requirements while keeping humans in control",
         },
       ],
@@ -487,13 +462,13 @@ export const caseDetails = [
     ],
     pipeline: {
       label: "Architecture",
-      title: "Multi-Agent System",
+      title: "Multi-agent system",
       text: "Click on any agent to explore its role and responsibilities",
       nodes: [
         { id: "university", label: "University", color: "#377BBB" },
         { id: "visa", label: "Visa", color: "#377BBB" },
         { id: "application", label: "Application", color: "#00895E" },
-        { id: "counselor", label: "Admission Counselor", color: "#BC2831" },
+        { id: "counselor", label: "Admission counselor", color: "#BC2831" },
         { id: "scholarship", label: "Scholarship", color: "#BB7000" },
         { id: "essay", label: "Essay", color: "#BB7000" },
       ],
@@ -515,38 +490,38 @@ export const caseDetails = [
     },
     key_features: {
       label: "Capabilities",
-      title: "Key Features",
+      title: "Key features",
       text: "A comprehensive suite of AI-powered tools to guide students through every step of the admissions journey.",
       list: [
         {
-          title: "Intelligent Conversation Routing",
+          title: "Intelligent conversation routing",
           desc: "Understands student queries and routes them to the right specialist agent with full context preservation.",
         },
         {
-          title: "Real-Time University Matching",
+          title: "Real-time university matching",
           desc: "Instant matching of universities based on academic profile, preferences, and goals with detailed rankings.",
         },
         {
-          title: "Scholarship Discovery Engine",
+          title: "Scholarship discovery engine",
           desc: "Comprehensive search across thousands of scholarships to find the best opportunities for each student.",
         },
         {
-          title: "Application Timeline Management",
+          title: "Application timeline management",
           desc: "Automated deadline tracking, document checklists, and progress monitoring across all applications.",
         },
         {
-          title: "Essay Assistance & Review",
+          title: "Essay assistance & review",
           desc: "AI-powered feedback on personal essays and statements with suggestions for improvement and impact.",
         },
         {
-          title: "Visa Guidance & Requirements",
+          title: "Visa guidance & requirements",
           desc: "Country-specific visa information, requirements, and procedural guidance for international students.",
         },
       ],
     },
     techStack: {
-      label: "Built With",
-      title: "Technology Stack",
+      label: "Built with",
+      title: "Technology stack",
       text: "Enterprise-grade technologies powering scalable, intelligent multi-agent systems.",
       stacks: [
         {
@@ -579,18 +554,18 @@ export const caseDetails = [
     },
     results: {
       label: "Results",
-      title: "Measurable Impact",
+      title: "Measurable impact",
       text: "The agentic system delivered tangible value through intelligent automation and comprehensive guidance.",
       items: [
-        { value: "75%", label: "Time Reduction", desc: "Reduction in manual research time for students" },
-        { value: "6", label: "Specialist Agents", desc: "AI agents working in coordination to provide end-to-end guidance" },
-        { value: "1", label: "Master Orchestrator", desc: "Central coordinator ensuring cohesive student experience" },
+        { value: "75%", label: "Time reduction", desc: "Reduction in manual research time for students" },
+        { value: "6", label: "Specialist agents", desc: "AI agents working in coordination to provide end-to-end guidance" },
+        { value: "1", label: "Master orchestrator", desc: "Central coordinator ensuring cohesive student experience" },
         { value: "∞", label: "Scalability", desc: "Easily extensible architecture for future agents and domains" },
       ],
     },
     top_features: [
       {
-        title: "Event-Driven",
+        title: "Event-driven",
         desc: "Microservices architecture with asynchronous message processing",
       },
       {
@@ -606,31 +581,78 @@ export const caseDetails = [
       {
         id: "find-sites-workflow",
         title: "AI Find Sites Real Estate Solution",
-        img: "case1.png",
-        date: "1st January 2024",
+        img: "cases/find-sites-card.webp",
       },
     ],
   },
 ];
 
-export const pillars = [
-  "AI-First",
-  "Enterprise Scale",
-  "Transparency",
-  "Real Results",
-];
+// Vision, mission and values, from the "14Labs Research – Main Document".
+export const about = {
+  vision: "Machine learning research that solves humanity's real problems.",
+  mission: "We do original, rigorous machine learning research for organizations tackling real-world problems, turning new ideas into solutions that work and benefit people.",
+};
 
 export const values = [
   {
-    title: "Deep AI Expertise",
-    desc: "From multi-agent architectures to fine-tuned LLMs, our team brings cutting-edge knowledge to every engagement.",
+    title: "Novel work",
+    desc: "We pursue original ideas, not repackaged ones. If an existing tool already solves a client's problem, we tell them.",
   },
   {
-    title: "Practical Engineering",
-    desc: "We don't just design systems — we build and ship them. Every solution is engineered for reliability and real-world performance.",
+    title: "Quality first",
+    desc: "We only deliver results we can stand behind: reproducible experiments, honest evaluation, and clear reporting of what didn't work.",
   },
   {
-    title: "Genuine Partnership",
-    desc: "We align seamlessly with your teams, keep our word, and stay invested in your outcomes long after delivery.",
+    title: "People before profit",
+    desc: "We choose projects by their benefit to people, and we turn down work that would cause harm.",
+  },
+  {
+    title: "Real problems, real outcomes",
+    desc: "We measure success by impact in the real world, not just benchmark scores.",
+  },
+];
+
+// 14Labs people without a profile card, still highlighted in author lists.
+export const otherTeamAuthors = ["Muhammad Baqir"];
+
+export const team = [
+  {
+    name: "Faisal Ali",
+    aliases: ["Faisal Ali"],
+    role: "Researcher & Mechanical Engineer",
+    bio: "Building intelligent applications and explainable models for energy, engineering and enterprise systems.",
+    education: "BSc Mechanical Engineering, UET Lahore",
+    photo: "team/faisal-ali-2026.webp",
+    links: [
+      { type: "scholar", url: "https://scholar.google.com/citations?user=oTPZS2oAAAAJ" },
+      { type: "portfolio", url: "https://engfaisaluet.netlify.app/" },
+      { type: "email", url: "mailto:engfaisaluet@14labs.co" },
+    ],
+  },
+  {
+    name: "Mehmood Ul Haq",
+    aliases: ["Mehmood Ul Haq", "Mehmood ul Haq"],
+    role: "AI/ML Researcher",
+    bio: "Computer Engineering graduate focused on AI, machine learning, deep learning and NLP, building impactful, scalable AI solutions for complex real-world challenges.",
+    education: "MS Data Science, UET Lahore",
+    photo: "team/mehmood-ul-haq-2026.webp",
+    links: [
+      { type: "scholar", url: "https://scholar.google.com/citations?user=oRDkaNIAAAAJ" },
+      { type: "linkedin", url: "https://www.linkedin.com/in/mehmodulhaq570/" },
+      { type: "github", url: "https://github.com/mehmoodulhaq570" },
+      { type: "portfolio", url: "https://mehmoodulhaq570.netlify.app/" },
+      { type: "email", url: "mailto:mehmoodulhaq1040@14labs.co" },
+    ],
+  },
+  {
+    name: "Muhammad Ilyas",
+    aliases: ["Muhammad Ilyas"],
+    role: "Machine Learning Engineer",
+    bio: "Builds real-time, production-style AI systems, with strengths in computer vision, deep learning and deployment. His final-year project was a real-time violence detection system.",
+    education: "BS Computer Science",
+    photo: "team/muhammad-ilyas.webp",
+    links: [
+      { type: "email", url: "mailto:m.ilyaskhan5383@14labs.co" },
+    ],
   },
 ];

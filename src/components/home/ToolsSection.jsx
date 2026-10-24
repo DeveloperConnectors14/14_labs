@@ -39,7 +39,7 @@ function ToolsSection() {
             </Typography>
           </Box>
           <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            We leverage cutting-edge AI frameworks and cloud infrastructure to build intelligent, scalable solutions for enterprise.
+            The frameworks behind our research and the infrastructure behind our production systems.
           </Typography>
         </Grid>
 

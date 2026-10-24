@@ -8,13 +8,13 @@ const SITE_URL = "https://14labs.co";
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "14Labs",
+    default: "14Labs · AI Engineering, Applied Machine Learning & Research",
     // Pages set their own title; this frames it. Without a template every route
     // inherits the bare site name, which is what shipped until now.
     template: "%s · 14Labs",
   },
   description:
-    "14Labs builds AI and machine learning systems — multi-agent architectures, LLM pipelines, and applied research delivered to production.",
+    "14Labs, Lahore, Pakistan: AI engineering, applied machine learning and peer-reviewed research in solar energy forecasting, explainable ML and computer vision.",
   icons: {
     // Google's favicon crawler looks for /favicon.ico by that exact name.
     // Both files are generated from public/logo-14.png — see scripts/generate-icons.mjs.
@@ -27,7 +27,7 @@ export const metadata = {
     url: SITE_URL,
     title: "14Labs",
     description:
-      "AI and machine learning systems — multi-agent architectures, LLM pipelines, and applied research.",
+      "AI engineering, applied machine learning and peer-reviewed research, from Lahore, Pakistan.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "14Labs" }],
   },
   twitter: {
@@ -35,7 +35,7 @@ export const metadata = {
     site: "@14labs_co",
     title: "14Labs",
     description:
-      "AI and machine learning systems — multi-agent architectures, LLM pipelines, and applied research.",
+      "AI engineering, applied machine learning and peer-reviewed research, from Lahore, Pakistan.",
     images: ["/og.png"],
   },
 };
@@ -51,7 +51,7 @@ const organizationSchema = {
   image: `${SITE_URL}/og.png`,
   email: "contact@14labs.co",
   description:
-    "14Labs builds AI and machine learning systems — multi-agent architectures, LLM pipelines, and applied research.",
+    "14Labs, Lahore, Pakistan: AI engineering, applied machine learning and peer-reviewed research in solar energy forecasting, explainable ML and computer vision.",
   sameAs: ["https://x.com/14labs_co", "https://www.linkedin.com/company/14labs"],
 };
 

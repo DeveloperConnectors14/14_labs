@@ -1,134 +1,91 @@
-"use client";
-
 import CallSection from "@/components/general/CallSection";
-import { getPillars, getStats, getValues } from "@/services/dataService";
+import { getAbout, getContactInfo, getValues } from "@/services/dataService";
 import { Box, Typography, Grid } from "@mui/material";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS, BUTTON_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
 
-const stats = getStats();
-const pillars = getPillars();
+export const metadata = {
+    title: "About",
+    description: "14Labs, Lahore, Pakistan: original, rigorous machine learning research turned into solutions that work and benefit people.",
+};
+
+const about = getAbout();
+const contactInfo = getContactInfo();
 const values = getValues();
+
+const cardSx = {
+    height: "100%",
+    p: { xs: 2.5, md: 3 },
+    borderRadius: CARD_RADIUS,
+    border: 1,
+    borderColor: "divider",
+    backgroundColor: "background.paper",
+};
 
 function AboutUs() {
     return (
         <Box>
             <Box
+                component="section"
                 sx={{
                     background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
                     px: SECTION_PX,
                     py: SECTION_PY,
                 }}
             >
-                <Grid container spacing={4}>
-                    <Grid size={{ xs: 12 }}>
-                        <Typography variant="h2" sx={{ color: "text.primary" }}>
-                            Designing{" "}
-                            <Box component="span" sx={{ color: "text.secondary" }}>
-                                Intelligent Solutions
-                            </Box>
-                        </Typography>
+                <Typography variant="caption" sx={{ display: "block", color: "text.secondary", letterSpacing: "0.08em", textTransform: "uppercase", mb: 2 }}>
+                    Our vision
+                </Typography>
+                {/* The vision statement is the page headline, with its last words highlighted. */}
+                <Typography variant="h1" component="h1" sx={{ color: "text.primary", maxWidth: 900 }}>
+                    {about.vision.replace(/humanity's real problems\.$/, "")}
+                    <Box component="span" sx={{ color: "text.secondary" }}>
+                        humanity&apos;s real problems
+                    </Box>
+                </Typography>
 
-                        <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-                            14Labs is an AI-first technology company dedicated to transforming businesses through intelligent automation and cutting-edge AI solutions. We combine deep AI expertise with practical engineering to deliver systems that drive real business value.
-                        </Typography>
-
-                        <Typography variant="body1" color="text.primary">
-                            From multi-agent systems to custom LLM integrations, we specialize in building AI infrastructure that scales. We believe in genuine support, seamless team alignment, and delivering outcomes that matter.
-                        </Typography>
-
-                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mt: 4 }}>
-                            {pillars.map((p) => (
-                                <Box
-                                    key={p}
-                                    sx={{
-                                        px: 2.5,
-                                        py: 1,
-                                        borderRadius: BUTTON_RADIUS,
-                                        backgroundColor: "primary.contrastText",
-                                        color: "text.primary",
-                                        fontSize: { xs: "12px", sm: "13px", md: "14px" },
-                                        fontFamily: "'Instrument Sans', sans-serif",
-                                    }}
-                                >
-                                    {p}
-                                </Box>
-                            ))}
-                        </Box>
-                    </Grid>
-                </Grid>
+                <Typography variant="body1" sx={{ pt: 3, maxWidth: 760 }} color="text.primary">
+                    14Labs is an AI engineering, applied machine learning and research company based in {contactInfo.location}. We publish peer-reviewed research and turn it into production AI systems for companies and research partners.
+                </Typography>
             </Box>
 
-            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
-                <Grid container spacing={3}>
-                    {stats.map((s) => (
-                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={s.label}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "flex-start",
-                                    gap: 2.5,
-                                    p: 2,
-                                    borderRadius: CARD_RADIUS,
-                                    border: 1,
-                                    borderColor: "divider",
-                                    backgroundColor: "background.paper",
-                                    transition: "0.3s",
-                                }}
-                            >
-                                <Box>
-                                    <Typography
-                                        sx={{
-                                            lineHeight: 1,
-                                            mb: 3,
-                                            fontWeight: 700,
-                                            fontSize: { xs: "48px", sm: "64px", md: "88px" },
-                                            color: "text.primary",
-                                            fontFamily: "'Instrument Sans', sans-serif",
-                                        }}
-                                    >
-                                        {s.value}
-                                    </Typography>
-                                    <Typography variant="h3" sx={{ color: "text.black" }}>
-                                        {s.label}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        </Grid>
-                    ))}
-                </Grid>
+            <Box component="section" sx={{ px: SECTION_PX, py: SECTION_PY }}>
+                <Box sx={cardSx}>
+                    <Typography variant="caption" sx={{ display: "block", color: "text.grey", textTransform: "uppercase", mb: 2 }}>
+                        Our mission
+                    </Typography>
+                    <Typography variant="h3" sx={{ color: "text.black", fontWeight: 500, maxWidth: 1000 }}>
+                        {about.mission}
+                    </Typography>
+                </Box>
             </Box>
 
-            <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
+            <Box component="section" sx={{ px: SECTION_PX, py: SECTION_PY }}>
                 <Grid container spacing={6}>
                     <Grid size={{ xs: 12, md: 5 }}>
                         <Typography variant="h2" sx={{ color: "text.primary" }}>
-                            Who{" "}
+                            Our{" "}
                             <Box component="span" sx={{ color: "text.secondary" }}>
-                                We Are
+                                values
                             </Box>
                         </Typography>
 
                         <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-                            We are a team of AI engineers, researchers, and product builders...
+                            The principles behind which projects we take on and how we carry them out.
                         </Typography>
                     </Grid>
 
                     <Grid size={{ xs: 12, md: 7 }}>
                         <Grid container spacing={2}>
-                            {values.map((v) => (
-                                <Grid size={{ xs: 12 }} key={v.title}>
-                                    <Box sx={{
-                                        p: { xs: 2, sm: 2.5, md: 3 },
-                                        borderRadius: CARD_RADIUS,
-                                        border: 1,
-                                        borderColor: "divider",
-                                        backgroundColor: "background.paper",
-                                    }}>
+                            {values.map((v, i) => (
+                                <Grid size={{ xs: 12, sm: 6 }} key={v.title}>
+                                    <Box sx={cardSx}>
+                                        <Typography variant="caption" sx={{ display: "block", color: "text.grey", mb: 1 }}>
+                                            {String(i + 1).padStart(2, "0")}
+                                        </Typography>
                                         <Typography variant="h3">
                                             {v.title}
                                         </Typography>
-
-                                        <Typography variant="body2" color="text.grey" sx={{ py: 1 }}>
+                                        <Typography variant="body2" color="text.grey" sx={{ pt: 1 }}>
                                             {v.desc}
                                         </Typography>
                                     </Box>

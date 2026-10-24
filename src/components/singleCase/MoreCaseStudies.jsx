@@ -10,9 +10,9 @@ function MoreCaseStudies({ moreCases }) {
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <Typography variant="h2" sx={{ color: "text.primary" }}>
-                            View More{" "}
+                            View more{" "}
                             <Box component="span" sx={{ color: "text.secondary" }}>
-                                Case Studies
+                                case studies
                             </Box>
                         </Typography>
                         <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
@@ -54,9 +54,6 @@ function MoreCaseStudies({ moreCases }) {
                                         <CardContent sx={{ flexGrow: 1 }}>
                                             <Typography variant="h3" color="text.black">
                                                 {item.title}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.grey" sx={{ pt: 0.5 }}>
-                                                {item.date}
                                             </Typography>
                                         </CardContent>
                                     </Card>

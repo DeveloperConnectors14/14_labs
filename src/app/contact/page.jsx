@@ -11,6 +11,9 @@ import {
   Alert,
 } from "@mui/material";
 import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import { getContactInfo } from "@/services/dataService";
+
+const contactInfo = getContactInfo();
 
 const textFieldSx = {
   "& .MuiOutlinedInput-root": {
@@ -108,7 +111,7 @@ function ContactPage() {
           <Typography variant="h2" sx={{ color: "text.primary" }}>
             Contact{" "}
             <Box component="span" sx={{ color: "text.secondary" }}>
-              Us
+              us
             </Box>
           </Typography>
 
@@ -122,7 +125,7 @@ function ContactPage() {
                 Email
               </Typography>
               <Typography variant="h3" color="text.primary">
-                contact@14labs.co
+                {contactInfo.email}
               </Typography>
             </Box>
             <Box>
@@ -130,7 +133,7 @@ function ContactPage() {
                 Phone
               </Typography>
               <Typography variant="h3" color="text.primary">
-                +92 318 7806914
+                {contactInfo.phone}
               </Typography>
             </Box>
             <Box>
@@ -138,7 +141,7 @@ function ContactPage() {
                 Location
               </Typography>
               <Typography variant="h3" color="text.primary">
-                Lahore, Pakistan
+                {contactInfo.location}
               </Typography>
             </Box>
           </Box>
@@ -155,7 +158,7 @@ function ContactPage() {
             }}
           >
             <TextField
-              placeholder="Full Name"
+              placeholder="Full name"
               name="name"
               value={formData.name}
               onChange={handleChange}
@@ -165,7 +168,7 @@ function ContactPage() {
             />
 
             <TextField
-              placeholder="Email Address"
+              placeholder="Email address"
               name="email"
               type="email"
               value={formData.email}

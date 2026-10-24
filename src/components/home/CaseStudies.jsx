@@ -10,13 +10,13 @@ import {
   CardMedia,
 } from "@mui/material";
 import { getcaseStudies } from "@/services/dataService";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, TILE_RADIUS, NAV_SCROLL_MARGIN } from "@/theme/tokens";
 
 const studies = getcaseStudies();
 
 function CaseStudies() {
   return (
-    <Box sx={{ px: SECTION_PX, py: SECTION_PY }}>
+    <Box component="section" id="case-studies" sx={{ px: SECTION_PX, py: SECTION_PY, scrollMarginTop: NAV_SCROLL_MARGIN }}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h2" sx={{ color: "text.primary" }}>
@@ -25,7 +25,7 @@ function CaseStudies() {
             </Box>
           </Typography>
           <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            Explore how we've transformed businesses across industries with intelligent automation, multi-agent systems, and cutting-edge AI technology.
+            See how we&apos;ve applied AI and machine learning to real projects, from intelligent automation to multi-agent systems.
           </Typography>
         </Grid>
         <Grid size={12}>
@@ -52,7 +52,6 @@ function CaseStudies() {
                       borderColor: "transparent",
                       background: "linear-gradient(90deg, #016b64bb, #054c64c5, #063864cb, #02185abb)",
                       "& .caseTitle": { color: "secondary.contrastText" },
-                      "& .caseDate": { color: "primary.contrastText" },
                     },
                   }}
                 >
@@ -66,9 +65,6 @@ function CaseStudies() {
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography className="caseTitle" variant="h3" color="text.black" sx={{ transition: "color 0.3s" }}>
                       {item.title}
-                    </Typography>
-                    <Typography className="caseDate" variant="body2" color="text.grey" sx={{ pt: 1, transition: "color 0.3s" }}>
-                      {item.date}
                     </Typography>
                   </CardContent>
                 </Card>

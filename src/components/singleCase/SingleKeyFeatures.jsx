@@ -20,7 +20,7 @@ function SingleKeyFeatures({ keyFeatures }) {
                                 <>
                                     Key{" "}
                                     <Box component="span" sx={{ color: "text.secondary" }}>
-                                        Features
+                                        features
                                     </Box>
                                 </>
                             )}

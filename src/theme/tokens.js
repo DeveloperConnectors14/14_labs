@@ -4,3 +4,7 @@ export const CARD_RADIUS = "20px";
 export const TILE_RADIUS = "12px";
 export const BUTTON_RADIUS = "60px";
 export const BUTTON_PADDING = { px: 3, py: 1.4 };
+// Fixed navbar height per breakpoint, so /#anchor jumps land below it.
+export const NAV_SCROLL_MARGIN = { xs: "80px", sm: "90px", md: "80px", lg: "104px" };
+// Brand teal-to-navy gradient used by the homepage hero and paper headers.
+export const BRAND_GRADIENT = "linear-gradient(90deg, #00baaf, #0186b2, #0261b3, #002cb6)";

@@ -6,8 +6,16 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import Image from "next/image";
+import ScienceOutlinedIcon from "@mui/icons-material/ScienceOutlined";
+import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
+import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
 import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+
+const iconMap = {
+  ScienceOutlined: ScienceOutlinedIcon,
+  EngineeringOutlined: EngineeringOutlinedIcon,
+  VerifiedOutlined: VerifiedOutlinedIcon,
+};
 
 const features = getFeatures();
 
@@ -17,12 +25,12 @@ function WhyChooseUs() {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h2" sx={{ color: "text.primary" }}>
-            What set us <Box component="span" sx={{ color: "text.secondary" }}>
+            What sets us <Box component="span" sx={{ color: "text.secondary" }}>
               apart
             </Box>
           </Typography>
           <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
-            We differentiate ourselves from other AI service providers by:
+            How we work, whether the partner is a company or a university:
           </Typography>
         </Grid>
         <Grid size={12}>
@@ -43,17 +51,23 @@ function WhyChooseUs() {
                   }}
                 >
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Box sx={{ mb: 3 }}>
-                      <Image
-                        src={`/media/${item.icon}`}
-                        alt={item.icon}
-                        width={60}
-                        height={60}
-                        style={{
-                          objectFit: "contain",
-                          borderRadius: "100%",
-                        }}
-                      />
+                    <Box
+                      sx={{
+                        mb: 3,
+                        width: 60,
+                        height: 60,
+                        borderRadius: "50%",
+                        border: 1,
+                        borderColor: "divider",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {(() => {
+                        const Icon = iconMap[item.icon];
+                        return Icon ? <Icon sx={{ fontSize: 32, color: "text.secondary" }} /> : null;
+                      })()}
                     </Box>
                     <Typography variant="h3">
                       {item.title}

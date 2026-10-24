@@ -1,119 +1,101 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import {
-    Box,
-    Container,
-    Grid,
-    Typography,
-    Divider,
-    Button,
-} from "@mui/material";
-
+import Image from "next/image";
+import { Box, Grid, Typography, Divider, IconButton } from "@mui/material";
 import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import Image from "next/image";
-import { getNavItems } from "@/services/dataService";
+import { getContactInfo, getFooterColumns, getSocialLinks } from "@/services/dataService";
 import { SECTION_PX } from "@/theme/tokens";
 
-const navItems = getNavItems();
+const contactInfo = getContactInfo();
+const footerColumns = getFooterColumns();
+const socialLinks = getSocialLinks();
 
-const Footer = () => {
+const socialIcons = { linkedin: LinkedInIcon, x: XIcon };
+
+const headingSx = { display: "block", color: "text.grey", textTransform: "uppercase", mb: 2 };
+
+const linkSx = {
+    display: "block",
+    width: "fit-content",
+    color: "text.primary",
+    textDecoration: "none",
+    transition: "color 0.3s ease",
+    "&:hover": { color: "text.secondary" },
+};
+
+function Footer() {
     return (
-        <Box sx={{ px: SECTION_PX, py: 5 }}>
-            <Grid container alignItems="center" spacing={3}>
-                <Grid size={{ xs: 6, md: 3 }}>
-                    <Button
-                        component={Link}
-                        href="/"
-                        sx={{
-                            "&:hover": {
-                                backgroundColor: "transparent",
-                            },
-                        }}
-                    >
-                        <Image
-                            src="/media/logo.svg"
-                            alt="14Labs Logo"
-                            width={85.53}
-                            height={32}
-                        />
-                    </Button>
+        <Box component="footer" sx={{ px: SECTION_PX, pt: { xs: 5, md: 6 }, pb: 4, borderTop: 1, borderColor: "divider" }}>
+            <Grid container spacing={{ xs: 4, md: 3 }}>
+                <Grid size={{ xs: 12, md: 4 }}>
+                    <Link href="/" aria-label="14Labs home" style={{ display: "inline-flex" }}>
+                        <Image src="/media/logo.svg" alt="14Labs Logo" width={86} height={32} />
+                    </Link>
+                    <Typography variant="body2" color="text.primary" sx={{ pt: 2, maxWidth: 320 }}>
+                        AI Engineering, Applied Machine Learning & Research
+                    </Typography>
+                    <Typography variant="body2" color="text.grey" sx={{ pt: 1 }}>
+                        {contactInfo.location}
+                    </Typography>
                 </Grid>
-                <Grid size={{ xs: 12, md: 6 }} sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", alignItems: "center", }}>
-                    <Box sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-evenly", alignItems: "center", width: "100%" }}>
 
-                        {navItems.map((item) => (
-                            <Link key={item.path} href={item.path} style={{
-                                textDecoration: "none",
-                            }}>
-                                <Typography sx={{
-                                    fontStyle: "medium",
-                                    height: "24px",
-                                    fontWeight: 500,
-                                    fontsize: "16px",
-                                    lineHeight: "150%",
-                                    color: "text.primary",
-                                    transition: 'all 0.3s ease',
-                                    fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
-                                        color: "text.secondary",
-                                    },
-                                }}>
-                                    {item.label}
+                {footerColumns.map((column) => (
+                    <Grid size={{ xs: 6, md: 2 }} key={column.title} component="nav" aria-label={column.title}>
+                        <Typography variant="caption" sx={headingSx}>
+                            {column.title}
+                        </Typography>
+                        <Box sx={{ display: "flex", flexDirection: "column", gap: 1.25 }}>
+                            {column.links.map((link) => (
+                                <Typography key={link.path} variant="body2" component={Link} href={link.path} sx={linkSx}>
+                                    {link.label}
                                 </Typography>
-                            </Link>
-                        ))}
+                            ))}
+                        </Box>
+                    </Grid>
+                ))}
+
+                <Grid size={{ xs: 12, md: 4 }}>
+                    <Typography variant="caption" sx={headingSx}>
+                        Contact
+                    </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1.25 }}>
+                        <Typography variant="body2" component="a" href={`mailto:${contactInfo.email}`} sx={linkSx}>
+                            {contactInfo.email}
+                        </Typography>
+                        <Typography variant="body2" component="a" href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} sx={linkSx}>
+                            {contactInfo.phone}
+                        </Typography>
                     </Box>
-                </Grid>
-                <Grid size={{ xs: 6, sm: 6, md: 3 }}>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "flex-end",
-                        }}
-                    >
-                        <Link
-                            href="https://x.com/14labs_co"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ display: "inline-flex", padding: 8 }}
-                        >
-                            <XIcon fontSize="small" sx={{
-                                color: "text.black",
-                                transition: "color 0.3s ease",
-                                "&:hover": {
-                                    color: "text.secondary",
-                                },
-                            }} />
-                        </Link>
-                        <Link
-                            href="https://www.linkedin.com/company/14labs"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ display: "inline-flex", padding: 8 }}
-                        >
-                            <LinkedInIcon fontSize="small" sx={{
-                                color: "text.black",
-                                transition: "color 0.3s ease",
-                                "&:hover": {
-                                    color: "text.secondary",
-                                },
-                            }} />
-                        </Link>
+                    <Box sx={{ display: "flex", gap: 1, pt: 2 }}>
+                        {socialLinks.map(({ type, label, url }) => {
+                            const Icon = socialIcons[type];
+                            return (
+                                <IconButton
+                                    key={type}
+                                    component="a"
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`14Labs on ${label} (opens in new tab)`}
+                                    sx={{ border: 1, borderColor: "divider", color: "text.black", "&:hover": { color: "text.secondary" } }}
+                                >
+                                    <Icon fontSize="small" />
+                                </IconButton>
+                            );
+                        })}
                     </Box>
                 </Grid>
             </Grid>
 
-            <Divider sx={{ my: 3 }} />
+            <Divider sx={{ mt: { xs: 4, md: 5 }, mb: 3 }} />
 
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, pt: 1 }}>
-                <Typography variant="body2" sx={{ color: "text.grey" }}>
-                    © Copyright 2026, All Rights Reserved
-                </Typography>
-            </Box>
+            <Typography variant="body2" sx={{ color: "text.grey", textAlign: { xs: "center", md: "left" } }}>
+                © {new Date().getFullYear()} 14Labs · {contactInfo.location}. All rights reserved.
+            </Typography>
         </Box>
     );
-};
+}
 
 export default Footer;
