@@ -31,6 +31,9 @@ const textFieldSx = {
       borderColor: "text.secondary",
       borderWidth: "1.5px",
     },
+    "&.Mui-error fieldset": {
+      borderColor: "error.main",
+    },
   },
   "& .MuiInputBase-input": {
     color: "text.black",
@@ -57,6 +60,8 @@ function ContactPage() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // Subject and message are each optional, but at least one must be filled in.
+  const [contentMissing, setContentMissing] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbar, setSnackbar] = useState({ severity: "success", message: "" });
 
@@ -65,10 +70,15 @@ function ContactPage() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    if (e.target.name === "subject" || e.target.name === "message") setContentMissing(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.subject.trim() && !formData.message.trim()) {
+      setContentMissing(true);
+      return;
+    }
     setIsSubmitted(true);
 
     try {
@@ -184,7 +194,7 @@ function ContactPage() {
               value={formData.subject}
               onChange={handleChange}
               fullWidth
-              required
+              error={contentMissing}
               sx={textFieldSx}
             />
 
@@ -196,7 +206,8 @@ function ContactPage() {
               multiline
               rows={5}
               fullWidth
-              required
+              error={contentMissing}
+              helperText={contentMissing ? "Add a subject or a message" : ""}
               sx={textFieldSx}
             />
 

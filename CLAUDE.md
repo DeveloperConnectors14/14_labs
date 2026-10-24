@@ -139,6 +139,17 @@ Four columns: brand/tagline/location, Explore, Research (Publications, Our focus
   - After those deletions, the `swiper` package can be uninstalled.
 - The X and LinkedIn footer links haven't been verified.
 
+## Deployment
+
+- **Official flow:** merge on GitHub, then pull on the VM. Server: `14labs-new` (SSH alias), behind Cloudflare and nginx.
+  - **14labs.co** = `/opt/services/website` → `src/` tracks branch **`new-project`**, port 3000.
+  - **staging.14labs.co** = `/opt/services/website-staging` → `src/` tracks branch **`previous-site`** (the site that was live before the research redesign, commit `b505e41`), port 3007.
+  - Deploy: `cd /opt/services/<site>/src && sudo -u abdullah git pull --ff-only origin <branch> && cd .. && sudo docker compose up -d --build`. Folders belong to `abdullah`, who maintains the infra repo `/opt/services` (14labs-infra); tell him when the branch mapping changes.
+  - Rollback for 14labs.co: point `website/src` at `previous-site` (or a known good commit) and rebuild.
+- First research-redesign deploy: PR #5 (`feature/next-changes` → `new-project`), merge commit `3be6f48`, on 2026-10-24.
+- The repo's **Cloudflare Pages** check fails on every commit, including ones before the redesign; it is not what serves the site. Vercel previews succeed.
+- **Contact form email:** `/api/contact` sends via the self-hosted Stalwart server on the same VM (`mail.14labs.co:465`, TLS) as **`noreply@14labs.co`** (a sending-only user account created 2026-10-24) to `contact@14labs.co`, a Stalwart mailing list that forwards to baqir@ and abdullah@. The SMTP settings and password live only in each site's server `.env` (backups `.env.bak-20261024`); recreate the container after changing them. Stalwart 0.16 is managed via JMAP (`x:Account/set` etc. at `https://mail.14labs.co/jmap/`) or its web admin; there is no `/api` REST endpoint.
+
 ## Tools and accounts
 
 - **Second Google Drive:** a local MCP server `gdrive-separate` connected to **baqir@14labs.co**. It uses Google Cloud project `claude-drive-14labs-261020` (Drive and Docs APIs enabled; Sheets is not).
