@@ -62,11 +62,12 @@ function CollaboratorStrip() {
               "& .logoWhite, & .logoColor, & .logoLabel": { transition: "opacity 0.3s ease, color 0.3s ease" },
               [HOVER]: {
                 "&:hover": {
-                  backgroundColor: "background.paper",
-                  borderColor: "background.paper",
+                  // Always white, so the logos' original colours show in both themes.
+                  backgroundColor: "common.white",
+                  borderColor: "common.white",
                   "& .logoWhite": { opacity: 0 },
                   "& .logoColor": { opacity: 1 },
-                  "& .logoLabel": { color: "text.primary" },
+                  "& .logoLabel": { color: "brand.navy" },
                 },
               },
             }}

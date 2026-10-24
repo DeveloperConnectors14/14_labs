@@ -98,12 +98,12 @@ function HeroSection() {
                                     fontSize: { xs: "15px", md: "16px" },
                                     // Teal like the navbar's Let's connect: teal marks the main action.
                                     backgroundColor: "secondary.main",
-                                    color: "text.primary",
+                                    color: "brand.navy",
                                     transition: 'all 0.3s ease',
                                     "&:hover": {
                                         boxShadow: "none",
                                         backgroundColor: "primary.contrastText",
-                                        color: "text.primary",
+                                        color: "brand.navy",
                                     },
                                 }}
                             >

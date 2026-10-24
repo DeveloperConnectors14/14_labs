@@ -102,6 +102,12 @@ Removed from the homepage: pricing, "Challenges we can overcome", research outpu
 - Homepage service cards always show number, title, description and up to 3 tag chips (nothing is hidden behind hover); the whole card links to `/services`, and hover only adds the teal→navy gradient. An "Explore services" button sits under the intro on the left.
 - Both the homepage service cards and the case-study challenge cards use the shared `src/components/general/NumberedCard.jsx` (number + divider, title, description always visible; hover only adds the teal→navy gradient).
 
+### Light / dark theme
+- **Light is the default for everyone** (even if their device is in dark mode); dark mode is opt-in via the sun/moon button in the navbar (`ThemeToggle.jsx`, next to "Let's connect"; beside the menu icon on phones) and remembered by MUI (`localStorage` key `mui-mode`). Chosen so every visitor, e.g. a university contact, first sees the same official look.
+- Built on MUI CSS-variable colour schemes (`src/contexts/ThemeContext.jsx`: `colorSchemes.light/dark`, class on `<html>`); `InitColorSchemeScript` in `layout.jsx` applies the saved choice before first paint (no flash).
+- Dark palette: background `#071521`, cards `#0D2131`, text `#E6EDF3`, grey `#93A4B3`, teal unchanged. `palette.brand.navy/teal` stay fixed in both modes: use `brand.navy` for labels on teal buttons and white tiles. The hero, research cards, paper headers and the call-to-action box look the same in both modes.
+- Rules for new code: use palette names (`text.primary`, `background.paper`, `divider`, `SOFT_GRADIENT` from tokens) instead of hex values; for scheme-specific elements use `showInScheme()` (`src/theme/colorScheme.js`) or `theme.applyStyles("dark", …)`; check new UI in both modes. Logos: `ThemedLogo` (colour / `logo-dark.svg` / `logo-white.svg` over the hero).
+
 ### Writing style
 - All headings, labels and tags use **sentence case** ("Our services", "Key features", "Contact us"). Keep names (case-study titles, people), acronyms (AI, ML, QA) and brands as they are. The hero tagline and the 2–3 word research card titles stay title case.
 

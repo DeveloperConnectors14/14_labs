@@ -10,19 +10,20 @@ const Node = ({ id, label, color = "#377BBB" }) => {
         <Paper
             id={id}
             elevation={0}
-            sx={{
+            sx={(theme) => ({
                 px: { xs: 0.5, sm: 0.5, md: 2 },
                 py: { xs: 0.5, sm: 1, md: 1.5 },
                 borderRadius: TILE_RADIUS,
                 border: "1px dashed #D9D9D9",
+                ...theme.applyStyles("dark", { borderColor: theme.vars.palette.divider }),
                 display: "flex",
                 alignItems: "center",
                 gap: 1,
                 minWidth: { xs: 150, sm: 200, md: 240 },
                 justifyContent: "center",
-                background: "#fff",
+                backgroundColor: "background.paper",
                 fontFamily: "IBM Plex Mono",
-            }}
+            })}
         >
             <Box
                 sx={{

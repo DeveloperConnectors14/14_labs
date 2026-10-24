@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import ThemedLogo from "@/components/common/ThemedLogo";
 import { Box, Grid, Typography, Divider, IconButton } from "@mui/material";
 import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -31,7 +31,7 @@ function Footer() {
             <Grid container spacing={{ xs: 4, md: 3 }}>
                 <Grid size={{ xs: 12, md: 4 }}>
                     <Link href="/" aria-label="14Labs home" style={{ display: "inline-flex" }}>
-                        <Image src="/media/logo.svg" alt="14Labs Logo" width={86} height={32} />
+                        <ThemedLogo />
                     </Link>
                     <Typography variant="body2" color="text.primary" sx={{ pt: 2, maxWidth: 320 }}>
                         AI Engineering, Applied Machine Learning & Research

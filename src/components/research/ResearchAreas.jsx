@@ -135,7 +135,7 @@ function ResearchAreas() {
                           href={`/research/${paper.id}`}
                           label={paper.shortTitle}
                           clickable
-                          sx={{ display: "inline-flex", "&:hover": { backgroundColor: "secondary.main" } }}
+                          sx={{ display: "inline-flex", "&:hover": { backgroundColor: "secondary.main", color: "brand.navy" } }}
                         />
                       ))}
                     </Box>

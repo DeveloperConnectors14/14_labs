@@ -1,7 +1,7 @@
 import CallSection from "@/components/general/CallSection";
 import { getAbout, getContactInfo, getValues } from "@/services/dataService";
 import { Box, Typography, Grid } from "@mui/material";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 
 export const metadata = {
     title: "About",
@@ -27,7 +27,7 @@ function AboutUs() {
             <Box
                 component="section"
                 sx={{
-                    background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+                    background: SOFT_GRADIENT,
                     px: SECTION_PX,
                     py: SECTION_PY,
                 }}

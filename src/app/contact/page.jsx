@@ -10,7 +10,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, BUTTON_RADIUS, TILE_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 import { getContactInfo } from "@/services/dataService";
 
 const contactInfo = getContactInfo();
@@ -113,7 +113,7 @@ function ContactPage() {
       sx={{
         px: SECTION_PX,
         py: SECTION_PY,
-        background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)",
+        background: SOFT_GRADIENT,
       }}
     >
       <Grid container spacing={3} alignItems="flex-start">
@@ -220,12 +220,12 @@ function ContactPage() {
                 sx={{
                   borderRadius: BUTTON_RADIUS,
                   p: "9px 18px",
-                  color: "text.primary",
+                  color: "brand.navy",
                   backgroundColor: "secondary.main",
                   transition: "all 0.3s ease",
                   "&:hover": {
                     backgroundColor: "primary.contrastText",
-                    color: "text.primary",
+                    color: "brand.navy",
                   },
                 }}
               >

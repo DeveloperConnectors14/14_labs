@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 import NumberedCard from "@/components/general/NumberedCard";
 
 
@@ -7,7 +7,7 @@ function SingleCaseChallanges({ challanges }) {
 
     return (
         <>
-            <Box sx={{ px: SECTION_PX, py: SECTION_PY, background: "linear-gradient(90deg, #e3f5f2, #e3edf0, #e6e4ed, #e4e5ec)", }}>
+            <Box sx={{ px: SECTION_PX, py: SECTION_PY, background: SOFT_GRADIENT, }}>
                 <Grid container spacing={3}>
                     <Grid size={{ xs: 12, md: 4 }}>
                         <Typography variant="body1" sx={{ py: 1 }} color="text.primary">
