@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useCallback, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -17,14 +17,24 @@ import {
 import {
     Menu as MenuIcon,
     Close as CloseIcon,
+    ExpandMore,
 } from "@mui/icons-material";
 import ThemedLogo from "@/components/common/ThemedLogo";
 import ThemeToggle from "@/components/common/ThemeToggle";
+import { MenuPanel, NavDropdown } from "@/components/common/NavMenu";
 import { BUTTON_RADIUS, NAV_HEIGHT, FONT_MONO, SECTION_PX } from "@/theme/tokens";
-import { getNavItems, hasDarkHero } from "@/services/dataService";
+import { getNavItems, getNavMenus, hasDarkHero } from "@/services/dataService";
+
+const navMenus = getNavMenus();
 
 function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
+    // Which desktop hover panel is open (its label), and which phone-menu section is expanded.
+    const [menuOpen, setMenuOpen] = useState(null);
+    const [mobileExpanded, setMobileExpanded] = useState(null);
+    const onMenuOpenChange = useCallback((label, open) => {
+        setMenuOpen((current) => (open ? label : current === label ? null : current));
+    }, []);
 
     const isScrolled = useScrollTrigger({
         disableHysteresis: true,
@@ -35,11 +45,22 @@ function Navbar() {
 
     // Pages that open with the dark full-width hero get a transparent bar with
     // white text on top of it (like the DeepMind reference). It turns solid
-    // white as soon as the page scrolls or the mobile menu opens.
+    // white as soon as the page scrolls, the mobile menu opens or a hover panel opens.
     const pathname = usePathname();
     const overHero = hasDarkHero(pathname);
-    const transparent = overHero && !isScrolled && !mobileOpen;
+    const transparent = overHero && !isScrolled && !mobileOpen && !menuOpen;
     const linkColor = transparent ? "secondary.contrastText" : "text.primary";
+
+    const linkSx = {
+        fontWeight: 500,
+        // Per-breakpoint so it overrides the theme's responsive body size.
+        fontSize: { xs: "15px", md: "15px" },
+        lineHeight: "150%",
+        color: linkColor,
+        transition: "all 0.3s ease",
+        fontFamily: FONT_MONO,
+        "&:hover": { color: "text.secondary" },
+    };
 
     return (
         <>
@@ -93,28 +114,20 @@ function Navbar() {
                             display: { xs: "none", md: "flex" },
                             alignItems: "center",
                             gap: { md: 4, lg: 5 },
-                            p: "4px"
                         }}>
-                            {navItems.map((item) => (
-                                <Link key={item.path} href={item.path} style={{
-                                    textDecoration: "none",
-                                }}>
-                                    <Typography sx={{
-                                        fontWeight: 500,
-                                        // Per-breakpoint so it overrides the theme's responsive body size.
-                                        fontSize: { xs: "15px", md: "15px" },
-                                        lineHeight: "150%",
-                                        color: linkColor,
-                                        transition: 'all 0.3s ease',
-                                        fontFamily: FONT_MONO, "&:hover": {
-                                            color: "text.secondary",
-                                        },
-                                    }}>
-                                        {item.label}
-                                    </Typography>
+                            {navItems.map((item) => item.menu ? (
+                                <NavDropdown
+                                    key={item.path}
+                                    item={item}
+                                    menu={navMenus[item.menu]}
+                                    labelSx={linkSx}
+                                    onOpenChange={(open) => onMenuOpenChange(item.label, open)}
+                                />
+                            ) : (
+                                <Link key={item.path} href={item.path} style={{ textDecoration: "none" }}>
+                                    <Typography sx={linkSx}>{item.label}</Typography>
                                 </Link>
                             ))}
-
                         </Box>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, md: 2 } }}>
@@ -180,14 +193,19 @@ function Navbar() {
                         zIndex: 1100,
                         px: 2,
                         py: 2,
+                        // Scrolls if an expanded section makes it taller than the screen.
+                        maxHeight: "calc(100svh - 64px)",
+                        overflowY: "auto",
                     }}
                 >
                     {navItems.map((item) => (
+                        <Fragment key={item.path}>
+                        {/* An item with a menu gets its expand arrow right beside the label. */}
+                        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 0.5 }}>
                         <Button
-                            key={item.path}
                             component={Link}
                             href={item.path}
-                            fullWidth
+                            fullWidth={!item.menu}
                             onClick={() => setMobileOpen(false)}
                             sx={{
                                 justifyContent: "center",
@@ -205,6 +223,26 @@ function Navbar() {
                         >
                             {item.label}
                         </Button>
+                        {item.menu && (
+                            <IconButton
+                                aria-label={`${item.label.charAt(0)}${item.label.slice(1).toLowerCase()} links`}
+                                aria-expanded={mobileExpanded === item.label}
+                                onClick={() => setMobileExpanded((open) => (open === item.label ? null : item.label))}
+                                size="small"
+                                sx={{ color: "text.primary" }}
+                            >
+                                <ExpandMore sx={{ transition: "transform 0.2s", transform: mobileExpanded === item.label ? "rotate(180deg)" : "none" }} />
+                            </IconButton>
+                        )}
+                        </Box>
+                        {item.menu && (
+                            <Collapse in={mobileExpanded === item.label}>
+                                <Box sx={{ maxWidth: 360, mx: "auto", px: 1, pt: 1, pb: 2 }}>
+                                    <MenuPanel menu={navMenus[item.menu]} onNavigate={() => setMobileOpen(false)} />
+                                </Box>
+                            </Collapse>
+                        )}
+                        </Fragment>
                     ))}
                     <Box sx={{ display: "flex", justifyContent: "center", mt: 1 }}>
                         <Button

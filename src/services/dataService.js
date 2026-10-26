@@ -75,3 +75,29 @@ export const formatCitation = (paper) => {
 // Pages whose top is the dark full-width gradient header; the navbar is
 // transparent over them.
 export const hasDarkHero = (pathname) => pathname === "/" || pathname.startsWith("/research/");
+
+// Hover-panel contents for the navbar (see `menu` in navItems). Built from the
+// existing data, so new papers and case studies appear automatically.
+const latestPapers = publications
+  .filter((p) => p.status === "published" && p.published)
+  .sort((a, b) => b.published.localeCompare(a.published))
+  .slice(0, 3);
+
+const navMenus = {
+  research: {
+    columns: [
+      {
+        title: "Focus areas",
+        links: researchAreas.map((area) => ({ label: area.title, href: `/#focus-${area.topics[0]}`, icon: area.icon, plain: true })),
+      },
+      {
+        title: "Latest papers",
+        links: latestPapers.map((p) => ({ label: p.shortTitle, meta: formatPublishedDate(p.published), href: `/research/${p.id}` })),
+      },
+    ],
+    footer: { label: "All research", href: "/#research" },
+  },
+};
+
+export const getNavMenus = () => navMenus;
+

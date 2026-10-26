@@ -1,5 +1,7 @@
+// `menu` adds a hover panel on desktop (and an expandable list on phones),
+// built in dataService.getNavMenus().
 export const navItems = [
-  { label: "RESEARCH", path: "/#research" },
+  { label: "RESEARCH", path: "/#research", menu: "research" },
   { label: "SERVICES", path: "/#services" },
   { label: "CASE STUDIES", path: "/#case-studies" },
   { label: "ABOUT US", path: "/about-us" },

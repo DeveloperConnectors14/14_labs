@@ -1,31 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Box, ButtonBase, Collapse, Grid, Typography } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
-import BoltOutlinedIcon from "@mui/icons-material/BoltOutlined";
-import BiotechIcon from "@mui/icons-material/Biotech";
-import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
-import AgricultureOutlinedIcon from "@mui/icons-material/AgricultureOutlined";
 import { DashList } from "@/components/general/ArticleParts";
+import { areaIcons } from "@/components/research/areaIcons";
 import { getResearchAreas } from "@/services/dataService";
 import { SECTION_PX, SECTION_PY, CARD_RADIUS, NAV_SCROLL_MARGIN } from "@/theme/tokens";
 
 const areas = getResearchAreas();
 
-const iconMap = {
-  BoltOutlined: BoltOutlinedIcon,
-  Biotech: BiotechIcon,
-  PublicOutlined: PublicOutlinedIcon,
-  AgricultureOutlined: AgricultureOutlinedIcon,
-};
+// Each row has an anchor (e.g. /#focus-materials, used by the navbar's Research
+// menu); arriving at one opens that row.
+const rowId = (area) => `focus-${area.topics[0]}`;
 
 // "Our focus": heading and a photo on the left, a numbered list of the research
 // areas on the right. One row is open at a time and shows the area's
 // description, then future directions we're open to collaborating on.
 function ResearchAreas() {
   const [open, setOpen] = useState(0);
+
+  useEffect(() => {
+    const openFromHash = () => {
+      const i = areas.findIndex((area) => `#${rowId(area)}` === window.location.hash);
+      if (i === -1) return;
+      setOpen(i);
+      // Opening this row closes the one above it, which shifts the page after the
+      // browser has scrolled to the anchor; scroll again once the rows settle.
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      setTimeout(() => {
+        document.getElementById(rowId(areas[i]))?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+      }, 350);
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, []);
 
   return (
     <Box component="section" id="research-areas" sx={{ px: SECTION_PX, py: SECTION_PY, scrollMarginTop: NAV_SCROLL_MARGIN }}>
@@ -62,9 +73,9 @@ function ResearchAreas() {
           {areas.map((area, i) => {
             const isOpen = open === i;
             const panelId = `focus-panel-${i}`;
-            const Icon = iconMap[area.icon];
+            const Icon = areaIcons[area.icon];
             return (
-              <Box component="li" key={area.title} sx={{ borderTop: 1, borderColor: "divider", "&:last-of-type": { borderBottom: 1, borderColor: "divider" } }}>
+              <Box component="li" key={area.title} id={rowId(area)} sx={{ scrollMarginTop: NAV_SCROLL_MARGIN, borderTop: 1, borderColor: "divider", "&:last-of-type": { borderBottom: 1, borderColor: "divider" } }}>
                 <ButtonBase
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
