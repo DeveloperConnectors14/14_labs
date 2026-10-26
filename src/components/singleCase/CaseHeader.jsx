@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 import ShareButton from "@/components/general/ShareButton";
 import ScrollToButton from "@/components/general/ScrollToButton";
+import AnimatedText from "@/components/general/AnimatedText";
 import { keepHyphenatedWords } from "@/components/general/ArticleParts";
 import { SECTION_PX, CARD_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 
@@ -17,8 +18,9 @@ function CaseHeader({ data }) {
         <Typography variant="caption" sx={{ display: "block", color: "text.grey", textTransform: "uppercase", letterSpacing: "0.08em" }}>
           {meta}
         </Typography>
-        <Typography variant="h1" sx={{ color: "text.primary", mt: 2, textWrap: "balance" }}>
-          {keepHyphenatedWords(data.hero.title)}
+        {/* The title reveals letter by letter (screen readers get it whole via aria-label). */}
+        <Typography variant="h1" aria-label={data.hero.title} sx={{ color: "text.primary", mt: 2, textWrap: "balance" }}>
+          <AnimatedText text={keepHyphenatedWords(data.hero.title)} />
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 2, mt: { xs: 3, md: 4 } }}>
           {data.pipeline && <ScrollToButton targetId="architecture">See the architecture</ScrollToButton>}

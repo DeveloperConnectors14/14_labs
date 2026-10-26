@@ -2,7 +2,7 @@
 
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import Xarrow, { Xwrapper } from "react-xarrows";
-import { SECTION_PX, SECTION_PY, TILE_RADIUS, NAV_SCROLL_MARGIN } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, TILE_RADIUS, NAV_SCROLL_MARGIN, FONT_MONO } from "@/theme/tokens";
 
 
 const Node = ({ id, label, color = "#377BBB" }) => {
@@ -22,7 +22,7 @@ const Node = ({ id, label, color = "#377BBB" }) => {
                 minWidth: { xs: 150, sm: 200, md: 240 },
                 justifyContent: "center",
                 backgroundColor: "background.paper",
-                fontFamily: "IBM Plex Mono",
+                fontFamily: FONT_MONO,
             })}
         >
             <Box

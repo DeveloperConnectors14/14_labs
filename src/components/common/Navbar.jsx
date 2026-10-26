@@ -20,10 +20,8 @@ import {
 } from "@mui/icons-material";
 import ThemedLogo from "@/components/common/ThemedLogo";
 import ThemeToggle from "@/components/common/ThemeToggle";
-import { BUTTON_RADIUS } from "@/theme/tokens";
+import { BUTTON_RADIUS, NAV_HEIGHT, FONT_MONO, SECTION_PX } from "@/theme/tokens";
 import { getNavItems, hasDarkHero } from "@/services/dataService";
-
-const APP_BAR_HEIGHT = "104px";
 
 function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -52,7 +50,7 @@ function Navbar() {
                 // transparent bar over the hero.
                 enableColorOnDark
                 sx={{
-                    height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
+                    height: NAV_HEIGHT,
                     backgroundColor: transparent ? "transparent" : "background.paper",
                     boxShadow: transparent ? "none" : "0 2px 10px rgba(0,0,0,0.05)",
                     backdropFilter: isScrolled ? "blur(10px)" : "none",
@@ -60,8 +58,12 @@ function Navbar() {
                     zIndex: 1200,
                 }}
             >
+                {/* Same side margins as the page content, so the logo and the right-hand
+                    button line up with the sections below. */}
                 <Toolbar
+                    disableGutters
                     sx={{
+                        px: SECTION_PX,
                         height: "100%",
                         display: "flex",
                         alignItems: "center",
@@ -73,7 +75,11 @@ function Navbar() {
                         <Button
                             component={Link}
                             href="/"
+                            aria-label="14Labs home"
                             sx={{
+                                // No padding, so the logo starts exactly at the page margin.
+                                p: 0,
+                                minWidth: 0,
                                 "&:hover": {
                                     backgroundColor: "transparent",
                                 },
@@ -94,14 +100,13 @@ function Navbar() {
                                     textDecoration: "none",
                                 }}>
                                     <Typography sx={{
-                                        fontStyle: "medium",
-                                        height: "24px",
                                         fontWeight: 500,
-                                        fontsize: "16px",
+                                        // Per-breakpoint so it overrides the theme's responsive body size.
+                                        fontSize: { xs: "15px", md: "15px" },
                                         lineHeight: "150%",
                                         color: linkColor,
                                         transition: 'all 0.3s ease',
-                                        fontFamily: "'IBM Plex Mono', monospace", "&:hover": {
+                                        fontFamily: FONT_MONO, "&:hover": {
                                             color: "text.secondary",
                                         },
                                     }}>
@@ -123,12 +128,11 @@ function Navbar() {
                             borderRadius: BUTTON_RADIUS,
                             p: "10px 20px",
                             fontWeight: 600,
-                            fontStyle: "semiBold",
                             // Per-breakpoint so it overrides the theme's responsive button size.
                             fontSize: { xs: "15px", md: "15px" },
                             lineHeight: "20px",
                             color: "brand.navy",
-                            fontFamily: "'IBM Plex Mono', monospace",
+                            fontFamily: FONT_MONO,
                             backgroundColor: "secondary.main",
                             boxShadow: "none",
                             transition: 'all 0.3s ease',
@@ -147,7 +151,8 @@ function Navbar() {
                         <IconButton
                             aria-label={mobileOpen ? "Close menu" : "Open menu"}
                             onClick={() => setMobileOpen((prev) => !prev)}
-                            sx={{ color: linkColor }}
+                            // Pulled into its own padding so the icon lines up with the page margin.
+                            sx={{ color: linkColor, mr: -1 }}
                         >
                             <Fade in={!mobileOpen}>
                                 <MenuIcon />
@@ -166,7 +171,7 @@ function Navbar() {
                 <Box
                     sx={{
                         position: "fixed",
-                        top: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT },
+                        top: NAV_HEIGHT,
                         left: 0,
                         right: 0,
                         backgroundColor: "background.paper",
@@ -189,7 +194,7 @@ function Navbar() {
                                 py: 1,
                                 fontWeight: 500,
                                 fontSize: 14,
-                                fontFamily: "'IBM Plex Mono', monospace",
+                                fontFamily: FONT_MONO,
                                 color: "text.primary",
                                 backgroundColor: "transparent",
                                 transition: "all 0.4s ease",
@@ -212,7 +217,7 @@ function Navbar() {
                                 py: 1,
                                 fontWeight: 600,
                                 fontSize: { xs: "15px", sm: "15px" },
-                                fontFamily: "'IBM Plex Mono', monospace",
+                                fontFamily: FONT_MONO,
                                 color: "brand.navy",
                                 backgroundColor: "secondary.main",
                                 boxShadow: "none",
@@ -231,7 +236,7 @@ function Navbar() {
             </Collapse>
 
             {/* Space for the fixed navbar, except where the hero sits behind it. */}
-            {!overHero && <Toolbar sx={{ height: { xs: "80px", sm: "90px", md: "80px", lg: APP_BAR_HEIGHT }, }} />}
+            {!overHero && <Toolbar sx={{ height: NAV_HEIGHT }} />}
         </>
     );
 }

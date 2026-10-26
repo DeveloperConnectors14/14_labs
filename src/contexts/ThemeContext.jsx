@@ -3,6 +3,7 @@
 import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { createContext, useContext } from "react";
+import { FONT_SANS, FONT_MONO } from "@/theme/tokens";
 
 const ThemeContext = createContext();
 
@@ -51,11 +52,11 @@ const theme = createTheme({
   },
 
     typography: {
-      fontFamily: "'Instrument Sans', sans-serif",
+      fontFamily: FONT_SANS,
       fontWeightRegular: 400,
       fontWeightMedium: 500,
       h1: {
-        fontFamily: "'Instrument Sans', sans-serif",
+        fontFamily: FONT_SANS,
         fontWeight: 600,
         lineHeight: 1.2,
         fontSize: "28px",
@@ -63,7 +64,7 @@ const theme = createTheme({
         "@media (min-width:1024px)": { fontSize: "48px" },
       },
       h2: {
-        fontFamily: "'Instrument Sans', sans-serif",
+        fontFamily: FONT_SANS,
         fontWeight: 600,
         lineHeight: 1.2,
         fontSize: "26px",
@@ -71,7 +72,7 @@ const theme = createTheme({
         "@media (min-width:1024px)": { fontSize: "48px" },
       },
       h3: {
-        fontFamily: "'Instrument Sans', sans-serif",
+        fontFamily: FONT_SANS,
         fontWeight: 700,
         lineHeight: 1.3,
         fontSize: "20px",
@@ -79,7 +80,7 @@ const theme = createTheme({
         "@media (min-width:1024px)": { fontSize: "24px" },
       },
       h4: {
-        fontFamily: "'Instrument Sans', sans-serif",
+        fontFamily: FONT_SANS,
         fontWeight: 600,
         lineHeight: 1.3,
         fontSize: "18px",
@@ -87,7 +88,7 @@ const theme = createTheme({
         "@media (min-width:1024px)": { fontSize: "26px" },
       },
       body1: {
-        fontFamily: "'Instrument Sans', sans-serif",
+        fontFamily: FONT_SANS,
         fontWeight: 400,
         lineHeight: 1.5,
         fontSize: "16px",
@@ -95,7 +96,7 @@ const theme = createTheme({
         "@media (min-width:1024px)": { fontSize: "18px" },
       },
       body2: {
-        fontFamily: "'Instrument Sans', sans-serif",
+        fontFamily: FONT_SANS,
         fontWeight: 400,
         lineHeight: 1.5,
         fontSize: "14px",
@@ -103,7 +104,7 @@ const theme = createTheme({
         "@media (min-width:1024px)": { fontSize: "16px" },
       },
       button: {
-        fontFamily: "'IBM Plex Mono', monospace",
+        fontFamily: FONT_MONO,
         fontWeight: 600,
         lineHeight: 1.2,
         textTransform: "uppercase",
@@ -112,7 +113,7 @@ const theme = createTheme({
         "@media (min-width:1024px)": { fontSize: "20px" },
       },
       caption: {
-        fontFamily: "'IBM Plex Mono', monospace",
+        fontFamily: FONT_MONO,
         fontWeight: 500,
         lineHeight: 1.4,
         fontSize: "12px",

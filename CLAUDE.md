@@ -27,7 +27,9 @@ Other standing rules:
 
 ### Navbar (`src/components/common/Navbar.jsx`)
 - Logo far left, links right beside it: **Research · Services · Case studies · About us**. There's no Contact link. Research, Services and Case studies are homepage sections (`/#research`, `/#services`, `/#case-studies`); only About us is a separate page.
-- Right-hand button: **"Let's connect"** (→ `/contact`), 15px text.
+- Right-hand button: **"Let's connect"** (→ `/contact`), 15px text. Links are also 15px (IBM Plex Mono, weight 500, capitals).
+- **Height: 64px on phones/tablets, 72px from laptops up** (was 80–104px; changed 2026-10-26). Set once as `NAV_HEIGHT` in `tokens.js`; the bar, its spacer, the mobile menu and the `/#anchor` scroll offset (`NAV_SCROLL_MARGIN`) all use it, so change it only there.
+- **Side margins = page margins** (`SECTION_PX`: 16px phones, 32px desktop; toolbar `disableGutters`). The logo has no button padding and the phone menu icon is pulled into its padding (`mr: -1`), so the logo and the right-hand button/icon line up exactly with the content below.
 - On `/` and `/research/*` the bar is transparent over the dark hero (white links, an **all-white** `logo-white.svg`) and turns solid white, with the colour logo, on scroll or when the mobile menu opens. Other pages use the solid white bar.
 
 ### Homepage hero (`src/components/home/HeroSection.jsx`)
@@ -67,7 +69,7 @@ Removed from the homepage: pricing, "Challenges we can overcome", research outpu
 
 ### Paper pages (`src/app/research/[paperId]/page.jsx`)
 - Statically generated for every paper; unknown ids return 404.
-- Hero (`GradientHero`): full width, caption plus full title. Brand gradient by default (current state for all papers). A paper can set an optional `heroImg` (wide landscape photo, separate from the card image `img`) to show a photo behind the title with a dark navy fade; none are set yet. Title area up to 1300px wide with balanced wrapping, and hyphens shown as non-breaking (U+2011) so words like "meta-review" never split across lines; the stored title is unchanged.
+- Hero (`GradientHero`): full width, caption plus full title. **All 11 papers now have their own header photo** (`heroImg`, `research/<id>-hero.webp`, separate from the card image `img`; Unsplash, picked by the user from a contact sheet on 2026-10-26; credits in `publications.js` and `docs/IMAGE_GUIDE.md` §6a), shown behind the title with a dark navy fade (stronger on phones) and a soft text shadow. Optional `heroPosition` sets the crop (used for the fire and Ti6Al4V papers). Without `heroImg` the header falls back to the brand gradient. Title area up to 1300px wide with balanced wrapping, and hyphens shown as non-breaking (U+2011) so words like "meta-review" never split across lines; the stored title is unchanged.
 - Body sections, in order:
   1. Authors (team members in bold)
   2. View paper ↗ / DOI ↗ buttons
@@ -88,7 +90,8 @@ Removed from the homepage: pricing, "Challenges we can overcome", research outpu
 - `shortTitle` is used on cards; the full title is used elsewhere.
 
 ### "Our focus" section (`src/components/research/ResearchAreas.jsx`)
-- Layout from a reference site: heading "Our **focus**" (no intro line, removed at the user's request) and a large photo on the left; a numbered accordion (01–04) of the research areas on the right. One row open at a time (first by default); the open row shows only the area's description. **No paper links and no paper count** (user's choice, 2026-10-26).
+- Layout from a reference site: heading "Our **focus**" (no intro line, removed at the user's request) and a large photo on the left; a numbered accordion (01–04) of the research areas on the right. One row open at a time (first by default); the open row shows the area's description, then "Open to collaboration on" with 3 future directions per area (`directions` in `researchAreas`, rendered with the shared `DashList`). **No paper links and no paper count** (user's choice, 2026-10-26).
+- The directions are future work, not track record, so keep the "Open to collaboration on" label. They were drafted by Claude from the team's methods (forecasting, explainable ML, computer vision); **the researchers should confirm** each one.
 - **Areas are sectors (2026-10-26):** Energy (4 papers: 3 solar forecasting + Zn–Co hydrogen catalysts), Materials (4: Ti6Al4V properties, fatigue, SPS, TEM imaging), Environment (2: air quality, fire safety), Agriculture (1, under review: abamectin nanoparticles; described as "our newest research area"). Each paper's `topic` (`energy` / `materials` / `environment` / `agriculture`) maps it to an area; the paper page caption shows the area name.
 - **Order is fixed by hand** in `researchAreas` in `data.js` (currently most papers first). Don't sort it automatically; the user reorders it when needed.
 - Alignment (desktop): the list's first divider lines up with the top of the heading's letters (10px offset). The photo keeps a fixed 3:2 shape (a stretch-to-list version squashed it when rows were closed, so the user rejected it); bottoms may differ slightly depending on the open row.
@@ -98,6 +101,7 @@ Removed from the homepage: pricing, "Challenges we can overcome", research outpu
 - There is no case-studies listing page or services page any more: `/services` and `/case-studies` permanently redirect (in `next.config.mjs`) to `/#services` and `/#case-studies`. The case-study detail pages `/case-studies/<id>` are kept; homepage case cards link to them. Service cards are plain (not links), and the services section has no "Explore services" button.
 - No dates on case studies (the "1st January 2024" placeholders were removed).
 - Both case studies use `layout: "article"` (layout copied from a DeepMind blog post, in the site's own style, light background, solid white navbar): `CaseHeader` (centred "Case study · <industry>" meta line, centred title, **SEE THE ARCHITECTURE** (`ScrollToButton`, smooth-scrolls to the pipeline section `#architecture`) + `ShareButton`, a large rounded cover, then the subtitle as a centred lead) → `CaseArticle` (Project details, The challenge + cost callout, Our approach, Results if any, Key features, Technology chips) → pipeline diagram → More case studies → call to action. A LET'S CONNECT header button was removed because it duplicated the navbar. AI Find Sites has real photos (Unsplash, free licence): cover `cases/find-sites-cover.webp` (aerial suburb, 21:9) and card `cases/find-sites-card.webp` (skyscrapers). AI Admission Counselor: cover `cases/admission-cover.webp` (university campus, Zhanhui Li) and card `cases/admission-card.webp` (graduation cap, Dragos Blaga), both Unsplash. The old `case1.png`/`case2.png` are no longer used.
+- **Title animation (2026-10-26):** the case-study title (`CaseHeader`) reveals letter by letter, each letter sharpening from a soft blur (motion copied from a reference recording; our own font and colours). `src/components/general/AnimatedText.jsx`, CSS only: 25 ms per letter, 0.4 s each, so about 1.2–1.3 s for our titles; plays once per load. The `h1` carries the full title as `aria-label` (letters are `aria-hidden`); reduced-motion visitors see it instantly. **Case-study titles only:** not on paper pages (long academic titles, sober tone), the homepage hero (already has the slideshow) or paragraphs.
 - Shared article pieces: `src/components/general/GradientHero.jsx` and `ArticleParts.jsx` (`SectionTitle`, `DetailsList`, `DashList`), used by both paper pages and the case-study article.
 
 ### Services
@@ -111,6 +115,9 @@ Removed from the homepage: pricing, "Challenges we can overcome", research outpu
 - Dark palette: background `#071521`, cards `#0D2131`, text `#E6EDF3`, grey `#93A4B3`, teal unchanged. `palette.brand.navy/teal` stay fixed in both modes: use `brand.navy` for labels on teal buttons and white tiles. The hero, research cards, paper headers and the call-to-action box look the same in both modes.
 - Rules for new code: use palette names (`text.primary`, `background.paper`, `divider`, `SOFT_GRADIENT` from tokens) instead of hex values; for scheme-specific elements use `showInScheme()` (`src/theme/colorScheme.js`) or `theme.applyStyles("dark", …)`; check new UI in both modes. Logos: `ThemedLogo` (colour / `logo-dark.svg` / `logo-white.svg` over the hero).
 
+### Fonts
+- Instrument Sans (text and headings) and IBM Plex Mono (buttons, labels, navbar) are self-hosted with `next/font` in `layout.jsx` with real weights (sans 400–700, mono 400–600), so bold text isn't faked by the browser and visitors make no request to Google. Use `FONT_SANS` / `FONT_MONO` from `tokens.js`; never write the font names in components. Inter was removed (unused).
+
 ### Writing style
 - All headings, labels and tags use **sentence case** ("Our services", "Key features", "Contact us"). Keep names (case-study titles, people), acronyms (AI, ML, QA) and brands as they are. The hero tagline and the 2–3 word research card titles stay title case.
 
@@ -119,6 +126,8 @@ Sections in order:
 1. Vision as the headline: "Machine learning research that solves humanity's real problems", then one paragraph (the four research-area tags were removed as repetitive)
 2. Mission
 3. Four values from the "14Labs Research – Main Document"
+
+Layout (polished 2026-10-26): mission and values share one two-column layout ("Our **mission**" / "Our **values**" heading on the left, content on the right, a thin divider between); the mission is plain large navy text (no box). The intro paragraph names the four focus areas. All copy (`vision`, `visionHighlight`, `intro`, `mission`) lives in `about` in `data.js`.
 4. Contact call to action
 
 The research stats and the Research team section were removed at the user's request ("for now"); `ResearchTeam.jsx`, the `team` data and photos are kept so the team can be restored with one line.
@@ -152,9 +161,9 @@ Four columns: brand/tagline/location, Explore, Research (Publications, Our focus
 
 - **Official flow:** merge on GitHub, then pull on the VM. Server: `14labs-new` (SSH alias), behind Cloudflare and nginx.
   - **14labs.co** = `/opt/services/website` → `src/` tracks branch **`new-project`**, port 3000.
-  - **staging.14labs.co** = `/opt/services/website-staging` → `src/` tracks branch **`previous-site`** (the site that was live before the research redesign, commit `b505e41`), port 3007.
+  - **staging.14labs.co** = `/opt/services/website-staging` → `src/` tracks branch **`previous-live`** (the version that was live on 14labs.co just before the 2026-10-26 release, commit `4ab56cb`; kept as a fallback to compare with), port 3007. Before 2026-10-26 it ran `previous-site` (the pre-redesign site, commit `b505e41`), which is no longer hosted but kept in git.
   - Deploy: `cd /opt/services/<site>/src && sudo -u abdullah git pull --ff-only origin <branch> && cd .. && sudo docker compose up -d --build`. Folders belong to `abdullah`, who maintains the infra repo `/opt/services` (14labs-infra); tell him when the branch mapping changes.
-  - Rollback for 14labs.co: point `website/src` at `previous-site` (or a known good commit) and rebuild.
+  - Rollback for 14labs.co: point `website/src` at `previous-live` (the previous release) or another known good commit, and rebuild.
 - First research-redesign deploy: PR #5 (`feature/next-changes` → `new-project`), merge commit `3be6f48`, on 2026-10-24.
 - The repo's **Cloudflare Pages** check fails on every commit, including ones before the redesign; it is not what serves the site. Vercel previews succeed.
 - **Contact form email:** `/api/contact` sends via the self-hosted Stalwart server on the same VM (`mail.14labs.co:465`, TLS) as **`noreply@14labs.co`** (a sending-only user account created 2026-10-24) to `contact@14labs.co`, a Stalwart mailing list that forwards to baqir@ and abdullah@. The SMTP settings and password live only in each site's server `.env` (backups `.env.bak-20261024`); recreate the container after changing them. Stalwart 0.16 is managed via JMAP (`x:Account/set` etc. at `https://mail.14labs.co/jmap/`) or its web admin; there is no `/api` REST endpoint.

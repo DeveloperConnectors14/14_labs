@@ -80,24 +80,46 @@ export const researchAreas = [
     title: "Energy",
     desc: "Solar irradiance and PV power forecasting, and catalysts for hydrogen generation.",
     topics: ["energy"],
+    // Future directions (not past work), shown as "Open to collaboration on".
+    // Drafted by Claude from the team's methods; researchers to confirm.
+    directions: [
+      "Grid load and demand forecasting",
+      "Battery health and lifetime prediction",
+      "PV fault detection from drone or thermal images",
+    ],
   },
   {
     icon: "Biotech",
     title: "Materials",
     desc: "Explainable ML for metal 3D printing and sintering, and AI for microscopy images.",
     topics: ["materials"],
+    directions: [
+      "ML-guided process parameter optimisation for 3D printing",
+      "Defect detection in metal parts with computer vision",
+      "Faster alloy and composite screening",
+    ],
   },
   {
     icon: "PublicOutlined",
     title: "Environment",
     desc: "Air-quality prediction for sustainable cities and vision-based fire safety.",
     topics: ["environment"],
+    directions: [
+      "Air-quality and emissions monitoring from sensor networks",
+      "Early wildfire and smoke detection",
+      "Urban heat and flood-risk mapping",
+    ],
   },
   {
     icon: "AgricultureOutlined",
     title: "Agriculture",
     desc: "Nanoparticle formulations of abamectin, a widely used crop-protection agent. Our newest research area.",
     topics: ["agriculture"],
+    directions: [
+      "Crop yield forecasting from satellite and weather data",
+      "Plant disease detection from leaf images",
+      "Controlled-release nano-formulations for crop protection",
+    ],
   },
 ];
 
@@ -593,7 +615,10 @@ export const caseDetails = [
 
 // Vision, mission and values, from the "14Labs Research – Main Document".
 export const about = {
-  vision: "Machine learning research that solves humanity's real problems.",
+  // The vision is the About page headline; `visionHighlight` is shown in teal.
+  vision: "Machine learning research that solves",
+  visionHighlight: "humanity's real problems",
+  intro: `14Labs is an AI engineering, applied machine learning and research company based in ${contactInfo.location}. We publish peer-reviewed research in energy, materials, environment and agriculture, and turn it into production AI systems for companies and research partners.`,
   mission: "We do original, rigorous machine learning research for organizations tackling real-world problems, turning new ideas into solutions that work and benefit people.",
 };
 

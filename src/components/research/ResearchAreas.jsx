@@ -8,6 +8,7 @@ import BoltOutlinedIcon from "@mui/icons-material/BoltOutlined";
 import BiotechIcon from "@mui/icons-material/Biotech";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import AgricultureOutlinedIcon from "@mui/icons-material/AgricultureOutlined";
+import { DashList } from "@/components/general/ArticleParts";
 import { getResearchAreas } from "@/services/dataService";
 import { SECTION_PX, SECTION_PY, CARD_RADIUS, NAV_SCROLL_MARGIN } from "@/theme/tokens";
 
@@ -21,7 +22,8 @@ const iconMap = {
 };
 
 // "Our focus": heading and a photo on the left, a numbered list of the research
-// areas on the right. One row is open at a time and shows the area's description.
+// areas on the right. One row is open at a time and shows the area's
+// description, then future directions we're open to collaborating on.
 function ResearchAreas() {
   const [open, setOpen] = useState(0);
 
@@ -123,6 +125,14 @@ function ResearchAreas() {
                     <Typography variant="body1" color="text.grey">
                       {area.desc}
                     </Typography>
+                    {area.directions?.length > 0 && (
+                      <>
+                        <Typography variant="caption" color="text.grey" sx={{ display: "block", textTransform: "uppercase", mt: 2.5, mb: 1.5 }}>
+                          Open to collaboration on
+                        </Typography>
+                        <DashList items={area.directions} />
+                      </>
+                    )}
                   </Box>
                 </Collapse>
               </Box>
