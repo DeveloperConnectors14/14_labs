@@ -200,8 +200,10 @@ function Navbar() {
                 >
                     {navItems.map((item) => (
                         <Fragment key={item.path}>
-                        {/* An item with a menu gets its expand arrow right beside the label. */}
-                        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 0.5 }}>
+                        {/* The label is centred like every other item; an item with a menu
+                            gets its expand arrow hanging just to the right of the label. */}
+                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                        <Box sx={{ position: "relative", display: "flex", width: item.menu ? "auto" : "100%" }}>
                         <Button
                             component={Link}
                             href={item.path}
@@ -229,11 +231,12 @@ function Navbar() {
                                 aria-expanded={mobileExpanded === item.label}
                                 onClick={() => setMobileExpanded((open) => (open === item.label ? null : item.label))}
                                 size="small"
-                                sx={{ color: "text.primary" }}
+                                sx={{ position: "absolute", left: "100%", top: "50%", transform: "translateY(-50%)", color: "text.primary" }}
                             >
                                 <ExpandMore sx={{ transition: "transform 0.2s", transform: mobileExpanded === item.label ? "rotate(180deg)" : "none" }} />
                             </IconButton>
                         )}
+                        </Box>
                         </Box>
                         {item.menu && (
                             <Collapse in={mobileExpanded === item.label}>
