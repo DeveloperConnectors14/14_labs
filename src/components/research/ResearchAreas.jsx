@@ -14,6 +14,9 @@ const areas = getResearchAreas();
 // Each row has an anchor (e.g. /#focus-materials, used by the navbar's Research
 // menu); arriving at one opens that row.
 const rowId = (area) => `focus-${area.topics[0]}`;
+// Fixed open/close time (not "auto", which grows with the row's height), so the
+// scroll after a focus link can wait until every row has settled.
+const ROW_ANIMATION_MS = 300;
 
 // "Our focus": heading and a photo on the left, a numbered list of the research
 // areas on the right. One row is open at a time and shows the area's
@@ -31,7 +34,7 @@ function ResearchAreas() {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       setTimeout(() => {
         document.getElementById(rowId(areas[i]))?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
-      }, 350);
+      }, ROW_ANIMATION_MS + 50);
     };
     openFromHash();
     window.addEventListener("hashchange", openFromHash);
@@ -131,7 +134,7 @@ function ResearchAreas() {
                     : <Add sx={{ color: "text.secondary", fontSize: 24, flexShrink: 0 }} />}
                 </ButtonBase>
 
-                <Collapse in={isOpen}>
+                <Collapse in={isOpen} timeout={ROW_ANIMATION_MS}>
                   <Box id={panelId} role="region" aria-label={area.title} sx={{ pb: 3, pl: { xs: 7.5, md: 10 } }}>
                     <Typography variant="body1" color="text.grey">
                       {area.desc}
