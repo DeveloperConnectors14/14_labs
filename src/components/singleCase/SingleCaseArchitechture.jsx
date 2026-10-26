@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, FONT_SANS } from "@/theme/tokens";
 
 
 function SingleCaseArchitechture({ architectureData }) {
@@ -38,7 +38,7 @@ function SingleCaseArchitechture({ architectureData }) {
                                             <Typography
                                                 sx={{
                                                     color: "text.primary",
-                                                    fontFamily: "'Instrument Sans', sans-serif",
+                                                    fontFamily: FONT_SANS,
                                                     fontWeight: 700,
                                                     fontSize: { xs: "40px", sm: "48px", md: "56px" },
                                                     lineHeight: 1,

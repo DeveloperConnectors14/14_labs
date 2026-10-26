@@ -3,6 +3,14 @@ import Navbar from "@/components/common/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { getContactInfo } from "@/services/dataService";
+import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+
+// Self-hosted at build time (no request to Google from visitors) with the real
+// weights the site uses, so bold text isn't faked by the browser. The CSS
+// variables are read by FONT_SANS / FONT_MONO in src/theme/tokens.js.
+const sans = Instrument_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-sans", display: "swap" });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-mono", display: "swap" });
 
 const SITE_URL = "https://14labs.co";
 
@@ -47,6 +55,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "14Labs",
+  legalName: getContactInfo().legalName,
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
   image: `${SITE_URL}/og.png`,
@@ -60,16 +69,12 @@ function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Instrument+Sans&family=Inter&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body>
+      <body className={`${sans.variable} ${mono.variable}`}>
         {/* Applies the visitor's saved colour scheme (light by default) before the page paints. */}
         <InitColorSchemeScript attribute="class" defaultMode="light" />
         <AppRouterCacheProvider>

@@ -21,6 +21,8 @@ export const publications = [
     // Photo: Bernd Dittrich (Unsplash)
     img: "research/solar-irradiance-meta-review-photo.webp",
     imgTone: "dark",
+    // Header photo: Karsten Würth (Unsplash)
+    heroImg: "research/solar-irradiance-meta-review-hero.webp",
     title: "Solar irradiance forecasting meta-review: An in-depth systematic meta-review on solar irradiance forecasting datasets, predictive pipelines and performance",
     authors: ["Faiza Mehmood", "Muhammad Nabeel Asim", "Aamir Mehmood", "Waqar Mahmood", "Sebastian Vollmer", "Mehmood Ul Haq", "Faisal Ali", "Andreas Dengel"],
     venue: "Results in Engineering",
@@ -31,7 +33,7 @@ export const publications = [
     doi: "10.1016/j.rineng.2026.112449",
     url: "https://www.sciencedirect.com/science/article/pii/S2590123026034675",
     status: "published",
-    topic: "solar",
+    topic: "energy",
     note: "In collaboration with DFKI, Germany",
     overview: [
       "Solar irradiance forecasting is essential for integrating solar power into existing grids, yet the research on it is highly fragmented. Hundreds of methods, datasets and benchmarks make it hard to see what actually moves the field forward.",
@@ -55,6 +57,9 @@ export const publications = [
     // Photo: Jakub Żerdzicki (Unsplash)
     img: "research/slm-ti6al4v-ml-gui-photo.webp",
     imgTone: "dark",
+    // Header photo: Simon N. (Unsplash)
+    heroImg: "research/slm-ti6al4v-ml-gui-hero.webp",
+    heroPosition: "65% 85%", // keeps the printed part in view
     title: "Machine Learning Driven Prediction and GUI Based Optimization of Quasi-Static Mechanical Properties in SLM Fabricated Ti6Al4V Alloy",
     authors: ["Muhammad Muteeb Butt", "Sidra Rashid", "Mehmood ul Haq", "Ayyaz Mustafa", "Arshad Iqbal", "Hossein Laieghi", "Varma KVVSSN", "Metin U. Salamci", "Enrico Salvati", "Hüseyin Kızıl"],
     venue: "International Journal of Precision Engineering and Manufacturing",
@@ -87,6 +92,8 @@ export const publications = [
     // Photo: ThisisEngineering (Unsplash)
     img: "research/am-ti6al4v-fatigue-life-photo-2.webp",
     imgTone: "dark",
+    // Header photo: heino eisner (Unsplash)
+    heroImg: "research/am-ti6al4v-fatigue-life-hero.webp",
     title: "Machine learning and physics based empirical equations for fatigue life prediction of AM Ti-6Al-4 V",
     authors: ["Muhammad Muteeb Butt", "Mehmood ul Haq", "Varma KVVSSN", "Hossein Laieghi", "Hakan Yavas", "Metin U Salamci", "Hüseyin Kızıl"],
     venue: "Progress in Additive Manufacturing",
@@ -120,6 +127,8 @@ export const publications = [
     // Photo: Dawun Choi (Unsplash)
     img: "research/air-quality-urban-planning-photo.webp",
     imgTone: "dark",
+    // Header photo: Anna Yablonskaya (Unsplash)
+    heroImg: "research/air-quality-urban-planning-hero-2.webp",
     title: "Using machine learning for air quality prediction and sustainable urban planning",
     authors: ["M.A. Mujtaba", "Muhammad Adeel Munir", "Sheeraz Ali", "Jana Petrů", "Talha Ansar", "Waiz Akhlaq", "Muneeb Ahmad", "Haseeb Iqbal", "Faisal Ali", "Muhammad Nasir Bashir", "Theodosios Alexander"],
     venue: "Sustainable Futures",
@@ -151,6 +160,8 @@ export const publications = [
     // Photo: Fulvio Ciccolo (Unsplash)
     img: "research/zn-co-nanoferrite-electrocatalysts-photo.webp",
     imgTone: "dark",
+    // Header photo: Zoran Borojevic (Unsplash)
+    heroImg: "research/zn-co-nanoferrite-electrocatalysts-hero.webp",
     title: "Zn-Co nanoferrite electrocatalysts for enhanced hydrogen and oxygen generation",
     authors: ["Kiran Shahzadi", "Muhammad Sarfraz", "Muneerah Alomar", "M.A. Mujtaba", "Muhammad Nasir Bashir", "Muhammad Mahmood Ali", "Faisal Ali"],
     venue: "Results in Chemistry",
@@ -161,7 +172,7 @@ export const publications = [
     doi: "10.1016/j.rechem.2025.102392",
     url: "https://www.sciencedirect.com/science/article/pii/S2211715625003753",
     status: "published",
-    topic: "nano",
+    topic: "energy",
     overview: [
       "Water splitting can produce clean hydrogen and oxygen, but only with efficient electrocatalysts to drive the reactions.",
       "The study prepares a series of Zn₁₋ₓCoₓFe₂O₄ nanoferrite electrocatalysts by hydrothermal synthesis. FTIR and X-ray diffraction confirm their synthesis and cubic spinel structure, and their electrocatalytic performance is measured with linear sweep voltammetry, cyclic voltammetry and electrochemical impedance spectroscopy.",
@@ -182,11 +193,13 @@ export const publications = [
     // Photo: Tom Fisk (Pexels)
     img: "research/hybrid-ensemble-solar-forecasting-photo-2.webp",
     imgTone: "dark",
+    // Header photo: Tinky 小天 (Unsplash)
+    heroImg: "research/hybrid-ensemble-solar-forecasting-hero.webp",
     title: "Hybrid Ensemble Forecasting of Solar Irradiance for Real-Time PV Energy Management in Lahore, Pakistan",
     authors: ["Faisal Ali", "M.M. Abbas", "Mehmood Ul Haq", "U. Aziz", "F. Butt", "Y. Fouad"],
     venue: "Results in Engineering",
     status: "review",
-    topic: "solar",
+    topic: "energy",
     overview: [
       "Combines several forecasting models into a hybrid ensemble to predict solar irradiance in Lahore, Pakistan, supporting real-time photovoltaic energy management and planning.",
     ],
@@ -199,11 +212,13 @@ export const publications = [
     // Photo: Naval Rathore (Unsplash)
     img: "research/multi-horizon-solar-prediction-photo.webp",
     imgTone: "dark",
+    // Header photo: Reza Madani (Unsplash)
+    heroImg: "research/multi-horizon-solar-prediction-hero-2.webp",
     title: "Advancing Solar Energy Prediction Using Statistical, Machine Learning, and Deep Learning Models for Multi-Horizons in Lahore, Pakistan",
     authors: ["Faisal Ali", "Mehmood Ul Haq", "Usman Aziz", "Nisha Anwar", "Muhammad Baqir"],
     venue: "Renewable Energy",
     status: "review",
-    topic: "solar",
+    topic: "energy",
     overview: [
       "Compares statistical, machine learning and deep learning models for forecasting solar energy in Lahore across multiple forecast horizons, to address the weather-driven uncertainty in the city's solar generation.",
       "The models compared include SARIMAX, XGBoost, random forest, LitTFT, BiLSTM, CNN-BiLSTM, TCN and TFT, calibrated with NASA POWER and Open-Meteo data. The work supports PV planning, energy-yield estimation and renewable-energy integration.",
@@ -217,11 +232,14 @@ export const publications = [
     // Photo: Chirag Nayak (Unsplash)
     img: "research/yolov11-fire-extinguishing-photo.webp",
     imgTone: "dark",
+    // Header photo: Daoud Abismail (Unsplash)
+    heroImg: "research/yolov11-fire-extinguishing-hero.webp",
+    heroPosition: "center bottom", // keeps the bright ceiling fixture out from behind the navbar
     title: "Automated Vision-Based Fire Extinguishing System Using YOLOv11 and Sensor Fusion for Safety Application",
     authors: ["Mehmood Ul Haq", "K. Muneer", "T. Muzammal", "Shahzaib", "Faisal Ali", "A. Obaid", "Y. Saleem"],
     venue: "Results in Engineering",
     status: "review",
-    topic: "vision",
+    topic: "environment",
     overview: [
       "An automated system that detects and locates fires with computer vision and sensor fusion, then directs an extinguishing unit at them.",
       "It runs YOLOv11 on edge hardware (Raspberry Pi) with automated actuators, for real-time detection and physical response.",
@@ -235,11 +253,13 @@ export const publications = [
     // Photo: ThisisEngineering (Unsplash)
     img: "research/diffusion-tem-zno-photo.webp",
     imgTone: "dark",
+    // Header photo: Joyita Bhattacharya (Unsplash)
+    heroImg: "research/diffusion-tem-zno-hero.webp",
     title: "Diffusion Model based Re-Generation of TEM images of PVP Capped ZnO particles fabricated by Hybrid Flash Nano Precipitation-Plasma Torch Processing",
     authors: ["M.S. Rafique", "F. Javed", "Mehmood Ul Haq", "Faisal Ali", "U. Aziz"],
     venue: "Materials & Design",
     status: "review",
-    topic: "nano",
+    topic: "materials",
     overview: [
       "Uses diffusion models to regenerate transmission electron microscopy (TEM) images of PVP-capped ZnO nanoparticles made by hybrid flash nanoprecipitation–plasma torch processing, supporting nanoparticle research where microscopy data is limited.",
     ],
@@ -252,11 +272,13 @@ export const publications = [
     // Photo: Nathan Rimoux (Unsplash)
     img: "research/pvp-abamectin-nanoparticles-photo.webp",
     imgTone: "dark",
+    // Header photo: Teo Sticea (Unsplash)
+    heroImg: "research/pvp-abamectin-nanoparticles-hero.webp",
     title: "Modification of physicochemical properties of PVP capped Abamectin Nanoparticles employing Hybrid FNP-TP",
     authors: ["M.S. Rafique", "I. Shahadat", "Faisal Ali", "M. Ilyas"],
     venue: "Materials Processing Technology",
     status: "review",
-    topic: "nano",
+    topic: "agriculture",
     overview: [
       "Investigates how a hybrid FNP-TP process modifies the physicochemical properties of PVP-capped abamectin nanoparticles.",
     ],
@@ -269,6 +291,8 @@ export const publications = [
     // Photo: ThisisEngineering (Unsplash)
     img: "research/sps-interpretable-ml-photo.webp",
     imgTone: "dark",
+    // Header photo: Atypeek Dgn (Unsplash)
+    heroImg: "research/sps-interpretable-ml-hero.webp",
     title: "Interpretable Machine Learning for SPS Process-Property Relationships Using SHAP Analysis and 2D Process Maps",
     authors: [],
     status: "review",

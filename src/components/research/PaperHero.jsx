@@ -10,7 +10,14 @@ function PaperHero({ paper }) {
 
   // The page header has its own optional image (`heroImg`, wide landscape), separate
   // from the card image; without one it shows the brand gradient.
-  return <GradientHero caption={caption} title={paper.title} image={paper.heroImg && `/media/${paper.heroImg}`} />;
+  return (
+    <GradientHero
+      caption={caption}
+      title={paper.title}
+      image={paper.heroImg && `/media/${paper.heroImg}`}
+      imagePosition={paper.heroPosition}
+    />
+  );
 }
 
 export default PaperHero;

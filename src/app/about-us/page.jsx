@@ -1,5 +1,6 @@
 import CallSection from "@/components/general/CallSection";
-import { getAbout, getContactInfo, getValues } from "@/services/dataService";
+import { keepHyphenatedWords } from "@/components/general/ArticleParts";
+import { getAbout, getValues } from "@/services/dataService";
 import { Box, Typography, Grid } from "@mui/material";
 import { SECTION_PX, SECTION_PY, CARD_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
 
@@ -9,7 +10,6 @@ export const metadata = {
 };
 
 const about = getAbout();
-const contactInfo = getContactInfo();
 const values = getValues();
 
 const cardSx = {
@@ -20,6 +20,18 @@ const cardSx = {
     borderColor: "divider",
     backgroundColor: "background.paper",
 };
+
+// Heading in the site's "Our <teal word>" style, used for each section's left column.
+function SectionHeading({ word }) {
+    return (
+        <Typography variant="h2" sx={{ color: "text.primary" }}>
+            Our{" "}
+            <Box component="span" sx={{ color: "text.secondary" }}>
+                {word}
+            </Box>
+        </Typography>
+    );
+}
 
 function AboutUs() {
     return (
@@ -35,41 +47,37 @@ function AboutUs() {
                 <Typography variant="caption" sx={{ display: "block", color: "text.secondary", letterSpacing: "0.08em", textTransform: "uppercase", mb: 2 }}>
                     Our vision
                 </Typography>
-                {/* The vision statement is the page headline, with its last words highlighted. */}
-                <Typography variant="h1" component="h1" sx={{ color: "text.primary", maxWidth: 900 }}>
-                    {about.vision.replace(/humanity's real problems\.$/, "")}
+                <Typography variant="h1" component="h1" sx={{ color: "text.primary", maxWidth: 900, textWrap: "balance" }}>
+                    {about.vision}{" "}
                     <Box component="span" sx={{ color: "text.secondary" }}>
-                        humanity&apos;s real problems
+                        {about.visionHighlight}
                     </Box>
                 </Typography>
 
                 <Typography variant="body1" sx={{ pt: 3, maxWidth: 760 }} color="text.primary">
-                    14Labs is an AI engineering, applied machine learning and research company based in {contactInfo.location}. We publish peer-reviewed research and turn it into production AI systems for companies and research partners.
+                    {about.intro}
                 </Typography>
             </Box>
 
-            <Box component="section" sx={{ px: SECTION_PX, py: SECTION_PY }}>
-                <Box sx={cardSx}>
-                    <Typography variant="caption" sx={{ display: "block", color: "text.grey", textTransform: "uppercase", mb: 2 }}>
-                        Our mission
-                    </Typography>
-                    <Typography variant="h3" sx={{ color: "text.black", fontWeight: 500, maxWidth: 1000 }}>
-                        {about.mission}
-                    </Typography>
-                </Box>
+            {/* Mission and values share one layout: heading on the left, content on the right. */}
+            <Box component="section" sx={{ px: SECTION_PX, pt: SECTION_PY }}>
+                <Grid container spacing={{ xs: 2, md: 6 }}>
+                    <Grid size={{ xs: 12, md: 5 }}>
+                        <SectionHeading word="mission" />
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 7 }}>
+                        <Typography variant="h3" component="p" sx={{ color: "text.primary", fontWeight: 500, pt: { md: 1 }, textWrap: "balance" }}>
+                            {keepHyphenatedWords(about.mission)}
+                        </Typography>
+                    </Grid>
+                </Grid>
             </Box>
 
             <Box component="section" sx={{ px: SECTION_PX, py: SECTION_PY }}>
-                <Grid container spacing={6}>
+                <Grid container spacing={{ xs: 3, md: 6 }} sx={{ borderTop: 1, borderColor: "divider", pt: { xs: 4, md: 6 } }}>
                     <Grid size={{ xs: 12, md: 5 }}>
-                        <Typography variant="h2" sx={{ color: "text.primary" }}>
-                            Our{" "}
-                            <Box component="span" sx={{ color: "text.secondary" }}>
-                                values
-                            </Box>
-                        </Typography>
-
-                        <Typography variant="body1" sx={{ py: 2 }} color="text.primary">
+                        <SectionHeading word="values" />
+                        <Typography variant="body1" sx={{ pt: 2 }} color="text.primary">
                             The principles behind which projects we take on and how we carry them out.
                         </Typography>
                     </Grid>
@@ -82,7 +90,7 @@ function AboutUs() {
                                         <Typography variant="caption" sx={{ display: "block", color: "text.grey", mb: 1 }}>
                                             {String(i + 1).padStart(2, "0")}
                                         </Typography>
-                                        <Typography variant="h3">
+                                        <Typography variant="h3" sx={{ color: "text.primary" }}>
                                             {v.title}
                                         </Typography>
                                         <Typography variant="body2" color="text.grey" sx={{ pt: 1 }}>

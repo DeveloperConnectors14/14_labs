@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { SECTION_PX, SECTION_PY, CARD_RADIUS, SOFT_GRADIENT } from "@/theme/tokens";
+import { SECTION_PX, SECTION_PY, CARD_RADIUS, SOFT_GRADIENT, FONT_SANS } from "@/theme/tokens";
 import NumberedCard from "@/components/general/NumberedCard";
 
 
@@ -35,7 +35,7 @@ function SingleCaseChallanges({ challanges }) {
                                 <Typography
                                     sx={{
                                         color: "text.secondary",
-                                        fontFamily: "'Instrument Sans', sans-serif",
+                                        fontFamily: FONT_SANS,
                                         fontWeight: 700,
                                         fontSize: { xs: "48px", sm: "56px", md: "72px" },
                                         lineHeight: 1,

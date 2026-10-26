@@ -79,6 +79,28 @@ For the more scientific papers (#5, #9, #10, #11), exact matches are rare. A **g
 
 Note: the AI Admission Counselor cover shows the **University of Glasgow**, which is recognisable. Visitors could read it as a connection to that university. Replace it with a less identifiable campus or library photo if that is a concern.
 
+## 6a. Paper page header photos
+
+Each paper page has its own wide header photo behind the title (`heroImg`), different from its card photo. All are free Unsplash photos, chosen on 2026-10-26 from a contact sheet of 3 options per paper; #4 and #7 were replaced the same day from a wider shortlist.
+
+| # | Paper | Header photo | Credit |
+|---|---|---|---|
+| 1 | Solar Forecasting Review | Solar panels in silhouette under a crimson dusk sky | Karsten Würth (Unsplash) |
+| 2 | Ti6Al4V Property Prediction | Gold 3D-printed part on a dark print bed | Simon N. (Unsplash) |
+| 3 | Fatigue Life Prediction | Dark perforated metal, macro | heino eisner (Unsplash) |
+| 4 | Air Quality Prediction | Chimney smoke drifting over a hazy skyline | Anna Yablonskaya (Unsplash) |
+| 5 | Nanoferrite Electrocatalysts | Gas bubbles rising through water on black | Zoran Borojevic (Unsplash) |
+| 6 | Ensemble Solar Forecasting | Transmission towers against an orange sunset | Tinky 小天 (Unsplash) |
+| 7 | Multi-Horizon Solar Prediction | Sunbeams breaking over a wide city from above | Reza Madani (Unsplash) |
+| 8 | Automated Fire Extinguishing | Water mist from a ceiling fixture | Daoud Abismail (Unsplash) |
+| 9 | Diffusion TEM Imaging | Electron micrograph (SEM) of crystalline particles | Joyita Bhattacharya (Unsplash) |
+| 10 | Abamectin Nanoparticles | Tractor spraying a crop field at dusk | Teo Sticea (Unsplash) |
+| 11 | Interpretable SPS Modelling | Dark metallic crystals, close-up | Atypeek Dgn (Unsplash) |
+
+Notes:
+- Unsplash has no real photos of electrolysis, TEM microscopes or spark plasma sintering, so #5, #9 and #11 use close stand-ins (#9 is a real electron micrograph, but SEM rather than TEM).
+- None of the city photos (#4, #7) is confirmed to be Lahore; don't caption them as Lahore.
+
 ## 7. How to hand over a photo
 
 1. Download the photo, choosing "Original" or "Large" size. Save it to the developer's **Downloads** folder, or share the file or link with the developer.
@@ -96,7 +118,7 @@ Note: the AI Admission Counselor cover shows the **University of Glasgow**, whic
   - Path: `public/media/research/<paper-id>-photo.webp`.
   - Format: portrait 2:3, about **900 × 1350 px**, WebP quality about 80.
   - On the paper in `src/data/publications.js`, set `img: "research/<paper-id>-photo.webp"` and `imgTone: "dark"`.
-- **Paper page header photo (optional):** set `heroImg: "research/<paper-id>-hero.webp"` (wide landscape, about 2000 px wide). Without it the page header shows the brand gradient.
+- **Paper page header photo:** `heroImg: "research/<paper-id>-hero.webp"` (wide landscape, 2400 px wide, WebP quality about 74). The title sits on the lower-left over a dark navy fade. If the crop hides the subject or puts something bright behind the navbar, set `heroPosition` (CSS object-position, e.g. `"center bottom"` or `"65% 85%"`). Without `heroImg` the header shows the brand gradient. For Unsplash photos, trigger the photo's `download_location` once when you use it (API guideline).
 - **Case-study images:**
   - Path: `public/media/cases/`.
   - In `src/data/data.js`, set `cover` (page banner) or `img` (homepage card) on the case study.
