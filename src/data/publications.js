@@ -31,7 +31,7 @@ export const publications = [
     doi: "10.1016/j.rineng.2026.112449",
     url: "https://www.sciencedirect.com/science/article/pii/S2590123026034675",
     status: "published",
-    topic: "solar",
+    topic: "energy",
     note: "In collaboration with DFKI, Germany",
     overview: [
       "Solar irradiance forecasting is essential for integrating solar power into existing grids, yet the research on it is highly fragmented. Hundreds of methods, datasets and benchmarks make it hard to see what actually moves the field forward.",
@@ -161,7 +161,7 @@ export const publications = [
     doi: "10.1016/j.rechem.2025.102392",
     url: "https://www.sciencedirect.com/science/article/pii/S2211715625003753",
     status: "published",
-    topic: "nano",
+    topic: "energy",
     overview: [
       "Water splitting can produce clean hydrogen and oxygen, but only with efficient electrocatalysts to drive the reactions.",
       "The study prepares a series of Zn₁₋ₓCoₓFe₂O₄ nanoferrite electrocatalysts by hydrothermal synthesis. FTIR and X-ray diffraction confirm their synthesis and cubic spinel structure, and their electrocatalytic performance is measured with linear sweep voltammetry, cyclic voltammetry and electrochemical impedance spectroscopy.",
@@ -186,7 +186,7 @@ export const publications = [
     authors: ["Faisal Ali", "M.M. Abbas", "Mehmood Ul Haq", "U. Aziz", "F. Butt", "Y. Fouad"],
     venue: "Results in Engineering",
     status: "review",
-    topic: "solar",
+    topic: "energy",
     overview: [
       "Combines several forecasting models into a hybrid ensemble to predict solar irradiance in Lahore, Pakistan, supporting real-time photovoltaic energy management and planning.",
     ],
@@ -203,7 +203,7 @@ export const publications = [
     authors: ["Faisal Ali", "Mehmood Ul Haq", "Usman Aziz", "Nisha Anwar", "Muhammad Baqir"],
     venue: "Renewable Energy",
     status: "review",
-    topic: "solar",
+    topic: "energy",
     overview: [
       "Compares statistical, machine learning and deep learning models for forecasting solar energy in Lahore across multiple forecast horizons, to address the weather-driven uncertainty in the city's solar generation.",
       "The models compared include SARIMAX, XGBoost, random forest, LitTFT, BiLSTM, CNN-BiLSTM, TCN and TFT, calibrated with NASA POWER and Open-Meteo data. The work supports PV planning, energy-yield estimation and renewable-energy integration.",
@@ -221,7 +221,7 @@ export const publications = [
     authors: ["Mehmood Ul Haq", "K. Muneer", "T. Muzammal", "Shahzaib", "Faisal Ali", "A. Obaid", "Y. Saleem"],
     venue: "Results in Engineering",
     status: "review",
-    topic: "vision",
+    topic: "environment",
     overview: [
       "An automated system that detects and locates fires with computer vision and sensor fusion, then directs an extinguishing unit at them.",
       "It runs YOLOv11 on edge hardware (Raspberry Pi) with automated actuators, for real-time detection and physical response.",
@@ -239,7 +239,7 @@ export const publications = [
     authors: ["M.S. Rafique", "F. Javed", "Mehmood Ul Haq", "Faisal Ali", "U. Aziz"],
     venue: "Materials & Design",
     status: "review",
-    topic: "nano",
+    topic: "materials",
     overview: [
       "Uses diffusion models to regenerate transmission electron microscopy (TEM) images of PVP-capped ZnO nanoparticles made by hybrid flash nanoprecipitation–plasma torch processing, supporting nanoparticle research where microscopy data is limited.",
     ],
@@ -256,7 +256,7 @@ export const publications = [
     authors: ["M.S. Rafique", "I. Shahadat", "Faisal Ali", "M. Ilyas"],
     venue: "Materials Processing Technology",
     status: "review",
-    topic: "nano",
+    topic: "agriculture",
     overview: [
       "Investigates how a hybrid FNP-TP process modifies the physicochemical properties of PVP-capped abamectin nanoparticles.",
     ],

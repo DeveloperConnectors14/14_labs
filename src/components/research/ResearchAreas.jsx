@@ -1,28 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { Box, ButtonBase, Chip, Collapse, Grid, Typography } from "@mui/material";
+import { Box, ButtonBase, Collapse, Grid, Typography } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
-import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
+import BoltOutlinedIcon from "@mui/icons-material/BoltOutlined";
 import BiotechIcon from "@mui/icons-material/Biotech";
-import CenterFocusStrongOutlinedIcon from "@mui/icons-material/CenterFocusStrongOutlined";
-import EnergySavingsLeafOutlinedIcon from "@mui/icons-material/EnergySavingsLeafOutlined";
+import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
+import AgricultureOutlinedIcon from "@mui/icons-material/AgricultureOutlined";
 import { getResearchAreas } from "@/services/dataService";
 import { SECTION_PX, SECTION_PY, CARD_RADIUS, NAV_SCROLL_MARGIN } from "@/theme/tokens";
 
 const areas = getResearchAreas();
 
 const iconMap = {
-  WbSunnyOutlined: WbSunnyOutlinedIcon,
+  BoltOutlined: BoltOutlinedIcon,
   Biotech: BiotechIcon,
-  CenterFocusStrongOutlined: CenterFocusStrongOutlinedIcon,
-  EnergySavingsLeafOutlined: EnergySavingsLeafOutlinedIcon,
+  PublicOutlined: PublicOutlinedIcon,
+  AgricultureOutlined: AgricultureOutlinedIcon,
 };
 
 // "Our focus": heading and a photo on the left, a numbered list of the research
-// areas on the right. One row is open at a time and lists that area's papers.
+// areas on the right. One row is open at a time and shows the area's description.
 function ResearchAreas() {
   const [open, setOpen] = useState(0);
 
@@ -124,21 +123,6 @@ function ResearchAreas() {
                     <Typography variant="body1" color="text.grey">
                       {area.desc}
                     </Typography>
-                    <Typography variant="caption" color="text.grey" sx={{ display: "block", textTransform: "uppercase", mt: 2, mb: 1 }}>
-                      {area.paperCount} {area.paperCount === 1 ? "paper" : "papers"}
-                    </Typography>
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                      {area.papers.map((paper) => (
-                        <Chip
-                          key={paper.id}
-                          component={Link}
-                          href={`/research/${paper.id}`}
-                          label={paper.shortTitle}
-                          clickable
-                          sx={{ display: "inline-flex", "&:hover": { backgroundColor: "secondary.main", color: "brand.navy" } }}
-                        />
-                      ))}
-                    </Box>
                   </Box>
                 </Collapse>
               </Box>

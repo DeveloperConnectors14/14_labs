@@ -6,6 +6,9 @@ export const navItems = [
 ];
 
 export const contactInfo = {
+  // Registered company name: shown only in the footer copyright line and the
+  // search-engine data. Everywhere else the brand name "14Labs" is used.
+  legalName: "14Labs Research and Technologies (Private) Limited",
   email: "contact@14labs.co",
   phone: "+92 318 7806914",
   location: "Lahore, Pakistan",
@@ -71,29 +74,30 @@ export const caseStudies = [
 ];
 
 export const researchAreas = [
+  // Listed in display order (most papers first); reorder here by hand as needed.
   {
-    icon: "WbSunnyOutlined",
-    title: "Solar energy forecasting",
-    desc: "Multi-horizon irradiance and PV power forecasting.",
-    topics: ["solar"],
+    icon: "BoltOutlined",
+    title: "Energy",
+    desc: "Solar irradiance and PV power forecasting, and catalysts for hydrogen generation.",
+    topics: ["energy"],
   },
   {
     icon: "Biotech",
-    title: "Explainable ML for materials",
-    desc: "Interpretable prediction of material properties and fatigue life.",
-    topics: ["materials", "nano"],
+    title: "Materials",
+    desc: "Explainable ML for metal 3D printing and sintering, and AI for microscopy images.",
+    topics: ["materials"],
   },
   {
-    icon: "CenterFocusStrongOutlined",
-    title: "Computer vision & safety",
-    desc: "Real-time detection with vision and sensor fusion.",
-    topics: ["vision"],
-  },
-  {
-    icon: "EnergySavingsLeafOutlined",
-    title: "Sustainability analytics",
-    desc: "Air quality prediction for sustainable cities.",
+    icon: "PublicOutlined",
+    title: "Environment",
+    desc: "Air-quality prediction for sustainable cities and vision-based fire safety.",
     topics: ["environment"],
+  },
+  {
+    icon: "AgricultureOutlined",
+    title: "Agriculture",
+    desc: "Nanoparticle formulations of abamectin, a widely used crop-protection agent. Our newest research area.",
+    topics: ["agriculture"],
   },
 ];
 

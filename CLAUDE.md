@@ -18,6 +18,7 @@ Other standing rules:
 ## Positioning and brand
 
 - **14Labs, Lahore, Pakistan: AI Engineering, Applied Machine Learning & Research.** Always write the name as **"14Labs"** (no space), including metadata, the footer and emails.
+- **Registered company name: "14Labs Research and Technologies (Private) Limited"** (exact spelling, from the user). Used only in the footer copyright line and as `legalName` in the search-engine data (`layout.jsx`); stored as `contactInfo.legalName` in `data.js`. Everywhere else use the brand name "14Labs". Not added to the About page (decided 2026-10-26).
 - Audience includes universities (MOU discussions), so claims must be accurate and verifiable: no fake testimonials, no unverifiable stats, no implied partnerships.
 - Brand colours: navy `#0A3B60`, teal `#00D3B1`. Teal is an accent for 2–3 key items per screen, not a fill colour.
 - Design reference is deepmind.google, but **copy its layout only, never its theme**: keep the site's own colours, fonts, radii and button styles.
@@ -31,8 +32,8 @@ Other standing rules:
 
 ### Homepage hero (`src/components/home/HeroSection.jsx`)
 - Full width (no margins or rounded corners), full screen height (`100svh`).
-- Background: three rotating photos (`HeroSlideshow.jsx`, data `heroSlides` in `data.js`): Agriculture, Materials, Energy (Unsplash: Bernd Dittrich, Clayton Cardinalli, Shio Yang — a city street grid glowing at night from above ("the grid"; chosen over solar-farm and pylon photos); no usable real hydrogen photos exist on Unsplash; files in `public/media/hero/`). Slow crossfade every 7s (1.5s fade); first photo loads with priority; rotation pauses off-screen / hidden tab; reduced-motion visitors see only the first photo. Light overlays (user asked for less gradient): brand tint at 20%, a soft dark radial behind the headline, a dark bottom fade for the logo strip, and a subtle text shadow on the headline. A background grid was tried and removed; `HeroGrid.jsx` is unused.
-- Note: Agriculture is not yet one of the published research areas; keep this in mind if a university asks.
+- Background: three rotating photos (`HeroSlideshow.jsx`, data `heroSlides` in `data.js`): Agriculture, Materials, Energy (Unsplash: Bernd Dittrich, Clayton Cardinalli, Shio Yang — a city street grid glowing at night from above ("the grid"; chosen over solar-farm and pylon photos); no usable real hydrogen photos exist on Unsplash; files in `public/media/hero/`). Crossfade every 5s (1.2s fade; shortened from 7s on 2026-10-26 so visitors see all three themes before scrolling); first photo loads with priority; rotation pauses off-screen / hidden tab; reduced-motion visitors see only the first photo. Light overlays (user asked for less gradient): brand tint at 20%, a soft dark radial behind the headline, a dark bottom fade for the logo strip, and a subtle text shadow on the headline. A background grid was tried and removed; `HeroGrid.jsx` is unused.
+- The three slides match three of the four "Our focus" areas (Energy, Materials, Agriculture); Environment has no slide (a 4th slide would lengthen the cycle).
 - Headline: "AI Engineering, **Applied Machine Learning** & Research", with "Applied Machine Learning" in teal. Sizes 34 / 44 / 58px; balanced wrapping.
 - Two buttons:
   - **Research:** teal, smooth-scrolls to `#research`.
@@ -87,7 +88,9 @@ Removed from the homepage: pricing, "Challenges we can overcome", research outpu
 - `shortTitle` is used on cards; the full title is used elsewhere.
 
 ### "Our focus" section (`src/components/research/ResearchAreas.jsx`)
-- Layout from a reference site: heading "Our **focus**" (no intro line, removed at the user's request) and a large photo on the left; a numbered accordion (01–04) of the research areas on the right. One row open at a time (first by default); the open row shows the area's description and its papers as chips linking to `/research/<id>` (from `getResearchAreas()`, which now includes `papers`).
+- Layout from a reference site: heading "Our **focus**" (no intro line, removed at the user's request) and a large photo on the left; a numbered accordion (01–04) of the research areas on the right. One row open at a time (first by default); the open row shows only the area's description. **No paper links and no paper count** (user's choice, 2026-10-26).
+- **Areas are sectors (2026-10-26):** Energy (4 papers: 3 solar forecasting + Zn–Co hydrogen catalysts), Materials (4: Ti6Al4V properties, fatigue, SPS, TEM imaging), Environment (2: air quality, fire safety), Agriculture (1, under review: abamectin nanoparticles; described as "our newest research area"). Each paper's `topic` (`energy` / `materials` / `environment` / `agriculture`) maps it to an area; the paper page caption shows the area name.
+- **Order is fixed by hand** in `researchAreas` in `data.js` (currently most papers first). Don't sort it automatically; the user reorders it when needed.
 - Alignment (desktop): the list's first divider lines up with the top of the heading's letters (10px offset). The photo keeps a fixed 3:2 shape (a stretch-to-list version squashed it when rows were closed, so the user rejected it); bottoms may differ slightly depending on the open row.
 - Photo: `public/media/focus-microscope.webp`, an Unsplash photo by Yassine Khalfalli (free for commercial use, no attribution required), used as the original colours. A navy-to-teal duotone version was discussed as an option.
 
@@ -129,7 +132,7 @@ The research stats and the Research team section were removed at the user's requ
 - Used at the bottom of every page. Brand gradient box; content aligned to the page edge: headline, subline (85% white) and a small "Start a conversation →" pill on the left; email and phone as grouped, clickable rows with icons (`mailto:` / `tel:`) on the right. Only the contact version exists now; the `contact` prop is accepted but ignored.
 
 ### Footer
-Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs · Lahore, Pakistan." **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
+Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs Research and Technologies (Private) Limited · Lahore, Pakistan. All rights reserved." (on phones the company name and the rest sit on separate lines so the name isn't split) **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
 
 ## Open items
 

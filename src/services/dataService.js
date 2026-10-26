@@ -26,13 +26,6 @@ const stats = [
   { value: researchAreas.length, label: "Research areas" },
 ];
 
-const areasWithCounts = researchAreas.map((area) => {
-  const papers = publications
-    .filter((p) => area.topics.includes(p.topic))
-    .map(({ id, shortTitle }) => ({ id, shortTitle }));
-  return { ...area, papers, paperCount: papers.length };
-});
-
 export const getNavItems = () => navItems;
 export const getcaseStudies = () => caseStudies;
 export const getStats = () => stats;
@@ -41,7 +34,7 @@ export const getCaseDetails = () => caseDetails;
 export const getAbout = () => about;
 export const getValues = () => values;
 export const getPublications = () => publications;
-export const getResearchAreas = () => areasWithCounts;
+export const getResearchAreas = () => researchAreas;
 export const getTeam = () => team;
 export const getHeroSlides = () => heroSlides;
 export const getCollaborators = () => collaborators;

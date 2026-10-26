@@ -3,6 +3,7 @@ import Navbar from "@/components/common/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { getContactInfo } from "@/services/dataService";
 
 const SITE_URL = "https://14labs.co";
 
@@ -47,6 +48,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "14Labs",
+  legalName: getContactInfo().legalName,
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
   image: `${SITE_URL}/og.png`,

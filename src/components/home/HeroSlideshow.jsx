@@ -7,8 +7,8 @@ import { keyframes } from "@mui/material/styles";
 import { getHeroSlides } from "@/services/dataService";
 
 const slides = getHeroSlides();
-const INTERVAL_MS = 7000;
-const FADE_MS = 1500;
+const INTERVAL_MS = 5000;
+const FADE_MS = 1200;
 
 const fill = keyframes`
   from { transform: scaleX(0); }
