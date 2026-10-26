@@ -10,7 +10,7 @@ export const navItems = [
 export const contactInfo = {
   // Registered company name: shown only in the footer copyright line and the
   // search-engine data. Everywhere else the brand name "14Labs" is used.
-  legalName: "14Labs Research and Technologies (Private) Limited",
+  legalName: "14Labs Research and Technology (Private) Limited",
   email: "contact@14labs.co",
   phone: "+92 318 7806914",
   location: "Lahore, Pakistan",

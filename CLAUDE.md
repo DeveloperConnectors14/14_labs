@@ -18,7 +18,7 @@ Other standing rules:
 ## Positioning and brand
 
 - **14Labs, Lahore, Pakistan: AI Engineering, Applied Machine Learning & Research.** Always write the name as **"14Labs"** (no space), including metadata, the footer and emails.
-- **Registered company name: "14Labs Research and Technologies (Private) Limited"** (exact spelling, from the user). Used only in the footer copyright line and as `legalName` in the search-engine data (`layout.jsx`); stored as `contactInfo.legalName` in `data.js`. Everywhere else use the brand name "14Labs". Not added to the About page (decided 2026-10-26).
+- **Registered company name: "14Labs Research and Technology (Private) Limited"** (exact spelling, from the user; corrected from "Technologies" to "Technology" on 2026-10-26). Used only in the footer copyright line and as `legalName` in the search-engine data (`layout.jsx`); stored as `contactInfo.legalName` in `data.js`. Everywhere else use the brand name "14Labs". Not added to the About page (decided 2026-10-26).
 - Audience includes universities (MOU discussions), so claims must be accurate and verifiable: no fake testimonials, no unverifiable stats, no implied partnerships.
 - Brand colours: navy `#0A3B60`, teal `#00D3B1`. Teal is an accent for 2–3 key items per screen, not a fill colour.
 - Design reference is deepmind.google, but **copy its layout only, never its theme**: keep the site's own colours, fonts, radii and button styles.
@@ -142,7 +142,7 @@ The research stats and the Research team section were removed at the user's requ
 - Used at the bottom of every page. Brand gradient box; content aligned to the page edge: headline, subline (85% white) and a small "Start a conversation →" pill on the left; email and phone as grouped, clickable rows with icons (`mailto:` / `tel:`) on the right. Only the contact version exists now; the `contact` prop is accepted but ignored.
 
 ### Footer
-Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs Research and Technologies (Private) Limited · Lahore, Pakistan. All rights reserved." (on phones the company name and the rest sit on separate lines so the name isn't split) **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
+Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs Research and Technology (Private) Limited · Lahore, Pakistan. All rights reserved." (on phones the company name and the rest sit on separate lines so the name isn't split) **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
 
 ## Open items
 
