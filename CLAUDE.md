@@ -18,7 +18,7 @@ Other standing rules:
 ## Positioning and brand
 
 - **14Labs, Lahore, Pakistan: AI Engineering, Applied Machine Learning & Research.** Always write the name as **"14Labs"** (no space), including metadata, the footer and emails.
-- **Registered company name: "14Labs Research and Technology (Private) Limited"** (exact spelling, from the user; corrected from "Technologies" to "Technology" on 2026-10-26). Used only in the footer copyright line and as `legalName` in the search-engine data (`layout.jsx`); stored as `contactInfo.legalName` in `data.js`. Everywhere else use the brand name "14Labs". Not added to the About page (decided 2026-10-26).
+- **No legal company name on the site (2026-10-27):** the company is **not registered yet**, so never show "(Private) Limited" or any registered-company name (it would be a false legal claim). The footer and search-engine data use the brand name "14Labs" only. A legal name ("14Labs Research and Technology (Private) Limited" was planned) can be added back to the footer copyright line and `legalName` in `layout.jsx` once registration is complete.
 - Audience includes universities (MOU discussions), so claims must be accurate and verifiable: no fake testimonials, no unverifiable stats, no implied partnerships.
 - Brand colours: navy `#0A3B60`, teal `#00D3B1`. Teal is an accent for 2–3 key items per screen, not a fill colour.
 - Design reference is deepmind.google, but **copy its layout only, never its theme**: keep the site's own colours, fonts, radii and button styles.
@@ -142,7 +142,7 @@ The research stats and the Research team section were removed at the user's requ
 - Used at the bottom of every page. Brand gradient box; content aligned to the page edge: headline, subline (85% white) and a small "Start a conversation →" pill on the left; email and phone as grouped, clickable rows with icons (`mailto:` / `tel:`) on the right. Only the contact version exists now; the `contact` prop is accepted but ignored.
 
 ### Footer
-Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs Research and Technology (Private) Limited · Lahore, Pakistan. All rights reserved." (on phones the company name and the rest sit on separate lines so the name isn't split) **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
+Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs · Lahore, Pakistan. All rights reserved." (no legal company name until the company is registered) **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
 
 ## Open items
 
@@ -165,6 +165,7 @@ Four columns: brand/tagline/location, Explore, Research (Publications, Our focus
   - **staging.14labs.co** = `/opt/services/website-staging` → `src/` tracks branch **`previous-live`** (the version that was live on 14labs.co just before the 2026-10-26 release, commit `4ab56cb`; kept as a fallback to compare with), port 3007. Before 2026-10-26 it ran `previous-site` (the pre-redesign site, commit `b505e41`), which is no longer hosted but kept in git.
   - Deploy: `cd /opt/services/<site>/src && sudo -u abdullah git pull --ff-only origin <branch> && cd .. && sudo docker compose up -d --build`. Folders belong to `abdullah`, who maintains the infra repo `/opt/services` (14labs-infra); tell him when the branch mapping changes.
   - Rollback for 14labs.co: point `website/src` at `previous-live` (the previous release) or another known good commit, and rebuild.
+- **Runtime: Node 22** (`FROM node:22-alpine` in both Dockerfile stages; moved from end-of-life Node 20 on 2026-10-26 for the October 2026 Node.js security release, PR #11). `previous-live` (staging) got the same change (commit `6ed8d1a`). Keep the floating `22-alpine` tag so rebuilds pick up patches.
 - First research-redesign deploy: PR #5 (`feature/next-changes` → `new-project`), merge commit `3be6f48`, on 2026-10-24.
 - The repo's **Cloudflare Pages** check fails on every commit, including ones before the redesign; it is not what serves the site. Vercel previews succeed.
 - **Contact form email:** `/api/contact` sends via the self-hosted Stalwart server on the same VM (`mail.14labs.co:465`, TLS) as **`noreply@14labs.co`** (a sending-only user account created 2026-10-24) to `contact@14labs.co`, a Stalwart mailing list that forwards to baqir@ and abdullah@. The SMTP settings and password live only in each site's server `.env` (backups `.env.bak-20261024`); recreate the container after changing them. Stalwart 0.16 is managed via JMAP (`x:Account/set` etc. at `https://mail.14labs.co/jmap/`) or its web admin; there is no `/api` REST endpoint.
