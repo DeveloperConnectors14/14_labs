@@ -91,13 +91,8 @@ function Footer() {
 
             <Divider sx={{ mt: { xs: 4, md: 5 }, mb: 3 }} />
 
-            {/* One line on desktop; on phones the company name and the rest get a line each, so the name isn't split. */}
-            <Typography variant="body2" sx={{ color: "text.grey", textAlign: { xs: "center", md: "left" }, textWrap: "balance" }}>
-                © {new Date().getFullYear()} {contactInfo.legalName}
-                <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}> · </Box>
-                <Box component="span" sx={{ display: { xs: "block", md: "inline" } }}>
-                    {contactInfo.location}. All rights reserved.
-                </Box>
+            <Typography variant="body2" sx={{ color: "text.grey", textAlign: { xs: "center", md: "left" } }}>
+                © {new Date().getFullYear()} 14Labs · {contactInfo.location}. All rights reserved.
             </Typography>
         </Box>
     );
