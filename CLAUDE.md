@@ -18,7 +18,7 @@ Other standing rules:
 ## Positioning and brand
 
 - **14Labs, Lahore, Pakistan: AI Engineering, Applied Machine Learning & Research.** Always write the name as **"14Labs"** (no space), including metadata, the footer and emails.
-- **No legal company name on the site (2026-10-27):** the company is **not registered yet**, so never show "(Private) Limited" or any registered-company name (it would be a false legal claim). The footer and search-engine data use the brand name "14Labs" only. A legal name ("14Labs Research and Technology (Private) Limited" was planned) can be added back to the footer copyright line and `legalName` in `layout.jsx` once registration is complete.
+- **Legal name (incorporated 2026-11-12):** the company is registered with SECP as **14LABS RESEARCH AND TECHNOLOGY (PRIVATE) LIMITED** (SECP prints names in capitals). On the site it is written in normal case, "14Labs Research and Technology (Private) Limited", and appears **only** in the footer copyright line and `legalName` in the search-engine data (`contactInfo.legalName` in `data.js`); everywhere else use the brand name "14Labs". The registered office, **283-B, GECHS Phase 3, Lahore, Pakistan** (`contactInfo.registeredAddress`), appears in the same two places only (footer copyright line, and `address` in the search-engine data); the logo column and Contact column keep the short "Lahore, Pakistan". The user chose **not** to show the SECP registration number (CUIN).
 - Audience includes universities (MOU discussions), so claims must be accurate and verifiable: no fake testimonials, no unverifiable stats, no implied partnerships.
 - Brand colours: navy `#0A3B60`, teal `#00D3B1`. Teal is an accent for 2–3 key items per screen, not a fill colour.
 - Design reference is deepmind.google, but **copy its layout only, never its theme**: keep the site's own colours, fonts, radii and button styles.
@@ -142,7 +142,7 @@ The research stats and the Research team section were removed at the user's requ
 - Used at the bottom of every page. Brand gradient box; content aligned to the page edge: headline, subline (85% white) and a small "Start a conversation →" pill on the left; email and phone as grouped, clickable rows with icons (`mailto:` / `tel:`) on the right. Only the contact version exists now; the `contact` prop is accepted but ignored.
 
 ### Footer
-Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs · Lahore, Pakistan. All rights reserved." (no legal company name until the company is registered) **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
+Four columns: brand/tagline/location, Explore, Research (Publications, Our focus), Contact (email, phone, LinkedIn, X). "© {year} 14Labs Research and Technology (Private) Limited · 283-B, GECHS Phase 3, Lahore, Pakistan. All rights reserved." (one line on desktop; on phones the company name and the address each get their own line) **No privacy policy page** (the user doesn't want one). Contact details come from `contactInfo` in `data.js`.
 
 ## Open items
 
