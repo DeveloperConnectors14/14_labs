@@ -3,6 +3,7 @@ import Navbar from "@/components/common/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { getContactInfo } from "@/services/dataService";
 import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 
 // Self-hosted at build time (no request to Google from visitors) with the real
@@ -50,10 +51,20 @@ export const metadata = {
 
 // Without this Google has no declared logo for the domain and picks a page image
 // instead — which is how OpenAI's mark ended up on our search result.
+const { legalName, registeredAddress } = getContactInfo();
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "14Labs",
+  legalName,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: registeredAddress.street,
+    addressLocality: registeredAddress.city,
+    addressRegion: registeredAddress.region,
+    addressCountry: registeredAddress.countryCode,
+  },
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
   image: `${SITE_URL}/og.png`,

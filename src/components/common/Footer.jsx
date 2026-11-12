@@ -9,6 +9,8 @@ import { getContactInfo, getFooterColumns, getSocialLinks } from "@/services/dat
 import { SECTION_PX } from "@/theme/tokens";
 
 const contactInfo = getContactInfo();
+const { street, city, country } = contactInfo.registeredAddress;
+const registeredAddress = `${street}, ${city}, ${country}`;
 const footerColumns = getFooterColumns();
 const socialLinks = getSocialLinks();
 
@@ -91,8 +93,13 @@ function Footer() {
 
             <Divider sx={{ mt: { xs: 4, md: 5 }, mb: 3 }} />
 
-            <Typography variant="body2" sx={{ color: "text.grey", textAlign: { xs: "center", md: "left" } }}>
-                © {new Date().getFullYear()} 14Labs · {contactInfo.location}. All rights reserved.
+            {/* One line on desktop; on phones the company name and the address get a line each, so neither is split mid-phrase. */}
+            <Typography variant="body2" sx={{ color: "text.grey", textAlign: { xs: "center", md: "left" }, textWrap: "balance" }}>
+                © {new Date().getFullYear()} {contactInfo.legalName}
+                <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}> · </Box>
+                <Box component="span" sx={{ display: { xs: "block", md: "inline" } }}>
+                    {registeredAddress}. All rights reserved.
+                </Box>
             </Typography>
         </Box>
     );
