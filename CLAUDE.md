@@ -11,7 +11,7 @@ For every request from now on:
 3. **Then build it**, and verify it: lint, production build, and headless-browser screenshots at desktop (~1709px and 1366px) and mobile (390px). Look at the screenshots.
 
 Other standing rules:
-- Work on branch `feature/next-changes`. Don't commit, push or open PRs unless asked.
+- **Branches (standardised 2026-11-24):** `main` = live on 14labs.co (GitHub default), `staging` = preview on staging.14labs.co. Each change gets its own short-lived branch from `staging`, named `feature/<what>`, `fix/<what>` or `docs/<what>`; PR it into `staging`, check staging.14labs.co, then PR `staging` → `main` to release, and delete the change branch after merging. Don't commit, push or open PRs unless asked.
 - Keep code well structured and optimised: data lives in `src/data/*.js` and is read only through `src/services/dataService.js`. Reuse existing components, tokens (`src/theme/tokens.js`) and theme styles instead of adding one-off styles.
 - Ask before spending paid AI credits (Figma/Canva image generation), and confirm the target account first.
 
@@ -161,12 +161,13 @@ Four columns: brand/tagline/location, Explore, Research (Publications, Our focus
 ## Deployment
 
 - **Official flow:** merge on GitHub, then pull on the VM. Server: `14labs-new` (SSH alias), behind Cloudflare and nginx.
-  - **14labs.co** = `/opt/services/website` → `src/` tracks branch **`new-project`**, port 3000.
-  - **staging.14labs.co** = `/opt/services/website-staging` → `src/` tracks branch **`previous-live`** (the version that was live on 14labs.co just before the 2026-10-26 release, commit `4ab56cb`; kept as a fallback to compare with), port 3007. Before 2026-10-26 it ran `previous-site` (the pre-redesign site, commit `b505e41`), which is no longer hosted but kept in git.
+  - **14labs.co** = `/opt/services/website` → `src/` tracks branch **`main`**, port 3000.
+  - **staging.14labs.co** = `/opt/services/website-staging` → `src/` tracks branch **`staging`** (preview of upcoming changes), port 3007.
+  - **Old versions are archive tags, not branches** (2026-11-24): `archive/previous-live` (site just before the 2026-10-26 release; staging's old fallback), `archive/previous-site` (pre-redesign site, `b505e41`), `archive/old-main` (the old TypeScript `main`, last change 2026-05-05; it was GitHub's default and Vercel's production branch while 14labs.co ran `new-project`), `archive/site-revamp` (hadiscript's unmerged work, Sept 2026), `archive/use-cases`. Restore one with `git switch -c <name> archive/<tag>`. `new-project` was renamed to `main` (GitHub redirects the old name).
   - Deploy: `cd /opt/services/<site>/src && sudo -u abdullah git pull --ff-only origin <branch> && cd .. && sudo docker compose up -d --build`. Folders belong to `abdullah`, who maintains the infra repo `/opt/services` (14labs-infra); tell him when the branch mapping changes.
-  - Rollback for 14labs.co: point `website/src` at `previous-live` (the previous release) or another known good commit, and rebuild.
-- **Runtime: Node 22** (`FROM node:22-alpine` in both Dockerfile stages; moved from end-of-life Node 20 on 2026-10-26 for the October 2026 Node.js security release, PR #11). `previous-live` (staging) got the same change (commit `6ed8d1a`). Keep the floating `22-alpine` tag so rebuilds pick up patches.
-- First research-redesign deploy: PR #5 (`feature/next-changes` → `new-project`), merge commit `3be6f48`, on 2026-10-24.
+  - Rollback for 14labs.co: check out a known good commit or tag in `website/src` (e.g. `git checkout <sha>` or `archive/previous-live`), rebuild, then fix forward on `main`.
+- **Runtime: Node 22** (`FROM node:22-alpine` in both Dockerfile stages; moved from end-of-life Node 20 on 2026-10-26 for the October 2026 Node.js security release, PR #11). Keep the floating `22-alpine` tag so rebuilds pick up patches.
+- First research-redesign deploy: PR #5 (`feature/next-changes` → `new-project`, now `main`), merge commit `3be6f48`, on 2026-10-24.
 - The repo's **Cloudflare Pages** check fails on every commit, including ones before the redesign; it is not what serves the site. Vercel previews succeed.
 - **Contact form email:** `/api/contact` sends via the self-hosted Stalwart server on the same VM (`mail.14labs.co:465`, TLS) as **`noreply@14labs.co`** (a sending-only user account created 2026-10-24) to `contact@14labs.co`, a Stalwart mailing list that forwards to baqir@ and abdullah@. The SMTP settings and password live only in each site's server `.env` (backups `.env.bak-20261024`); recreate the container after changing them. Stalwart 0.16 is managed via JMAP (`x:Account/set` etc. at `https://mail.14labs.co/jmap/`) or its web admin; there is no `/api` REST endpoint.
 
